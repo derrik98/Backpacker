@@ -28,28 +28,25 @@ public class ItineraryDao extends DaoTemplate {
 
 
     public List<Itinerary> getItinerary(String city) {
-        List<Itinerary> ret = this.execute(new DaoAction<List<Itinerary>>() {
-            @Override
-            public List<Itinerary> act() throws SQLException {
-                Connection conn;
-                List<Itinerary> itinerary = new ArrayList<>();
-                String sql;
+        List<Itinerary> ret = this.execute(() -> {
+            Connection conn;
+            List<Itinerary> itinerary;
+            String sql;
 
-                conn = DatabaseUserConnection.getUserConnection();
-                sql = "call backpacker.get_itinerary(?);\r\n";
+            conn = DatabaseUserConnection.getUserConnection();
+            sql = "call backpacker.get_itinerary(?);\r\n";
 
-                try (PreparedStatement stm = conn.prepareStatement(sql)) {
+            try (PreparedStatement stm = conn.prepareStatement(sql)) {
 
-                    stm.setString(1, city);
+                stm.setString(1, city);
 
-                    try (ResultSet rs = stm.executeQuery()) {
-                        itinerary = unpackResultSet(rs);
-                    }
-
+                try (ResultSet rs = stm.executeQuery()) {
+                    itinerary = unpackResultSet(rs);
                 }
-                DatabaseUserConnection.closeUserConnection(conn);
-                return itinerary;
+
             }
+            DatabaseUserConnection.closeUserConnection(conn);
+            return itinerary;
         });
         if (ret != null) {
             return ret;
@@ -130,7 +127,7 @@ public class ItineraryDao extends DaoTemplate {
         }) != null);
     }
 
-    public int getItineraryId(String guideId, String location, String date, String time, int participants, int price, String steps) throws SQLException, ClassNotFoundException {
+    public int getItineraryId(String guideId, String location, String date, String time, int participants, int price, String steps) throws SQLException {
 
         Connection conn;
         String sql;
@@ -160,26 +157,23 @@ public class ItineraryDao extends DaoTemplate {
     }
 
     public List<Itinerary> getBookedItineraries(String input) {
-        List<Itinerary> ret = this.execute(new DaoAction<List<Itinerary>>() {
-            @Override
-            public List<Itinerary> act() throws SQLException {
-                Connection conn = null;
-                List<Itinerary> itinerary = new ArrayList<>();
-                String sql;
+        List<Itinerary> ret = this.execute(() -> {
+            Connection conn = null;
+            List<Itinerary> itinerary;
+            String sql;
 
-                conn = DatabaseUserConnection.getUserConnection();
-                sql = "call backpacker.get_booked_itineraries(?);\r\n";
+            conn = DatabaseUserConnection.getUserConnection();
+            sql = "call backpacker.get_booked_itineraries(?);\r\n";
 
-                try(PreparedStatement stm = conn.prepareStatement(sql)) {
+            try(PreparedStatement stm = conn.prepareStatement(sql)) {
 
-                    stm.setString(1, input);
+                stm.setString(1, input);
 
-                    try (ResultSet rs = stm.executeQuery()) {
-                        itinerary = unpackResultSet(rs);
-                    }
+                try (ResultSet rs = stm.executeQuery()) {
+                    itinerary = unpackResultSet(rs);
                 }
-                return itinerary;
             }
+            return itinerary;
         });
         if (ret != null)
             return ret;

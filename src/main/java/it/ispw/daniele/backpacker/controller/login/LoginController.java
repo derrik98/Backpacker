@@ -45,5 +45,4 @@ public class LoginController {
         TouristGuideDao tgd = new TouristGuideDao();
         return tgd.createTouristGuide(tgb.getUsername(), tgb.getName(), tgb.getSurname(), tgb.getEmail(), tgb.getPassword(), tgb.getProfilePicture(), tgb.getIdentificationCode());
     }
-
 }

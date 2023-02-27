@@ -14,7 +14,6 @@ module it.ispw.daniele.backpacker {
     requires java.logging;
     requires java.sql;
     requires org.jetbrains.annotations;
-    //requires AnimateFX;
     requires mysql.connector.java;
 
     exports it.ispw.daniele.backpacker.view.fxml_view;
