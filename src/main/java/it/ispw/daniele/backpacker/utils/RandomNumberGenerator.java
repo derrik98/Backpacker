@@ -7,7 +7,7 @@ public class RandomNumberGenerator {
     private static  RandomNumberGenerator instance = null;
     private static final int MIN = 0;
     private static final int MAX = 10000;
-    private static Random r = new Random();
+    private static final Random r = new Random();
 
     private RandomNumberGenerator(){}
 

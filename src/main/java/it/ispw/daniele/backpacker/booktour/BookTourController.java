@@ -10,7 +10,7 @@ import java.util.List;
 
 public class BookTourController extends Controller {
 
-    public List<ItineraryBean> getItinerary(String input, String type){//, GeneralUserBean gu) {
+    public List<ItineraryBean> getItinerary(String input, String type){
         ItineraryDao id = new ItineraryDao();
         List<Itinerary> itinerary = null;
         switch (type) {

@@ -162,7 +162,7 @@ public class Controller {
                     ivBuy.setOnMouseClicked(mouseEvent -> {
 
                         titledPane.setExpanded(false);
-                        this.BuyItinerary(itineraryBeanList.get(finalJ), stackPane);
+                        this.buyItinerary(itineraryBeanList.get(finalJ), stackPane);
 
                     });
 
@@ -184,7 +184,7 @@ public class Controller {
                 ivSave.setOnMouseClicked(mouseEvent -> {
                     titledPane.setCollapsible(false);
                     titledPane.setExpanded(false);
-                    this.SaveItinerary(itineraryBeanList.get(finalJ1), "remove");
+                    this.saveItinerary(itineraryBeanList.get(finalJ1), "remove");
 
                     accordion.getPanes().remove(titledPane);
                 });
@@ -196,7 +196,7 @@ public class Controller {
                 ivSave.setOnMouseClicked(mouseEvent -> {
 
                     try {
-                        this.SaveItinerary(itineraryBeanList.get(finalJ1), "save");
+                        this.saveItinerary(itineraryBeanList.get(finalJ1), "save");
                         output.setText("Saved");
                     } catch (Exception e) {
                         output.setText("Error");
@@ -249,7 +249,7 @@ public class Controller {
         }
 
 
-    private void BuyItinerary(ItineraryBean itineraryBean, StackPane stackPane) {
+    private void buyItinerary(ItineraryBean itineraryBean, StackPane stackPane) {
         FXMLLoader loader = new FXMLLoader();
         FileInputStream fileInputStream;
 
@@ -267,7 +267,7 @@ public class Controller {
         }
     }
 
-    private void SaveItinerary(ItineraryBean itineraryBean, String type) {
+    private void saveItinerary(ItineraryBean itineraryBean, String type) {
         SaveTour st = new SaveTour();
         switch (type) {
             case "save" -> st.saveTour(SessionUser.getInstance().getSession(), itineraryBean);

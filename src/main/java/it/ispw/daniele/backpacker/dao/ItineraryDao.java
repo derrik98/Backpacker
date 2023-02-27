@@ -30,7 +30,7 @@ public class ItineraryDao extends DaoTemplate {
     public List<Itinerary> getItinerary(String city) {
         List<Itinerary> ret = this.execute(new DaoAction<List<Itinerary>>() {
             @Override
-            public List<Itinerary> act() throws ClassNotFoundException, SQLException {
+            public List<Itinerary> act() throws SQLException {
                 Connection conn;
                 List<Itinerary> itinerary = new ArrayList<>();
                 String sql;
@@ -162,7 +162,7 @@ public class ItineraryDao extends DaoTemplate {
     public List<Itinerary> getBookedItineraries(String input) {
         List<Itinerary> ret = this.execute(new DaoAction<List<Itinerary>>() {
             @Override
-            public List<Itinerary> act() throws ClassNotFoundException, SQLException {
+            public List<Itinerary> act() throws SQLException {
                 Connection conn = null;
                 List<Itinerary> itinerary = new ArrayList<>();
                 String sql;
@@ -213,7 +213,7 @@ public class ItineraryDao extends DaoTemplate {
     public void saveTour(String username, String itinerary) {
         this.execute(new DaoAction<Boolean>() {
             @Override
-            public Boolean act() throws ClassNotFoundException, SQLException {
+            public Boolean act() throws SQLException {
                 Connection con = DatabaseUserConnection.getUserConnection();
                 String sql = "call backpacker.save_itinerary(?, ?);\r\n";
 
@@ -231,7 +231,7 @@ public class ItineraryDao extends DaoTemplate {
     public List<Itinerary> getSavedItinerary(String input) {
         List<Itinerary> ret = this.execute(new DaoAction<List<Itinerary>>() {
             @Override
-            public List<Itinerary> act() throws ClassNotFoundException, SQLException {
+            public List<Itinerary> act() throws SQLException {
                 Connection conn = null;
                 List<Itinerary> itinerary = new ArrayList<>();
                 String sql;
