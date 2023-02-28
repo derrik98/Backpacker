@@ -1,6 +1,5 @@
 package it.ispw.daniele.backpacker.view.fxml_view;
 
-//import animatefx.animation.Shake;
 import it.ispw.daniele.backpacker.bean.GeneralUserBean;
 import it.ispw.daniele.backpacker.controller.login.LoginController;
 import it.ispw.daniele.backpacker.exceptions.EmptyFieldException;
@@ -48,12 +47,7 @@ public class LoginViewController {
         try{
             gu = controller.login(gub);
 
-            if(gu == null){
-                String styleErrorLabel = "-fx-border-style: solid; -fx-border-width: 1; -fx-border-color: red";
-                this.textFieldUsername.setStyle(styleErrorLabel);
-                this.textFieldPassword.setStyle(styleErrorLabel);
-            }
-            else{
+            if(gu != null){
                 String role = gu.getRole();
 
                 //SET SESSION GENERAL USER
@@ -63,19 +57,11 @@ public class LoginViewController {
                 switch (role) {
                     case "user" -> UserGraphicChange.getInstance().switchToHomePage(this.textFieldUsername.getScene());
                     case "tourist_guide" -> TouristGuideGraphicChange.getInstance().switchToHomePage(this.textFieldUsername.getScene());
-                    default -> {
-                    }
                 }
             }
         }catch (EmptyFieldException exception){
-            this.errorText.setStyle("-fx-font-size: 27px;");
             this.errorText.setText(exception.getMessage());
-            //this.textFieldUsername.setStyle("-fx-border-style: solid; -fx-border-width: 1; -fx-border-color: red");
-            //this.textFieldPassword.setStyle("-fx-border-style: solid; -fx-border-width: 1; -fx-border-color: red");
-
-            //new Shake(this.buttonLogin).play();
         }
-
     }
 
     public void switchToSignUp() throws IOException {

@@ -146,7 +146,7 @@
                          <HBox alignment="CENTER" prefWidth="900.0">
                              <Text fx:id="errorText" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0">
                                  <font>
-                                     <Font size="1.0"/>
+                                     <Font size="27"/>
                                  </font>
                              </Text>
                              <padding>

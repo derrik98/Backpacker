@@ -24,7 +24,6 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.scene.web.WebView;
 
 import java.io.FileInputStream;
@@ -117,7 +116,6 @@ public class Controller {
             region2.setMinWidth(15);
             region2.setMaxWidth(Double.MAX_VALUE);
 
-
             for (int indexMonument = 0; indexMonument < als.size(); indexMonument++) {
 
                 Label label = new Label(" " + als.get(indexMonument) + " ");
@@ -140,12 +138,10 @@ public class Controller {
 
             }
 
-            HBox region3 = new HBox();
-            region3.setMinWidth(15);
-            region3.setMaxWidth(Double.MAX_VALUE);
-
             Label output = new Label();
-            contentPane.getChildren().addAll(region3, output);
+            output.setFont(new Font("Arial", 14));
+            output.setPrefWidth(Control.USE_COMPUTED_SIZE);
+            contentPane.getChildren().addAll(region, output);
 
             if (type.equals("suggested")) {
 
@@ -166,12 +162,8 @@ public class Controller {
 
                     });
 
-                    contentPane.getChildren().addAll(region, ivBuy);
-                } else {
-                    HBox.setHgrow(region1, Priority.ALWAYS);
+                    contentPane.getChildren().addAll(region1, ivBuy);
                 }
-            } else {
-                HBox.setHgrow(region1, Priority.ALWAYS);
             }
 
             ImageView ivSave;
@@ -181,8 +173,9 @@ public class Controller {
             if (from.equals("profile")) {
 
                 ivSave = new ImageView(new Image(Objects.requireNonNull(getClass().getResource("/cestino.png")).toExternalForm()));
+                System.out.println(ivSave);
                 ivSave.setOnMouseClicked(mouseEvent -> {
-                    titledPane.setCollapsible(false);
+
                     titledPane.setExpanded(false);
                     this.saveItinerary(itineraryBeanList.get(finalJ1), "remove");
 
@@ -194,7 +187,7 @@ public class Controller {
             else {
                 ivSave = new ImageView(new Image(Objects.requireNonNull(getClass().getResource("/save.png")).toExternalForm()));
                 ivSave.setOnMouseClicked(mouseEvent -> {
-
+                    titledPane.setExpanded(false);
                     try {
                         this.saveItinerary(itineraryBeanList.get(finalJ1), "save");
                         output.setText("Saved");
@@ -203,40 +196,14 @@ public class Controller {
                     }
 
                 });
-
+            }
                 ivSave.setCursor(Cursor.HAND);
                 ivSave.setFitWidth(35);
                 ivSave.setFitHeight(35);
 
-                contentPane.getChildren().addAll(region1, ivSave);
-            }
-
-                //Setting of map image
-            /*ImageView ivMap = new ImageView(new Image(Objects.requireNonNull(getClass().getResource("/googleMaps.png")).toExternalForm()));
-            ivMap.setFitWidth(35);
-            ivMap.setFitHeight(35);
-            ivMap.setCursor(Cursor.HAND);
-            ivMap.setId("MAP");
+                contentPane.getChildren().addAll(region2, ivSave);
 
 
-            ivMap.setOnMouseClicked(mouseEvent -> {
-                System.out.println("COLL " + titledPane.isCollapsible());
-                System.out.println("COLL " + titledPane.isExpanded());
-
-                //if (!titledPane.isCollapsible()) {
-                    if (!titledPane.isExpanded()) {
-
-                    goToMap(als, titledPane);
-
-                    //titledPane.setCollapsible(true);
-                    titledPane.setExpanded(true);
-
-                } else {
-                    //titledPane.setCollapsible(true);
-                    titledPane.setExpanded(false);
-                }
-            });
-            contentPane.getChildren().addAll(region2, ivMap);*/
                 titledPane.setGraphic(contentPane);
                 this.goToMap(als, titledPane);
 
@@ -279,7 +246,8 @@ public class Controller {
 
         WebView webView = new WebView();
         webView.setMinHeight(550);
-        StringBuilder Url = new StringBuilder("https://google.it/maps/dir/" + SessionUser.getInstance().getSearchSession().getAddress());
+        //StringBuilder Url = new StringBuilder("https://google.it/maps/dir/" + SessionUser.getInstance().getSearchSession().getAddress());
+        StringBuilder Url = new StringBuilder("https://google.it/maps/dir/" + als.get(0));
 
         for (String element : als) {
 
@@ -289,19 +257,8 @@ public class Controller {
 
         webView.getEngine().load(Url.toString());
 
-        if(!Url.toString().equals("")){
-           // webView.setMaxSize(1200, 600);
-            //webView.maxWidthProperty().bind(webView.getScene().widthProperty());
-            //webView.maxHeightProperty().bind(webView.getScene().heightProperty());
-        } else {
-            webView.maxWidthProperty().unbind();
-            webView.maxHeightProperty().unbind();
-        }
-
         VBox v = new VBox(webView);
         titledPane.setContent(v);
-
-        //webView.getEngine().load(null);
 
     }
 }

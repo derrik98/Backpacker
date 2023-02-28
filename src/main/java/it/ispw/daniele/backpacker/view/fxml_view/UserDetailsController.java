@@ -104,15 +104,16 @@ public class UserDetailsController extends Controller {
         List<ItineraryBean> saved;
         saved = st.getItinerary(users.getUsername());
 
-        if(booked == null){
-            textBookedItineraries.setText(textBookedItineraries.getText() + ": EMPTY");
+        if(booked.isEmpty()){
+            this.textBookedItineraries.setText(this.textBookedItineraries.getText() + ": EMPTY");
         }
         else {
             Accordion accordionSuggested = this.createTable(booked, "suggested", "profile", null);
             vBoxBooked.getChildren().addAll(accordionSuggested);
         }
-        if(saved == null){
-            textSavedItineraries.setText(textSavedItineraries.getText() + ": EMPTY");
+
+        if(saved.isEmpty()){
+            this.textSavedItineraries.setText(this.textSavedItineraries.getText() + ": EMPTY");
         }
         else {
             Accordion accordionSelf = this.createTable(saved, "self", "profile", null);

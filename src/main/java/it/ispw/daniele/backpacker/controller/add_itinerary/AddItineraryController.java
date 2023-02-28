@@ -12,14 +12,15 @@ import java.util.Date;
 
 public class AddItineraryController {
 
-    public int getItineraryId(ItineraryBean itineraryBean) throws SQLException, ClassNotFoundException {
+    public int getItineraryId(ItineraryBean itineraryBean) throws SQLException {
         ItineraryDao itineraryDao = new ItineraryDao();
         ///MODIFICARE CODICE SQL
         return itineraryDao.getItineraryId(itineraryBean.getGuideId(), itineraryBean.getLocation(), itineraryBean.getDate(), itineraryBean.getTime(), itineraryBean.getParticipants(), itineraryBean.getPrice(), itineraryBean.getSteps());
     }
+
     public boolean addItinerary(ItineraryBean itineraryBean) throws DateException {
         ItineraryDao itineraryDao = new ItineraryDao();
-        Date date = null;
+        Date date;
         Date currentDate = new Date();
 
         if(itineraryBean.getGuideId().equals("") || itineraryBean.getLocation().equals("")) {

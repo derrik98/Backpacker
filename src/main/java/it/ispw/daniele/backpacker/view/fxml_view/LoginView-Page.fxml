@@ -99,10 +99,10 @@
                                     </font>
                                 </Button>
                             </HBox>
-                            <HBox alignment="CENTER" prefWidth="900.0">
+                            <HBox alignment="CENTER" style="-fx-background-color:rgba(139,103,40,0.95); -fx-background-radius:25 25 25 25;">
                                 <Text fx:id="errorText" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0">
                                     <font>
-                                        <Font size="1.0" />
+                                        <Font size="27" />
                                     </font>
                            <HBox.margin>
                               <Insets bottom="40.0" top="40.0" />

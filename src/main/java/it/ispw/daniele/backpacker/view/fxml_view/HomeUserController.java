@@ -21,7 +21,8 @@ import java.math.RoundingMode;
 
 public class HomeUserController{
 
-    public static final Text errorText = new Text();
+    @FXML
+    private Text errorText;
     @FXML
     private HBox menuBar = new HBox();
     @FXML
@@ -68,7 +69,8 @@ public class HomeUserController{
 
         try {
             if (textFieldCountry.getText().equals("") || textFieldCity.getText().equals("") || textFieldAddress.getText().equals("")) {
-                throw new FileNotFoundException("ERROR");
+                this.errorText.setText("Credenziali mancanti");
+                //throw new FileNotFoundException("ERROR");
             }
 
             SessionUser.getInstance().setSearchSession(homeBean);
@@ -78,12 +80,10 @@ public class HomeUserController{
             UserGraphicChange.getInstance().switchToResult(this.textFieldCountry.getScene(), homeBean);
 
         } catch (CityNotFoundException cityException) {
-            errorText.setStyle("-fx-font-size: 27px;");
-            errorText.setText(cityException.getMessage());
+            this.errorText.setText(cityException.getMessage());
             this.textFieldCity.setStyle("-fx-border-style: solid; -fx-border-width: 1; -fx-border-color: red");
         } catch (AddressNotFoundException addressException){
-            errorText.setStyle("-fx-font-size: 27px;");
-            errorText.setText(addressException.getMessage());
+            this.errorText.setText(addressException.getMessage());
             this.textFieldAddress.setStyle("-fx-border-style: solid; -fx-border-width: 1; -fx-border-color: red");
         }catch (MonumentNotFoundException mnfe){
             //this.showFeedback(mnfe.getMessage());
