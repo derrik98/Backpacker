@@ -38,5 +38,7 @@ public class SessionUser {
 
     public void closeSession(){
         this.userSession = null;
+        this.searchSession = null;
+
     }
 }

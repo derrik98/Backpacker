@@ -16,8 +16,13 @@ module it.ispw.daniele.backpacker {
     requires org.jetbrains.annotations;
     requires mysql.connector.java;
 
+    exports it.ispw.daniele.backpacker.utils;
+    exports it.ispw.daniele.backpacker.bean;
+    exports it.ispw.daniele.backpacker.exceptions;
     exports it.ispw.daniele.backpacker.view.fxml_view;
     opens it.ispw.daniele.backpacker.view.fxml_view to javafx.fxml;
     exports it.ispw.daniele.backpacker.view.command_line_interface;
     opens it.ispw.daniele.backpacker.view.command_line_interface to javafx.fxml;
+
+
 }

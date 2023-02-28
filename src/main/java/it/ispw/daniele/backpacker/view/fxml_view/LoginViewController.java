@@ -97,9 +97,8 @@ public class LoginViewController {
     }
 
     public void init() {
-        String styleDefault = "-fx-border-style: none; -fx-border-width: none; -fx-border-color: none";
-        this.textFieldUsername.setStyle(styleDefault);
-        this.textFieldPassword.setStyle(styleDefault);
+        this.textFieldUsername.setText("");
+        this.textFieldPassword.setText("");
     }
 
 }

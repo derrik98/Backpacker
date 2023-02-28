@@ -30,7 +30,7 @@ public class SearchController extends Controller {
         }
     }
 
-    public List<ItineraryBean> createItinerary(HomeBean homeBean) throws MonumentNotFoundException, GenericException {
+    public List<ItineraryBean> createItinerary(HomeBean homeBean) throws GenericException, MonumentNotFoundException {
 
         MonumentFromAddress monuments = new MonumentFromAddress();
         List<String> result = monuments.getMonuments(homeBean);
@@ -45,7 +45,7 @@ public class SearchController extends Controller {
             try {
                 rand = SecureRandom.getInstanceStrong();
             } catch (NoSuchAlgorithmException e) {
-                throw new GenericException("Error");
+                throw new GenericException("Search error");
             }
 
             StringBuilder vector = new StringBuilder();
@@ -66,7 +66,7 @@ public class SearchController extends Controller {
             try {
                 itinerary = new Itinerary(SecureRandom.getInstanceStrong().nextInt(1000), vector.toString());
             } catch (NoSuchAlgorithmException e) {
-                throw new GenericException("Error");
+                throw new GenericException("Search error");
             }
             it.add(itinerary);
         }

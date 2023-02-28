@@ -4,6 +4,7 @@ import it.ispw.daniele.backpacker.bean.HomeBean;
 import it.ispw.daniele.backpacker.controller.search.SearchController;
 import it.ispw.daniele.backpacker.exceptions.AddressNotFoundException;
 import it.ispw.daniele.backpacker.exceptions.CityNotFoundException;
+import it.ispw.daniele.backpacker.exceptions.EmptyFieldException;
 import it.ispw.daniele.backpacker.exceptions.MonumentNotFoundException;
 import it.ispw.daniele.backpacker.utils.Roles;
 import it.ispw.daniele.backpacker.utils.SessionUser;
@@ -14,7 +15,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -52,13 +52,9 @@ public class HomeUserController{
         labelRange.setText(sliderValue.setScale(1, RoundingMode.HALF_UP) + " km");
     }
 
-    public void searchRoutes() throws IOException{
+    public void searchRoutes() throws IOException {
 
-        buttonSearch.setStyle("");
-
-        String styleDefault = "-fx-border-style: none; -fx-border-width: none; -fx-border-color: none";
-        this.textFieldCity.setStyle(styleDefault);
-        this.textFieldAddress.setStyle(styleDefault);
+       // buttonSearch.setStyle("");
 
         HomeBean homeBean = new HomeBean();
         homeBean.setCountry(this.textFieldCountry.getText());
@@ -69,24 +65,18 @@ public class HomeUserController{
 
         try {
             if (textFieldCountry.getText().equals("") || textFieldCity.getText().equals("") || textFieldAddress.getText().equals("")) {
-                this.errorText.setText("Credenziali mancanti");
-                //throw new FileNotFoundException("ERROR");
+                throw new EmptyFieldException("Missing inputs");
             }
 
             SessionUser.getInstance().setSearchSession(homeBean);
 
             SearchController sc = new SearchController();
             sc.checkInput(homeBean);
-            UserGraphicChange.getInstance().switchToResult(this.textFieldCountry.getScene(), homeBean);
+            UserGraphicChange.getInstance().switchToResult(this.textFieldCountry.getScene());
 
-        } catch (CityNotFoundException cityException) {
-            this.errorText.setText(cityException.getMessage());
-            this.textFieldCity.setStyle("-fx-border-style: solid; -fx-border-width: 1; -fx-border-color: red");
-        } catch (AddressNotFoundException addressException){
-            this.errorText.setText(addressException.getMessage());
-            this.textFieldAddress.setStyle("-fx-border-style: solid; -fx-border-width: 1; -fx-border-color: red");
-        }catch (MonumentNotFoundException mnfe){
-            //this.showFeedback(mnfe.getMessage());
+        } catch (CityNotFoundException | EmptyFieldException | AddressNotFoundException |
+                 MonumentNotFoundException exception) {
+            this.errorText.setText(exception.getMessage());
         }
     }
 

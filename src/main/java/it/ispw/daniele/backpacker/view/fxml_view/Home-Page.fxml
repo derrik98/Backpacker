@@ -143,7 +143,7 @@
                                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
                              </padding>
                          </HBox>
-                         <HBox alignment="CENTER" prefWidth="900.0">
+                         <HBox alignment="CENTER" prefWidth="900.0" style="-fx-background-color:rgba(139,103,40,0.95); -fx-background-radius:25 25 25 25;">
                              <Text fx:id="errorText" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0">
                                  <font>
                                      <Font size="27"/>

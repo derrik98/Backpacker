@@ -20,7 +20,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 public class ResultController extends Controller {
@@ -60,7 +59,7 @@ public class ResultController extends Controller {
 
     private static ResultController instance = null;
 
-    public void init(HomeBean homeBean) throws MonumentNotFoundException, NoSuchAlgorithmException, GenericException {
+    public void init() throws GenericException {
 
         if(SessionUser.getInstance().getSession().getRole().equals(Roles.TOURIST_GUIDE.name().toLowerCase())) {
             TouristGuideGraphicChange i = TouristGuideGraphicChange.getInstance();
@@ -71,7 +70,9 @@ public class ResultController extends Controller {
             ugc.menuBar(this.menuBar, result);
         }
 
-        if (!homeBean.getCountry().equals("") && !homeBean.getCity().equals("") && !homeBean.getAddress().equals("")) {
+        HomeBean homeBean = SessionUser.getInstance().getSearchSession();
+
+        if (homeBean != null) {
             this.countrySearch.setText(homeBean.getCountry());
             this.citySearch.setText(homeBean.getCity());
             this.addressSearch.setText(homeBean.getAddress());
@@ -103,14 +104,15 @@ public class ResultController extends Controller {
             });
 
             vBoxDynamic.getChildren().add(0, link);
+            return;
         }
-////TOLTO IL CLICK SULLA LABEL DEI RESULT////
+
         BookTourController btc = new BookTourController();
         List<ItineraryBean> suggItinerary;
         suggItinerary = btc.getItinerary(citySearch.getText(), "city");
 
         if(suggItinerary == null){
-            System.out.println("EMPTY_DATABASE ");
+            suggestedItinerary.setText("Suggested Itinerary: EMPTY");
         }
         else{
             suggestedItinerary.setText("Suggested Itinerary");
@@ -124,10 +126,14 @@ public class ResultController extends Controller {
 
         SearchController sc = new SearchController();
         List<ItineraryBean> iti;
-        iti = sc.createItinerary(homeBean);
+        try {
+            iti = sc.createItinerary(homeBean);
+        } catch (GenericException | MonumentNotFoundException e) {
+            throw new GenericException("ERROR");
+        }
 
         if(iti == null){
-            System.out.println("EMPTY_DATABASE ");
+            selfItinerary.setText("Self Itinerary: EMPTY");
         }
         else {
             selfItinerary.setText("Self Itinerary");

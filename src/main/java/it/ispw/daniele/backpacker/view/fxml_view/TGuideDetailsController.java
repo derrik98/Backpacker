@@ -54,7 +54,7 @@ public class TGuideDetailsController extends Controller {
     @FXML
     public VBox vBoxSaved;
 
-    private final String PROFILE = "profile";
+    private static final String PROFILE = "profile";
 
     public void switchToSettings() throws IOException {
         FXMLLoader loader = new FXMLLoader();
@@ -82,7 +82,7 @@ public class TGuideDetailsController extends Controller {
     public void init(TouristGuideBean myUser) {
 
         TouristGuideGraphicChange tgc = new TouristGuideGraphicChange();
-        tgc.menuBar(this.menuBar, this.PROFILE);
+        tgc.menuBar(this.menuBar, PROFILE);
 
         TouristGuideBean tUsers = this.getSearchUser(SessionUser.getInstance().getSession().getUsername());
 
@@ -110,14 +110,14 @@ public class TGuideDetailsController extends Controller {
             textBookedItineraries.setText(textBookedItineraries.getText() + ": EMPTY");
         }
         else {
-            Accordion accordionSuggested = this.createTable(booked, "suggested", this.PROFILE, null);
+            Accordion accordionSuggested = this.createTable(booked, "suggested", PROFILE, null);
             vBoxBooked.getChildren().addAll(accordionSuggested);
         }
         if(saved == null){
             textSavedItineraries.setText(textSavedItineraries.getText() + ": EMPTY");
         }
         else {
-            Accordion accordionSelf = this.createTable(saved, "self", this.PROFILE, null);
+            Accordion accordionSelf = this.createTable(saved, "self", PROFILE, null);
             vBoxSaved.getChildren().addAll(accordionSelf);
         }
 
