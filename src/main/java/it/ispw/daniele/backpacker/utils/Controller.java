@@ -8,6 +8,7 @@ import it.ispw.daniele.backpacker.entity.Itinerary;
 import it.ispw.daniele.backpacker.entity.TouristGuide;
 import it.ispw.daniele.backpacker.entity.User;
 import it.ispw.daniele.backpacker.view.fxml_view.ItineraryDetailsController;
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -25,6 +26,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.web.WebView;
+import javafx.util.Duration;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -32,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Controller {
+public class Controller{
 
     protected UserBean convert(User l) {
         UserBean ub = new UserBean();
@@ -85,13 +87,15 @@ public class Controller {
 
         Accordion accordion = new Accordion();
 
-        for (int jind = 0; jind < itineraryBeanList.size(); jind++) {
+        for (ItineraryBean itineraryBean : itineraryBeanList) {
 
-            String[] steps = itineraryBeanList.get(jind).getSteps().split("/");
+            String[] steps = itineraryBean.getSteps().split("/");
             ArrayList<String> als = new ArrayList<>();
+
             for (int i = 0; i < steps.length; i++) {
                 als.add(i, steps[i]);
             }
+
             TitledPane titledPane = new TitledPane();
 
             titledPane.setAlignment(Pos.CENTER);
@@ -103,117 +107,172 @@ public class Controller {
 
             contentPane.minWidthProperty().bind(titledPane.widthProperty());
 
-            HBox region = new HBox();
-            region.setMinWidth(15);
-            region.setMaxWidth(Double.MAX_VALUE);
-            HBox.setHgrow(region, Priority.ALWAYS);
-
-            HBox region1 = new HBox();
-            region1.setMinWidth(15);
-            region1.setMaxWidth(Double.MAX_VALUE);
-
-            HBox region2 = new HBox();
-            region2.setMinWidth(15);
-            region2.setMaxWidth(Double.MAX_VALUE);
-
-            for (int indexMonument = 0; indexMonument < als.size(); indexMonument++) {
-
-                Label label = new Label(" " + als.get(indexMonument) + " ");
-
-                if (indexMonument != 0) {
-
-                    Label space = new Label(" - ");
-                    space.setFont(new Font("Arial", 14));
-                    space.setPrefWidth(Control.USE_COMPUTED_SIZE);
-
-                    contentPane.getChildren().add(space);
-
-                    label.setCursor(Cursor.HAND);
-
-                }
-
-                label.setFont(new Font("Arial", 14));
-                label.setPrefWidth(Control.USE_COMPUTED_SIZE);
-                contentPane.getChildren().add(label);
-
-            }
+            this.setLabelItinerary(als, contentPane);
 
             Label output = new Label();
-            output.setFont(new Font("Arial", 14));
-            output.setPrefWidth(Control.USE_COMPUTED_SIZE);
-            contentPane.getChildren().addAll(region, output);
+            this.setLabelOutput(output, contentPane);
 
             if (type.equals("suggested")) {
 
                 if (!from.equals("profile")) {
 
                     //Setting of buy image
-                    ImageView ivBuy;
-                    ivBuy = new ImageView(new Image(Objects.requireNonNull(getClass().getResource("/buy.png")).toExternalForm()));
-                    ivBuy.setFitWidth(40);
-                    ivBuy.setFitHeight(40);
-                    ivBuy.setCursor(Cursor.HAND);
+                    this.setIvBuy(titledPane, itineraryBean, stackPane, contentPane);
 
-                    int finalJ = jind;
-                    ivBuy.setOnMouseClicked(mouseEvent -> {
-
-                        titledPane.setExpanded(false);
-                        this.buyItinerary(itineraryBeanList.get(finalJ), stackPane);
-
-                    });
-
-                    contentPane.getChildren().addAll(region1, ivBuy);
                 }
             }
 
-            ImageView ivSave;
-            int finalJ1 = jind;
+            //int finalJ1 = ind;
 
             //Setting of delete image
             if (from.equals("profile")) {
 
-                ivSave = new ImageView(new Image(Objects.requireNonNull(getClass().getResource("/cestino.png")).toExternalForm()));
-                System.out.println(ivSave);
-                ivSave.setOnMouseClicked(mouseEvent -> {
+                this.setIvDelete(titledPane, itineraryBean, accordion, contentPane, output);
 
-                    titledPane.setExpanded(false);
-                    this.saveItinerary(itineraryBeanList.get(finalJ1), "remove");
-
-                    accordion.getPanes().remove(titledPane);
-                });
             }
 
             //Setting of save image
             else {
-                ivSave = new ImageView(new Image(Objects.requireNonNull(getClass().getResource("/save.png")).toExternalForm()));
-                ivSave.setOnMouseClicked(mouseEvent -> {
-                    titledPane.setExpanded(false);
-                    try {
-                        this.saveItinerary(itineraryBeanList.get(finalJ1), "save");
-                        output.setText("Saved");
-                    } catch (Exception e) {
-                        output.setText("Error");
-                    }
 
-                });
+                this.setIvSave(titledPane, itineraryBean, contentPane, output);
+
             }
-                ivSave.setCursor(Cursor.HAND);
-                ivSave.setFitWidth(35);
-                ivSave.setFitHeight(35);
 
-                contentPane.getChildren().addAll(region2, ivSave);
+            //contentPane.getChildren().addAll(region2, ivSave);
 
 
-                titledPane.setGraphic(contentPane);
-                this.goToMap(als, titledPane);
+            titledPane.setGraphic(contentPane);
+            this.goToMap(als, titledPane);
 
 
-                titledPane.setExpanded(true);
-                titledPane.setCollapsible(true);
-                accordion.getPanes().add(titledPane);
-            }
+            titledPane.setExpanded(true);
+            titledPane.setCollapsible(true);
+            accordion.getPanes().add(titledPane);
+        }
             return accordion;
         }
+
+    private void setIvSave(TitledPane titledPane, ItineraryBean itineraryBean, HBox hBox, Label output) {
+
+        HBox region2 = new HBox();
+        region2.setMinWidth(15);
+        region2.setMaxWidth(Double.MAX_VALUE);
+
+        ImageView ivSave;
+        ivSave = new ImageView(new Image(Objects.requireNonNull(getClass().getResource("/save.png")).toExternalForm()));
+
+        ivSave.setOnMouseClicked(mouseEvent -> {
+            titledPane.setExpanded(false);
+            try {
+                this.saveItinerary(itineraryBean, "save");
+
+                output.setText("Saved");
+
+            } catch (Exception e) {
+                output.setText("Error");
+            }
+            PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
+            pause.setOnFinished(e -> output.setText(""));
+            pause.play();
+        });
+
+        ivSave.setCursor(Cursor.HAND);
+        ivSave.setFitWidth(35);
+        ivSave.setFitHeight(35);
+
+        hBox.getChildren().addAll(region2, ivSave);
+    }
+
+    private void setIvDelete(TitledPane titledPane, ItineraryBean itineraryBean, Accordion accordion, HBox hBox, Label output) {
+
+        HBox region2 = new HBox();
+        region2.setMinWidth(15);
+        region2.setMaxWidth(Double.MAX_VALUE);
+
+        ImageView ivDelete;
+        ivDelete = new ImageView(new Image(Objects.requireNonNull(getClass().getResource("/cestino.png")).toExternalForm()));
+
+        ivDelete.setOnMouseClicked(mouseEvent -> {
+
+            titledPane.setExpanded(false);
+            try {
+                this.saveItinerary(itineraryBean, "remove");
+                accordion.getPanes().remove(titledPane);
+                output.setText("Deleted");
+            } catch (Exception e) {
+                output.setText("Error");
+            }
+            PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
+            pause.setOnFinished(e -> output.setText(""));
+            pause.play();
+        });
+
+        ivDelete.setCursor(Cursor.HAND);
+        ivDelete.setFitWidth(35);
+        ivDelete.setFitHeight(35);
+
+        hBox.getChildren().addAll(region2, ivDelete);
+    }
+
+    private void setIvBuy(TitledPane titledPane, ItineraryBean itineraryBean, StackPane stackPane, HBox contentPane) {
+
+        HBox region1 = new HBox();
+        region1.setMinWidth(15);
+        region1.setMaxWidth(Double.MAX_VALUE);
+
+        ImageView ivBuy;
+        ivBuy = new ImageView(new Image(Objects.requireNonNull(getClass().getResource("/buy.png")).toExternalForm()));
+        ivBuy.setFitWidth(40);
+        ivBuy.setFitHeight(40);
+        ivBuy.setCursor(Cursor.HAND);
+
+        ivBuy.setOnMouseClicked(mouseEvent -> {
+
+            titledPane.setExpanded(false);
+            this.buyItinerary(itineraryBean, stackPane);
+
+        });
+
+        contentPane.getChildren().addAll(region1, ivBuy);
+    }
+
+
+    private void setLabelOutput(Label output, HBox hBox) {
+
+        HBox region = new HBox();
+        region.setMinWidth(15);
+        region.setMaxWidth(Double.MAX_VALUE);
+        HBox.setHgrow(region, Priority.ALWAYS);
+
+        //Label output = new Label(message);
+        output.setFont(new Font("Arial", 14));
+        output.setPrefWidth(Control.USE_COMPUTED_SIZE);
+        hBox.getChildren().addAll(region, output);
+    }
+
+    private void setLabelItinerary(ArrayList<String> arrayList, HBox hBox) {
+
+        for (int indexMonument = 0; indexMonument < arrayList.size(); indexMonument++) {
+
+            Label label = new Label(" " + arrayList.get(indexMonument) + " ");
+
+            if (indexMonument != 0) {
+
+                Label space = new Label(" - ");
+                space.setFont(new Font("Arial", 14));
+                space.setPrefWidth(Control.USE_COMPUTED_SIZE);
+
+                hBox.getChildren().add(space);
+
+                label.setCursor(Cursor.HAND);
+
+            }
+
+            label.setFont(new Font("Arial", 14));
+            label.setPrefWidth(Control.USE_COMPUTED_SIZE);
+            hBox.getChildren().add(label);
+        }
+    }
 
 
     private void buyItinerary(ItineraryBean itineraryBean, StackPane stackPane) {
@@ -261,4 +320,5 @@ public class Controller {
         titledPane.setContent(v);
 
     }
+
 }

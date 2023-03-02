@@ -260,7 +260,7 @@ public class ItineraryDao extends DaoTemplate {
             int id = rs.getInt(ID);
             String steps = rs.getString(STEPS);
 
-            Itinerary itinerary = new Itinerary(id, steps);
+            Itinerary itinerary = new Itinerary(id, "", "", "", "", 0, 0, steps);
 
             l.add(itinerary);
         } while (rs.next());

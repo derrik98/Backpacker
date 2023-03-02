@@ -5,6 +5,7 @@ import it.ispw.daniele.backpacker.bean.ItineraryBean;
 import it.ispw.daniele.backpacker.dao.ItineraryDao;
 import it.ispw.daniele.backpacker.entity.Itinerary;
 import it.ispw.daniele.backpacker.utils.Controller;
+import java.util.Collections;
 
 import java.util.List;
 
@@ -12,19 +13,16 @@ public class BookTourController extends Controller {
 
     public List<ItineraryBean> getItinerary(String input, String type){
         ItineraryDao id = new ItineraryDao();
-        List<Itinerary> itinerary;
+        List<Itinerary> itinerary = null;
         switch (type) {
             case "city" -> itinerary = id.getItinerary(input);
             case "user" -> itinerary = id.getBookedItineraries(input);
-            default -> {
-                return null;
-            }
         }
         if(itinerary != null){
             return this.convert(itinerary);
         }
         else{
-            return null;
+            return Collections.emptyList();
         }
     }
 

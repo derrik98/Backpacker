@@ -17,6 +17,7 @@ module it.ispw.daniele.backpacker {
     requires mysql.connector.java;
 
     exports it.ispw.daniele.backpacker.utils;
+    exports it.ispw.daniele.backpacker.entity;
     exports it.ispw.daniele.backpacker.bean;
     exports it.ispw.daniele.backpacker.exceptions;
     exports it.ispw.daniele.backpacker.view.fxml_view;
