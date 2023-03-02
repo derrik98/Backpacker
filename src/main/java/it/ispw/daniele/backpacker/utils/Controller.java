@@ -7,6 +7,7 @@ import it.ispw.daniele.backpacker.booktour.SaveTour;
 import it.ispw.daniele.backpacker.entity.Itinerary;
 import it.ispw.daniele.backpacker.entity.TouristGuide;
 import it.ispw.daniele.backpacker.entity.User;
+import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.view.fxml_view.ItineraryDetailsController;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXMLLoader;
@@ -25,6 +26,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.scene.web.WebView;
 import javafx.util.Duration;
 
@@ -35,6 +37,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class Controller{
+
+    private String style = "Arial";
 
     protected UserBean convert(User l) {
         UserBean ub = new UserBean();
@@ -122,8 +126,6 @@ public class Controller{
                 }
             }
 
-            //int finalJ1 = ind;
-
             //Setting of delete image
             if (from.equals("profile")) {
 
@@ -137,9 +139,6 @@ public class Controller{
                 this.setIvSave(titledPane, itineraryBean, contentPane, output);
 
             }
-
-            //contentPane.getChildren().addAll(region2, ivSave);
-
 
             titledPane.setGraphic(contentPane);
             this.goToMap(als, titledPane);
@@ -244,8 +243,7 @@ public class Controller{
         region.setMaxWidth(Double.MAX_VALUE);
         HBox.setHgrow(region, Priority.ALWAYS);
 
-        //Label output = new Label(message);
-        output.setFont(new Font("Arial", 14));
+        output.setFont(new Font(style, 14));
         output.setPrefWidth(Control.USE_COMPUTED_SIZE);
         hBox.getChildren().addAll(region, output);
     }
@@ -259,7 +257,7 @@ public class Controller{
             if (indexMonument != 0) {
 
                 Label space = new Label(" - ");
-                space.setFont(new Font("Arial", 14));
+                space.setFont(new Font(style, 14));
                 space.setPrefWidth(Control.USE_COMPUTED_SIZE);
 
                 hBox.getChildren().add(space);
@@ -268,7 +266,7 @@ public class Controller{
 
             }
 
-            label.setFont(new Font("Arial", 14));
+            label.setFont(new Font(style, 14));
             label.setPrefWidth(Control.USE_COMPUTED_SIZE);
             hBox.getChildren().add(label);
         }
@@ -289,15 +287,18 @@ public class Controller{
             stackPane.getChildren().get(0).setDisable(true);
 
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException();
         }
     }
 
     private void saveItinerary(ItineraryBean itineraryBean, String type) {
         SaveTour st = new SaveTour();
-        switch (type) {
-            case "save" -> st.saveTour(SessionUser.getInstance().getSession(), itineraryBean);
-            case "remove" -> st.removeTour(SessionUser.getInstance().getSession(), itineraryBean);
+
+        if(type.equals("save")){
+            st.saveTour(SessionUser.getInstance().getSession(), itineraryBean);
+        }
+        else {
+            st.removeTour(SessionUser.getInstance().getSession(), itineraryBean);
         }
     }
 
@@ -305,7 +306,7 @@ public class Controller{
 
         WebView webView = new WebView();
         webView.setMinHeight(550);
-        //StringBuilder Url = new StringBuilder("https://google.it/maps/dir/" + SessionUser.getInstance().getSearchSession().getAddress());
+
         StringBuilder Url = new StringBuilder("https://google.it/maps/dir/" + als.get(0));
 
         for (String element : als) {

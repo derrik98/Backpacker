@@ -17,6 +17,7 @@ public class BookTourController extends Controller {
         switch (type) {
             case "city" -> itinerary = id.getItinerary(input);
             case "user" -> itinerary = id.getBookedItineraries(input);
+            default -> itinerary = Collections.emptyList();
         }
         if(itinerary != null){
             return this.convert(itinerary);
