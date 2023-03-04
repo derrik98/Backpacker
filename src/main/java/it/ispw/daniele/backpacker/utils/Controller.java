@@ -7,7 +7,6 @@ import it.ispw.daniele.backpacker.booktour.SaveTour;
 import it.ispw.daniele.backpacker.entity.Itinerary;
 import it.ispw.daniele.backpacker.entity.TouristGuide;
 import it.ispw.daniele.backpacker.entity.User;
-import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.view.fxml_view.ItineraryDetailsController;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXMLLoader;
@@ -26,7 +25,6 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.scene.web.WebView;
 import javafx.util.Duration;
 
@@ -38,7 +36,7 @@ import java.util.Objects;
 
 public class Controller{
 
-    private String style = "Arial";
+    private final String style = "Arial";
 
     protected UserBean convert(User l) {
         UserBean ub = new UserBean();
