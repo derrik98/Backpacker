@@ -51,7 +51,7 @@ public class AddItineraryViewController extends InterfaceController {
         String time = this.textFieldTime.getText();
         String participants = this.textFieldParticipants.getText();
         String price = this.textFieldPrice.getText();
-        boolean result = false;
+        boolean result;
 
         if(this.fieldDate.getValue() != null) {
             date = this.fieldDate.getValue().toString();

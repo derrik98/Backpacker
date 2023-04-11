@@ -13,7 +13,7 @@ public class BookTourController extends Controller {
 
     public List<ItineraryBean> getItinerary(String input, String type){
         ItineraryDao id = new ItineraryDao();
-        List<Itinerary> itinerary = null;
+        List<Itinerary> itinerary;
         switch (type) {
             case "city" -> itinerary = id.getItinerary(input);
             case "user" -> itinerary = id.getBookedItineraries(input);

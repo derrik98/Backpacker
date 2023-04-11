@@ -201,7 +201,6 @@
                      <Insets bottom="40.0" top="20.0" />
                  </VBox.margin>
              </Button>
-
          </VBox>
-         </VBox>
+     </VBox>
 </AnchorPane>

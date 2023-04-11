@@ -108,10 +108,10 @@ public class ResultController extends Controller {
         }
 
         BookTourController btc = new BookTourController();
-        List<ItineraryBean> suggItinerary;
-        suggItinerary = btc.getItinerary(citySearch.getText(), "city");
+        List<ItineraryBean> sItinerary;
+        sItinerary = btc.getItinerary(citySearch.getText(), "city");
 
-        if(suggItinerary == null){
+        if(sItinerary == null){
             suggestedItinerary.setText("Suggested Itinerary: EMPTY");
         }
         else{
@@ -120,7 +120,7 @@ public class ResultController extends Controller {
             guideImage.setFitHeight(50);
             guideImage.setFitHeight(50);
 
-            Accordion accordionSuggested = this.createTable(suggItinerary, "suggested", result, this.stackPaneResult);
+            Accordion accordionSuggested = this.createTable(sItinerary, "suggested", result, this.stackPaneResult);
             vBoxResultGuide.getChildren().add(accordionSuggested);
         }
 

@@ -26,7 +26,7 @@ public class SignUpController extends InterfaceController {
     @FXML
     private Label USER;
     @FXML
-    private TextField textFieldEmailSignUp,textFieldNameSignUp, textFieldSurnameSignUp, textFieldPassSignUp, textFieldConfPassSignUp;
+    private TextField textFieldEmailSignUp, textFieldNameSignUp, textFieldSurnameSignUp, textFieldPassSignUp, textFieldConfPassSignUp;
     @FXML
     private TextField textFieldVATNumber;
 
@@ -58,8 +58,8 @@ public class SignUpController extends InterfaceController {
         String newFileName;
 
         if(this.imageFile == null) {
-            fileName="";
-            newFileName="";
+            fileName = "";
+            newFileName = "";
         }else {
             fileName=this.imageFile.getName();
             newFileName=username+fileName;
@@ -80,7 +80,7 @@ public class SignUpController extends InterfaceController {
         }
 
         if(Boolean.TRUE.equals(regResult)){
-            System.out.println("REGISTRATION SUCCESSFULL");
+            System.out.println("REGISTRATION SUCCESSFULLY");
             if(this.imageFile != null){
                 String path = FileManager.PROFILE;
                 System.out.println(path);
@@ -97,7 +97,7 @@ public class SignUpController extends InterfaceController {
                        }
         }
         else{
-            System.out.println("unsuccessfull registration");
+            System.out.println("unsuccessfully registration");
         }
 
         this.textFieldEmailSignUp.setText("");

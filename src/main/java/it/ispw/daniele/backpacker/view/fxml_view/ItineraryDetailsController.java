@@ -18,10 +18,6 @@ public class ItineraryDetailsController {
     public ImageView closePageImage;
     @FXML
     public AnchorPane apDetails;
-
-    private final BookTourController controller = new BookTourController();
-    private final GeneralUserBean sessionUser = SessionUser.getInstance().getSession();
-    private ItineraryBean ib = new ItineraryBean();
     @FXML
     public Text itineraryId = new Text();
     @FXML
@@ -38,6 +34,10 @@ public class ItineraryDetailsController {
     public Text price = new Text();
     @FXML
     public Text steps;
+
+    private final BookTourController controller = new BookTourController();
+    private final GeneralUserBean sessionUser = SessionUser.getInstance().getSession();
+    private ItineraryBean ib = new ItineraryBean();
 
     @FXML
     public void closePage() {

@@ -36,8 +36,6 @@ public class HomeUserController{
     @FXML
     private TextField textFieldAddress;
     @FXML
-    private Button buttonSearch;
-    @FXML
     private RadioButton radioButtonRestaurant;
 
     @FXML
@@ -53,8 +51,6 @@ public class HomeUserController{
     }
 
     public void searchRoutes() throws IOException {
-
-       // buttonSearch.setStyle("");
 
         HomeBean homeBean = new HomeBean();
         homeBean.setCountry(this.textFieldCountry.getText());
@@ -74,8 +70,7 @@ public class HomeUserController{
             sc.checkInput(homeBean);
             UserGraphicChange.getInstance().switchToResult(this.textFieldCountry.getScene());
 
-        } catch (CityNotFoundException | EmptyFieldException | AddressNotFoundException |
-                 MonumentNotFoundException exception) {
+        } catch (CityNotFoundException | EmptyFieldException | AddressNotFoundException | MonumentNotFoundException exception) {
             this.errorText.setText(exception.getMessage());
         }
     }

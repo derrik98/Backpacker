@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MonumentFromAddress extends JSONFactory{
-    private List<String> monuments = new ArrayList<>();
+    private final List<String> monuments = new ArrayList<>();
     private static MonumentFromAddress instance = null;
 
     public static synchronized MonumentFromAddress getInstance() {

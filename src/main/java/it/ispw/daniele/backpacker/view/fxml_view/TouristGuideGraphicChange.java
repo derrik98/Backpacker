@@ -35,7 +35,6 @@ public class TouristGuideGraphicChange extends GUIChangeTemplate{
         });
     }
 
-
     public void switchToAddItinerary(Scene scene) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         FileInputStream fileInputStream = new FileInputStream("src/main/java/it/ispw/daniele/backpacker/view/fxml_view/Add-Itinerary-Page.fxml");

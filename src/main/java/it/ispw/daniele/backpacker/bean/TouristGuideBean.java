@@ -1,7 +1,5 @@
 package it.ispw.daniele.backpacker.bean;
 
-import java.io.Serial;
-
 public class TouristGuideBean extends GeneralUserBean{
 
     private String name;
