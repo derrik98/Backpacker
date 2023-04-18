@@ -226,8 +226,8 @@ public class ItineraryDao extends DaoTemplate {
         List<Itinerary> ret = this.execute(new DaoAction<List<Itinerary>>() {
             @Override
             public List<Itinerary> act() throws SQLException {
-                Connection conn = null;
-                List<Itinerary> itinerary = new ArrayList<>();
+                Connection conn;
+                List<Itinerary> itinerary;
                 String sql;
 
                 conn = DatabaseUserConnection.getUserConnection();

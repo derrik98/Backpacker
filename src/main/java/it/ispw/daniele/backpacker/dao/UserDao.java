@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class UserDAO extends DaoTemplate{
+public class UserDao extends DaoTemplate{
 
     private static final String SEARCH_USER = "search_user";
 

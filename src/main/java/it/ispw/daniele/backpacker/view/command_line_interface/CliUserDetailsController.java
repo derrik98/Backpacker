@@ -4,14 +4,13 @@ import it.ispw.daniele.backpacker.bean.ItineraryBean;
 import it.ispw.daniele.backpacker.bean.UserBean;
 import it.ispw.daniele.backpacker.booktour.BookTourController;
 import it.ispw.daniele.backpacker.booktour.SaveTour;
-import it.ispw.daniele.backpacker.dao.UserDAO;
+import it.ispw.daniele.backpacker.dao.UserDao;
 import it.ispw.daniele.backpacker.entity.User;
 import it.ispw.daniele.backpacker.utils.Controller;
 import it.ispw.daniele.backpacker.utils.SessionUser;
 
 import java.util.List;
 import java.util.Scanner;
-import java.util.logging.Logger;
 
 import static it.ispw.daniele.backpacker.view.command_line_interface.CLI.BOLD;
 import static it.ispw.daniele.backpacker.view.command_line_interface.CLI.RESET;
@@ -19,7 +18,7 @@ import static it.ispw.daniele.backpacker.view.command_line_interface.CLI.RESET;
 public class CliUserDetailsController extends Controller {
 
     private UserBean getSearchUser(String caller) {
-        UserDAO ud = new UserDAO();
+        UserDao ud = new UserDao();
         List<User> l = ud.getSearchUser(caller);
         return this.convert(l.get(0));
     }

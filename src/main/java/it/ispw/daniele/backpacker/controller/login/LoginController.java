@@ -5,7 +5,8 @@ import it.ispw.daniele.backpacker.bean.TouristGuideBean;
 import it.ispw.daniele.backpacker.bean.UserBean;
 import it.ispw.daniele.backpacker.dao.GeneralUserDao;
 import it.ispw.daniele.backpacker.dao.TouristGuideDao;
-import it.ispw.daniele.backpacker.dao.UserDAO;
+import it.ispw.daniele.backpacker.dao.UserDao;
+import it.ispw.daniele.backpacker.dao.local.UserDaoL;
 import it.ispw.daniele.backpacker.entity.GeneralUser;
 import it.ispw.daniele.backpacker.exceptions.EmptyFieldException;
 import it.ispw.daniele.backpacker.exceptions.LoginFailException;
@@ -37,8 +38,11 @@ public class LoginController {
     }
 
     public boolean createUser(UserBean ub) {
-        UserDAO ud = new UserDAO();
-        return ud.createUser(ub.getUsername(), ub.getName(), ub.getSurname(), ub.getEmail(), ub.getPassword(), ub.getProfilePicture());
+        UserDao ud = new UserDao();
+        UserDaoL udl = new UserDaoL();
+        ud.createUser(ub.getUsername(), ub.getName(), ub.getSurname(), ub.getEmail(), ub.getPassword(), ub.getProfilePicture());
+        udl.createUser(ub.getUsername(), ub.getName(), ub.getSurname(), ub.getEmail(), ub.getPassword(), ub.getProfilePicture());
+        return true;
     }
 
     public boolean createTouristGuide(TouristGuideBean tgb) {
