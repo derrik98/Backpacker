@@ -1,109 +1,123 @@
 package it.ispw.daniele.backpacker.dao.local;
 
 import it.ispw.daniele.backpacker.dao.DaoTemplate;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import it.ispw.daniele.backpacker.entity.User;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.util.*;
 
 public class UserDaoL extends DaoTemplate {
 
-    public Boolean createUser(String username, String name, String surname,
-                              String email, String password, String profilePicture) {
-        return (this.execute(() -> {
+    private static final String SEARCH_USER = "search_user";
 
-            JSONObject f = readJsonFromUrl();
-            System.out.println(f);
-            JSONArray  arr = (JSONArray) f.get("user");
-            System.out.println(arr);
+    private final String path_user = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/user.json";
 
-            JSONObject newUser = new JSONObject().put("username", username)
-                    .put("profilePicture", profilePicture)
-                    .put("password", password)
-                    .put("email", email)
-                    .put("surname", surname)
-                    .put("name", name);
+    private final String path_general_user = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/general_user.json";
 
-            System.out.println(newUser);
-            arr.put(newUser);
+    public Boolean createUser(String username, String name, String surname, String email, String password, String profilePicture) {
+        return this.execute(() -> {
 
-            System.out.println(arr);
-            System.out.println("JSON" + readJsonFromUrl());
+            JSONParser parser = new JSONParser();
+            JSONObject o;
+            JSONArray arr;
+            Map<String, String> jsonMap;
 
-            try (FileWriter file = new FileWriter("C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/user.json"))
-            {
-                file.write(f.toString());
+            o = (JSONObject) parser.parse(new FileReader(path_user));
+
+            arr = (JSONArray) o.get("user");
+
+            jsonMap = new HashMap<>();
+            jsonMap.put("username", username);
+            //jsonMap.put("email", email);
+           // jsonMap.put("password", password);
+            jsonMap.put("name", name);
+            jsonMap.put("surname", surname);
+            jsonMap.put("profile_picture_path", profilePicture);
+
+            JSONObject newUser = new JSONObject(jsonMap);
+
+            arr.add(newUser);
+
+            try (FileWriter file = new FileWriter(path_user)) {
+                file.write(o.toString());
                 System.out.println("Successfully updated json object to file...!!");
             }
 
-//            File f = new File("file.json");
-//            if (f.exists()){
-//                InputStream is = new FileInputStream("file.json");
-//                System.out.println(JSON + is);
-//                String jsonTxt = IOUtils.toString(is, "UTF-8");
-//
-//                System.out.println(jsonTxt);
-//                JSONObject json = new JSONObject(jsonTxt);
-//                String a = json.getString("1000");
-//                System.out.println(a);
-//
-//                JSONParser parser = new JSONParser();
-//            Object obj = parser.parse(new FileReader("c:\\file.json"));
-//
-//            JSONObject jsonObject =  (JSONObject) obj;
-//
-//            JSONObject obj = new JSONObject(jsonStr);
-//
-//            JSONArray arr = obj.getJSONArray("carTypes");
-//
-//            JSONObject hondaCivic17Json = new JSONObject()
-//                    .put("model", "civic")
-//                    .put("make", "honda")
-//                    .put("year", "2017");
-//
-//            JSONArray newArray = arr.put(hondaCivic17Json);
-//            JSONObject newJson = obj.put("carTypes", newArray);
-//
-//            String newJsonStr = newJson.toString();
-//            System.out.println(newJsonStr);
+            o = (JSONObject) parser.parse(new FileReader(path_general_user));
 
+            arr = (JSONArray) o.get("general_user");
 
-//            Connection con = DatabaseLoginConnection.getLoginConnection();
-//
-//            String sql = "call backpacker.add_user(?, ?, ?, ?, ?, ?);\r\n";
-//            try (PreparedStatement stm = con.prepareStatement(sql)) {
-//                stm.setString(1, username);
-//                stm.setString(2, name);
-//                stm.setString(3, surname);
-//                stm.setString(4, email);
-//                stm.setString(5, password);
-//                stm.setString(6, profilePicture);
-//                stm.executeUpdate();
-//            }
+            jsonMap = new HashMap<>();
+            jsonMap.put("username", username);
+            jsonMap.put("email", email);
+            jsonMap.put("password", password);
+            jsonMap.put("role", "user");
+
+            JSONObject newUser1 = new JSONObject(jsonMap);
+
+            arr.add(newUser1);
+
+            try (FileWriter file = new FileWriter(path_general_user)) {
+                file.write(o.toString());
+                System.out.println("Successfully updated json object to file...!!");
+            }
             return true;
-        }) != null);
-
+        }) != null;
     }
 
+    public List<User> getSearchUser(String caller) {
+        return this.queryDatabase(caller, SEARCH_USER);
+    }
 
-        private static String readAll(Reader rd) throws IOException {
-            StringBuilder sb = new StringBuilder();
-            int cp;
-            while ((cp = rd.read()) != -1) {
-                sb.append((char) cp);
+    private List<User> queryDatabase(String caller, String operation) {
+        List<User> ret = this.execute(() -> {
+            List<User> l = new ArrayList<>();
+
+            if (operation.equals(SEARCH_USER)) {
+
+                JSONParser parser = new JSONParser();
+                String path = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/user.json";
+
+                try (FileReader fileReader = new FileReader(path)) {
+
+                    JSONObject o = (JSONObject) parser.parse(fileReader);
+                    JSONArray arr = (JSONArray) o.get("user");
+                    if (arr.isEmpty()) {
+                        return Collections.emptyList();
+                    }
+
+                    System.out.println(arr.size());
+                    for (int index = 0; index < arr.size(); index++) {
+
+                        JSONObject object = (JSONObject) arr.get(index);
+
+                        if (object.get("username").equals(caller)) {
+                            String username = (String) object.get("username");
+                            String name = (String) object.get("name");
+                            String surname = (String) object.get("surname");
+                            String profilePicture = (String) object.get("profile_picture_path");
+                            String email = (String) object.get("email");
+
+                            if (object.get("profile_picture_path") == null || object.get("profile_picture_path").equals("")) {
+                                profilePicture = "user.png";
+                            }
+
+                            l.add(new User(username, name, surname, profilePicture, email));
+
+                            fileReader.close();
+
+                            return l;
+                        }
+                    }
+                }
             }
-            return sb.toString();
-        }
+            return null;
+        });
 
-
-        public static JSONObject readJsonFromUrl() throws IOException, JSONException {
-            try (InputStream is = new FileInputStream("C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/user.json");) {
-                BufferedReader rd = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
-                String jsonText = readAll(rd);
-                return new JSONObject(jsonText);
-            }
-        }
-
+        return Objects.requireNonNullElse(ret, Collections.emptyList());
+    }
 }

@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class UserDao extends DaoTemplate{
 
@@ -82,11 +83,8 @@ public class UserDao extends DaoTemplate{
                     stm.close();
             }
         });
-        if (ret != null) {
-            return ret;
-        } else {
-            return Collections.emptyList();
-        }
+
+        return Objects.requireNonNullElse(ret, Collections.emptyList());
     }
 
 }

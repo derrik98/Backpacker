@@ -1,5 +1,7 @@
 package it.ispw.daniele.backpacker.dao;
 
+import org.json.simple.parser.ParseException;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -15,7 +17,7 @@ public abstract class DaoTemplate {
             return daoAction.act();
         }catch (SQLException | ClassNotFoundException | FileNotFoundException exception){
             logger.log(Level.WARNING, exception.toString(), exception.getMessage());
-        } catch (IOException e) {
+        } catch (IOException | ParseException e) {
             throw new RuntimeException(e);
         }
         return null;

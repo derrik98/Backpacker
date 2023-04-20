@@ -1,0 +1,15 @@
+{
+  "general_user": [
+    {
+      "password": "a",
+      "email": "qa",
+      "username": "qa"
+    },
+    {
+      "password": "gy",
+      "role": "user",
+      "email": "gy",
+      "username": "gy"
+    }
+  ]
+}

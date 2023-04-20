@@ -1,28 +1,32 @@
 {
   "user": [
     {
-      "year": "2017",
-      "model": "civic",
-      "make": "honda"
-    },
-    {},
-    {
-      "year": "2017",
-      "model": "civic",
-      "make": "honda"
-    },
-    {
-      "year": "2017",
-      "model": "civic",
-      "make": "honda"
+      "profilePicture": "",
+      "password": "njnjn",
+      "surname": "njnjn",
+      "name": "njnjn",
+      "email": "njnj",
+      "username": "njnjn"
     },
     {
       "profilePicture": "",
-      "password": "kkokook",
-      "surname": "kokokokoko",
-      "name": "kokokokoko",
-      "email": "kokokok",
-      "username": "kokokokoko"
+      "password": "lplplp",
+      "surname": "plplplp",
+      "name": "lplplpl",
+      "email": "lplplp",
+      "username": "lplplpl"
+    },
+    {
+      "profile_picture_path": "",
+      "surname": "qa",
+      "name": "qa",
+      "username": "qa"
+    },
+    {
+      "name": "gy",
+      "profile_picture_path": "",
+      "surname": "gy",
+      "username": "gy"
     }
   ]
 }
