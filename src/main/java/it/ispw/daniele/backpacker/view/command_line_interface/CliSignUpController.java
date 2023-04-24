@@ -106,7 +106,7 @@ public class CliSignUpController extends InterfaceController {
             ub.setEmail(email);
             ub.setPassword(password);
             ub.setProfilePicture(newFileName);*/
-            regResult = lc.createUser(ub);
+            regResult = lc.createUser(ub, "cli");
         }
         else if(userType.equals(Roles.TOURIST_GUIDE.name())){
             System.out.println("VAT Number:");

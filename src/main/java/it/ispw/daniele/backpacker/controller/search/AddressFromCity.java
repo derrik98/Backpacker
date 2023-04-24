@@ -5,6 +5,7 @@ import it.ispw.daniele.backpacker.exceptions.AddressNotFoundException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+
 import java.io.IOException;
 
 public class AddressFromCity extends JSONFactory{

@@ -10,12 +10,11 @@ module it.ispw.daniele.backpacker {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires java.desktop;
-    requires org.json;
     requires java.logging;
     requires java.sql;
     requires org.jetbrains.annotations;
-    requires mysql.connector.java;
     requires json.simple;
+    requires org.json;
 
     exports it.ispw.daniele.backpacker.utils;
     exports it.ispw.daniele.backpacker.entity;

@@ -1,5 +1,6 @@
-package it.ispw.daniele.backpacker.dao;
+package it.ispw.daniele.backpacker.dao.UserDao;
 
+import it.ispw.daniele.backpacker.dao.DaoTemplate;
 import it.ispw.daniele.backpacker.entity.User;
 import it.ispw.daniele.backpacker.utils.DatabaseLoginConnection;
 import it.ispw.daniele.backpacker.utils.DatabaseUserConnection;
@@ -12,35 +13,35 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-public class UserDao extends DaoTemplate{
+public class UserDao extends UserDaoFactory {
 
-    private static final String SEARCH_USER = "search_user";
+    //private static final String SEARCH_USER = "search_user";
 
-    public Boolean createUser(String username, String name, String surname,
-                              String email, String password, String profilePicture) {
-        return (this.execute(() -> {
+//    public Boolean createUser(String username, String name, String surname,
+//                              String email, String password, String profilePicture) {
+//        return (this.execute(() -> {
+//
+//            Connection con = DatabaseLoginConnection.getLoginConnection();
+//
+//            String sql = "call backpacker.add_user(?, ?, ?, ?, ?, ?);\r\n";
+//            try (PreparedStatement stm = con.prepareStatement(sql)) {
+//                stm.setString(1, username);
+//                stm.setString(2, name);
+//                stm.setString(3, surname);
+//                stm.setString(4, email);
+//                stm.setString(5, password);
+//                stm.setString(6, profilePicture);
+//                stm.executeUpdate();
+//            }
+//            return true;
+//        }) != null);
+//    }
+//
+//    public List<User> getSearchUser(String caller){
+//        return this.queryDatabase(caller, SEARCH_USER);
+//    }
 
-            Connection con = DatabaseLoginConnection.getLoginConnection();
-
-            String sql = "call backpacker.add_user(?, ?, ?, ?, ?, ?);\r\n";
-            try (PreparedStatement stm = con.prepareStatement(sql)) {
-                stm.setString(1, username);
-                stm.setString(2, name);
-                stm.setString(3, surname);
-                stm.setString(4, email);
-                stm.setString(5, password);
-                stm.setString(6, profilePicture);
-                stm.executeUpdate();
-            }
-            return true;
-        }) != null);
-    }
-
-    public List<User> getSearchUser(String caller){
-        return this.queryDatabase(caller, SEARCH_USER);
-    }
-
-    private List<User> queryDatabase(String caller, String operation){
+    protected List<User> queryDatabase(String caller, String operation){
         List <User> ret = this.execute(() -> {
             List<User> l = new ArrayList<>();
             Connection conn = DatabaseUserConnection.getUserConnection();

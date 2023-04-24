@@ -69,7 +69,7 @@ public class SignUpController extends InterfaceController {
             String name = this.textFieldNameSignUp.getText();
             String surname = this.textFieldSurnameSignUp.getText();
             UserBean ub = this.setUserBean(username, name, surname, email, password, newFileName);
-            regResult = lc.createUser(ub);
+            regResult = lc.createUser(ub, "gui");
         }
         else if(userType.equals(Roles.TOURIST_GUIDE.name())){
             String name = this.textFieldNameSignUp.getText();
