@@ -45,7 +45,7 @@ public class LoginViewController {
         LoginController controller = new LoginController();
         GeneralUserBean gu;
         try{
-            gu = controller.login(gub);
+            gu = controller.login(gub, "gui");
 
             if(gu != null){
                 String role = gu.getRole();

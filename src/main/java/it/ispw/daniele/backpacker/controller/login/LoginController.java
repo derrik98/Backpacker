@@ -3,22 +3,25 @@ package it.ispw.daniele.backpacker.controller.login;
 import it.ispw.daniele.backpacker.bean.GeneralUserBean;
 import it.ispw.daniele.backpacker.bean.TouristGuideBean;
 import it.ispw.daniele.backpacker.bean.UserBean;
-import it.ispw.daniele.backpacker.dao.GeneralUserDao;
-import it.ispw.daniele.backpacker.dao.TouristGuideDao;
+import it.ispw.daniele.backpacker.dao.GeneralUserDao.GeneralUserDao;
+import it.ispw.daniele.backpacker.dao.GeneralUserDao.GeneralUserDaoFactory;
+import it.ispw.daniele.backpacker.dao.GeneralUserDao.GeneralUserDaoL;
+import it.ispw.daniele.backpacker.dao.TouristGuideDao.TouristGuideDao;
+import it.ispw.daniele.backpacker.dao.TouristGuideDao.TouristGuideDaoFactory;
+import it.ispw.daniele.backpacker.dao.TouristGuideDao.TouristGuideDaoL;
 import it.ispw.daniele.backpacker.dao.UserDao.UserDao;
 import it.ispw.daniele.backpacker.dao.UserDao.UserDaoFactory;
 import it.ispw.daniele.backpacker.dao.UserDao.UserDaoL;
 import it.ispw.daniele.backpacker.entity.GeneralUser;
-import it.ispw.daniele.backpacker.entity.User;
 import it.ispw.daniele.backpacker.exceptions.EmptyFieldException;
 import it.ispw.daniele.backpacker.exceptions.LoginFailException;
 
-import java.util.List;
-
 public class LoginController {
 
-    public GeneralUserBean login(GeneralUserBean userBean) throws EmptyFieldException {
-        GeneralUserDao gud = new GeneralUserDao();
+    public GeneralUserBean login(GeneralUserBean userBean, String view) throws EmptyFieldException {
+        //GeneralUserDao gud = new GeneralUserDao();
+
+        GeneralUserDaoFactory gudf = null;
 
         if (userBean.getUsername().equals("")) {
             throw new EmptyFieldException("Username necessary");
@@ -27,7 +30,13 @@ public class LoginController {
             throw new EmptyFieldException("Password necessary");
         }
 
-        GeneralUser result = gud.findUser(userBean.getUsername(), userBean.getPassword());
+        switch (view) {
+            case "gui" -> gudf = new GeneralUserDao();
+            case "cli" -> gudf = new GeneralUserDaoL();
+        }
+
+        assert gudf != null;
+        GeneralUser result = gudf.findUser(userBean.getUsername(), userBean.getPassword());
 
         if (result == null) {
             throw new LoginFailException("Incorrect Credentials");
@@ -53,15 +62,22 @@ public class LoginController {
             case "cli" -> udf = new UserDaoL();
         }
 
-        System.out.println(view);
-
         assert udf != null;
         udf.createUser(ub.getUsername(), ub.getName(), ub.getSurname(), ub.getEmail(), ub.getPassword(), ub.getProfilePicture());
         return true;
     }
 
-    public boolean createTouristGuide(TouristGuideBean tgb) {
-        TouristGuideDao tgd = new TouristGuideDao();
-        return tgd.createTouristGuide(tgb.getUsername(), tgb.getName(), tgb.getSurname(), tgb.getEmail(), tgb.getPassword(), tgb.getProfilePicture(), tgb.getIdentificationCode());
+    public boolean createTouristGuide(TouristGuideBean tgb, String view) {
+        //TouristGuideDao tgd = new TouristGuideDao();
+
+        TouristGuideDaoFactory tgdf = null;
+        switch (view){
+            case "gui" -> tgdf = new TouristGuideDao();
+            case "cli" -> tgdf = new TouristGuideDaoL();
+        }
+
+        assert tgdf != null;
+        tgdf.createTouristGuide(tgb.getUsername(), tgb.getName(), tgb.getSurname(), tgb.getEmail(), tgb.getPassword(), tgb.getProfilePicture(), tgb.getIdentificationCode());
+        return true;
     }
 }

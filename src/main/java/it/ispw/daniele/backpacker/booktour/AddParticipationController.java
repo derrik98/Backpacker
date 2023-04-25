@@ -2,7 +2,7 @@ package it.ispw.daniele.backpacker.booktour;
 
 import it.ispw.daniele.backpacker.bean.GeneralUserBean;
 import it.ispw.daniele.backpacker.bean.ItineraryBean;
-import it.ispw.daniele.backpacker.dao.ItineraryDao;
+import it.ispw.daniele.backpacker.dao.ItineraryDao.ItineraryDao;
 
 public class AddParticipationController {
         public void addParticipation(GeneralUserBean user, ItineraryBean itinerary) {

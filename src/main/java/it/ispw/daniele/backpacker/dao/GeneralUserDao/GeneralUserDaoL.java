@@ -1,25 +1,21 @@
-package it.ispw.daniele.backpacker.dao.local;
+package it.ispw.daniele.backpacker.dao.GeneralUserDao;
 
-import it.ispw.daniele.backpacker.dao.DaoTemplate;
 import it.ispw.daniele.backpacker.entity.GeneralUser;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import java.io.FileReader;
-import java.util.Map;
 
-public class GeneralUserDaoL extends DaoTemplate {
+public class GeneralUserDaoL extends GeneralUserDaoFactory {
 
     private final String path_general_user = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/general_user.json";
 
     public GeneralUser findUser(String username, String password) {
         return this.execute(() -> {
 
-            GeneralUser u = null;
+            GeneralUser u;
             JSONParser parser = new JSONParser();
-
-            Map<String, String> jsonMap;
 
             try (FileReader fileReader = new FileReader(path_general_user)) {
 

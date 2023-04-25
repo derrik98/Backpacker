@@ -1,5 +1,6 @@
-package it.ispw.daniele.backpacker.dao;
+package it.ispw.daniele.backpacker.dao.ItineraryDao;
 
+import it.ispw.daniele.backpacker.dao.DaoAction;
 import it.ispw.daniele.backpacker.entity.Itinerary;
 import it.ispw.daniele.backpacker.utils.DatabaseTouristGuideConnection;
 import it.ispw.daniele.backpacker.utils.DatabaseUserConnection;
@@ -8,12 +9,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
-public class ItineraryDao extends DaoTemplate {
+public class ItineraryDao extends ItineraryDaoFactory {
 
     private static final String ID = "id";
     private static final String LOCATION = "location";
@@ -48,20 +46,16 @@ public class ItineraryDao extends DaoTemplate {
             DatabaseUserConnection.closeUserConnection(conn);
             return itinerary;
         });
-        if (ret != null) {
-            return ret;
-        } else {
-            return Collections.emptyList();
-        }
+        return Objects.requireNonNullElse(ret, Collections.emptyList());
     }
 
-    public void addParticipation(String username, int itineraryId) {
-        this.manageParticipation(username, itineraryId, ADD_PART);
-    }
-
-    public void removeParticipation(String username, int itineraryId) {
-        this.manageParticipation(username, itineraryId, REMOVE_PART);
-    }
+//    public void addParticipation(String username, int itineraryId) {
+//        this.manageParticipation(username, itineraryId, ADD_PART);
+//    }
+//
+//    public void removeParticipation(String username, int itineraryId) {
+//        this.manageParticipation(username, itineraryId, REMOVE_PART);
+//    }
 
     public Boolean isParticipating(String username, int itineraryId) {
         Boolean ret = this.execute(() -> {
@@ -76,36 +70,33 @@ public class ItineraryDao extends DaoTemplate {
                 }
             }
         });
-        if (ret != null)
-            return ret;
-        else
-            return false;
+        return Objects.requireNonNullElse(ret, false);
     }
 
-    private void manageParticipation(String username, int id, String operation) {
-        this.execute((DaoAction<Void>) () -> {
-            Connection conn;
-            PreparedStatement stm = null;
-            String sql = null;
-            try {
-                conn = DatabaseUserConnection.getUserConnection();
-                if (operation.equals(ADD_PART)) {
-                    sql = "call backpacker.add_participation(?, ?);\r\n";
-                } else if (operation.equals(REMOVE_PART)) {
-                    sql = "call backpacker.remove_participation(?, ?);\r\n";
-                }
-                stm = conn.prepareStatement(sql);
-                stm.setString(1, username);
-                stm.setInt(2, id);
-                stm.executeUpdate();
-            } finally {
-                if (stm != null)
-                    stm.close();
-            }
-            DatabaseUserConnection.closeUserConnection(conn);
-            return null;
-        });
-    }
+//    private void manageParticipation(String username, int id, String operation) {
+//        this.execute((DaoAction<Void>) () -> {
+//            Connection conn;
+//            PreparedStatement stm = null;
+//            String sql = null;
+//            try {
+//                conn = DatabaseUserConnection.getUserConnection();
+//                if (operation.equals(ADD_PART)) {
+//                    sql = "call backpacker.add_participation(?, ?);\r\n";
+//                } else if (operation.equals(REMOVE_PART)) {
+//                    sql = "call backpacker.remove_participation(?, ?);\r\n";
+//                }
+//                stm = conn.prepareStatement(sql);
+//                stm.setString(1, username);
+//                stm.setInt(2, id);
+//                stm.executeUpdate();
+//            } finally {
+//                if (stm != null)
+//                    stm.close();
+//            }
+//            DatabaseUserConnection.closeUserConnection(conn);
+//            return null;
+//        });
+//    }
 
     public boolean addItinerary(String guideId, String location, Date date, String time, int participants, int price, String steps) {
         return (this.execute(() -> {

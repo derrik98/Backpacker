@@ -66,7 +66,7 @@ public class CliLoginController {
         LoginController controller = new LoginController();
         GeneralUserBean gu;
         try {
-            gu = controller.login(gub);
+            gu = controller.login(gub, "cli");
             if (gu == null) {
                 System.out.println(RED + "LOGIN FAILED!" + RESET);
             } else {

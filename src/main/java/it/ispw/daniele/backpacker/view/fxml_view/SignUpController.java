@@ -76,7 +76,7 @@ public class SignUpController extends InterfaceController {
             String surname = this.textFieldSurnameSignUp.getText();
             VATNumb = textFieldVATNumber.getText();
             TouristGuideBean tgb = this.setTouristGuideBean(username, name, surname, email, password, newFileName, VATNumb);
-            regResult = lc.createTouristGuide(tgb);
+            regResult = lc.createTouristGuide(tgb, "gui");
         }
 
         if(Boolean.TRUE.equals(regResult)){

@@ -2,7 +2,7 @@ package it.ispw.daniele.backpacker.booktour;
 
 import it.ispw.daniele.backpacker.bean.GeneralUserBean;
 import it.ispw.daniele.backpacker.bean.ItineraryBean;
-import it.ispw.daniele.backpacker.dao.ItineraryDao;
+import it.ispw.daniele.backpacker.dao.ItineraryDao.ItineraryDao;
 import it.ispw.daniele.backpacker.entity.Itinerary;
 import it.ispw.daniele.backpacker.utils.Controller;
 import java.util.Collections;

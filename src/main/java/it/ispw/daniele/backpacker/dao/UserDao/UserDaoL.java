@@ -78,9 +78,9 @@ public class UserDaoL extends UserDaoFactory {
             if (operation.equals(SEARCH_USER)) {
 
                 JSONParser parser = new JSONParser();
-                String path = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/user.json";
+                //String path = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/user.json";
 
-                try (FileReader fileReader = new FileReader(path)) {
+                try (FileReader fileReader = new FileReader(path_user)) {
 
                     JSONObject o = (JSONObject) parser.parse(fileReader);
                     JSONArray arr = (JSONArray) o.get("user");
@@ -88,7 +88,6 @@ public class UserDaoL extends UserDaoFactory {
                         return Collections.emptyList();
                     }
 
-                    System.out.println(arr.size());
                     for (int index = 0; index < arr.size(); index++) {
 
                         JSONObject object = (JSONObject) arr.get(index);

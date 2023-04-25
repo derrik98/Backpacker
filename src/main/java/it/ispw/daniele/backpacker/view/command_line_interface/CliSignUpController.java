@@ -124,7 +124,7 @@ public class CliSignUpController extends InterfaceController {
             tgb.setPassword(password);
             tgb.setProfilePicture(newFileName);
             tgb.setIdentificationCode(VATNumb);*/
-            regResult = lc.createTouristGuide(tgb);
+            regResult = lc.createTouristGuide(tgb, "cli");
         }
 
         if(Boolean.TRUE.equals(regResult)){

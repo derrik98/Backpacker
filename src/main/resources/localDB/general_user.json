@@ -1,1 +1,39 @@
-{"general_user":[{"password":"a","email":"qa","username":"qa"},{"password":"gy","role":"user","email":"gy","username":"gy"},{"password":"nj","role":"user","email":"nj","username":"nj"},{"password":"ft","role":"user","email":"ft","username":"ft"},{"password":"de","role":"user","email":"de","username":"de"},{"password":"qw","role":"user","email":"qw","username":"qw"}]}
+{
+  "general_user": [
+    {
+      "password": "a",
+      "email": "qa",
+      "username": "qa"
+    },
+    {
+      "password": "gy",
+      "role": "user",
+      "email": "gy",
+      "username": "gy"
+    },
+    {
+      "password": "nj",
+      "role": "user",
+      "email": "nj",
+      "username": "nj"
+    },
+    {
+      "password": "ft",
+      "role": "user",
+      "email": "ft",
+      "username": "ft"
+    },
+    {
+      "password": "de",
+      "role": "user",
+      "email": "de",
+      "username": "de"
+    },
+    {
+      "password": "qw",
+      "role": "user",
+      "email": "qw",
+      "username": "qw"
+    }
+  ]
+}

@@ -4,7 +4,7 @@ import it.ispw.daniele.backpacker.bean.ItineraryBean;
 import it.ispw.daniele.backpacker.bean.TouristGuideBean;
 import it.ispw.daniele.backpacker.booktour.BookTourController;
 import it.ispw.daniele.backpacker.booktour.SaveTour;
-import it.ispw.daniele.backpacker.dao.TouristGuideDao;
+import it.ispw.daniele.backpacker.dao.TouristGuideDao.TouristGuideDao;
 import it.ispw.daniele.backpacker.entity.TouristGuide;
 import it.ispw.daniele.backpacker.utils.Controller;
 import it.ispw.daniele.backpacker.utils.FileManager;

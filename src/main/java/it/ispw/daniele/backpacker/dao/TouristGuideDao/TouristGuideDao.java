@@ -1,5 +1,6 @@
-package it.ispw.daniele.backpacker.dao;
+package it.ispw.daniele.backpacker.dao.TouristGuideDao;
 
+import it.ispw.daniele.backpacker.dao.DaoTemplate;
 import it.ispw.daniele.backpacker.entity.TouristGuide;
 import it.ispw.daniele.backpacker.utils.DatabaseLoginConnection;
 import it.ispw.daniele.backpacker.utils.DatabaseTouristGuideConnection;
@@ -12,15 +13,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-public class TouristGuideDao extends DaoTemplate{
+public class TouristGuideDao extends TouristGuideDaoFactory {
 
     private static final String SEARCH_T_GUIDE = "search_t_guide";
 
-    public List<TouristGuide> getSearchUser(String caller){
-        return this.queryDatabase(caller, SEARCH_T_GUIDE);
-    }
+//    public List<TouristGuide> getSearchUser(String caller){
+//        return this.queryDatabase(caller, SEARCH_T_GUIDE);
+//    }
 
-    private List<TouristGuide> queryDatabase(String caller, String operation){
+    protected List<TouristGuide> queryDatabase(String caller, String operation){
         List <TouristGuide> ret = this.execute(() -> {
             List<TouristGuide> l = new ArrayList<>();
             Connection conn = DatabaseTouristGuideConnection.getTouristGuideConnection();
@@ -67,29 +68,29 @@ public class TouristGuideDao extends DaoTemplate{
         return Objects.requireNonNullElse(ret, Collections.emptyList());
     }
 
-    public Boolean createTouristGuide(String username, String name, String surname,
-                              String email, String password, String profilePicture, String identificationCode) {
-        return (this.execute(() -> {
-
-            Connection con = DatabaseLoginConnection.getLoginConnection();
-            if(con == null){
-
-                return false;
-            }
-
-            String sql = "call backpacker.add_tourist_guide(?, ?, ?, ?, ?, ?, ?);\r\n";
-            try (PreparedStatement stm = con.prepareStatement(sql)) {
-                stm.setString(1, username);
-                stm.setString(2, name);
-                stm.setString(3, surname);
-                stm.setString(4, email);
-                stm.setString(5, password);
-                stm.setString(6, profilePicture);
-                stm.setString(7, identificationCode);
-                stm.executeUpdate();
-            }
-
-            return true;
-        }) != null);
-    }
+//    public Boolean createTouristGuide(String username, String name, String surname,
+//                              String email, String password, String profilePicture, String identificationCode) {
+//        return (this.execute(() -> {
+//
+//            Connection con = DatabaseLoginConnection.getLoginConnection();
+//            if(con == null){
+//
+//                return false;
+//            }
+//
+//            String sql = "call backpacker.add_tourist_guide(?, ?, ?, ?, ?, ?, ?);\r\n";
+//            try (PreparedStatement stm = con.prepareStatement(sql)) {
+//                stm.setString(1, username);
+//                stm.setString(2, name);
+//                stm.setString(3, surname);
+//                stm.setString(4, email);
+//                stm.setString(5, password);
+//                stm.setString(6, profilePicture);
+//                stm.setString(7, identificationCode);
+//                stm.executeUpdate();
+//            }
+//
+//            return true;
+//        }) != null);
+//    }
 }

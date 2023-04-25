@@ -1,4 +1,4 @@
-package it.ispw.daniele.backpacker.dao;
+package it.ispw.daniele.backpacker.dao.GeneralUserDao;
 
 import it.ispw.daniele.backpacker.entity.GeneralUser;
 import it.ispw.daniele.backpacker.utils.DatabaseLoginConnection;
@@ -7,7 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class GeneralUserDao extends DaoTemplate{
+public class GeneralUserDao extends GeneralUserDaoFactory {
 
     public GeneralUser findUser(String username, String password) {
         return this.execute(() -> {
