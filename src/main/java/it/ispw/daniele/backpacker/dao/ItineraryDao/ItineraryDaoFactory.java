@@ -3,17 +3,21 @@ package it.ispw.daniele.backpacker.dao.ItineraryDao;
 import it.ispw.daniele.backpacker.dao.DaoAction;
 import it.ispw.daniele.backpacker.dao.DaoTemplate;
 import it.ispw.daniele.backpacker.entity.Itinerary;
+import it.ispw.daniele.backpacker.utils.DatabaseTouristGuideConnection;
 import it.ispw.daniele.backpacker.utils.DatabaseUserConnection;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +25,7 @@ import java.util.Map;
 public abstract class ItineraryDaoFactory extends DaoTemplate {
 
     protected final String path_goes_to = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/goes_to.json";
+    protected final String path_itinerary = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/itinerary.json";
 
     protected final String ID = "id";
     protected final String LOCATION = "location";
@@ -118,7 +123,67 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
     }
 
 
+    public boolean addItinerary(String guideId, String location, Date date, String time, int participants, int price, String steps) {
+        return (this.execute(() -> {
+
+            //Save on Database
+            Connection con = DatabaseTouristGuideConnection.getTouristGuideConnection();
+            String sql = "call backpacker.add_itinerary(?, ?, ?, ?, ?, ?, ?);\r\n";
+            try (PreparedStatement stm = con.prepareStatement(sql)) {
+                java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+
+                stm.setString(1, guideId);
+                stm.setString(2, location);
+                stm.setDate(3, sqlDate);
+                stm.setString(4, time);
+                stm.setInt(5, participants);
+                stm.setInt(6, price);
+                stm.setString(7, steps);
+                stm.executeUpdate();
+
+            }
+
+
+            //Save on File System
+            JSONParser parser = new JSONParser();
+            JSONObject o;
+            JSONArray arr;
+            Map<String, String> jsonMap;
+
+            o = (JSONObject) parser.parse(new FileReader(path_itinerary));
+
+            arr = (JSONArray) o.get("itinerary");
+
+
+            jsonMap = new HashMap<>();
+            jsonMap.put("id", String.valueOf(arr.size() + 1));  //controllare bene indice
+            jsonMap.put("guide_id", guideId);
+            jsonMap.put("location", location);
+            jsonMap.put("date", String.valueOf(date));
+            jsonMap.put("time", time);
+            jsonMap.put("participants", String.valueOf(participants));
+            jsonMap.put("price", String.valueOf(price));
+            jsonMap.put("steps", steps);
+
+            JSONObject newUser = new JSONObject(jsonMap);
+
+            arr.add(newUser);
+
+            try (FileWriter file = new FileWriter(path_itinerary)) {
+                file.write(o.toString());
+                System.out.println("Successfully updated json object to file...!!");
+            }
+
+            return true;
+
+        }) != null);
+    }
+
     protected abstract List<Itinerary> getItinerary(String city);
 
     protected abstract Boolean isParticipating(String username, int itineraryId);
+
+    protected abstract int getItineraryId(String guideId, String location, String date, String time, int participants, int price, String steps) throws SQLException, FileNotFoundException;
+
+    protected abstract List<Itinerary> getBookedItineraries(String input);
 }

@@ -98,25 +98,25 @@ public class ItineraryDao extends ItineraryDaoFactory {
 //        });
 //    }
 
-    public boolean addItinerary(String guideId, String location, Date date, String time, int participants, int price, String steps) {
-        return (this.execute(() -> {
-            Connection con = DatabaseTouristGuideConnection.getTouristGuideConnection();
-            String sql = "call backpacker.add_itinerary(?, ?, ?, ?, ?, ?, ?);\r\n";
-            try (PreparedStatement stm = con.prepareStatement(sql)) {
-                java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-
-                stm.setString(1, guideId);
-                stm.setString(2, location);
-                stm.setDate(3, sqlDate);
-                stm.setString(4, time);
-                stm.setInt(5, participants);
-                stm.setInt(6, price);
-                stm.setString(7, steps);
-                stm.executeUpdate();
-                return true;
-            }
-        }) != null);
-    }
+//    public boolean addItinerary(String guideId, String location, Date date, String time, int participants, int price, String steps) {
+//        return (this.execute(() -> {
+//            Connection con = DatabaseTouristGuideConnection.getTouristGuideConnection();
+//            String sql = "call backpacker.add_itinerary(?, ?, ?, ?, ?, ?, ?);\r\n";
+//            try (PreparedStatement stm = con.prepareStatement(sql)) {
+//                java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+//
+//                stm.setString(1, guideId);
+//                stm.setString(2, location);
+//                stm.setDate(3, sqlDate);
+//                stm.setString(4, time);
+//                stm.setInt(5, participants);
+//                stm.setInt(6, price);
+//                stm.setString(7, steps);
+//                stm.executeUpdate();
+//                return true;
+//            }
+//        }) != null);
+//    }
 
     public int getItineraryId(String guideId, String location, String date, String time, int participants, int price, String steps) throws SQLException {
 
@@ -166,10 +166,7 @@ public class ItineraryDao extends ItineraryDaoFactory {
             }
             return itinerary;
         });
-        if (ret != null)
-            return ret;
-        else
-            return Collections.emptyList();
+        return Objects.requireNonNullElse(ret, Collections.emptyList());
     }
 
     private List<Itinerary> unpackResultSet(ResultSet rs) throws SQLException{
