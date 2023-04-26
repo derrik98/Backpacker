@@ -35,7 +35,7 @@ public class ItineraryDetailsController {
     @FXML
     public Text steps;
 
-    private final BookTourController controller = new BookTourController();
+    private final BookTourController controller = new BookTourController("gui");
     private final GeneralUserBean sessionUser = SessionUser.getInstance().getSession();
     private ItineraryBean ib = new ItineraryBean();
 

@@ -98,9 +98,9 @@ public class UserDetailsController extends Controller {
 
         //BookTourController btc = new BookTourController();
         List<ItineraryBean> booked;
-        booked = new BookTourController().getItinerary(users.getUsername(), "user");//btc.getItinerary(users.getUsername(), "user");
+        booked = new BookTourController("gui").getItinerary(users.getUsername(), "user");//btc.getItinerary(users.getUsername(), "user");
 
-        SaveTour st = new SaveTour();
+        SaveTour st = new SaveTour("gui");
         List<ItineraryBean> saved;
         saved = st.getItinerary(users.getUsername());
 

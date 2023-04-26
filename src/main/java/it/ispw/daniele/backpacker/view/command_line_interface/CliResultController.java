@@ -30,7 +30,7 @@ public class CliResultController {
         System.out.println(BOLD + "RESULT PAGE\n" + RESET);
         System.out.println("Country: " + homeBean.getCountry() + ", City: " + homeBean.getCity() + ", Address: " + homeBean.getAddress() + ", Restaurant: " + homeBean.isRestaurant() + ", Range: " + homeBean.getRange() + "\n");
 
-        BookTourController btc = new BookTourController();
+        BookTourController btc = new BookTourController("cli");
         //List<ItineraryBean> it;
         it = btc.getItinerary(homeBean.getCity(), "city");
         int bookedSize = 0;
@@ -108,7 +108,7 @@ public class CliResultController {
                 }
 
                 case "1" -> {
-                    SaveTour st = new SaveTour();
+                    SaveTour st = new SaveTour("cli");
                     System.out.println("Digit Itinerary id");
                     int input = scanner.nextInt();
                     System.out.flush();

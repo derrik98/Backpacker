@@ -22,7 +22,7 @@ public class CliAddItineraryController extends InterfaceController {
 
     public void init() {
 
-        this.controller = new AddItineraryController();
+        this.controller = new AddItineraryController("cli");
 
         System.out.println("Digit 'share' to share itinerary");
 

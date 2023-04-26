@@ -100,9 +100,9 @@ public class TGuideDetailsController extends Controller {
 
         //BookTourController btc = new BookTourController();
         List<ItineraryBean> booked;
-        booked = new BookTourController().getItinerary(tUsers.getUsername(), "user");
+        booked = new BookTourController("gui").getItinerary(tUsers.getUsername(), "user");
 
-        SaveTour st = new SaveTour();
+        SaveTour st = new SaveTour("gui");
         List<ItineraryBean> saved;
         saved = st.getItinerary(tUsers.getUsername());
 

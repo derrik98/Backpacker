@@ -290,7 +290,7 @@ public class Controller{
     }
 
     private void saveItinerary(ItineraryBean itineraryBean, String type) {
-        SaveTour st = new SaveTour();
+        SaveTour st = new SaveTour("gui");
 
         if(type.equals("save")){
             st.saveTour(SessionUser.getInstance().getSession(), itineraryBean);

@@ -1,6 +1,7 @@
 package it.ispw.daniele.backpacker.dao.ItineraryDao;
 
 import it.ispw.daniele.backpacker.entity.Itinerary;
+import it.ispw.daniele.backpacker.utils.DatabaseUserConnection;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -9,6 +10,9 @@ import org.json.simple.parser.ParseException;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -17,7 +21,7 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
 
 
     @Override
-    protected List<Itinerary> getItinerary(String city) {
+    public List<Itinerary> getItinerary(String city) {
         List<Itinerary> ret = this.execute(() -> {
 
             List<Itinerary> itineraryList = null;
@@ -64,7 +68,7 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
     }
 
     @Override
-    protected Boolean isParticipating(String username, int itineraryId) {
+    public Boolean isParticipating(String username, int itineraryId) {
         Boolean ret = (Boolean) this.execute(() -> {
 //            Connection conn = DatabaseUserConnection.getUserConnection();
 //            String sql = "call backpacker.is_participating(?, ?);\r\n";
@@ -100,7 +104,7 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
     }
 
     @Override
-    protected int getItineraryId(String guideId, String location, String date, String time, int participants, int price, String steps) throws FileNotFoundException {
+    public int getItineraryId(String guideId, String location, String date, String time, int participants, int price, String steps) throws FileNotFoundException {
 
         JSONParser parser = new JSONParser();
 
@@ -143,7 +147,7 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
     }
 
     @Override
-    protected List<Itinerary> getBookedItineraries(String input) {
+    public List<Itinerary> getBookedItineraries(String input) {
         List<Itinerary> ret = this.execute(() -> {
 
             List<Itinerary> itineraryList = null;
@@ -195,5 +199,47 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
         });
         return Objects.requireNonNullElse(ret, Collections.emptyList());
 
+    }
+
+    @Override
+    public List<Itinerary> getSavedItinerary(String input) {
+        List<Itinerary> ret = this.execute(() -> {
+
+            List<Itinerary> itineraryList = null;
+
+            JSONParser parser = new JSONParser();
+
+            try(FileReader fileReader = new FileReader(path_saved_itinerary)) {
+
+                JSONObject o = (JSONObject) parser.parse(fileReader);
+                JSONArray arr = (JSONArray) o.get("saved_itinerary");
+
+                if (arr.isEmpty()) {
+                    return Collections.emptyList();
+                }
+
+                for (int index = 0; index < arr.size(); index++) {
+
+                    JSONObject object = (JSONObject) arr.get(index);
+
+                    if (object.get("username").equals(input)) {
+
+                        int id = (int) object.get(ID);
+                        String steps = (String) object.get(STEPS);
+
+                        Itinerary itinerary = new Itinerary(id, "", "", "", "", 0, 0, steps);
+
+                        itineraryList.add(itinerary);
+
+                    }
+                }
+
+                fileReader.close();
+                return itineraryList;
+            }
+
+        });
+
+        return Objects.requireNonNullElse(ret, Collections.emptyList());
     }
 }

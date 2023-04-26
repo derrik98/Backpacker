@@ -41,11 +41,11 @@ public class CliUserDetailsController extends Controller {
             System.out.println("Surname: " + users.getSurname());
             System.out.println("\n");
 
-            BookTourController btc = new BookTourController();
+            BookTourController btc = new BookTourController("cli");
             List<ItineraryBean> booked;
             booked = btc.getItinerary(users.getUsername(), "user");
 
-            SaveTour st = new SaveTour();
+            SaveTour st = new SaveTour("cli");
             List<ItineraryBean> saved;
             saved = st.getItinerary(users.getUsername());
 

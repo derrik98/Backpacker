@@ -80,7 +80,7 @@ public class AddItineraryViewController extends InterfaceController {
 
         fieldDate.setStyle("-fx-font-size: 20");
 
-        this.controller = new AddItineraryController();
+        this.controller = new AddItineraryController("gui");
 
         for(int i = 1; i < 10; i++){
             TextField textField = new TextField();

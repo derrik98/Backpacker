@@ -14,7 +14,7 @@ public class CliItineraryDetailsController {
 
     private String command = "SUBSCRIBE";
 
-    private final BookTourController controller = new BookTourController();
+    private final BookTourController controller = new BookTourController("cli");
     private ItineraryBean ib = new ItineraryBean();
     private final GeneralUserBean sessionUser = SessionUser.getInstance().getSession();
     public void subscribe() {

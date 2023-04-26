@@ -26,6 +26,7 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
 
     protected final String path_goes_to = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/goes_to.json";
     protected final String path_itinerary = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/itinerary.json";
+    protected final String path_saved_itinerary = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/saved_itinerary.json";
 
     protected final String ID = "id";
     protected final String LOCATION = "location";
@@ -179,11 +180,96 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
         }) != null);
     }
 
-    protected abstract List<Itinerary> getItinerary(String city);
 
-    protected abstract Boolean isParticipating(String username, int itineraryId);
+    public void saveTour(String username, String itinerary) {
+        this.execute(() -> {
 
-    protected abstract int getItineraryId(String guideId, String location, String date, String time, int participants, int price, String steps) throws SQLException, FileNotFoundException;
+            //Save on Database
+            Connection con = DatabaseUserConnection.getUserConnection();
+            String sql = "call backpacker.save_itinerary(?, ?);\r\n";
 
-    protected abstract List<Itinerary> getBookedItineraries(String input);
+            try (PreparedStatement stm = con.prepareStatement(sql)) {
+                stm.setString(1, username);
+                stm.setString(2, itinerary);
+                stm.executeUpdate();
+
+            }
+
+            //Save on File System
+            JSONParser parser = new JSONParser();
+            JSONObject o;
+            JSONArray arr;
+            Map<String, String> jsonMap;
+
+            o = (JSONObject) parser.parse(new FileReader(path_saved_itinerary));
+
+            arr = (JSONArray) o.get("saved_itinerary");
+
+            jsonMap = new HashMap<>();
+            jsonMap.put("id", String.valueOf(arr.size() + 1));  //controllare bene indice
+            jsonMap.put("username", username);
+            jsonMap.put("steps", itinerary);
+
+            JSONObject newItinerary = new JSONObject(jsonMap);
+
+            arr.add(newItinerary);
+
+            try (FileWriter file = new FileWriter(path_saved_itinerary)) {
+                file.write(o.toString());
+                System.out.println("Successfully updated json object to file...!!");
+            }
+
+            return true;
+        });
+    }
+
+    public void removeTour(String username, String steps) {
+        this.execute(() -> {
+
+            //Remove from Database
+            Connection con = DatabaseUserConnection.getUserConnection();
+            String sql = "call backpacker.remove_itinerary(?, ?);\r\n";
+
+            try (PreparedStatement stm = con.prepareStatement(sql)) {
+                stm.setString(1, username);
+                stm.setString(2, steps);
+                stm.executeUpdate();
+            }
+
+            //Remove from File System
+            try {
+                JSONParser parser = new JSONParser();
+
+                FileReader fileReader = new FileReader(path_saved_itinerary);
+
+                JSONObject o = (JSONObject) parser.parse(fileReader);
+                JSONArray arr = (JSONArray) o.get("saved_itinerary");
+
+                for (int index = 0; index < arr.size(); index++) {
+
+                    JSONObject object = (JSONObject) arr.get(index);
+
+                    if (object.get("username").equals(username) && object.get("steps").equals(steps)) {
+
+                        arr.remove(object);
+                    }
+
+                }
+            } catch (IOException | ParseException e) {
+                throw new RuntimeException(e);
+            }
+
+            return true;
+        });
+    }
+
+    public abstract List<Itinerary> getItinerary(String city);
+
+    public abstract Boolean isParticipating(String username, int itineraryId);
+
+    public abstract int getItineraryId(String guideId, String location, String date, String time, int participants, int price, String steps) throws SQLException, FileNotFoundException;
+
+    public abstract List<Itinerary> getBookedItineraries(String input);
+
+    public abstract List<Itinerary> getSavedItinerary(String input);
 }

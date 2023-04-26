@@ -1,15 +1,16 @@
 package it.ispw.daniele.backpacker.dao.ItineraryDao;
 
-import it.ispw.daniele.backpacker.dao.DaoAction;
 import it.ispw.daniele.backpacker.entity.Itinerary;
-import it.ispw.daniele.backpacker.utils.DatabaseTouristGuideConnection;
 import it.ispw.daniele.backpacker.utils.DatabaseUserConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 
 public class ItineraryDao extends ItineraryDaoFactory {
 
@@ -192,50 +193,45 @@ public class ItineraryDao extends ItineraryDaoFactory {
         return l;
     }
 
-    public void saveTour(String username, String itinerary) {
-        this.execute(new DaoAction<Boolean>() {
-            @Override
-            public Boolean act() throws SQLException {
-                Connection con = DatabaseUserConnection.getUserConnection();
-                String sql = "call backpacker.save_itinerary(?, ?);\r\n";
-
-                try (PreparedStatement stm = con.prepareStatement(sql)) {
-                    stm.setString(1, username);
-                    stm.setString(2, itinerary);
-                    stm.executeUpdate();
-
-                }
-                return true;
-            }
-        });
-    }
+//    public void saveTour(String username, String itinerary) {
+//        this.execute(new DaoAction<Boolean>() {
+//            @Override
+//            public Boolean act() throws SQLException {
+//                Connection con = DatabaseUserConnection.getUserConnection();
+//                String sql = "call backpacker.save_itinerary(?, ?);\r\n";
+//
+//                try (PreparedStatement stm = con.prepareStatement(sql)) {
+//                    stm.setString(1, username);
+//                    stm.setString(2, itinerary);
+//                    stm.executeUpdate();
+//
+//                }
+//                return true;
+//            }
+//        });
+//    }
 
     public List<Itinerary> getSavedItinerary(String input) {
-        List<Itinerary> ret = this.execute(new DaoAction<List<Itinerary>>() {
-            @Override
-            public List<Itinerary> act() throws SQLException {
-                Connection conn;
-                List<Itinerary> itinerary;
-                String sql;
+        List<Itinerary> ret = this.execute(() -> {
+            Connection conn;
+            List<Itinerary> itinerary;
+            String sql;
 
-                conn = DatabaseUserConnection.getUserConnection();
-                sql = "call backpacker.get_saved_itinerary(?);\r\n";
+            conn = DatabaseUserConnection.getUserConnection();
+            sql = "call backpacker.get_saved_itinerary(?);\r\n";
 
-                try(PreparedStatement stm = conn.prepareStatement(sql)) {
+            try(PreparedStatement stm = conn.prepareStatement(sql)) {
 
-                    stm.setString(1, input);
+                stm.setString(1, input);
 
-                    try (ResultSet rs = stm.executeQuery()) {
-                        itinerary = unpackResult(rs);
-                    }
+                try (ResultSet rs = stm.executeQuery()) {
+                    itinerary = unpackResult(rs);
                 }
-                return itinerary;
             }
+            return itinerary;
         });
-        if (ret != null)
-            return ret;
-        else
-            return Collections.emptyList();
+
+        return Objects.requireNonNullElse(ret, Collections.emptyList());
     }
 
     private List<Itinerary> unpackResult(ResultSet rs) throws SQLException {
@@ -255,19 +251,19 @@ public class ItineraryDao extends ItineraryDaoFactory {
         return l;
     }
 
-    public void removeTour(String username, String steps) {
-
-        this.execute(() -> {
-            Connection con = DatabaseUserConnection.getUserConnection();
-            String sql = "call backpacker.remove_itinerary(?, ?);\r\n";
-
-            try (PreparedStatement stm = con.prepareStatement(sql)) {
-                stm.setString(1, username);
-                stm.setString(2, steps);
-                stm.executeUpdate();
-            }
-            return true;
-        });
-    }
+//    public void removeTour(String username, String steps) {
+//
+//        this.execute(() -> {
+//            Connection con = DatabaseUserConnection.getUserConnection();
+//            String sql = "call backpacker.remove_itinerary(?, ?);\r\n";
+//
+//            try (PreparedStatement stm = con.prepareStatement(sql)) {
+//                stm.setString(1, username);
+//                stm.setString(2, steps);
+//                stm.executeUpdate();
+//            }
+//            return true;
+//        });
+//    }
 
 }

@@ -107,7 +107,7 @@ public class ResultController extends Controller {
             return;
         }
 
-        BookTourController btc = new BookTourController();
+        BookTourController btc = new BookTourController("gui");
         List<ItineraryBean> sItinerary;
         sItinerary = btc.getItinerary(citySearch.getText(), "city");
 
