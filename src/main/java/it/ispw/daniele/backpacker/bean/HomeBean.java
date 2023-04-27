@@ -1,6 +1,12 @@
 package it.ispw.daniele.backpacker.bean;
 
-public class HomeBean {
+import java.io.Serial;
+import java.io.Serializable;
+
+public class HomeBean implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     private String country;
     private String city;

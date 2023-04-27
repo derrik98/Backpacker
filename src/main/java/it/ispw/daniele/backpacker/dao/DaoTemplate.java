@@ -1,5 +1,7 @@
 package it.ispw.daniele.backpacker.dao;
 
+import it.ispw.daniele.backpacker.exceptions.GenericException;
+import it.ispw.daniele.backpacker.exceptions.LoginFailException;
 import org.json.simple.parser.ParseException;
 
 import java.io.FileNotFoundException;
@@ -15,7 +17,7 @@ public abstract class DaoTemplate {
     public final <G> G execute(DaoAction<G> daoAction){
         try {
             return daoAction.act();
-        }catch (SQLException | ClassNotFoundException | FileNotFoundException exception){
+        }catch (SQLException | ClassNotFoundException | FileNotFoundException | LoginFailException  exception){
             logger.log(Level.WARNING, exception.toString(), exception.getMessage());
         } catch (IOException | ParseException e) {
             throw new RuntimeException(e);

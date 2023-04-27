@@ -121,13 +121,6 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
                         && object.get("price").equals(String.valueOf(price)) && object.get("steps").equals(steps)) {
 
                     int id = (int) object.get(ID);
-//                    String guideId = (String) object.get(GUIDE_ID);
-//                    String location = (String) object.get(LOCATION);
-//                    String date = (String) object.get(DATE);
-//                    String time = (String) object.get(TIME);
-//                    int participants = (int) object.get(PARTICIPANTS);
-//                    int price = (int) object.get(PRICE);
-//                    String steps = (String) object.get(STEPS);
 
                     fileReader.close();
 
@@ -238,4 +231,5 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
 
         return Objects.requireNonNullElse(ret, Collections.emptyList());
     }
+
 }

@@ -34,6 +34,30 @@
       "role": "user",
       "email": "qw",
       "username": "qw"
+    },
+    {
+      "password": "epppe",
+      "role": "user",
+      "email": "peppe",
+      "username": "peppe"
+    },
+    {
+      "password": "za",
+      "role": "user",
+      "email": "za",
+      "username": "za"
+    },
+    {
+      "password": "za",
+      "role": "user",
+      "email": "za",
+      "username": "za"
+    },
+    {
+      "password": "cd",
+      "role": "user",
+      "email": "cd",
+      "username": "cd"
     }
   ]
 }

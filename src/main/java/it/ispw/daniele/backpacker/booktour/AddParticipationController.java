@@ -13,25 +13,24 @@ public class AddParticipationController {
     public AddParticipationController(String view) {
 
         switch (view) {
-            case "gui" -> id = new ItineraryDao();
-            case "cli" -> id = new ItineraryDaoL();
+            case "gui" -> this.id = new ItineraryDao();
+            case "cli" -> this.id = new ItineraryDaoL();
         }
-
     }
 
     public void addParticipation(GeneralUserBean user, ItineraryBean itinerary) {
             //ItineraryDao id = new ItineraryDao();
-            id.addParticipation(user.getUsername(), itinerary.getItineraryId());
+            this.id.addParticipation(user.getUsername(), itinerary.getItineraryId());
         }
 
         public void removeParticipation(GeneralUserBean user, ItineraryBean itinerary) {
             //ItineraryDao id = new ItineraryDao();
-            id.removeParticipation(user.getUsername(), itinerary.getItineraryId());
+            this.id.removeParticipation(user.getUsername(), itinerary.getItineraryId());
         }
 
         public boolean isParticipating(GeneralUserBean user, ItineraryBean itinerary) {
             //ItineraryDao id = new ItineraryDao();
-            return id.isParticipating(user.getUsername(), itinerary.getItineraryId());
+            return this.id.isParticipating(user.getUsername(), itinerary.getItineraryId());
         }
     }
 

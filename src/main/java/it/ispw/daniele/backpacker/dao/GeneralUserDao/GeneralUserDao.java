@@ -12,7 +12,7 @@ public class GeneralUserDao extends GeneralUserDaoFactory {
     public GeneralUser findUser(String username, String password) {
         return this.execute(() -> {
             Connection conn;
-            GeneralUser u = null;
+            GeneralUser generalUser = null;
             conn = DatabaseLoginConnection.getLoginConnection();
 
             String sql = "call backpacker.login(?, ?);\r\n";
@@ -32,13 +32,13 @@ public class GeneralUserDao extends GeneralUserDaoFactory {
                     String usernameLoaded = rs.getString("username");
 
                     if (usernameLoaded.equals(username)) {
-                        u = new GeneralUser(usernameLoaded, "", role);
+                        generalUser = new GeneralUser(usernameLoaded, "", role);
 
                     }
                 }
             }
 
-            return u;
+            return generalUser;
         });
     }
 }

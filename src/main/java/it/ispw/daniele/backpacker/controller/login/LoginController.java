@@ -14,7 +14,11 @@ import it.ispw.daniele.backpacker.dao.UserDao.UserDaoFactory;
 import it.ispw.daniele.backpacker.dao.UserDao.UserDaoL;
 import it.ispw.daniele.backpacker.entity.GeneralUser;
 import it.ispw.daniele.backpacker.exceptions.EmptyFieldException;
+import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.exceptions.LoginFailException;
+
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 
 public class LoginController {
 
@@ -50,11 +54,14 @@ public class LoginController {
         }
     }
 
-    public boolean createUser(UserBean ub, String view) {
+    public boolean createUser(UserBean ub, String view) throws EmptyFieldException {
 //        UserDao ud = new UserDao();
 //        UserDaoL udl = new UserDaoL();
 //        ud.createUser(ub.getUsername(), ub.getName(), ub.getSurname(), ub.getEmail(), ub.getPassword(), ub.getProfilePicture());
 //        udl.createUser(ub.getUsername(), ub.getName(), ub.getSurname(), ub.getEmail(), ub.getPassword(), ub.getProfilePicture());
+        if (ub.getUsername().equals("") || ub.getName().equals("") || ub.getSurname().equals("") || ub.getEmail().equals("") || ub.getPassword().equals("")) {
+            throw new EmptyFieldException("Missing Data");
+        }
 
         UserDaoFactory udf = null;
         switch (view) {
@@ -63,7 +70,9 @@ public class LoginController {
         }
 
         assert udf != null;
+
         udf.createUser(ub.getUsername(), ub.getName(), ub.getSurname(), ub.getEmail(), ub.getPassword(), ub.getProfilePicture());
+
         return true;
     }
 
@@ -71,7 +80,7 @@ public class LoginController {
         //TouristGuideDao tgd = new TouristGuideDao();
 
         TouristGuideDaoFactory tgdf = null;
-        switch (view){
+        switch (view) {
             case "gui" -> tgdf = new TouristGuideDao();
             case "cli" -> tgdf = new TouristGuideDaoL();
         }

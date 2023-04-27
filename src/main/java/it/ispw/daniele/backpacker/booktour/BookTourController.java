@@ -22,8 +22,8 @@ public class BookTourController extends Controller {
 
         //ItineraryDaoFactory id = null;
         switch (view) {
-            case "gui" -> id = new ItineraryDao();
-            case "cli" -> id = new ItineraryDaoL();
+            case "gui" -> this.id = new ItineraryDao();
+            case "cli" -> this.id = new ItineraryDaoL();
         }
     }
 
@@ -32,8 +32,8 @@ public class BookTourController extends Controller {
 
         List<Itinerary> itinerary;
         switch (type) {
-            case "city" -> itinerary = id.getItinerary(input);
-            case "user" -> itinerary = id.getBookedItineraries(input);
+            case "city" -> itinerary = this.id.getItinerary(input);
+            case "user" -> itinerary = this.id.getBookedItineraries(input);
             default -> itinerary = Collections.emptyList();
         }
 

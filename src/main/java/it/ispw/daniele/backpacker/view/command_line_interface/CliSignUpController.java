@@ -3,6 +3,8 @@ package it.ispw.daniele.backpacker.view.command_line_interface;
 import it.ispw.daniele.backpacker.bean.TouristGuideBean;
 import it.ispw.daniele.backpacker.bean.UserBean;
 import it.ispw.daniele.backpacker.controller.login.LoginController;
+import it.ispw.daniele.backpacker.exceptions.EmptyFieldException;
+import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.utils.FileManager;
 import it.ispw.daniele.backpacker.utils.Roles;
 import it.ispw.daniele.backpacker.view.utils_view.InterfaceController;
@@ -12,6 +14,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 import static it.ispw.daniele.backpacker.view.command_line_interface.CLI.*;
@@ -106,7 +109,12 @@ public class CliSignUpController extends InterfaceController {
             ub.setEmail(email);
             ub.setPassword(password);
             ub.setProfilePicture(newFileName);*/
-            regResult = lc.createUser(ub, "cli");
+            try {
+                regResult = lc.createUser(ub, "cli");
+            } catch (EmptyFieldException exception) {
+                System.out.println(RED + exception.getMessage() + RESET);
+            }
+
         }
         else if(userType.equals(Roles.TOURIST_GUIDE.name())){
             System.out.println("VAT Number:");

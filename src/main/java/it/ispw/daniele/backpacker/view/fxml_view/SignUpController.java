@@ -3,12 +3,15 @@ package it.ispw.daniele.backpacker.view.fxml_view;
 import it.ispw.daniele.backpacker.bean.TouristGuideBean;
 import it.ispw.daniele.backpacker.bean.UserBean;
 import it.ispw.daniele.backpacker.controller.login.LoginController;
+import it.ispw.daniele.backpacker.exceptions.EmptyFieldException;
+import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.utils.FileManager;
 import it.ispw.daniele.backpacker.utils.Roles;
 import it.ispw.daniele.backpacker.view.utils_view.InterfaceController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -16,6 +19,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.sql.SQLException;
 
 public class SignUpController extends InterfaceController {
 
@@ -29,11 +33,13 @@ public class SignUpController extends InterfaceController {
     private TextField textFieldEmailSignUp, textFieldNameSignUp, textFieldSurnameSignUp, textFieldPassSignUp, textFieldConfPassSignUp;
     @FXML
     private TextField textFieldVATNumber;
+    @FXML
+    public Text errorText;
 
     private File imageFile = null;
 
     @FXML
-    public void signUp(){
+    public void signUp() {
         LoginController lc = new LoginController();
 
         boolean regResult = false;
@@ -47,31 +53,35 @@ public class SignUpController extends InterfaceController {
         email = textFieldEmailSignUp.getText();
         username = textFieldNameSignUp.getText();
         password = textFieldPassSignUp.getText();
-        if(this.USER.isUnderline()){
+        if (this.USER.isUnderline()) {
             userType = USER.getId();
-        }
-        else {
+        } else {
             userType = TOURIST_GUIDE.getId();
         }
 
         String fileName;
         String newFileName;
 
-        if(this.imageFile == null) {
+        if (this.imageFile == null) {
             fileName = "";
             newFileName = "";
-        }else {
-            fileName=this.imageFile.getName();
-            newFileName=username+fileName;
+        } else {
+            fileName = this.imageFile.getName();
+            newFileName = username + fileName;
         }
 
-        if (userType.equals(Roles.USER.name())){
+        if (userType.equals(Roles.USER.name())) {
             String name = this.textFieldNameSignUp.getText();
             String surname = this.textFieldSurnameSignUp.getText();
             UserBean ub = this.setUserBean(username, name, surname, email, password, newFileName);
-            regResult = lc.createUser(ub, "gui");
-        }
-        else if(userType.equals(Roles.TOURIST_GUIDE.name())){
+
+            try {
+                regResult = lc.createUser(ub, "gui");
+            } catch (EmptyFieldException exception) {
+                this.errorText.setText(exception.getMessage());
+            }
+
+        } else if (userType.equals(Roles.TOURIST_GUIDE.name())) {
             String name = this.textFieldNameSignUp.getText();
             String surname = this.textFieldSurnameSignUp.getText();
             VATNumb = textFieldVATNumber.getText();
@@ -79,24 +89,24 @@ public class SignUpController extends InterfaceController {
             regResult = lc.createTouristGuide(tgb, "gui");
         }
 
-        if(Boolean.TRUE.equals(regResult)){
+        if (Boolean.TRUE.equals(regResult)) {
             System.out.println("REGISTRATION SUCCESSFULLY");
-            if(this.imageFile != null){
+            if (this.imageFile != null) {
                 String path = FileManager.PROFILE;
                 System.out.println(path);
                 File file = new File(path, fileName);
                 File newFile = new File(path, newFileName);
-                try(InputStream inputStream = new FileInputStream(this.imageFile)){
+                try (InputStream inputStream = new FileInputStream(this.imageFile)) {
                     Files.copy(inputStream, file.toPath());
-                }catch (Exception e){
+                } catch (Exception e) {
                     System.out.println("Warning image");
                 }
-                if(!file.renameTo(newFile)){
+                if (!file.renameTo(newFile)) {
                     System.out.println("unable to rename");
                 }
-                       }
-        }
-        else{
+            }
+            this.errorText.setText("");
+        } else {
             System.out.println("unsuccessfully registration");
         }
 
@@ -112,13 +122,13 @@ public class SignUpController extends InterfaceController {
 
     @FXML
     public void selectImage() {
-        final FileChooser fc=new FileChooser();
+        final FileChooser fc = new FileChooser();
         fc.setTitle("Select image");
         fc.setInitialDirectory(new File(System.getProperty("user.home")));
-        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("JPG","*.jpg"),
-                new FileChooser.ExtensionFilter("PNG","*.png"));
-        this.imageFile=fc.showOpenDialog(new Stage());
-        if(this.imageFile!=null)this.textFieldImage.setText(this.imageFile.getName());
+        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                new FileChooser.ExtensionFilter("PNG", "*.png"));
+        this.imageFile = fc.showOpenDialog(new Stage());
+        if (this.imageFile != null) this.textFieldImage.setText(this.imageFile.getName());
     }
 
     @FXML

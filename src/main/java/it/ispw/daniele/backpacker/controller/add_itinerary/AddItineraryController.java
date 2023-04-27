@@ -20,8 +20,8 @@ public class AddItineraryController {
     public AddItineraryController(String view) {
 
         switch (view) {
-            case "gui" -> itineraryDao = new ItineraryDao();
-            case "cli" -> itineraryDao = new ItineraryDaoL();
+            case "gui" -> this.itineraryDao = new ItineraryDao();
+            case "cli" -> this.itineraryDao = new ItineraryDaoL();
         }
 
     }
@@ -29,7 +29,7 @@ public class AddItineraryController {
     public int getItineraryId(ItineraryBean itineraryBean) throws SQLException, FileNotFoundException {
         //ItineraryDao itineraryDao = new ItineraryDao();
         ///MODIFICARE CODICE SQL
-        return itineraryDao.getItineraryId(itineraryBean.getGuideId(), itineraryBean.getLocation(), itineraryBean.getDate(), itineraryBean.getTime(), itineraryBean.getParticipants(), itineraryBean.getPrice(), itineraryBean.getSteps());
+        return this.itineraryDao.getItineraryId(itineraryBean.getGuideId(), itineraryBean.getLocation(), itineraryBean.getDate(), itineraryBean.getTime(), itineraryBean.getParticipants(), itineraryBean.getPrice(), itineraryBean.getSteps());
     }
 
     public boolean addItinerary(ItineraryBean itineraryBean) throws DateException {
@@ -56,7 +56,7 @@ public class AddItineraryController {
             throw new DateException(outputFormatter.format(date) + " is before current date");
         }
 
-        return itineraryDao.addItinerary(itineraryBean.getGuideId(), itineraryBean.getLocation(), date, itineraryBean.getTime(), itineraryBean.getParticipants(), itineraryBean.getPrice(), itineraryBean.getSteps());
+        return this.itineraryDao.addItinerary(itineraryBean.getGuideId(), itineraryBean.getLocation(), date, itineraryBean.getTime(), itineraryBean.getParticipants(), itineraryBean.getPrice(), itineraryBean.getSteps());
 
     }
 }
