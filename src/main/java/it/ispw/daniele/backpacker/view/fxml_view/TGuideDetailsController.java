@@ -6,6 +6,7 @@ import it.ispw.daniele.backpacker.booktour.BookTourController;
 import it.ispw.daniele.backpacker.booktour.SaveTour;
 import it.ispw.daniele.backpacker.dao.TouristGuideDao.TouristGuideDao;
 import it.ispw.daniele.backpacker.entity.TouristGuide;
+import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.utils.Controller;
 import it.ispw.daniele.backpacker.utils.FileManager;
 import it.ispw.daniele.backpacker.utils.SessionUser;
@@ -73,7 +74,7 @@ public class TGuideDetailsController extends Controller {
         textSettings.setVisible(false);
     }
 
-    private TouristGuideBean getSearchUser(String caller){
+    private TouristGuideBean getSearchUser(String caller) {
         TouristGuideDao ud = new TouristGuideDao();
         List<TouristGuide> l = ud.getSearchUser(caller);
         return this.convert(l.get(0));

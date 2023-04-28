@@ -1,6 +1,7 @@
 package it.ispw.daniele.backpacker.dao.ItineraryDao;
 
 import it.ispw.daniele.backpacker.entity.Itinerary;
+import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.utils.DatabaseUserConnection;
 
 import java.sql.Connection;

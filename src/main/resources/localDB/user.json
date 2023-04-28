@@ -1,80 +1,16 @@
 {
   "user": [
     {
-      "profilePicture": "",
-      "password": "njnjn",
-      "surname": "njnjn",
-      "name": "njnjn",
-      "email": "njnj",
-      "username": "njnjn"
-    },
-    {
-      "profilePicture": "",
-      "password": "lplplp",
-      "surname": "plplplp",
-      "name": "lplplpl",
-      "email": "lplplp",
-      "username": "lplplpl"
-    },
-    {
-      "profile_picture_path": "",
-      "surname": "qa",
-      "name": "qa",
-      "username": "qa"
-    },
-    {
-      "profile_picture_path": "",
-      "surname": "gy",
-      "name": "gy",
-      "username": "gy"
-    },
-    {
-      "profile_picture_path": "",
-      "surname": "nj",
-      "name": "nj",
-      "username": "nj"
-    },
-    {
-      "profile_picture_path": "",
-      "surname": "ft",
-      "name": "ft",
-      "username": "ft"
-    },
-    {
-      "profile_picture_path": "",
-      "surname": "de",
-      "name": "de",
-      "username": "de"
-    },
-    {
-      "profile_picture_path": "",
-      "surname": "qw",
-      "name": "qw",
-      "username": "qw"
-    },
-    {
-      "profile_picture_path": "",
-      "surname": "peppe",
-      "name": "peppe",
-      "username": "peppe"
-    },
-    {
       "profile_picture_path": "",
       "surname": "za",
       "name": "za",
       "username": "za"
     },
     {
-      "name": "za",
+      "name": "lp",
       "profile_picture_path": "",
-      "surname": "za",
-      "username": "za"
-    },
-    {
-      "name": "cd",
-      "profile_picture_path": "",
-      "surname": "cd",
-      "username": "cd"
+      "surname": "lp",
+      "username": "lp"
     }
   ]
 }

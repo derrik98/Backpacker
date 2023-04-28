@@ -3,6 +3,7 @@ package it.ispw.daniele.backpacker.dao.ItineraryDao;
 import it.ispw.daniele.backpacker.dao.DaoAction;
 import it.ispw.daniele.backpacker.dao.DaoTemplate;
 import it.ispw.daniele.backpacker.entity.Itinerary;
+import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.utils.DatabaseTouristGuideConnection;
 import it.ispw.daniele.backpacker.utils.DatabaseUserConnection;
 import org.json.simple.JSONArray;
@@ -39,7 +40,7 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
     private final String ADD_PART = "add_part";
     private final String REMOVE_PART = "remove_part";
 
-    public void addParticipation(String username, int itineraryId) {
+    public void addParticipation(String username, int itineraryId)  {
         this.manageParticipation(username, itineraryId, ADD_PART);
     }
 

@@ -1,6 +1,7 @@
 package it.ispw.daniele.backpacker.dao.ItineraryDao;
 
 import it.ispw.daniele.backpacker.entity.Itinerary;
+import it.ispw.daniele.backpacker.exceptions.GenericException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;

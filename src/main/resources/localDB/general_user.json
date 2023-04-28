@@ -58,6 +58,36 @@
       "role": "user",
       "email": "cd",
       "username": "cd"
+    },
+    {
+      "password": "za",
+      "role": "user",
+      "email": "za",
+      "username": "za"
+    },
+    {
+      "password": "za",
+      "role": "user",
+      "email": "za",
+      "username": "za"
+    },
+    {
+      "password": "za",
+      "role": "user",
+      "email": "za",
+      "username": "za"
+    },
+    {
+      "password": "za",
+      "role": "user",
+      "email": "za",
+      "username": "za"
+    },
+    {
+      "password": "lp",
+      "role": "user",
+      "email": "lp",
+      "username": "lp"
     }
   ]
 }

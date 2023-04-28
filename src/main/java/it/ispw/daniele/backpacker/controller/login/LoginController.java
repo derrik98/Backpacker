@@ -54,7 +54,7 @@ public class LoginController {
         }
     }
 
-    public boolean createUser(UserBean ub, String view) throws EmptyFieldException {
+    public boolean createUser(UserBean ub, String view) throws EmptyFieldException, GenericException {
 //        UserDao ud = new UserDao();
 //        UserDaoL udl = new UserDaoL();
 //        ud.createUser(ub.getUsername(), ub.getName(), ub.getSurname(), ub.getEmail(), ub.getPassword(), ub.getProfilePicture());
@@ -71,9 +71,21 @@ public class LoginController {
 
         assert udf != null;
 
-        udf.createUser(ub.getUsername(), ub.getName(), ub.getSurname(), ub.getEmail(), ub.getPassword(), ub.getProfilePicture());
+            //return udf.createUser(ub.getUsername(), ub.getName(), ub.getSurname(), ub.getEmail(), ub.getPassword(), ub.getProfilePicture());
+            //return true;
+            //System.out.println(udf.createUser(ub.getUsername(), ub.getName(), ub.getSurname(), ub.getEmail(), ub.getPassword(), ub.getProfilePicture()));
+//
+            if (udf.createUser(ub.getUsername(), ub.getName(), ub.getSurname(), ub.getEmail(), ub.getPassword(), ub.getProfilePicture()).equals(true)) {
+                System.out.println(udf.createUser(ub.getUsername(), ub.getName(), ub.getSurname(), ub.getEmail(), ub.getPassword(), ub.getProfilePicture()));
+                return true;
+//            }
+            } else {
+                throw new GenericException("User already exist");
+            }
+        //}
+        //        udf.createUser(ub.getUsername(), ub.getName(), ub.getSurname(), ub.getEmail(), ub.getPassword(), ub.getProfilePicture());
 
-        return true;
+        //return false;
     }
 
     public boolean createTouristGuide(TouristGuideBean tgb, String view) {
@@ -90,3 +102,4 @@ public class LoginController {
         return true;
     }
 }
+

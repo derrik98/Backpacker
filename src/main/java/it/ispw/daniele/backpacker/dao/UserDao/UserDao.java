@@ -2,6 +2,7 @@ package it.ispw.daniele.backpacker.dao.UserDao;
 
 import it.ispw.daniele.backpacker.dao.DaoTemplate;
 import it.ispw.daniele.backpacker.entity.User;
+import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.utils.DatabaseLoginConnection;
 import it.ispw.daniele.backpacker.utils.DatabaseUserConnection;
 
@@ -41,7 +42,7 @@ public class UserDao extends UserDaoFactory {
 //        return this.queryDatabase(caller, SEARCH_USER);
 //    }
 
-    protected List<User> queryDatabase(String caller, String operation){
+    protected List<User> queryDatabase(String caller, String operation) {
         List <User> ret = this.execute(() -> {
             List<User> l = new ArrayList<>();
             Connection conn = DatabaseUserConnection.getUserConnection();

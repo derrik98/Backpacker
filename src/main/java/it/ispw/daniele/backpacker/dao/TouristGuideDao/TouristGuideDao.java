@@ -2,6 +2,7 @@ package it.ispw.daniele.backpacker.dao.TouristGuideDao;
 
 import it.ispw.daniele.backpacker.dao.DaoTemplate;
 import it.ispw.daniele.backpacker.entity.TouristGuide;
+import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.utils.DatabaseLoginConnection;
 import it.ispw.daniele.backpacker.utils.DatabaseTouristGuideConnection;
 
@@ -21,7 +22,7 @@ public class TouristGuideDao extends TouristGuideDaoFactory {
 //        return this.queryDatabase(caller, SEARCH_T_GUIDE);
 //    }
 
-    protected List<TouristGuide> queryDatabase(String caller, String operation){
+    protected List<TouristGuide> queryDatabase(String caller, String operation) {
         List <TouristGuide> ret = this.execute(() -> {
             List<TouristGuide> l = new ArrayList<>();
             Connection conn = DatabaseTouristGuideConnection.getTouristGuideConnection();
