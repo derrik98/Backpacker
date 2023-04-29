@@ -126,7 +126,7 @@ public class ItineraryDao extends ItineraryDaoFactory {
         String sql;
 
         conn = DatabaseUserConnection.getUserConnection();
-        sql = "call backpacker.get_itinerary_id(?, ?, ?, ?, ?, ?; ?);\r\n";
+        sql = "call backpacker.get_itinerary_id(?, ?, ?, ?, ?, ?, ?);\r\n";
 
         try (PreparedStatement stm = conn.prepareStatement(sql)) {
             stm.setString(1,guideId);

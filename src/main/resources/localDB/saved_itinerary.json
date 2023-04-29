@@ -2,23 +2,18 @@
   "saved_itinerary": [
     {
       "id": "1",
-      "steps": "Monumento a Nizami Ganjavi\/Altare della Patria\/Piazza di San Silvestro\/Basilica dei Santi Ambrogio e Carlo al Corso\/Monumento a Quintino Sella\/Sacrario delle Bandiere delle Forze Armate",
-      "username": "gy"
+      "steps": "colosseo\/via del corso\/pantheon\/colosseo\/via del corso\/pantheon\/",
+      "username": "cf"
     },
     {
       "id": "2",
-      "steps": "Statue dei Dioscuri\/Monumento al Bersagliere\/Monumento celebrativo del \"Bicentenario dei Carabinieri\"\/Piazza di San Silvestro\/Basilica dei Santi Ambrogio e Carlo al Corso\/Monumento a José Gervasio Artigas",
-      "username": "cd"
+      "steps": "Statua Equestre di Vittorio Emanuele II\/Monumento a Goethe\/Altare della Patria\/Sacrario delle Bandiere delle Forze ArmateAltare della Patria\/Cordonata Capitolina",
+      "username": "cf"
     },
     {
       "id": "3",
-      "steps": "Monumento a Goethe\/Statua Equestre di Vittorio Emanuele IIMonumento a Goethe\/Monumento a José Gervasio ArtigasStatua Equestre di Vittorio Emanuele II\/Monumento a Cola Di Rienzo",
-      "username": "cd"
-    },
-    {
-      "id": "4",
-      "steps": "hdbcd\/bcjdncd\/nvjfnvf\/hdbcd\/bcjdncd\/nvjfnvf\/",
-      "username": "cd"
+      "steps": "Colonna di Marco Aurelio\/Scalinata di Trinità dei Monti\/Monumento al Bersagliere\/Statue dei DioscuriStatue dei Dioscuri\/Piazza di San Silvestro",
+      "username": "cf"
     }
   ]
 }

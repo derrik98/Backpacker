@@ -54,7 +54,7 @@ public class LoginController {
         }
     }
 
-    public boolean createUser(UserBean ub, String view) throws EmptyFieldException, GenericException {
+    public boolean createUser(UserBean ub, String view) throws EmptyFieldException, GenericException, SQLException {
 //        UserDao ud = new UserDao();
 //        UserDaoL udl = new UserDaoL();
 //        ud.createUser(ub.getUsername(), ub.getName(), ub.getSurname(), ub.getEmail(), ub.getPassword(), ub.getProfilePicture());
@@ -71,20 +71,27 @@ public class LoginController {
 
         assert udf != null;
 
-            //return udf.createUser(ub.getUsername(), ub.getName(), ub.getSurname(), ub.getEmail(), ub.getPassword(), ub.getProfilePicture());
-            //return true;
-            //System.out.println(udf.createUser(ub.getUsername(), ub.getName(), ub.getSurname(), ub.getEmail(), ub.getPassword(), ub.getProfilePicture()));
-//
-            if (udf.createUser(ub.getUsername(), ub.getName(), ub.getSurname(), ub.getEmail(), ub.getPassword(), ub.getProfilePicture()).equals(true)) {
-                System.out.println(udf.createUser(ub.getUsername(), ub.getName(), ub.getSurname(), ub.getEmail(), ub.getPassword(), ub.getProfilePicture()));
-                return true;
-//            }
-            } else {
-                throw new GenericException("User already exist");
-            }
+        //return udf.createUser(ub.getUsername(), ub.getName(), ub.getSurname(), ub.getEmail(), ub.getPassword(), ub.getProfilePicture());
+        //return true;
+        //System.out.println(udf.createUser(ub.getUsername(), ub.getName(), ub.getSurname(), ub.getEmail(), ub.getPassword(), ub.getProfilePicture()));
+
+
+        if (udf.createUser(ub.getUsername(), ub.getName(), ub.getSurname(), ub.getEmail(), ub.getPassword(), ub.getProfilePicture()).equals(true)) {
+            System.out.println(udf.createUser(ub.getUsername(), ub.getName(), ub.getSurname(), ub.getEmail(), ub.getPassword(), ub.getProfilePicture()));
+            return true;
+        }
+
+        //udf.createUser(ub.getUsername(), ub.getName(), ub.getSurname(), ub.getEmail(), ub.getPassword(), ub.getProfilePicture()).equals(true);
+
+
+        else {
+            throw new GenericException("User already exist");
+        }
+
         //}
         //        udf.createUser(ub.getUsername(), ub.getName(), ub.getSurname(), ub.getEmail(), ub.getPassword(), ub.getProfilePicture());
 
+        //return false;
         //return false;
     }
 

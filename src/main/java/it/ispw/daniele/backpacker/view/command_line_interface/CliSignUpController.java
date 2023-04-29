@@ -111,7 +111,7 @@ public class CliSignUpController extends InterfaceController {
             ub.setProfilePicture(newFileName);*/
             try {
                 regResult = lc.createUser(ub, "cli");
-            } catch (EmptyFieldException | GenericException exception) {
+            } catch (EmptyFieldException | GenericException | SQLException exception) {
                 System.out.println(RED + exception.getMessage() + RESET);
             }
 

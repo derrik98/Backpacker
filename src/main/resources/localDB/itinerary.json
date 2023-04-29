@@ -1,5 +1,14 @@
 {
   "itinerary": [
-
+    {
+      "date": "Thu May 18 00:00:00 CEST 2023",
+      "guide_id": "cf",
+      "price": "30",
+      "location": "roma",
+      "id": "1",
+      "time": "9:00",
+      "steps": "colosseo\/via del corso\/pantheon\/colosseo\/via del corso\/pantheon\/",
+      "participants": "30"
+    }
   ]
 }

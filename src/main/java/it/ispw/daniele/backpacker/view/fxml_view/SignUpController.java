@@ -11,6 +11,8 @@ import it.ispw.daniele.backpacker.view.utils_view.InterfaceController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -35,7 +37,6 @@ public class SignUpController extends InterfaceController {
     private TextField textFieldVATNumber;
     @FXML
     public Text errorText;
-
     private File imageFile = null;
 
     @FXML
@@ -77,10 +78,7 @@ public class SignUpController extends InterfaceController {
 
             try {
                 regResult = lc.createUser(ub, "gui");
-            } catch (EmptyFieldException exception) {
-                System.out.println(exception.getMessage());
-                this.errorText.setText(exception.getMessage());
-            }catch (GenericException exception){
+            } catch (EmptyFieldException | GenericException | SQLException exception) {
                 this.errorText.setText(exception.getMessage());
             }
 
@@ -146,5 +144,12 @@ public class SignUpController extends InterfaceController {
         this.textFieldVATNumber.setDisable(false);
         this.USER.setUnderline(false);
         this.TOURIST_GUIDE.setUnderline(true);
+    }
+
+    @FXML
+    public void enterKeyPressed(KeyEvent keyEvent) {
+        if (keyEvent.getCode().equals(KeyCode.ENTER)){
+            this.signUp();
+        }
     }
 }

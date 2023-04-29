@@ -1,5 +1,9 @@
 {
   "goes_to": [
-
+    {
+      "itinerary_id": "1",
+      "with_guide": "true",
+      "username": "cf"
+    }
   ]
 }

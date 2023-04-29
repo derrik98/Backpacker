@@ -24,6 +24,7 @@ import javafx.scene.text.Text;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 public class UserDetailsController extends Controller {
@@ -70,7 +71,7 @@ public class UserDetailsController extends Controller {
         textSettings.setVisible(false);
     }
 
-    private UserBean getSearchUser(String caller){
+    private UserBean getSearchUser(String caller) {
         UserDao ud = new UserDao();
         List<User> l = ud.getSearchUser(caller);
         return this.convert(l.get(0));

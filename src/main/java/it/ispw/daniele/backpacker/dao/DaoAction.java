@@ -8,5 +8,5 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public interface DaoAction<G> {
-    G act() throws ClassNotFoundException, IOException, ParseException, LoginFailException, SQLException, GenericException;
+    G act() throws SQLException, GenericException;
 }

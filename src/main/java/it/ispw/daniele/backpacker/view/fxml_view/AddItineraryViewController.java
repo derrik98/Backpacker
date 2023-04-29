@@ -20,7 +20,8 @@ public class AddItineraryViewController extends InterfaceController {
     public TextField textFieldPrice;
     @FXML
     public TextField textFieldParticipants;
-    public static final ListView<Object> listView = new ListView<>();
+    @FXML
+    public ListView<Object> listView = new ListView<>();
     @FXML
     private HBox menuBar = new HBox();
     @FXML
@@ -57,7 +58,7 @@ public class AddItineraryViewController extends InterfaceController {
             date = this.fieldDate.getValue().toString();
         }
 
-        ItineraryBean itineraryBean = this.setItineraryBean(this.guideBean.getUsername(), date, location, time, Integer.parseInt(participants), Integer.parseInt(price), this.steps);
+        ItineraryBean itineraryBean = this.setItineraryBean(this.guideBean.getUsername(), location, date, time, Integer.parseInt(participants), Integer.parseInt(price), this.steps);
 
         try {
             result = controller.addItinerary(itineraryBean);
@@ -87,7 +88,7 @@ public class AddItineraryViewController extends InterfaceController {
             textField.setStyle("-fx-font-size: 20");
             textField.setId(String.valueOf(i));
             textField.setPromptText("step -> " + i);
-
+System.out.println(textField);
 
             listView.getItems().add(textField);
         }

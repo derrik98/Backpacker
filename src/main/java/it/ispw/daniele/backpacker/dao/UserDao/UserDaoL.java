@@ -6,9 +6,12 @@ import it.ispw.daniele.backpacker.exceptions.GenericException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 public class UserDaoL extends UserDaoFactory {
@@ -72,6 +75,7 @@ public class UserDaoL extends UserDaoFactory {
 //        return this.queryDatabase(caller, SEARCH_USER);
 //    }
 
+
     protected List<User> queryDatabase(String caller, String operation) {
         List<User> ret = this.execute(() -> {
             List<User> l = new ArrayList<>();
@@ -111,6 +115,8 @@ public class UserDaoL extends UserDaoFactory {
                             return l;
                         }
                     }
+                } catch (IOException | ParseException e) {
+                    throw new RuntimeException(e);
                 }
             }
             return null;

@@ -58,6 +58,10 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
                     }
                 }
 
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (IOException | ParseException e) {
+                throw new RuntimeException(e);
             }
             return null;
         });
@@ -93,6 +97,8 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
                     }
                 }
 
+            } catch (IOException | ParseException e) {
+                throw new RuntimeException(e);
             }
 
             return false;
@@ -101,7 +107,7 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
     }
 
     @Override
-    public int getItineraryId(String guideId, String location, String date, String time, int participants, int price, String steps) throws FileNotFoundException {
+    public int getItineraryId(String guideId, String location, String date, String time, int participants, int price, String steps) {
 
         JSONParser parser = new JSONParser();
 
@@ -182,6 +188,8 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
                         }
                     }
                 }
+            } catch (IOException | ParseException e) {
+                throw new RuntimeException(e);
             }
 
             return itineraryList;
@@ -226,6 +234,8 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
 
                 fileReader.close();
                 return itineraryList;
+            } catch (IOException | ParseException e) {
+                throw new RuntimeException(e);
             }
 
         });

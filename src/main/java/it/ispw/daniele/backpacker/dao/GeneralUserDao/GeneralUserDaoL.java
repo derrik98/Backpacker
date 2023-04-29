@@ -4,8 +4,11 @@ import it.ispw.daniele.backpacker.entity.GeneralUser;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 
 public class GeneralUserDaoL extends GeneralUserDaoFactory {
 
@@ -40,6 +43,8 @@ public class GeneralUserDaoL extends GeneralUserDaoFactory {
                     }
                 }
 
+            } catch (IOException | ParseException e) {
+                throw new RuntimeException(e);
             }
 
             return null;

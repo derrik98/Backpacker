@@ -132,6 +132,7 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
             Connection con = DatabaseTouristGuideConnection.getTouristGuideConnection();
             String sql = "call backpacker.add_itinerary(?, ?, ?, ?, ?, ?, ?);\r\n";
             try (PreparedStatement stm = con.prepareStatement(sql)) {
+
                 java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 
                 stm.setString(1, guideId);
@@ -152,7 +153,11 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
             JSONArray arr;
             Map<String, String> jsonMap;
 
-            o = (JSONObject) parser.parse(new FileReader(path_itinerary));
+            try {
+                o = (JSONObject) parser.parse(new FileReader(path_itinerary));
+            } catch (IOException | ParseException e) {
+                throw new RuntimeException(e);
+            }
 
             arr = (JSONArray) o.get("itinerary");
 
@@ -174,6 +179,8 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
             try (FileWriter file = new FileWriter(path_itinerary)) {
                 file.write(o.toString());
                 System.out.println("Successfully updated json object to file...!!");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
 
             return true;
@@ -202,7 +209,11 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
             JSONArray arr;
             Map<String, String> jsonMap;
 
-            o = (JSONObject) parser.parse(new FileReader(path_saved_itinerary));
+            try {
+                o = (JSONObject) parser.parse(new FileReader(path_saved_itinerary));
+            } catch (IOException | ParseException e) {
+                throw new RuntimeException(e);
+            }
 
             arr = (JSONArray) o.get("saved_itinerary");
 
@@ -218,6 +229,8 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
             try (FileWriter file = new FileWriter(path_saved_itinerary)) {
                 file.write(o.toString());
                 System.out.println("Successfully updated json object to file...!!");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
 
             return true;
