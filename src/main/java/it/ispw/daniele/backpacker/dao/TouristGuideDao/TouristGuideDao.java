@@ -60,9 +60,9 @@ public class TouristGuideDao extends TouristGuideDaoFactory {
                     return l;
                 }
             } finally {
-
-                if (stm != null)
-                    stm.close();
+                DatabaseTouristGuideConnection.closeTouristGuideConnection(conn);
+//                if (stm != null)
+//                    stm.close();
             }
         });
 

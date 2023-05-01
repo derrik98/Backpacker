@@ -170,7 +170,7 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
 
                         JSONObject objectI = (JSONObject) arrayItinerary.get(indexI);
 
-                        if (objectG.get("itinerary_id") == objectI.get("id") && objectG.get("username").equals(input)) {
+                        if (objectG.get("itinerary_id").equals(objectI.get("id")) && objectG.get("username").equals(input)) {
 
                             int id = (int) objectG.get(ID);
                             String guideId = (String) objectI.get(GUIDE_ID);

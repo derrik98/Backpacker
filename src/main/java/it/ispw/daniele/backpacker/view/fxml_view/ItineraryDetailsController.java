@@ -70,7 +70,7 @@ public class ItineraryDetailsController {
         time.setText(itineraryBean.getTime());
         participants.setText(String.valueOf(itineraryBean.getParticipants()));
         price.setText(String.valueOf(itineraryBean.getPrice()));
-        steps.setText(itineraryBean.getSteps());
+        steps.setText(itineraryBean.getSteps().replace("/", " - "));
 
         ib = itineraryBean;
     }

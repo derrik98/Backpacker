@@ -6,7 +6,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,36 +23,47 @@ public class TouristGuideDaoL extends TouristGuideDaoFactory {
 
                 JSONParser parser = new JSONParser();
 
-                try (FileReader fileReader = new FileReader(path_tourist_guide)) {
+                try (FileReader fileT = new FileReader(path_tourist_guide); FileReader fileGeneralUser = new FileReader(path_general_user)) {
 
-                    JSONObject o = (JSONObject) parser.parse(fileReader);
-                    JSONArray arr = (JSONArray) o.get("tourist_guide");
+                    JSONObject objectT = (JSONObject) parser.parse(fileT);
+                    JSONArray arrayT = (JSONArray) objectT.get("tourist_guide");
 
-                    if (arr.isEmpty()) {
+                    JSONObject objectGeneralUser = (JSONObject) parser.parse(fileGeneralUser);
+                    JSONArray arrayGeneralUser = (JSONArray) objectGeneralUser.get("general_user");
+
+                    if (arrayT.isEmpty() || arrayGeneralUser.isEmpty()) {
                         return Collections.emptyList();
                     }
 
-                    for (int index = 0; index < arr.size(); index++) {
+                    for (int indexT = 0; indexT < arrayT.size(); indexT++) {
 
-                        JSONObject object = (JSONObject) arr.get(index);
+                        JSONObject objectU = (JSONObject) arrayT.get(indexT);
 
-                        if (object.get("username").equals(caller)) {
-                            String username = (String) object.get("username");
-                            String name = (String) object.get("name");
-                            String surname = (String) object.get("surname");
-                            String profilePicture = (String) object.get("profile_picture_path");
-                            String email = (String) object.get("email");
-                            String vatNum = (String) object.get("identification_code");
+                        for (int indexGU = 0; indexGU < arrayGeneralUser.size(); indexGU++) {
 
-                            if (object.get("profile_picture_path") == null || object.get("profile_picture_path").equals("")) {
-                                profilePicture = "tourist_guide.png";
+                            JSONObject objectGU = (JSONObject) arrayGeneralUser.get(indexGU);
+
+                            if (objectU.get("username").equals(caller) && objectGU.get("username").equals(caller)) {
+
+                                String username = (String) objectT.get("username");
+                                String name = (String) objectT.get("name");
+                                String surname = (String) objectT.get("surname");
+                                String profilePicture = (String) objectT.get("profile_picture_path");
+                                String email = (String) objectGU.get("email");
+                                String vatNum = (String) objectT.get("identification_code");
+
+                                if (objectU.get("profile_picture_path") == null || objectU.get("profile_picture_path").equals("")) {
+                                    profilePicture = "user.png";
+                                }
+
+                                l.add(new TouristGuide(username, name, surname, profilePicture, email, vatNum));
+
+                                fileT.close();
+                                fileGeneralUser.close();
+
+                                return l;
+
                             }
-
-                            l.add(new TouristGuide(username, name, surname, profilePicture, email, vatNum));
-
-                            fileReader.close();
-
-                            return l;
                         }
                     }
                 } catch (IOException | ParseException e) {

@@ -26,15 +26,15 @@ public abstract class UserDaoFactory extends DaoTemplate {
 
     protected static final String SEARCH_USER = "search_user";
     protected final String path_user = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/user.json";
-    private final String path_general_user = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/general_user.json";
+    protected final String path_general_user = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/general_user.json";
 
     public Boolean createUser(String username, String name, String surname, String email, String password, String profilePicture) {
         return (this.execute(() -> {
 
             //Save on Database
-            Connection con = DatabaseLoginConnection.getLoginConnection();
+            Connection conn = DatabaseLoginConnection.getLoginConnection();
 
-            if (con == null) {
+            if (conn == null) {
                 return false;
             }
 
@@ -42,7 +42,7 @@ public abstract class UserDaoFactory extends DaoTemplate {
             //
             // PreparedStatement stm = con.prepareStatement(sql);
 
-            try (PreparedStatement stm = con.prepareStatement(sql)){
+            try (PreparedStatement stm = conn.prepareStatement(sql)){
                 stm.setString(1, username);
                 stm.setString(2, name);
                 stm.setString(3, surname);
@@ -50,8 +50,10 @@ public abstract class UserDaoFactory extends DaoTemplate {
                 stm.setString(5, password);
                 stm.setString(6, profilePicture);
                 stm.executeUpdate();
-
+            }finally {
+                DatabaseLoginConnection.closeLoginConnection(conn);
             }
+
             /*finally {
                 if (stm != null) {
                     try {

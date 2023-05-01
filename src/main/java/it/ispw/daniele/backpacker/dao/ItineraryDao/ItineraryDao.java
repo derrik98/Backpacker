@@ -43,8 +43,8 @@ public class ItineraryDao extends ItineraryDaoFactory {
                 try (ResultSet rs = stm.executeQuery()) {
                     itinerary = unpackResultSet(rs);
                 }
-
             }
+
             DatabaseUserConnection.closeUserConnection(conn);
             return itinerary;
         });
@@ -67,9 +67,11 @@ public class ItineraryDao extends ItineraryDaoFactory {
                 stm.setString(1, username);
                 stm.setInt(2, itineraryId);
                 try (ResultSet rs = stm.executeQuery()) {
-                    DatabaseUserConnection.closeUserConnection(conn);
+                    //DatabaseUserConnection.closeUserConnection(conn);
                     return (rs.first());
                 }
+            }finally {
+                DatabaseUserConnection.closeUserConnection(conn);
             }
         });
         return Objects.requireNonNullElse(ret, false);
@@ -165,6 +167,8 @@ public class ItineraryDao extends ItineraryDaoFactory {
                 try (ResultSet rs = stm.executeQuery()) {
                     itinerary = unpackResultSet(rs);
                 }
+            }finally {
+                DatabaseUserConnection.closeUserConnection(conn);
             }
             return itinerary;
         });
@@ -228,6 +232,8 @@ public class ItineraryDao extends ItineraryDaoFactory {
                 try (ResultSet rs = stm.executeQuery()) {
                     itinerary = unpackResult(rs);
                 }
+            }finally {
+                DatabaseUserConnection.closeUserConnection(conn);
             }
             return itinerary;
         });

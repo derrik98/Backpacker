@@ -1,1 +1,34 @@
-{"general_user":[{"password":"cd","role":"user","email":"cd","username":"cd"},{"password":"cf","role":"tourist_guide","email":"cf","username":"cf"},{"password":"cf","role":"tourist_guide","email":"cf","username":"cf"},{"password":"za","role":"user","email":"za","username":"za"}]}
+{
+  "general_user": [
+    {
+      "password": "cd",
+      "role": "user",
+      "email": "cd",
+      "username": "cd"
+    },
+    {
+      "password": "cf",
+      "role": "tourist_guide",
+      "email": "cf",
+      "username": "cf"
+    },
+    {
+      "password": "cf",
+      "role": "tourist_guide",
+      "email": "cf",
+      "username": "cf"
+    },
+    {
+      "password": "za",
+      "role": "user",
+      "email": "za",
+      "username": "za"
+    },
+    {
+      "password": "derrik98",
+      "role": "user",
+      "email": "danielederrico98@gmail.com",
+      "username": "derrik98"
+    }
+  ]
+}

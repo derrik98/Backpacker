@@ -1,9 +1,1 @@
-{
-  "goes_to": [
-    {
-      "itinerary_id": "1",
-      "with_guide": "true",
-      "username": "cf"
-    }
-  ]
-}
+{"goes_to":[{"with_guide":"true","itinerary_id":"1","username":"cf"},{"itinerary_id":"1","with_guide":"true","username":"cf"}]}

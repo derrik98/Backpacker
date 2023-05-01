@@ -38,7 +38,6 @@ public class GeneralUserDaoL extends GeneralUserDaoFactory {
                         if (usernameLoaded.equals(username)) {
                             u = new GeneralUser(usernameLoaded, "", role);
                             return u;
-
                         }
                     }
                 }

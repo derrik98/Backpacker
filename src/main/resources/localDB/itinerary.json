@@ -9,6 +9,16 @@
       "time": "9:00",
       "steps": "colosseo\/via del corso\/pantheon\/colosseo\/via del corso\/pantheon\/",
       "participants": "30"
+    },
+    {
+      "date": "Sun Jun 11 00:00:00 CEST 2023",
+      "guide_id": "cf",
+      "price": "39",
+      "location": "torino",
+      "id": "2",
+      "time": "9:00",
+      "steps": "ca\/cd\/cd\/cf\/",
+      "participants": "25"
     }
   ]
 }

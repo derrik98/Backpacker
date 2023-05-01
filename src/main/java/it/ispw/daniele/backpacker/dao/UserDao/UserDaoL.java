@@ -1,6 +1,7 @@
 package it.ispw.daniele.backpacker.dao.UserDao;
 
 import it.ispw.daniele.backpacker.dao.DaoTemplate;
+import it.ispw.daniele.backpacker.entity.Itinerary;
 import it.ispw.daniele.backpacker.entity.User;
 import it.ispw.daniele.backpacker.exceptions.GenericException;
 import org.json.simple.JSONArray;
@@ -85,34 +86,46 @@ public class UserDaoL extends UserDaoFactory {
                 JSONParser parser = new JSONParser();
                 //String path = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/user.json";
 
-                try (FileReader fileReader = new FileReader(path_user)) {
+                try (FileReader fileUser = new FileReader(path_user); FileReader fileGeneralUser = new FileReader(path_general_user)) {
 
-                    JSONObject o = (JSONObject) parser.parse(fileReader);
-                    JSONArray arr = (JSONArray) o.get("user");
-                    if (arr.isEmpty()) {
+                    JSONObject objectUser = (JSONObject) parser.parse(fileUser);
+                    JSONArray arrayUser = (JSONArray) objectUser.get("user");
+
+                    JSONObject objectGeneralUser = (JSONObject) parser.parse(fileGeneralUser);
+                    JSONArray arrayGeneralUser = (JSONArray) objectGeneralUser.get("general_user");
+
+                    if (arrayUser.isEmpty() || arrayGeneralUser.isEmpty()) {
                         return Collections.emptyList();
                     }
 
-                    for (int index = 0; index < arr.size(); index++) {
+                    for (int indexU = 0; indexU < arrayUser.size(); indexU++) {
 
-                        JSONObject object = (JSONObject) arr.get(index);
+                        JSONObject objectU = (JSONObject) arrayUser.get(indexU);
 
-                        if (object.get("username").equals(caller)) {
-                            String username = (String) object.get("username");
-                            String name = (String) object.get("name");
-                            String surname = (String) object.get("surname");
-                            String profilePicture = (String) object.get("profile_picture_path");
-                            String email = (String) object.get("email");
+                        for (int indexGU = 0; indexGU < arrayGeneralUser.size(); indexGU++) {
 
-                            if (object.get("profile_picture_path") == null || object.get("profile_picture_path").equals("")) {
-                                profilePicture = "user.png";
+                            JSONObject objectGU = (JSONObject) arrayGeneralUser.get(indexGU);
+
+                            if (objectU.get("username").equals(caller) && objectGU.get("username").equals(caller)) {
+
+                                String username = (String) objectU.get("username");
+                                String name = (String) objectU.get("name");
+                                String surname = (String) objectU.get("surname");
+                                String profilePicture = (String) objectU.get("profile_picture_path");
+                                String email = (String) objectGU.get("email");
+
+                                if (objectU.get("profile_picture_path") == null || objectU.get("profile_picture_path").equals("")) {
+                                    profilePicture = "user.png";
+                                }
+
+                                l.add(new User(username, name, surname, profilePicture, email));
+
+                                fileUser.close();
+                                fileGeneralUser.close();
+
+                                return l;
+
                             }
-
-                            l.add(new User(username, name, surname, profilePicture, email));
-
-                            fileReader.close();
-
-                            return l;
                         }
                     }
                 } catch (IOException | ParseException e) {

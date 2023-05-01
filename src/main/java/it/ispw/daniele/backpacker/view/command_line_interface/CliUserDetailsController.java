@@ -36,8 +36,8 @@ public class CliUserDetailsController extends Controller {
             System.out.print("\033[H\033[2J");
             System.out.println(BOLD + "PROFILE PAGE\n" + RESET);
             System.out.println("Username: " + users.getUsername());
-            System.out.println("Name: " + users.getName());
             System.out.println("Email: " + users.getEmail());
+            System.out.println("Name: " + users.getName());
             System.out.println("Surname: " + users.getSurname());
             System.out.println("\n");
 
@@ -53,7 +53,7 @@ public class CliUserDetailsController extends Controller {
                 System.out.println("Booked itineraries: ");
                 System.out.println("EMPTY_DATABASE\n");
             } else {
-                for(int indexB = 0; indexB < booked.size(); indexB++) {
+                for (int indexB = 0; indexB < booked.size(); indexB++) {
                     System.out.println("Booked itineraries: ");
                     System.out.print("ID [" + booked.get(indexB).getItineraryId() + "] " + booked.get(indexB).getSteps() + "\n");
                 }
@@ -68,16 +68,16 @@ public class CliUserDetailsController extends Controller {
                 }
             }
 
-                System.out.println("\nGo Back [press 'b']: ");
-                Scanner scanner = new Scanner(System.in);
+            System.out.println("\nGo Back [press 'b']: ");
+            Scanner scanner = new Scanner(System.in);
 
-                if (scanner.nextLine().equals("b")) {
-                    return;
-                } else {
-                    System.out.println("Command not found");
-                }
+            if (scanner.nextLine().equals("b")) {
+                return;
+            } else {
+                System.out.println("Command not found");
+            }
 
-                System.out.flush();
+            System.out.flush();
         } while (true);
     }
 }

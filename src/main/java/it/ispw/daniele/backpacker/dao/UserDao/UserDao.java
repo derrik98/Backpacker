@@ -79,9 +79,9 @@ public class UserDao extends UserDaoFactory {
                     return l;
                 }
             } finally {
-
-                if (stm != null)
-                    stm.close();
+                DatabaseUserConnection.closeUserConnection(conn);
+//                if (stm != null)
+//                    stm.close();
             }
         });
 

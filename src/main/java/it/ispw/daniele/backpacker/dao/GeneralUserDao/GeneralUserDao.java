@@ -38,6 +38,7 @@ public class GeneralUserDao extends GeneralUserDaoFactory {
                 }
             }
 
+            DatabaseLoginConnection.closeLoginConnection(conn);
             return generalUser;
         });
     }

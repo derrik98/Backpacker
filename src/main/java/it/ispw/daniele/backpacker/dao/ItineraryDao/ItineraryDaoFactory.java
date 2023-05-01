@@ -50,13 +50,14 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
 
     private void manageParticipation(String username, int id, String operation) {
         this.execute((DaoAction<Void>) () -> {
-            Connection conn;
-            PreparedStatement stm = null;
+
+            Connection conn = DatabaseUserConnection.getUserConnection();;
+            PreparedStatement stm;
             String sql = null;
 
             //Save on Database
+
             try {
-                conn = DatabaseUserConnection.getUserConnection();
                 if (operation.equals(ADD_PART)) {
                     sql = "call backpacker.add_participation(?, ?);\r\n";
                 } else if (operation.equals(REMOVE_PART)) {
@@ -67,10 +68,9 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
                 stm.setInt(2, id);
                 stm.executeUpdate();
             } finally {
-                if (stm != null)
-                    stm.close();
+                DatabaseUserConnection.closeUserConnection(conn);
             }
-            DatabaseUserConnection.closeUserConnection(conn);
+           // DatabaseUserConnection.closeUserConnection(conn);
 
 
             //Save on File System
@@ -129,9 +129,9 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
         return (this.execute(() -> {
 
             //Save on Database
-            Connection con = DatabaseTouristGuideConnection.getTouristGuideConnection();
+            Connection conn = DatabaseTouristGuideConnection.getTouristGuideConnection();
             String sql = "call backpacker.add_itinerary(?, ?, ?, ?, ?, ?, ?);\r\n";
-            try (PreparedStatement stm = con.prepareStatement(sql)) {
+            try (PreparedStatement stm = conn.prepareStatement(sql)) {
 
                 java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 
@@ -144,6 +144,8 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
                 stm.setString(7, steps);
                 stm.executeUpdate();
 
+            }finally {
+                DatabaseTouristGuideConnection.closeTouristGuideConnection(conn);
             }
 
 
@@ -193,14 +195,16 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
         this.execute(() -> {
 
             //Save on Database
-            Connection con = DatabaseUserConnection.getUserConnection();
+            Connection conn = DatabaseUserConnection.getUserConnection();
             String sql = "call backpacker.save_itinerary(?, ?);\r\n";
 
-            try (PreparedStatement stm = con.prepareStatement(sql)) {
+            try (PreparedStatement stm = conn.prepareStatement(sql)) {
                 stm.setString(1, username);
                 stm.setString(2, itinerary);
                 stm.executeUpdate();
 
+            }finally {
+                DatabaseUserConnection.closeUserConnection(conn);
             }
 
             //Save on File System
@@ -241,13 +245,15 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
         this.execute(() -> {
 
             //Remove from Database
-            Connection con = DatabaseUserConnection.getUserConnection();
+            Connection conn = DatabaseUserConnection.getUserConnection();
             String sql = "call backpacker.remove_itinerary(?, ?);\r\n";
 
-            try (PreparedStatement stm = con.prepareStatement(sql)) {
+            try (PreparedStatement stm = conn.prepareStatement(sql)) {
                 stm.setString(1, username);
                 stm.setString(2, steps);
                 stm.executeUpdate();
+            }finally {
+                DatabaseUserConnection.closeUserConnection(conn);
             }
 
             //Remove from File System

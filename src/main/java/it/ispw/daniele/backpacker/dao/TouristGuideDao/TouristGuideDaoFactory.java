@@ -23,7 +23,7 @@ public  abstract class TouristGuideDaoFactory extends DaoTemplate {
     protected static final String SEARCH_T_GUIDE = "search_t_guide";
 
     protected final String path_tourist_guide = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/tourist_guide.json";
-    private final String path_general_user = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/general_user.json";
+    protected final String path_general_user = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/general_user.json";
 
 
     public Boolean createTouristGuide(String username, String name, String surname,
@@ -31,14 +31,14 @@ public  abstract class TouristGuideDaoFactory extends DaoTemplate {
         return (this.execute(() -> {
 
             //Save on Database
-            Connection con = DatabaseLoginConnection.getLoginConnection();
+            Connection conn = DatabaseLoginConnection.getLoginConnection();
 
-            if(con == null){
+            if(conn == null){
                 return false;
             }
 
             String sql = "call backpacker.add_tourist_guide(?, ?, ?, ?, ?, ?, ?);\r\n";
-            try (PreparedStatement stm = con.prepareStatement(sql)) {
+            try (PreparedStatement stm = conn.prepareStatement(sql)) {
                 stm.setString(1, username);
                 stm.setString(2, name);
                 stm.setString(3, surname);
@@ -47,6 +47,8 @@ public  abstract class TouristGuideDaoFactory extends DaoTemplate {
                 stm.setString(6, profilePicture);
                 stm.setString(7, identificationCode);
                 stm.executeUpdate();
+            }finally {
+                DatabaseLoginConnection.closeLoginConnection(conn);
             }
 
 
