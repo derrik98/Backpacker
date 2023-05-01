@@ -24,11 +24,9 @@ public class CliSignUpController extends InterfaceController {
 
     private File imageFile = null;
 
-    public void init() {
+    public void init(Scanner scan) {
 
         System.out.print("\033[H\033[2J");
-
-        Scanner scan = new Scanner(System.in);
 
         LoginController lc = new LoginController();
 
@@ -102,13 +100,7 @@ public class CliSignUpController extends InterfaceController {
 
         if (userType.equals(Roles.USER.name())){
             UserBean ub = this.setUserBean(username, name, surname, email, password, newFileName);
-            /*UserBean ub = new UserBean();
-            ub.setUsername(username);
-            ub.setName(name);
-            ub.setSurname(surname);
-            ub.setEmail(email);
-            ub.setPassword(password);
-            ub.setProfilePicture(newFileName);*/
+
             try {
                 regResult = lc.createUser(ub, "cli");
             } catch (EmptyFieldException | GenericException | SQLException exception) {
@@ -124,14 +116,6 @@ public class CliSignUpController extends InterfaceController {
 
             TouristGuideBean tgb = this.setTouristGuideBean(username, name, surname, email, password, newFileName, VATNumb);
 
-            /*TouristGuideBean tgb = new TouristGuideBean();
-            tgb.setUsername(username);
-            tgb.setName(name);
-            tgb.setSurname(surname);
-            tgb.setEmail(email);
-            tgb.setPassword(password);
-            tgb.setProfilePicture(newFileName);
-            tgb.setIdentificationCode(VATNumb);*/
             regResult = lc.createTouristGuide(tgb, "cli");
         }
 

@@ -153,7 +153,7 @@ public class ItineraryDao extends ItineraryDaoFactory {
 
     public List<Itinerary> getBookedItineraries(String input) {
         List<Itinerary> ret = this.execute(() -> {
-            Connection conn = null;
+            Connection conn;
             List<Itinerary> itinerary;
             String sql;
 

@@ -15,6 +15,7 @@ public class CliLoginController {
     public void init() {
 
         Scanner scan = new Scanner(System.in);
+        String input;
 
         do {
             System.out.print("\033[H\033[2J");
@@ -27,37 +28,39 @@ public class CliLoginController {
 
             System.out.println("Command: ");
 
-            switch (scan.nextLine()) {
-                case "0" -> {
-                    this.login(scan);
-                }
+            input = scan.next();
+
+            switch (input) {
+                case "0" -> this.login();
                 case "1" -> {
                     CliSignUpController signUpController = new CliSignUpController();
-                    signUpController.init();
+                    signUpController.init(scan);
                 }
-                case "quit" -> {
+                /*case "quit" -> {
                     System.out.println(RED + "CLOSE APPLICATION" + RESET);
-                    scan.close();
+                    //scan.close();
                     return;
-                }
-                default -> System.out.println(RED + "Command not found\n" + RESET);
+                }*/
+                default ->
+                        System.out.println(RED + "CLOSE APPLICATION" + RESET);//System.out.println(RED + "COMMAND NOT FOUND\n" + RESET);
             }
 
-            //System.out.flush();
+        } while(!input.equals("quit"));
 
-        } while(true);
+        //System.out.println(RED + "CLOSE APPLICATION" + RESET);
+        scan.close();
     }
 
-    private void login(Scanner scan) {
+    private void login() {
+        Scanner scan = new Scanner(System.in);
+
         System.out.print("\033[H\033[2J");
 
         System.out.println("Username:");
-        String username = scan.nextLine();
-        System.out.flush();
+        String username = scan.next();
 
         System.out.println("Password:");
-        String password = scan.nextLine();
-        System.out.flush();
+        String password = scan.next();
 
         GeneralUserBean gub = new GeneralUserBean();
         gub.setUsername(username);
@@ -68,7 +71,7 @@ public class CliLoginController {
         try {
             gu = controller.login(gub, "cli");
             if (gu == null) {
-                System.out.println(RED + "LOGIN FAILED!" + RESET);
+                System.out.println(RED + "LOGIN FAILED" + RESET);
             } else {
                 String role = gu.getRole();
 
@@ -85,5 +88,8 @@ public class CliLoginController {
         }catch (EmptyFieldException e) {
             System.out.println("\n" + RED + e.getMessage() + RESET + "\n");
         }
+
+        scan.close();
     }
+
 }

@@ -15,6 +15,7 @@ public class CliMenuUserController {
 
     private final Scanner scanner = new Scanner(System.in);
 
+
     public void init() throws AddressNotFoundException, IOException, CityNotFoundException, MonumentNotFoundException {
 
         CliUserGraphicChange ugc = CliUserGraphicChange.getInstance();
@@ -34,7 +35,6 @@ public class CliMenuUserController {
                 case "0" -> {
                     CliHomeController homeController = new CliHomeController();
                     homeController.init(scanner);
-                    System.out.flush();
                 }
                 case "1" -> {
                     CliUserDetailsController cliUserDetailsController = new CliUserDetailsController();

@@ -30,7 +30,8 @@ public class CliAddItineraryController extends InterfaceController {
 
             System.out.println("step -> " + i);
 
-            String input = scanner.nextLine();
+            String input = scanner.next();
+            //System.out.flush();
 
             if(input.equals("share")){
                 this.share();
@@ -45,37 +46,39 @@ public class CliAddItineraryController extends InterfaceController {
 
     private void share() {
 
-        for (String step : this.listView) {
-            if (!step.equals("")) {
-                this.steps = this.steps.concat(step + "-");
+        for(int i = 0; i < this.listView.size(); i++){
+        //for (String step : this.listView) {
+            if(!this.listView.get(i).equals("")){
+           // if (!step.equals("")) {
+                this.steps = this.steps.concat(this.listView.get(i) + "-");
             }
         }
 
         System.out.println("Itinerary details:\n");
 
         System.out.println("Location:");
-        String location = scanner.nextLine();
-        System.out.flush();
+        String location = scanner.next();
+        //System.out.flush();
 
         System.out.println("Date: format[YYYY/MM/DD]");
-        String date = scanner.nextLine().replace("/", "-");
-        System.out.flush();
+        String date = scanner.next().replace("/", "-");
+        //System.out.flush();
 
         System.out.println("Time:");
-        String time = scanner.nextLine();
-        System.out.flush();
+        String time = scanner.next();
+        //System.out.flush();
 
         System.out.println("Participants:");
-        int participants = scanner.nextInt();
-        System.out.flush();
+        String participants = scanner.next();
+        //System.out.flush();
 
         System.out.println("Price:");
-        int price = scanner.nextInt();
-        System.out.flush();
+        String price = scanner.next();
+        //System.out.flush();
 
         boolean result;
 
-        ItineraryBean itineraryBean = this.setItineraryBean(this.guideBean.getUsername(), location, date, time, participants, price, this.steps);
+        ItineraryBean itineraryBean = this.setItineraryBean(this.guideBean.getUsername(), location, date, time, Integer.parseInt(participants), Integer.parseInt(price), this.steps);
 //        itineraryBean.setGuideId(this.guideBean.getUsername());
 //        itineraryBean.setDate(date);
 //        itineraryBean.setLocation(location);

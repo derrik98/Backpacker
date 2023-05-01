@@ -1,6 +1,5 @@
 {
   "itinerary": [
-
     {
       "date": "Tue Dec 12 00:00:00 CET 2023",
       "guide_id": "cf",
@@ -10,6 +9,26 @@
       "time": "10",
       "steps": "qw-qw-qw-",
       "participants": "23"
+    },
+    {
+      "date": "Tue Dec 12 00:00:00 CET 2023",
+      "guide_id": "cf",
+      "price": "13",
+      "location": "roma",
+      "id": "2",
+      "time": "10",
+      "steps": "fr-fr-fr-",
+      "participants": "13"
+    },
+    {
+      "date": "Tue Dec 12 00:00:00 CET 2023",
+      "guide_id": "cf",
+      "price": "15",
+      "location": "roma",
+      "id": "3",
+      "time": "10",
+      "steps": "de-de-",
+      "participants": "15"
     }
   ]
 }

@@ -37,7 +37,7 @@ public class CliItineraryDetailsController {
 
         System.out.print("\033[H\033[2J");
         System.out.println(BOLD + "ITINERARY DETAILS PAGE\n" + RESET);
-        System.out.flush();
+        //System.out.flush();
 
         System.out.println("Itinerary id: " + itineraryBean.getItineraryId());
 

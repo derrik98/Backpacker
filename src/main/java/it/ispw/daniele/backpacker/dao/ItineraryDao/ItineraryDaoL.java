@@ -1,7 +1,6 @@
 package it.ispw.daniele.backpacker.dao.ItineraryDao;
 
 import it.ispw.daniele.backpacker.entity.Itinerary;
-import it.ispw.daniele.backpacker.exceptions.GenericException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -10,6 +9,7 @@ import org.json.simple.parser.ParseException;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -21,7 +21,7 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
     public List<Itinerary> getItinerary(String city) {
         List<Itinerary> ret = this.execute(() -> {
 
-            List<Itinerary> itineraryList = null;
+            List<Itinerary> itineraryList = new ArrayList<>();
 
             JSONParser parser = new JSONParser();
 
@@ -37,20 +37,22 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
 
                     JSONObject object = (JSONObject) arr.get(index);
 
-                    if (object.get("location").equals(city)) {
+                    if (String.valueOf(object.get("location")).equals(city)) {
 
                         System.out.println(object.get(ID));
 
-                        int id = (int) object.get(ID);
-                        String guideId = (String) object.get(GUIDE_ID);
-                        String location = (String) object.get(LOCATION);
-                        String date = (String) object.get(DATE);
-                        String time = (String) object.get(TIME);
-                        int participants = (int) object.get(PARTICIPANTS);
-                        int price = (int) object.get(PRICE);
-                        String steps = (String) object.get(STEPS);
+                        String id = String.valueOf(object.get(ID));
+                        String guideId = String.valueOf(object.get(GUIDE_ID));
+                        String location = String.valueOf(object.get(LOCATION));
+                        String date = String.valueOf(object.get(DATE));
+                        String time = String.valueOf(object.get(TIME));
+                        String participants = String.valueOf(object.get(PARTICIPANTS));
+                        String price = String.valueOf(object.get(PRICE));
+                        String steps = String.valueOf(object.get(STEPS));
 
-                        Itinerary itinerary = new Itinerary(id, guideId, location, date, time, participants, price, steps);
+
+                        Itinerary itinerary = new Itinerary(Integer.parseInt(id), guideId, location, date, time, Integer.parseInt(participants),
+                                Integer.parseInt(price), steps);
 
                         itineraryList.add(itinerary);
 
