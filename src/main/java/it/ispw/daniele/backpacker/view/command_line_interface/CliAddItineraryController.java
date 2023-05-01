@@ -47,7 +47,7 @@ public class CliAddItineraryController extends InterfaceController {
 
         for (String step : this.listView) {
             if (!step.equals("")) {
-                this.steps = this.steps.concat(step + "/");
+                this.steps = this.steps.concat(step + "-");
             }
         }
 
@@ -66,16 +66,16 @@ public class CliAddItineraryController extends InterfaceController {
         System.out.flush();
 
         System.out.println("Participants:");
-        String participants = scanner.nextLine();
+        int participants = scanner.nextInt();
         System.out.flush();
 
         System.out.println("Price:");
-        String price = scanner.nextLine();
+        int price = scanner.nextInt();
         System.out.flush();
 
         boolean result;
 
-        ItineraryBean itineraryBean = this.setItineraryBean(this.guideBean.getUsername(), location, date, time, Integer.parseInt(participants), Integer.parseInt(price), this.steps);
+        ItineraryBean itineraryBean = this.setItineraryBean(this.guideBean.getUsername(), location, date, time, participants, price, this.steps);
 //        itineraryBean.setGuideId(this.guideBean.getUsername());
 //        itineraryBean.setDate(date);
 //        itineraryBean.setLocation(location);

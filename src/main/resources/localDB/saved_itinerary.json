@@ -1,1 +1,99 @@
-{"saved_itinerary":[{"id":"1","steps":"colosseo\/via del corso\/pantheon\/colosseo\/via del corso\/pantheon\/","username":"cf"},{"id":"2","steps":"Statua Equestre di Vittorio Emanuele II\/Monumento a Goethe\/Altare della Patria\/Sacrario delle Bandiere delle Forze ArmateAltare della Patria\/Cordonata Capitolina","username":"cf"},{"id":"3","steps":"Colonna di Marco Aurelio\/Scalinata di Trinità dei Monti\/Monumento al Bersagliere\/Statue dei DioscuriStatue dei Dioscuri\/Piazza di San Silvestro","username":"cf"},{"id":"4","steps":"Rampa Imperiale di Domiziano\/Obelisco della Minerva\/Statua Equestre di Vittorio Emanuele II\/Palazzo Ricci-Sacchetti\/Piazza di San Silvestro\/Sacrario delle Bandiere delle Forze Armate","username":"cf"},{"id":"5","steps":"Colonna di Marco Aurelio\/Galleria Doria Pamphilj\/Statua Equestre di Vittorio Emanuele II\/Monumento a Quintino Sella\/Terrazza delle QuadrigheColonna di Marco Aurelio","username":"cf"},{"id":"6","steps":"Altare della Patria\/Monumento a Quintino Sella\/Cordonata Capitolina\/Pantheon\/Monumento al Bersagliere\/Monumento celebrativo del \"Bicentenario dei Carabinieri\"","username":"cf"},{"id":"7","steps":"colosseo\/via del corso\/pantheon\/colosseo\/via del corso\/pantheon\/","username":"za"},{"id":"8","steps":"Pantheon\/Statue dei Dioscuri\/Scalinata di Trinità dei Monti\/Piazza di San Silvestro\/Basilica dei Santi Ambrogio e Carlo al CorsoPantheon","username":"za"},{"id":"9","steps":"Monumento a Quintino Sella\/Monumento al Bersagliere\/Monumento a Goethe\/Rampa Imperiale di Domiziano\/Basilica dei Santi Ambrogio e Carlo al Corso\/Pantheon","username":"za"},{"id":"10","steps":"Altare della Patria\/Sacrario delle Bandiere delle Forze Armate\/Scalinata di Trinità dei Monti\/Statua Equestre di Vittorio Emanuele II\/Monumento celebrativo del \"Bicentenario dei Carabinieri\"Altare della Patria","username":"za"}]}
+{
+  "saved_itinerary": [
+    {
+      "id": "1",
+      "steps": "colosseo-via del corso-pantheon-colosseo-via del corso-pantheon-",
+      "username": "cf"
+    },
+    {
+      "id": "2",
+      "steps": "Statua Equestre di Vittorio Emanuele II\/Monumento a Goethe\/Altare della Patria\/Sacrario delle Bandiere delle Forze ArmateAltare della Patria\/Cordonata Capitolina",
+      "username": "cf"
+    },
+    {
+      "id": "3",
+      "steps": "Colonna di Marco Aurelio\/Scalinata di Trinità dei Monti\/Monumento al Bersagliere\/Statue dei DioscuriStatue dei Dioscuri\/Piazza di San Silvestro",
+      "username": "cf"
+    },
+    {
+      "id": "4",
+      "steps": "Rampa Imperiale di Domiziano\/Obelisco della Minerva\/Statua Equestre di Vittorio Emanuele II\/Palazzo Ricci-Sacchetti\/Piazza di San Silvestro\/Sacrario delle Bandiere delle Forze Armate",
+      "username": "cf"
+    },
+    {
+      "id": "5",
+      "steps": "Colonna di Marco Aurelio\/Galleria Doria Pamphilj\/Statua Equestre di Vittorio Emanuele II\/Monumento a Quintino Sella\/Terrazza delle QuadrigheColonna di Marco Aurelio",
+      "username": "cf"
+    },
+    {
+      "id": "6",
+      "steps": "Altare della Patria\/Monumento a Quintino Sella\/Cordonata Capitolina\/Pantheon\/Monumento al Bersagliere\/Monumento celebrativo del \"Bicentenario dei Carabinieri\"",
+      "username": "cf"
+    },
+    {
+      "id": "7",
+      "steps": "colosseo\/via del corso\/pantheon\/colosseo\/via del corso\/pantheon\/",
+      "username": "za"
+    },
+    {
+      "id": "8",
+      "steps": "Pantheon\/Statue dei Dioscuri\/Scalinata di Trinità dei Monti\/Piazza di San Silvestro\/Basilica dei Santi Ambrogio e Carlo al CorsoPantheon",
+      "username": "za"
+    },
+    {
+      "id": "9",
+      "steps": "Monumento a Quintino Sella\/Monumento al Bersagliere\/Monumento a Goethe\/Rampa Imperiale di Domiziano\/Basilica dei Santi Ambrogio e Carlo al Corso\/Pantheon",
+      "username": "za"
+    },
+    {
+      "id": "10",
+      "steps": "Altare della Patria\/Sacrario delle Bandiere delle Forze Armate\/Scalinata di Trinità dei Monti\/Statua Equestre di Vittorio Emanuele II\/Monumento celebrativo del \"Bicentenario dei Carabinieri\"Altare della Patria",
+      "username": "za"
+    },
+    {
+      "id": "11",
+      "steps": "PantheonPantheon\/Palazzo Ricci-Sacchetti\/Rampa Imperiale di Domiziano\/Galleria Doria PamphiljPalazzo Ricci-Sacchetti",
+      "username": "cf"
+    },
+    {
+      "id": "12",
+      "steps": "Terrazza delle Quadrighe\/Obelisco della Minerva\/Basilica dei Santi Ambrogio e Carlo al Corso\/Sacrario delle Bandiere delle Forze Armate\/Galleria Doria Pamphilj\/Scalinata di Trinità dei Monti",
+      "username": "cf"
+    },
+    {
+      "id": "13",
+      "steps": "colosseo-via del corso-pantheon-colosseo-via del corso-pantheon-",
+      "username": "cf"
+    },
+    {
+      "id": "14",
+      "steps": "vg-vg-vg-vg-",
+      "username": "cf"
+    },
+    {
+      "id": "15",
+      "steps": "vg-vg-vg-vg-",
+      "username": "cf"
+    },
+    {
+      "id": "16",
+      "steps": "mk-km-mk-",
+      "username": "cf"
+    },
+    {
+      "id": "17",
+      "steps": "nj-nj-nj-nj-",
+      "username": "cf"
+    },
+    {
+      "id": "18",
+      "steps": "nj-nj-nj-nj-",
+      "username": "cf"
+    },
+    {
+      "id": "19",
+      "steps": "za-za-za-",
+      "username": "cf"
+    }
+  ]
+}

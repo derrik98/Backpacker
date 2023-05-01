@@ -39,6 +39,8 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
 
                     if (object.get("location").equals(city)) {
 
+                        System.out.println(object.get(ID));
+
                         int id = (int) object.get(ID);
                         String guideId = (String) object.get(GUIDE_ID);
                         String location = (String) object.get(LOCATION);

@@ -3,7 +3,6 @@ package it.ispw.daniele.backpacker.dao.ItineraryDao;
 import it.ispw.daniele.backpacker.dao.DaoAction;
 import it.ispw.daniele.backpacker.dao.DaoTemplate;
 import it.ispw.daniele.backpacker.entity.Itinerary;
-import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.utils.DatabaseTouristGuideConnection;
 import it.ispw.daniele.backpacker.utils.DatabaseUserConnection;
 import org.json.simple.JSONArray;
@@ -28,7 +27,6 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
     protected final String path_goes_to = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/goes_to.json";
     protected final String path_itinerary = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/itinerary.json";
     protected final String path_saved_itinerary = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/saved_itinerary.json";
-
     protected final String ID = "id";
     protected final String LOCATION = "location";
     protected final String GUIDE_ID = "guideId";
@@ -51,12 +49,11 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
     private void manageParticipation(String username, int id, String operation) {
         this.execute((DaoAction<Void>) () -> {
 
-            Connection conn = DatabaseUserConnection.getUserConnection();;
+            Connection conn = DatabaseUserConnection.getUserConnection();
             PreparedStatement stm;
             String sql = null;
 
             //Save on Database
-
             try {
                 if (operation.equals(ADD_PART)) {
                     sql = "call backpacker.add_participation(?, ?);\r\n";
@@ -70,13 +67,11 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
             } finally {
                 DatabaseUserConnection.closeUserConnection(conn);
             }
-           // DatabaseUserConnection.closeUserConnection(conn);
-
 
             //Save on File System
             try {
-                JSONParser parser = new JSONParser();
 
+                JSONParser parser = new JSONParser();
                 FileReader fileReader = new FileReader(path_goes_to);
 
                 JSONObject o = (JSONObject) parser.parse(fileReader);
@@ -265,15 +260,24 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
                 JSONObject o = (JSONObject) parser.parse(fileReader);
                 JSONArray arr = (JSONArray) o.get("saved_itinerary");
 
+                System.out.println(username + " " + steps);
                 for (int index = 0; index < arr.size(); index++) {
 
                     JSONObject object = (JSONObject) arr.get(index);
 
                     if (object.get("username").equals(username) && object.get("steps").equals(steps)) {
-
+                        System.out.println(object.get("username") + " " + object.get("steps"));
+                        System.out.println(object);
                         arr.remove(object);
-                    }
 
+                        try (FileWriter file = new FileWriter(path_saved_itinerary)) {
+                            file.write(o.toString());
+                            System.out.println("Successfully updated json object to file...!!");
+                            return true;
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
                 }
             } catch (IOException | ParseException e) {
                 throw new RuntimeException(e);

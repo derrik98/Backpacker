@@ -43,7 +43,7 @@ public class CliLoginController {
                 default -> System.out.println(RED + "Command not found\n" + RESET);
             }
 
-            System.out.flush();
+            //System.out.flush();
 
         } while(true);
     }
