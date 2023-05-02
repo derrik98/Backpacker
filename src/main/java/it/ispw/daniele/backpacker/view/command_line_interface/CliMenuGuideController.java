@@ -13,9 +13,7 @@ import static it.ispw.daniele.backpacker.view.command_line_interface.CLI.RESET;
 
 public class CliMenuGuideController {
 
-    public void init() throws AddressNotFoundException, IOException, CityNotFoundException, MonumentNotFoundException {
-
-        Scanner scanner = new Scanner(System.in);
+    public void init(Scanner scanner) throws AddressNotFoundException, IOException, CityNotFoundException, MonumentNotFoundException {
 
         CliTouristGuideGraphicChange touristGuideGraphicChange = CliTouristGuideGraphicChange.getInstance();
 
@@ -47,11 +45,14 @@ public class CliMenuGuideController {
                 case "3" -> {
                     System.out.println(RED + "LOGOUT" + RESET);
                     SessionUser.getInstance().closeSession();
-                    touristGuideGraphicChange.switchToLogin(scanner);
+                    touristGuideGraphicChange.switchToLogin();
                     return;
                 }
                 default -> System.out.println(RED + "Command not found\n" + RESET);
             }
-        } while (true);
+
+            System.out.flush();
+
+        } while (scanner.hasNext());
     }
 }

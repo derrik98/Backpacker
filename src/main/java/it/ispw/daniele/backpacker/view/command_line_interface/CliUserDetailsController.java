@@ -19,8 +19,6 @@ import static it.ispw.daniele.backpacker.view.command_line_interface.CLI.RESET;
 public class CliUserDetailsController extends Controller {
 
     private UserBean getSearchUser(String caller) {
-//        UserDaoL ud = new UserDaoL();
-//        List<User> l = ud.getSearchUser(caller);
 
         UserDaoFactory ud = new UserDaoL();
         List<User> l = ud.getSearchUser(caller);
@@ -29,6 +27,7 @@ public class CliUserDetailsController extends Controller {
 
     public void init() {
 
+        Scanner scanner = new Scanner(System.in);
         UserBean users = this.getSearchUser(SessionUser.getInstance().getSession().getUsername());
 
         do {
@@ -69,7 +68,6 @@ public class CliUserDetailsController extends Controller {
             }
 
             System.out.println("\nGo Back [press 'b']: ");
-            Scanner scanner = new Scanner(System.in);
 
             if (scanner.nextLine().equals("b")) {
                 return;
@@ -78,6 +76,7 @@ public class CliUserDetailsController extends Controller {
             }
 
             System.out.flush();
-        } while (true);
+
+        } while (scanner.hasNext());
     }
 }

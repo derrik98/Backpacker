@@ -1,6 +1,8 @@
 package it.ispw.daniele.backpacker.view.command_line_interface;
 
 
+import java.util.Scanner;
+
 public class CLI {
 
     public static final String RESET = "\033[0m";  // TEXT RESET
@@ -10,6 +12,7 @@ public class CLI {
     public static final String BOLD = "\033[0;1m"; // TEXT BOLD
 
     public static void main(String[] args) {
+
 
         CliLoginController cliLoginController = new CliLoginController();
         cliLoginController.init();

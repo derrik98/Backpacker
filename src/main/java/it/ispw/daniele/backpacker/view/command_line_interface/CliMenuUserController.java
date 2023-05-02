@@ -13,10 +13,8 @@ import static it.ispw.daniele.backpacker.view.command_line_interface.CLI.RESET;
 
 public class CliMenuUserController {
 
-    private final Scanner scanner = new Scanner(System.in);
+    public void init(Scanner scanner) throws AddressNotFoundException, IOException, CityNotFoundException, MonumentNotFoundException {
 
-
-    public void init() throws AddressNotFoundException, IOException, CityNotFoundException, MonumentNotFoundException {
 
         CliUserGraphicChange ugc = CliUserGraphicChange.getInstance();
 
@@ -24,7 +22,7 @@ public class CliMenuUserController {
             System.out.print("\033[H\033[2J");
             System.out.println("MENU'------------------------------UNDO [u]--");
             System.out.println("---------------------------------------------");
-            System.out.println("----------------Home [0]---------------------");
+            System.out.println("----------------Search [0]-------------------");
             System.out.println("----------------Profile [1]------------------");
             System.out.println("----------------Logout [2]-------------------");
             System.out.println("---------------------------------------------");
@@ -32,24 +30,17 @@ public class CliMenuUserController {
             System.out.println("Command: ");
 
             switch (scanner.nextLine()) {
-                case "0" -> {
-                    CliHomeController homeController = new CliHomeController();
-                    homeController.init(scanner);
-                }
-                case "1" -> {
-                    CliUserDetailsController cliUserDetailsController = new CliUserDetailsController();
-                    cliUserDetailsController.init();
-                }
+                case "0" -> ugc.switchToHome(scanner);
+                case "1" -> ugc.switchToUserDetails();
                 case "2" -> {
                     System.out.println(RED + "LOGOUT" + RESET);
                     SessionUser.getInstance().closeSession();
-                    ugc.switchToLogin(scanner);
                     return;
                 }
-                case "u" ->{
-
+                case "u" -> {
+                    return;
                 }
-                default -> System.out.println(RED + "Command not found\n" + RESET);
+                default -> System.out.println(RED + "COMMAND NOT FOUND\n" + RESET);
             }
 
             System.out.flush();

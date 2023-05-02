@@ -14,12 +14,11 @@ public class CliLoginController {
 
     public void init() {
 
-        Scanner scan = new Scanner(System.in);
-        String input;
+        Scanner scanner = new Scanner(System.in);
 
         do {
             System.out.print("\033[H\033[2J");
-            System.out.println("----------------------------------EXIT [quit]");
+            System.out.println("----------------------------------EXIT [2]---");
             System.out.println("---------------------------------------------");
             System.out.println("----------------LOGIN [0]--------------------");
             System.out.println("----------------SIGNUP [1]-------------------");
@@ -28,39 +27,36 @@ public class CliLoginController {
 
             System.out.println("Command: ");
 
-            input = scan.next();
-
-            switch (input) {
-                case "0" -> this.login();
+            switch (scanner.nextLine()) {
+                case "0" -> this.login(scanner);
                 case "1" -> {
                     CliSignUpController signUpController = new CliSignUpController();
-                    signUpController.init(scan);
+                    signUpController.init(scanner);
                 }
-                /*case "quit" -> {
+                case "2" -> {
                     System.out.println(RED + "CLOSE APPLICATION" + RESET);
-                    //scan.close();
+                    scanner.close();
                     return;
-                }*/
-                default ->
-                        System.out.println(RED + "CLOSE APPLICATION" + RESET);//System.out.println(RED + "COMMAND NOT FOUND\n" + RESET);
+                }
+                default -> System.out.println(RED + "COMMAND NOT FOUND\n" + RESET);
+
             }
 
-        } while(!input.equals("quit"));
+            System.out.flush();
 
-        //System.out.println(RED + "CLOSE APPLICATION" + RESET);
-        scan.close();
+        } while (true);
+
     }
 
-    private void login() {
-        Scanner scan = new Scanner(System.in);
+    private void login(Scanner scanner) {
 
         System.out.print("\033[H\033[2J");
 
         System.out.println("Username:");
-        String username = scan.next();
+        String username = scanner.nextLine();
 
         System.out.println("Password:");
-        String password = scan.next();
+        String password = scanner.nextLine();
 
         GeneralUserBean gub = new GeneralUserBean();
         gub.setUsername(username);
@@ -80,16 +76,13 @@ public class CliLoginController {
                 su.setSession(gu);
 
                 switch (role) {
-                    case "user" -> CliUserGraphicChange.getInstance().menuBar();
-                    case "tourist_guide" -> CliTouristGuideGraphicChange.getInstance().menuBar();
+                    case "user" -> CliUserGraphicChange.getInstance().menuBar(scanner);
+                    case "tourist_guide" -> CliTouristGuideGraphicChange.getInstance().menuBar(scanner);
                 }
             }
 
-        }catch (EmptyFieldException e) {
+        } catch (EmptyFieldException e) {
             System.out.println("\n" + RED + e.getMessage() + RESET + "\n");
         }
-
-        scan.close();
     }
-
 }

@@ -29,6 +29,24 @@
       "role": "user",
       "email": "danielederrico98@gmail.com",
       "username": "derrik98"
+    },
+    {
+      "password": "gt",
+      "role": "user",
+      "email": "gt",
+      "username": "gt"
+    },
+    {
+      "password": "mj",
+      "role": "user",
+      "email": "mj",
+      "username": "mj"
+    },
+    {
+      "password": "sim",
+      "role": "user",
+      "email": "sim",
+      "username": "sim"
     }
   ]
 }

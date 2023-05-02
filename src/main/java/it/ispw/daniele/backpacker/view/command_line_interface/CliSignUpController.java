@@ -150,6 +150,6 @@ public class CliSignUpController extends InterfaceController {
         this.imageFile = null;
         ProfilePicture = "";
 
-        scan.close();
+        //scan.close();
     }
 }
