@@ -19,31 +19,21 @@ public class CliHomeController extends InterfaceController {
 
         System.out.print("\033[H\033[2J");
         System.out.println(BOLD + "SEARCH PAGE\n" + RESET);
-        System.out.flush();
 
         System.out.println("Country:");
         String country = scanner.nextLine();
-        System.out.flush();
 
         System.out.println("City:");
         String city = scanner.nextLine();
-        System.out.flush();
-
 
         System.out.println("Address:");
         String address = scanner.nextLine();
-        System.out.flush();
-
 
         System.out.println("Restaurant: [Y or N]");
         String restaurant = scanner.nextLine();
-        System.out.flush();
-
 
         System.out.println("Range:");
         String range = scanner.nextLine();
-        System.out.flush();
-
 
         HomeBean homeBean = this.setHomeBean(country, city, address, restaurant, range);
 
@@ -51,6 +41,7 @@ public class CliHomeController extends InterfaceController {
             if (country.equals("") || city.equals("") || address.equals("")) {
                 throw new FileNotFoundException("ERROR");
             }
+
             SearchController sc = new SearchController();
             sc.checkInput(homeBean);
 

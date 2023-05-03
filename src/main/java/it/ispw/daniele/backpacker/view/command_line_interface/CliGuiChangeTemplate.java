@@ -38,13 +38,6 @@ public abstract class CliGuiChangeTemplate {
         });
     }
 
-    public  void switchToUserDetails(){
-        this.catcher(() -> {
-            CliUserDetailsController cliUserDetailsController = new CliUserDetailsController();
-            cliUserDetailsController.init();
-        });
-    }
-
     public  void switchToResult(HomeBean homeBean){
         this.catcher(() -> {
             CliResultController crc = new CliResultController();

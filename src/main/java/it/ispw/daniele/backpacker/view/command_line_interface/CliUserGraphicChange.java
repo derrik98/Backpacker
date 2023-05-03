@@ -26,6 +26,13 @@ public class CliUserGraphicChange extends CliGuiChangeTemplate{
         });
     }
 
+    public  void switchToUserDetails(){
+        this.catcher(() -> {
+            CliUserDetailsController cliUserDetailsController = new CliUserDetailsController();
+            cliUserDetailsController.init();
+        });
+    }
+
 //    public void switchToResult(String country, String city, String address, String restaurant, String range) {
 //        // Do nothing.
 //    }

@@ -35,6 +35,7 @@ public class CliMenuUserController {
                 case "2" -> {
                     System.out.println(RED + "LOGOUT" + RESET);
                     SessionUser.getInstance().closeSession();
+                    ugc.switchToLogin();
                     return;
                 }
                 case "u" -> {
@@ -42,8 +43,6 @@ public class CliMenuUserController {
                 }
                 default -> System.out.println(RED + "COMMAND NOT FOUND\n" + RESET);
             }
-
-            System.out.flush();
 
         } while (true);
     }

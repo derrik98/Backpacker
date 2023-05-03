@@ -62,7 +62,7 @@ public abstract class GUIChangeTemplate{
         });
     }
 
-    public void switchToItineraryDetails(Scene scene, ItineraryBean itineraryBean){
+    /*public void switchToItineraryDetails(Scene scene, ItineraryBean itineraryBean){
         this.catcher(() -> {
             FXMLLoader loader = new FXMLLoader();
             FileInputStream fileInputStream;
@@ -81,7 +81,7 @@ public abstract class GUIChangeTemplate{
             stackPaneResult.getChildren().add(fxmlLoader);
             stackPaneResult.getChildren().get(0).setDisable(true);// OOOOOOOOO
         });
-    }
+    }*/
 
     public void menuBar (HBox pos, String sel){
         this.catcher(() -> {

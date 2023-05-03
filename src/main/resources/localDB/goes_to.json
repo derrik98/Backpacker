@@ -1,19 +1,5 @@
 {
   "goes_to": [
-    {
-      "with_guide": "true",
-      "itinerary_id": "1",
-      "username": "cf"
-    },
-    {
-      "with_guide": "true",
-      "itinerary_id": "1",
-      "username": "cf"
-    },
-    {
-      "itinerary_id": "2",
-      "with_guide": "true",
-      "username": "cd"
-    }
+
   ]
 }

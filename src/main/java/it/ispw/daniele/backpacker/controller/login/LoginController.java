@@ -55,10 +55,7 @@ public class LoginController {
     }
 
     public boolean createUser(UserBean ub, String view) throws EmptyFieldException, GenericException, SQLException {
-//        UserDao ud = new UserDao();
-//        UserDaoL udl = new UserDaoL();
-//        ud.createUser(ub.getUsername(), ub.getName(), ub.getSurname(), ub.getEmail(), ub.getPassword(), ub.getProfilePicture());
-//        udl.createUser(ub.getUsername(), ub.getName(), ub.getSurname(), ub.getEmail(), ub.getPassword(), ub.getProfilePicture());
+
         if (ub.getUsername().equals("") || ub.getName().equals("") || ub.getSurname().equals("") || ub.getEmail().equals("") || ub.getPassword().equals("")) {
             throw new EmptyFieldException("Missing Data");
         }
@@ -71,32 +68,21 @@ public class LoginController {
 
         assert udf != null;
 
-        //return udf.createUser(ub.getUsername(), ub.getName(), ub.getSurname(), ub.getEmail(), ub.getPassword(), ub.getProfilePicture());
-        //return true;
-        //System.out.println(udf.createUser(ub.getUsername(), ub.getName(), ub.getSurname(), ub.getEmail(), ub.getPassword(), ub.getProfilePicture()));
-
-
         if (udf.createUser(ub.getUsername(), ub.getName(), ub.getSurname(), ub.getEmail(), ub.getPassword(), ub.getProfilePicture()).equals(true)) {
-            System.out.println(udf.createUser(ub.getUsername(), ub.getName(), ub.getSurname(), ub.getEmail(), ub.getPassword(), ub.getProfilePicture()));
             return true;
         }
-
-        //udf.createUser(ub.getUsername(), ub.getName(), ub.getSurname(), ub.getEmail(), ub.getPassword(), ub.getProfilePicture()).equals(true);
-
 
         else {
             throw new GenericException("User already exist");
         }
 
-        //}
-        //        udf.createUser(ub.getUsername(), ub.getName(), ub.getSurname(), ub.getEmail(), ub.getPassword(), ub.getProfilePicture());
-
-        //return false;
-        //return false;
     }
 
-    public boolean createTouristGuide(TouristGuideBean tgb, String view) {
-        //TouristGuideDao tgd = new TouristGuideDao();
+    public boolean createTouristGuide(TouristGuideBean tgb, String view) throws EmptyFieldException, GenericException {
+
+        if (tgb.getUsername().equals("") || tgb.getName().equals("") || tgb.getSurname().equals("") || tgb.getEmail().equals("") || tgb.getPassword().equals("") || tgb.getIdentificationCode().equals("")) {
+            throw new EmptyFieldException("Missing Data");
+        }
 
         TouristGuideDaoFactory tgdf = null;
         switch (view) {
@@ -105,8 +91,13 @@ public class LoginController {
         }
 
         assert tgdf != null;
-        tgdf.createTouristGuide(tgb.getUsername(), tgb.getName(), tgb.getSurname(), tgb.getEmail(), tgb.getPassword(), tgb.getProfilePicture(), tgb.getIdentificationCode());
-        return true;
+        if(tgdf.createTouristGuide(tgb.getUsername(), tgb.getName(), tgb.getSurname(), tgb.getEmail(), tgb.getPassword(), tgb.getProfilePicture(), tgb.getIdentificationCode())){
+            return true;
+        }
+        else {
+            throw new GenericException("User already exist");
+        }
+
     }
 }
 

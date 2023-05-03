@@ -67,15 +67,13 @@ public class CliUserDetailsController extends Controller {
                 }
             }
 
-            System.out.println("\nGo Back [press 'b']: ");
+            System.out.println("\nGo Back [b]: ");
 
             if (scanner.nextLine().equals("b")) {
                 return;
             } else {
                 System.out.println("Command not found");
             }
-
-            System.out.flush();
 
         } while (scanner.hasNext());
     }

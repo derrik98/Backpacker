@@ -24,7 +24,7 @@ public class CliSignUpController extends InterfaceController {
 
     private File imageFile = null;
 
-    public void init(Scanner scan) {
+    public void init(Scanner scan) throws SQLException, EmptyFieldException, GenericException {
 
         System.out.print("\033[H\033[2J");
 
@@ -43,31 +43,32 @@ public class CliSignUpController extends InterfaceController {
 
         System.out.println("Email:");
         email = scan.nextLine();
-        System.out.flush();
+        //System.out.flush();
 
         System.out.println("Username:");
         username = scan.nextLine();
-        System.out.flush();
+        //System.out.flush();
 
         System.out.println("Name:");
         name = scan.nextLine();
-        System.out.flush();
+        //System.out.flush();
 
         System.out.println("Surname:");
         surname = scan.nextLine();
-        System.out.flush();
+        ///System.out.flush();
 
         System.out.println("Password:");
         password = scan.nextLine();
-        System.out.flush();
+        //System.out.flush();
 
         System.out.println("Type of user: Generic[0] - Tourist_Guide[1]");
         userType = scan.nextLine();
-        System.out.flush();
+        //System.out.flush();
 
-        switch (userType) {
-            case "0" -> userType = "USER";
-            case "1" -> userType = "TOURIST_GUIDE";
+        if (userType.equals("1")) {
+            userType = "TOURIST_GUIDE";
+        } else {
+            userType = "USER";
         }
 
         System.out.println("Would you like profile image? Yes[y] - No[n]");
@@ -96,22 +97,18 @@ public class CliSignUpController extends InterfaceController {
 
         }
 
-        System.out.flush();
+        //System.out.flush();
 
         if (userType.equals(Roles.USER.name())){
             UserBean ub = this.setUserBean(username, name, surname, email, password, newFileName);
 
-            try {
-                regResult = lc.createUser(ub, "cli");
-            } catch (EmptyFieldException | GenericException | SQLException exception) {
-                System.out.println(RED + exception.getMessage() + RESET);
-            }
+            regResult = lc.createUser(ub, "cli");
 
         }
         else if(userType.equals(Roles.TOURIST_GUIDE.name())){
             System.out.println("VAT Number:");
             VATNumb = scan.nextLine();
-            System.out.flush();
+            //System.out.flush();
 
 
             TouristGuideBean tgb = this.setTouristGuideBean(username, name, surname, email, password, newFileName, VATNumb);

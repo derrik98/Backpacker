@@ -39,8 +39,7 @@ public abstract class UserDaoFactory extends DaoTemplate {
             }
 
             String sql = "call backpacker.add_user(?, ?, ?, ?, ?, ?);\r\n";
-            //
-            // PreparedStatement stm = con.prepareStatement(sql);
+            //PreparedStatement stm = conn.prepareStatement(sql);
 
             try (PreparedStatement stm = conn.prepareStatement(sql)){
                 stm.setString(1, username);
@@ -50,7 +49,8 @@ public abstract class UserDaoFactory extends DaoTemplate {
                 stm.setString(5, password);
                 stm.setString(6, profilePicture);
                 stm.executeUpdate();
-            }finally {
+            }
+            finally {
                 DatabaseLoginConnection.closeLoginConnection(conn);
             }
 
@@ -63,7 +63,7 @@ public abstract class UserDaoFactory extends DaoTemplate {
                     }
                 }
                 try {
-                    con.close();
+                    conn.close();
                 } catch (SQLException e) {
                     System.out.println("error");
                 }
@@ -77,9 +77,7 @@ public abstract class UserDaoFactory extends DaoTemplate {
 
             try {
                 o = (JSONObject) parser.parse(new FileReader(path_user));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            } catch (ParseException e) {
+            } catch (IOException | ParseException e) {
                 throw new RuntimeException(e);
             }
 

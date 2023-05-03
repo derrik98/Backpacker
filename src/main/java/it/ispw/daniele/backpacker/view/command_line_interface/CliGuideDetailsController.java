@@ -25,6 +25,7 @@ public class CliGuideDetailsController extends Controller {
 
         GeneralUserBean gub = SessionUser.getInstance().getSession();
         TouristGuideBean users = this.getSearchUser(gub.getUsername());
+        Scanner scanner = new Scanner(System.in);
 
         do {
             System.out.print("\033[H\033[2J");
@@ -36,8 +37,8 @@ public class CliGuideDetailsController extends Controller {
             System.out.println("Vat number: " + users.getIdentificationCode());
             System.out.println("\n");
             System.out.println("Go Back [press 'b']: ");
-            Scanner s = new Scanner(System.in);
-            if (s.nextLine().equals("b")) {
+
+            if (scanner.nextLine().equals("b")) {
                 return;
             }
             else {

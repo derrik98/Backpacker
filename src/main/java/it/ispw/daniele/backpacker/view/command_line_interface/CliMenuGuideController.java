@@ -30,18 +30,9 @@ public class CliMenuGuideController {
             System.out.println("Command: ");
 
             switch (scanner.nextLine()) {
-                case "0" -> {
-                    CliHomeController homeController = new CliHomeController();
-                    homeController.init(scanner);
-                }
-                case "1" -> {
-                    CliAddItineraryController cliAddItineraryController = new CliAddItineraryController();
-                    cliAddItineraryController.init();
-                }
-                case "2" -> {
-                    CliGuideDetailsController cliGuideDetailsController = new CliGuideDetailsController();
-                    cliGuideDetailsController.init();
-                }
+                case "0" -> touristGuideGraphicChange.switchToHome(scanner);
+                case "1" -> touristGuideGraphicChange.switchToAddItinerary();
+                case "2" -> touristGuideGraphicChange.switchToGuideDetails();
                 case "3" -> {
                     System.out.println(RED + "LOGOUT" + RESET);
                     SessionUser.getInstance().closeSession();
@@ -50,8 +41,6 @@ public class CliMenuGuideController {
                 }
                 default -> System.out.println(RED + "Command not found\n" + RESET);
             }
-
-            System.out.flush();
 
         } while (scanner.hasNext());
     }

@@ -26,30 +26,26 @@ public class CliAddItineraryController extends InterfaceController {
 
         System.out.println("Digit 'share' to share itinerary");
 
-        for(int i = 1; i < 10; i++){
+        for (int i = 1; i < 10; i++) {
 
             System.out.println("step -> " + i);
 
-            String input = scanner.next();
-            //System.out.flush();
+            String input = scanner.nextLine();
 
-            if(input.equals("share")){
+            if (input.equals("share")) {
                 this.share();
                 return;
-            }
-            else{
+            } else {
                 listView.add(input);
             }
         }
-        this.guideBean= SessionUser.getInstance().getSession();
+        this.guideBean = SessionUser.getInstance().getSession();
     }
 
     private void share() {
 
-        for(int i = 0; i < this.listView.size(); i++){
-        //for (String step : this.listView) {
-            if(!this.listView.get(i).equals("")){
-           // if (!step.equals("")) {
+        for (int i = 0; i < this.listView.size(); i++) {
+            if (!this.listView.get(i).equals("")) {
                 this.steps = this.steps.concat(this.listView.get(i) + "-");
             }
         }
@@ -57,44 +53,34 @@ public class CliAddItineraryController extends InterfaceController {
         System.out.println("Itinerary details:\n");
 
         System.out.println("Location:");
-        String location = scanner.next();
+        String location = scanner.nextLine();
         //System.out.flush();
 
         System.out.println("Date: format[YYYY/MM/DD]");
-        String date = scanner.next().replace("/", "-");
+        String date = scanner.nextLine().replace("/", "-");
         //System.out.flush();
 
         System.out.println("Time:");
-        String time = scanner.next();
+        String time = scanner.nextLine();
         //System.out.flush();
 
         System.out.println("Participants:");
-        String participants = scanner.next();
+        String participants = scanner.nextLine();
         //System.out.flush();
 
         System.out.println("Price:");
-        String price = scanner.next();
+        String price = scanner.nextLine();
         //System.out.flush();
 
         boolean result;
 
         ItineraryBean itineraryBean = this.setItineraryBean(this.guideBean.getUsername(), location, date, time, Integer.parseInt(participants), Integer.parseInt(price), this.steps);
-//        itineraryBean.setGuideId(this.guideBean.getUsername());
-//        itineraryBean.setDate(date);
-//        itineraryBean.setLocation(location);
-//        itineraryBean.setTime(time);
-//        itineraryBean.setParticipants(Integer.parseInt(participants));
-//        itineraryBean.setPrice(Integer.parseInt(price));
-//        itineraryBean.setSteps(this.steps);
-//        System.out.println(this.guideBean.getUsername());
-//        System.out.println("Dati" + itineraryBean.getGuideId() + "\n" + itineraryBean.getDate() + "\n" + itineraryBean.getLocation() + "\n" + itineraryBean.getTime() + "\n" + itineraryBean.getParticipants() + "\n" + itineraryBean.getPrice());
 
         try {
             result = controller.addItinerary(itineraryBean);
-            if(result){
+            if (result) {
                 System.out.println("Correct share!\n");
-            }
-            else{
+            } else {
                 System.out.print(RED + "Error share\n" + RESET);
             }
         } catch (Exception e) {

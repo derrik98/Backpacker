@@ -2,17 +2,41 @@ package it.ispw.daniele.backpacker.view.command_line_interface;
 
 import it.ispw.daniele.backpacker.utils.Roles;
 
-public class CliTouristGuideGraphicChange extends CliGuiChangeTemplate{
+import java.util.Scanner;
+
+public class CliTouristGuideGraphicChange extends CliGuiChangeTemplate {
     private static CliTouristGuideGraphicChange instance = null;
 
     private CliTouristGuideGraphicChange() {
         whoAmI = Roles.TOURIST_GUIDE;
     }
 
-    public static CliTouristGuideGraphicChange getInstance(){
-        if(instance == null){
+    public static CliTouristGuideGraphicChange getInstance() {
+        if (instance == null) {
             instance = new CliTouristGuideGraphicChange();
         }
         return instance;
+    }
+
+    @Override
+    protected void switchToHome(Scanner scanner) {
+        this.catcher(() -> {
+            CliHomeController homeController = new CliHomeController();
+            homeController.init(scanner);
+        });
+    }
+
+    public void switchToGuideDetails() {
+        this.catcher(() -> {
+            CliGuideDetailsController cliGuideDetailsController = new CliGuideDetailsController();
+            cliGuideDetailsController.init();
+        });
+    }
+
+    public void switchToAddItinerary(){
+        this.catcher(() -> {
+            CliAddItineraryController cliAddItineraryController = new CliAddItineraryController();
+            cliAddItineraryController.init();
+        });
     }
 }
