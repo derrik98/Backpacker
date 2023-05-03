@@ -1,14 +1,12 @@
 package it.ispw.daniele.backpacker.view.command_line_interface;
 
 import it.ispw.daniele.backpacker.bean.HomeBean;
-import it.ispw.daniele.backpacker.exceptions.AddressNotFoundException;
-import it.ispw.daniele.backpacker.exceptions.CityNotFoundException;
-import it.ispw.daniele.backpacker.exceptions.GenericException;
-import it.ispw.daniele.backpacker.exceptions.MonumentNotFoundException;
+import it.ispw.daniele.backpacker.exceptions.*;
 import it.ispw.daniele.backpacker.utils.Roles;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,11 +36,16 @@ public abstract class CliGuiChangeTemplate {
         });
     }
 
-    public  void switchToResult(HomeBean homeBean){
+    public  void switchToResult(HomeBean homeBean, Scanner scanner){
         this.catcher(() -> {
             CliResultController crc = new CliResultController();
-            crc.init(homeBean);
+            crc.init(homeBean, scanner);
         });
+    }
+
+    public void switchToSignUp(Scanner scanner) throws SQLException, EmptyFieldException, GenericException {
+        CliSignUpController signUpController = new CliSignUpController();
+        signUpController.init(scanner);
     }
 
     public void menuBar (Scanner scanner){
@@ -63,5 +66,4 @@ public abstract class CliGuiChangeTemplate {
     }
 
     protected abstract void switchToHome(Scanner scanner) throws IOException;
-
 }

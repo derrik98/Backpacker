@@ -29,7 +29,7 @@ public class CliHomeController extends InterfaceController {
         System.out.println("Address:");
         String address = scanner.nextLine();
 
-        System.out.println("Restaurant: [Y or N]");
+        System.out.println("Restaurant: [y or n]");
         String restaurant = scanner.nextLine();
 
         System.out.println("Range:");
@@ -46,7 +46,7 @@ public class CliHomeController extends InterfaceController {
             sc.checkInput(homeBean);
 
             CliUserGraphicChange ugc = CliUserGraphicChange.getInstance();
-            ugc.switchToResult(homeBean);
+            ugc.switchToResult(homeBean, scanner);
 
         } catch (CityNotFoundException | AddressNotFoundException | MonumentNotFoundException exception) {
             System.out.println(RED + exception.getMessage() + RESET + "\n");

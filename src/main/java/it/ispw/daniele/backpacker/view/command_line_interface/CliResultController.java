@@ -15,7 +15,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -25,7 +24,7 @@ public class CliResultController {
 
     List<ItineraryBean> it;
 
-    public void init(HomeBean homeBean) throws MonumentNotFoundException, NoSuchAlgorithmException, GenericException {
+    public void init(HomeBean homeBean, Scanner scanner) throws MonumentNotFoundException, NoSuchAlgorithmException, GenericException {
         System.out.print("\033[H\033[2J");
         System.out.println(BOLD + "RESULT PAGE\n" + RESET);
         System.out.println("Country: " + homeBean.getCountry() + ", City: " + homeBean.getCity() + ", Address: " + homeBean.getAddress() + ", Restaurant: " + homeBean.isRestaurant() + ", Range: " + homeBean.getRange() + "\n");
@@ -58,37 +57,33 @@ public class CliResultController {
         List<ItineraryBean> mergeItinerary = new ArrayList<>(it);
         assert iti != null;
         mergeItinerary.addAll(iti);
-        createCommand(mergeItinerary, bookedSize - 1);
+        createCommand(mergeItinerary, bookedSize - 1, scanner);
     }
 
-    private void createCommand(List<ItineraryBean> itineraryBeanList, int bSize) {
-
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("" + "Commands : VIEW ON MAP[0] - SAVE[1] - BUY[2] (Only for suggester itinerary) - QUIT[3]");
+    private void createCommand(List<ItineraryBean> itineraryBeanList, int bSize, Scanner scanner){
 
         do {
+            System.out.println("Commands : VIEW ON MAP[0] - SAVE[1] - BUY[2] (Only for suggester itinerary) - QUIT[3]");
+
             switch (scanner.nextLine()) {
                 case "0" -> {
                     System.out.println("Digit Itinerary id");
-                    int input = scanner.nextInt();
-                    System.out.flush();
+                    int input = Integer.parseInt(scanner.nextLine());
 
                     String[] steps = itineraryBeanList.get(input).getSteps().split("/");
-                    System.out.println(Arrays.toString(steps));
 
                     ArrayList<String> als = new ArrayList<>();
                     for (int i = 0; i < steps.length; i++) {
                         als.add(i, steps[i]);
                     }
 
-                    System.out.println("als" + als);
                     StringBuilder Url = new StringBuilder("https://google.it/maps/dir");
 
                     for (int indexMonument = 0; indexMonument < als.size(); indexMonument++) {
-                            Url.append("/").append(als.get(indexMonument));
+                        Url.append("/").append(als.get(indexMonument));
                     }
 
-                    if(Desktop.isDesktopSupported()){
+                    if (Desktop.isDesktopSupported()) {
                         Desktop desktop = Desktop.getDesktop();
                         try {
                             desktop.browse(new URI(Url.toString().replace(" ", "+")));
@@ -96,7 +91,7 @@ public class CliResultController {
                             // TODO Auto-generated catch block
                             e.printStackTrace();
                         }
-                    }else{
+                    } else {
                         Runtime runtime = Runtime.getRuntime();
                         try {
                             runtime.exec("xdg-open " + Url);
@@ -106,48 +101,43 @@ public class CliResultController {
                         }
                     }
                 }
-
                 case "1" -> {
                     SaveTour st = new SaveTour("cli");
                     System.out.println("Digit Itinerary id");
-                    int input = scanner.nextInt();
-                    System.out.flush();
-                    if(input <= itineraryBeanList.size() && input >= 0){
+                    int input = Integer.parseInt(scanner.nextLine());
+
+                    if (input <= itineraryBeanList.size() && input >= 0) {
                         st.saveTour(SessionUser.getInstance().getSession(), itineraryBeanList.get(input));
                         System.out.println(GREEN + "Itinerary added successfully" + RESET);
-                    }//   COMMENTARE IL CODICE
-                    else{
+                    } else {
                         System.out.println(RED + "Incorrect id" + RESET);
                     }
 
                 }
                 case "2" -> {
                     System.out.println("Digit Itinerary id");
-                    int input = scanner.nextInt();
-                    if(input <= bSize && input >= bSize){
+                    int input = Integer.parseInt(scanner.nextLine());
+                    if (input <= bSize && input >= bSize) {
                         CliItineraryDetailsController cidc = new CliItineraryDetailsController();
                         cidc.init(itineraryBeanList.get(input));
-                    }
-                    else{
+                    } else {
                         System.out.println(RED + "Incorrect id" + RESET);
                     }
                 }
-                case "3" ->{
+                case "3" -> {
                     System.out.println("QUIT");
                     return;
                 }
                 default -> System.out.println(RED + "Command not found\n" + RESET);
             }
-            System.out.flush();
-            scanner.reset();
-            System.out.println("" + "Commands : VIEW ON MAP[0] - SAVE[1] - BUY[2] (Only for suggester itinerary) - QUIT[3]");
+
         } while (true);
     }
 
     public void createTable(List<ItineraryBean> itineraryBeanList, int tableSize) {
 
         int j;
-        for (j = 0; j < itineraryBeanList.size() ; j++) {
+        for (j = 0; j < itineraryBeanList.size(); j++) {
             String[] steps = itineraryBeanList.get(j).getSteps().split("/");
             ArrayList<String> als = new ArrayList<>();
             for (int i = 0; i < steps.length; i++) {
@@ -157,7 +147,7 @@ public class CliResultController {
             StringBuilder line = new StringBuilder();
             line.append("ID [").append(tableSize).append("] ");
             tableSize++;
-            for(int indexMonument = 0; indexMonument < als.size(); indexMonument++) {
+            for (int indexMonument = 0; indexMonument < als.size(); indexMonument++) {
                 line.append(als.get(indexMonument));
 
             }

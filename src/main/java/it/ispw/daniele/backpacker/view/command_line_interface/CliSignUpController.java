@@ -108,8 +108,6 @@ public class CliSignUpController extends InterfaceController {
         else if(userType.equals(Roles.TOURIST_GUIDE.name())){
             System.out.println("VAT Number:");
             VATNumb = scan.nextLine();
-            //System.out.flush();
-
 
             TouristGuideBean tgb = this.setTouristGuideBean(username, name, surname, email, password, newFileName, VATNumb);
 

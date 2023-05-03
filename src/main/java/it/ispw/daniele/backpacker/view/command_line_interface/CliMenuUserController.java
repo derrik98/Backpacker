@@ -5,8 +5,12 @@ import it.ispw.daniele.backpacker.exceptions.CityNotFoundException;
 import it.ispw.daniele.backpacker.exceptions.MonumentNotFoundException;
 import it.ispw.daniele.backpacker.utils.SessionUser;
 
+import javax.swing.text.Position;
+import java.awt.*;
+import java.io.Console;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 import static it.ispw.daniele.backpacker.view.command_line_interface.CLI.RED;
 import static it.ispw.daniele.backpacker.view.command_line_interface.CLI.RESET;
@@ -26,6 +30,7 @@ public class CliMenuUserController {
             System.out.println("----------------Profile [1]------------------");
             System.out.println("----------------Logout [2]-------------------");
             System.out.println("---------------------------------------------");
+            System.out.println("---------------------------------------------");
 
             System.out.println("Command: ");
 
@@ -39,6 +44,7 @@ public class CliMenuUserController {
                     return;
                 }
                 case "u" -> {
+
                     return;
                 }
                 default -> System.out.println(RED + "COMMAND NOT FOUND\n" + RESET);

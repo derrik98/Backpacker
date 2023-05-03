@@ -1,5 +1,14 @@
 {
   "saved_itinerary": [
-
+    {
+      "id": "1",
+      "steps": "Rampa Imperiale di Domiziano\/Cordonata Capitolina\/Scalinata di Trinità dei Monti\/Monumento a Goethe\/Monumento a Quintino Sella\/Pantheon",
+      "username": "fr"
+    },
+    {
+      "id": "2",
+      "steps": "Colonna di Marco Aurelio\/Scalinata di Trinità dei Monti\/Obelisco della Minerva\/Cordonata Capitolina\/Monumento celebrativo del \"Bicentenario dei Carabinieri\"Colonna di Marco Aurelio",
+      "username": "fr"
+    }
   ]
 }

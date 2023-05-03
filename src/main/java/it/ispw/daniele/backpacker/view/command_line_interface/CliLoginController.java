@@ -38,13 +38,11 @@ public class CliLoginController {
                     }
                 }
                 case "1" -> {
-                    CliSignUpController signUpController = new CliSignUpController();
                     try {
-                        signUpController.init(scanner);
-                    } catch (SQLException | GenericException | EmptyFieldException exception) {
+                        CliUserGraphicChange.getInstance().switchToSignUp(scanner);
+                    } catch (Exception exception) {
                         System.out.println(RED + exception.getMessage() + RESET);
                     }
-                    return;
                 }
                 case "2" -> {
                     System.out.println(RED + "CLOSE APPLICATION" + RESET);
@@ -55,7 +53,7 @@ public class CliLoginController {
 
             }
 
-        } while (scanner.hasNext());
+        } while (true);
 
     }
 

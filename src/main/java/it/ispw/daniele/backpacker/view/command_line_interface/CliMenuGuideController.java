@@ -26,6 +26,7 @@ public class CliMenuGuideController {
             System.out.println("----------------Profile [2]------------------");
             System.out.println("----------------Logout [3]-------------------");
             System.out.println("---------------------------------------------");
+            System.out.println("---------------------------------------------");
 
             System.out.println("Command: ");
 

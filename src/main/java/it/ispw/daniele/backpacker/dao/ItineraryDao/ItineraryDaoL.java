@@ -207,7 +207,7 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
     public List<Itinerary> getSavedItinerary(String input) {
         List<Itinerary> ret = this.execute(() -> {
 
-            List<Itinerary> itineraryList = null;
+            List<Itinerary> itineraryList = new ArrayList<>();
 
             JSONParser parser = new JSONParser();
 
@@ -226,10 +226,10 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
 
                     if (object.get("username").equals(input)) {
 
-                        int id = (int) object.get(ID);
+                        String id = (String) object.get(ID);
                         String steps = (String) object.get(STEPS);
 
-                        Itinerary itinerary = new Itinerary(id, "", "", "", "", 0, 0, steps);
+                        Itinerary itinerary = new Itinerary(Integer.parseInt(id), "", "", "", "", 0, 0, steps);
 
                         itineraryList.add(itinerary);
 
