@@ -40,11 +40,12 @@ public class CliMenuUserController {
                 case "2" -> {
                     System.out.println(RED + "LOGOUT" + RESET);
                     SessionUser.getInstance().closeSession();
-                    ugc.switchToLogin();
+                    //ugc.switchToLogin();
                     return;
                 }
                 case "u" -> {
-
+                    System.out.println("QUI");
+                    //ugc.undo(scanner);
                     return;
                 }
                 default -> System.out.println(RED + "COMMAND NOT FOUND\n" + RESET);

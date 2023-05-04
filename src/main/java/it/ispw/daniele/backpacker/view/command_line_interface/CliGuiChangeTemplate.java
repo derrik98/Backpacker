@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.Scanner;
+import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,38 +21,49 @@ public abstract class CliGuiChangeTemplate {
 
     protected Roles whoAmI;
 
-    public void catcher(CliGuiAction cGuiAction){
+    protected static Stack<String> stackScene = new Stack<>();
+
+    public void catcher(CliGuiAction cliGuiAction) {
         try {
-            cGuiAction.action();
-        }catch (IOException | AddressNotFoundException | CityNotFoundException | MonumentNotFoundException |
-                NoSuchAlgorithmException | GenericException ioException){
+            cliGuiAction.action();
+        } catch (IOException | AddressNotFoundException | CityNotFoundException ioException) {
             logger.log(Level.WARNING, ioException.toString(), ioException.getCause());
+        } catch (SQLException | GenericException | EmptyFieldException | MonumentNotFoundException |
+                 NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
         }
     }
 
-    public void switchToLogin(){
+    public void switchToLogin() {
         this.catcher(() -> {
+            stackScene.push("login");
             CliLoginController clc = new CliLoginController();
             clc.init();
         });
     }
 
-    public  void switchToResult(HomeBean homeBean, Scanner scanner){
+    public void switchToResult(Scanner scanner) {
         this.catcher(() -> {
+            stackScene.push("result");
             CliResultController crc = new CliResultController();
-            crc.init(homeBean, scanner);
+            crc.init(scanner);
         });
     }
 
-    public void switchToSignUp(Scanner scanner) throws SQLException, EmptyFieldException, GenericException {
-        CliSignUpController signUpController = new CliSignUpController();
-        signUpController.init(scanner);
+    public void switchToSignUp(Scanner scanner) {
+        this.catcher(() -> {
+            stackScene.push("signUp");
+            CliSignUpController signUpController = new CliSignUpController();
+            signUpController.init(scanner);
+        });
     }
 
-    public void menuBar (Scanner scanner){
+    public void menuBar(Scanner scanner) {
         this.catcher(() -> {
 
-            switch (whoAmI){
+            stackScene.push("home");
+
+            switch (whoAmI) {
                 case USER -> {
                     CliMenuUserController cliMenuUserController = new CliMenuUserController();
                     cliMenuUserController.init(scanner);
@@ -66,4 +78,6 @@ public abstract class CliGuiChangeTemplate {
     }
 
     protected abstract void switchToHome(Scanner scanner) throws IOException;
+
+    protected abstract void undo(Scanner scanner);
 }

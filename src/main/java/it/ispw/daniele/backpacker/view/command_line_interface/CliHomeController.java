@@ -46,7 +46,7 @@ public class CliHomeController extends InterfaceController {
             sc.checkInput(homeBean);
 
             CliUserGraphicChange ugc = CliUserGraphicChange.getInstance();
-            ugc.switchToResult(homeBean, scanner);
+            ugc.switchToResult(scanner);
 
         } catch (CityNotFoundException | AddressNotFoundException | MonumentNotFoundException exception) {
             System.out.println(RED + exception.getMessage() + RESET + "\n");

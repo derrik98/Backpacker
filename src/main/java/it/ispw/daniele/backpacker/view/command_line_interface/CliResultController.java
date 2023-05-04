@@ -24,8 +24,11 @@ public class CliResultController {
 
     List<ItineraryBean> it;
 
-    public void init(HomeBean homeBean, Scanner scanner) throws MonumentNotFoundException, NoSuchAlgorithmException, GenericException {
+    public void init(Scanner scanner) throws MonumentNotFoundException, GenericException {
         System.out.print("\033[H\033[2J");
+
+        HomeBean homeBean = SessionUser.getInstance().getSearchSession();
+
         System.out.println(BOLD + "RESULT PAGE\n" + RESET);
         System.out.println("Country: " + homeBean.getCountry() + ", City: " + homeBean.getCity() + ", Address: " + homeBean.getAddress() + ", Restaurant: " + homeBean.isRestaurant() + ", Range: " + homeBean.getRange() + "\n");
 
@@ -154,70 +157,6 @@ public class CliResultController {
             System.out.println(line);
             System.out.print("\n");
 
-           /* webView.getEngine().load(Url.toString());
-            VBox v = new VBox(webView);
-
-            if (type.equals("suggested")) {
-                ImageView ivBuy = new ImageView(new Image(Objects.requireNonNull(getClass().getResource("/buy.png")).toExternalForm()));
-                ivBuy.setFitWidth(50);
-                ivBuy.setFitHeight(50);
-                ivBuy.setCursor(Cursor.HAND);
-
-                int finalJ = j;
-                ivBuy.setOnMouseClicked(mouseEvent -> {
-                    FXMLLoader loader = new FXMLLoader();
-                    FileInputStream fileInputStream;
-                    try {
-
-                        fileInputStream = new FileInputStream("src/main/java/it/ispw/daniele/backpacker/fxmlView/ItineraryDetails-Page.fxml");
-                        Parent fxmlLoader = loader.load(fileInputStream);
-                        ItineraryDetailsController idc = loader.getController();
-                        idc.convertItinerary(itineraryBeanList.get(finalJ));
-                        this.stackPaneResult.getChildren().add(fxmlLoader);
-                        stackPaneResult.getChildren().get(0).setDisable(true);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                });
-                HBox.setHgrow(region1, Priority.NEVER);
-                contentPane.getChildren().addAll(region, ivBuy);
-            }
-
-            ImageView ivMap = new ImageView(new Image(Objects.requireNonNull(getClass().getResource("/googleMaps.png")).toExternalForm()));
-            ivMap.setFitWidth(35);
-            ivMap.setFitHeight(35);
-            ivMap.setCursor(Cursor.HAND);
-            ivMap.setId("MAP");
-            ImageView ivSave = new ImageView(new Image(Objects.requireNonNull(getClass().getResource("/save.png")).toExternalForm()));
-            ivSave.setCursor(Cursor.HAND);
-            ivSave.setFitWidth(35);
-            ivSave.setFitHeight(35);
-
-            ivMap.setOnMouseClicked(mouseEvent -> {
-                if (!titledPane.isCollapsible()) {
-                    titledPane.setCollapsible(true);
-                    titledPane.setExpanded(true);
-                    System.out.println("tasto mappa cliccato");
-                } else {
-                    titledPane.setCollapsible(false);
-                    titledPane.setExpanded(false);
-
-                }
-            });
-
-            int finalJ1 = j;
-            ivSave.setOnMouseClicked(mouseEvent -> {
-                System.out.println("SONO QUI");
-
-                SaveTour st = new SaveTour();
-                try {
-                    System.out.println("ITINERARIO ." + itineraryBeanList.get(finalJ1).getSteps());
-                    st.saveTour(SessionUser.getInstance().getSession(), itineraryBeanList.get(finalJ1));
-                } catch (ParseException e) {
-                    throw new RuntimeException(e);
-                }
-            });*/
         }
-        //createCommand(itineraryBeanList);
     }
 }

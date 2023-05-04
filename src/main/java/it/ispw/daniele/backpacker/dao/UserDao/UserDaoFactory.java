@@ -28,7 +28,7 @@ public abstract class UserDaoFactory extends DaoTemplate {
     protected final String path_user = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/user.json";
     protected final String path_general_user = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/general_user.json";
 
-    public Boolean createUser(String username, String name, String surname, String email, String password, String profilePicture) {
+    public Boolean createUser(String username, String name, String surname, String email, String password, String profilePicture) throws SQLException, GenericException {
         return (this.execute(() -> {
 
             //Save on Database
@@ -130,7 +130,7 @@ public abstract class UserDaoFactory extends DaoTemplate {
         }) != null);
     }
 
-    public List<User> getSearchUser(String caller){
+    public List<User> getSearchUser(String caller) {
         return this.queryDatabase(caller, SEARCH_USER);
     }
 

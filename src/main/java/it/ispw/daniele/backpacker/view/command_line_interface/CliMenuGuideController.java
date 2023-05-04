@@ -40,6 +40,10 @@ public class CliMenuGuideController {
                     touristGuideGraphicChange.switchToLogin();
                     return;
                 }
+                case "u" -> {
+
+                    return;
+                }
                 default -> System.out.println(RED + "Command not found\n" + RESET);
             }
 

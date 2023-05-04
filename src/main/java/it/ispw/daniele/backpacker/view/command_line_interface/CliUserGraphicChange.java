@@ -21,6 +21,7 @@ public class CliUserGraphicChange extends CliGuiChangeTemplate{
 
     public  void switchToHome(Scanner scanner){
         this.catcher(() -> {
+            stackScene.push("home");
             CliHomeController homeController = new CliHomeController();
             homeController.init(scanner);
         });
@@ -28,12 +29,35 @@ public class CliUserGraphicChange extends CliGuiChangeTemplate{
 
     public  void switchToUserDetails(){
         this.catcher(() -> {
+            stackScene.push("profile");
             CliUserDetailsController cliUserDetailsController = new CliUserDetailsController();
             cliUserDetailsController.init();
         });
     }
 
-//    public void switchToResult(String country, String city, String address, String restaurant, String range) {
-//        // Do nothing.
-//    }
+    public void undo(Scanner scanner){
+        this.catcher(() -> {
+
+            System.out.println(stackScene);
+
+            if (stackScene.size() > 1) {
+
+                System.out.println(stackScene);
+                System.out.println(stackScene.get(stackScene.size() - 2));
+
+                String from = stackScene.get(stackScene.size() - 2);
+                switch (from) {
+                    case "home" -> this.switchToHome(scanner);
+                    case "result" -> this.switchToResult(scanner);
+                    case "profile" -> this.switchToUserDetails();
+                }
+                stackScene.remove(stackScene.size() - 1);
+
+            } else {
+                this.switchToHome(scanner);
+            }
+
+        });
+    }
+
 }

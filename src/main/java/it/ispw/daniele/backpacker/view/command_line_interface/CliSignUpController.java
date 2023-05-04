@@ -24,13 +24,13 @@ public class CliSignUpController extends InterfaceController {
 
     private File imageFile = null;
 
-    public void init(Scanner scan) throws SQLException, EmptyFieldException, GenericException {
+    public void init(Scanner scanner) throws SQLException, EmptyFieldException, GenericException {
 
         System.out.print("\033[H\033[2J");
 
         LoginController lc = new LoginController();
 
-        boolean regResult = false;
+        boolean regResult;
 
         String email;
         String username;
@@ -42,28 +42,28 @@ public class CliSignUpController extends InterfaceController {
         String ProfilePicture = "";
 
         System.out.println("Email:");
-        email = scan.nextLine();
-        //System.out.flush();
+        email = scanner.nextLine();
+        System.out.flush();
 
         System.out.println("Username:");
-        username = scan.nextLine();
-        //System.out.flush();
+        username = scanner.nextLine();
+        System.out.flush();
 
         System.out.println("Name:");
-        name = scan.nextLine();
-        //System.out.flush();
+        name = scanner.nextLine();
+        System.out.flush();
 
         System.out.println("Surname:");
-        surname = scan.nextLine();
-        ///System.out.flush();
+        surname = scanner.nextLine();
+        System.out.flush();
 
         System.out.println("Password:");
-        password = scan.nextLine();
-        //System.out.flush();
+        password = scanner.nextLine();
+        System.out.flush();
 
         System.out.println("Type of user: Generic[0] - Tourist_Guide[1]");
-        userType = scan.nextLine();
-        //System.out.flush();
+        userType = scanner.nextLine();
+        System.out.flush();
 
         if (userType.equals("1")) {
             userType = "TOURIST_GUIDE";
@@ -76,7 +76,7 @@ public class CliSignUpController extends InterfaceController {
         String fileName = "";
         String newFileName = "";
 
-        switch (scan.nextLine()){
+        switch (scanner.nextLine()){
             case "n":
                 fileName = "";
                 newFileName = "";
@@ -97,7 +97,7 @@ public class CliSignUpController extends InterfaceController {
 
         }
 
-        //System.out.flush();
+        System.out.flush();
 
         if (userType.equals(Roles.USER.name())){
             UserBean ub = this.setUserBean(username, name, surname, email, password, newFileName);
@@ -105,9 +105,10 @@ public class CliSignUpController extends InterfaceController {
             regResult = lc.createUser(ub, "cli");
 
         }
-        else if(userType.equals(Roles.TOURIST_GUIDE.name())){
+        else {
             System.out.println("VAT Number:");
-            VATNumb = scan.nextLine();
+            VATNumb = scanner.nextLine();
+            System.out.flush();
 
             TouristGuideBean tgb = this.setTouristGuideBean(username, name, surname, email, password, newFileName, VATNumb);
 
@@ -145,6 +146,5 @@ public class CliSignUpController extends InterfaceController {
         this.imageFile = null;
         ProfilePicture = "";
 
-        //scan.close();
     }
 }

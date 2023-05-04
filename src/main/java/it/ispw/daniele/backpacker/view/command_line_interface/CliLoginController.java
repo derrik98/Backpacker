@@ -3,10 +3,8 @@ package it.ispw.daniele.backpacker.view.command_line_interface;
 import it.ispw.daniele.backpacker.bean.GeneralUserBean;
 import it.ispw.daniele.backpacker.controller.login.LoginController;
 import it.ispw.daniele.backpacker.exceptions.EmptyFieldException;
-import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.utils.SessionUser;
 
-import java.sql.SQLException;
 import java.util.Scanner;
 
 import static it.ispw.daniele.backpacker.view.command_line_interface.CLI.RED;
@@ -53,6 +51,8 @@ public class CliLoginController {
 
             }
 
+            System.out.flush();
+
         } while (true);
 
     }
@@ -63,9 +63,11 @@ public class CliLoginController {
 
         System.out.println("Username:");
         String username = scanner.nextLine();
+        System.out.flush();
 
         System.out.println("Password:");
         String password = scanner.nextLine();
+        System.out.flush();
 
         GeneralUserBean gub = new GeneralUserBean();
         gub.setUsername(username);
