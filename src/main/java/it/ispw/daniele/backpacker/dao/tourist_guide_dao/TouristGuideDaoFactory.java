@@ -1,8 +1,7 @@
-package it.ispw.daniele.backpacker.dao.TouristGuideDao;
+package it.ispw.daniele.backpacker.dao.tourist_guide_dao;
 
 import it.ispw.daniele.backpacker.dao.DaoTemplate;
 import it.ispw.daniele.backpacker.entity.TouristGuide;
-import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.utils.DatabaseLoginConnection;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;

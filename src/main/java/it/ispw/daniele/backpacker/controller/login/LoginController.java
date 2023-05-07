@@ -3,27 +3,25 @@ package it.ispw.daniele.backpacker.controller.login;
 import it.ispw.daniele.backpacker.bean.GeneralUserBean;
 import it.ispw.daniele.backpacker.bean.TouristGuideBean;
 import it.ispw.daniele.backpacker.bean.UserBean;
-import it.ispw.daniele.backpacker.dao.GeneralUserDao.GeneralUserDao;
-import it.ispw.daniele.backpacker.dao.GeneralUserDao.GeneralUserDaoFactory;
-import it.ispw.daniele.backpacker.dao.GeneralUserDao.GeneralUserDaoL;
-import it.ispw.daniele.backpacker.dao.TouristGuideDao.TouristGuideDao;
-import it.ispw.daniele.backpacker.dao.TouristGuideDao.TouristGuideDaoFactory;
-import it.ispw.daniele.backpacker.dao.TouristGuideDao.TouristGuideDaoL;
-import it.ispw.daniele.backpacker.dao.UserDao.UserDao;
-import it.ispw.daniele.backpacker.dao.UserDao.UserDaoFactory;
-import it.ispw.daniele.backpacker.dao.UserDao.UserDaoL;
+import it.ispw.daniele.backpacker.dao.general_user_dao.GeneralUserDao;
+import it.ispw.daniele.backpacker.dao.general_user_dao.GeneralUserDaoFactory;
+import it.ispw.daniele.backpacker.dao.general_user_dao.GeneralUserDaoL;
+import it.ispw.daniele.backpacker.dao.tourist_guide_dao.TouristGuideDao;
+import it.ispw.daniele.backpacker.dao.tourist_guide_dao.TouristGuideDaoFactory;
+import it.ispw.daniele.backpacker.dao.tourist_guide_dao.TouristGuideDaoL;
+import it.ispw.daniele.backpacker.dao.user_dao.UserDao;
+import it.ispw.daniele.backpacker.dao.user_dao.UserDaoFactory;
+import it.ispw.daniele.backpacker.dao.user_dao.UserDaoL;
 import it.ispw.daniele.backpacker.entity.GeneralUser;
 import it.ispw.daniele.backpacker.exceptions.EmptyFieldException;
 import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.exceptions.LoginFailException;
 
 import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
 
 public class LoginController {
 
     public GeneralUserBean login(GeneralUserBean userBean, String view) throws EmptyFieldException {
-        //GeneralUserDao gud = new GeneralUserDao();
 
         GeneralUserDaoFactory gudf = null;
 
@@ -34,9 +32,10 @@ public class LoginController {
             throw new EmptyFieldException("Password necessary");
         }
 
-        switch (view) {
-            case "gui" -> gudf = new GeneralUserDao();
-            case "cli" -> gudf = new GeneralUserDaoL();
+        if (view.equals("gui")) {
+            gudf = new GeneralUserDao();
+        } else if (view.equals("cli")) {
+            gudf = new GeneralUserDaoL();
         }
 
         assert gudf != null;
@@ -61,9 +60,11 @@ public class LoginController {
         }
 
         UserDaoFactory udf = null;
-        switch (view) {
-            case "gui" -> udf = new UserDao();
-            case "cli" -> udf = new UserDaoL();
+
+        if (view.equals("gui")) {
+            udf = new UserDao();
+        } else if (view.equals("cli")) {
+            udf = new UserDaoL();
         }
 
         assert udf != null;
@@ -85,9 +86,11 @@ public class LoginController {
         }
 
         TouristGuideDaoFactory tgdf = null;
-        switch (view) {
-            case "gui" -> tgdf = new TouristGuideDao();
-            case "cli" -> tgdf = new TouristGuideDaoL();
+
+        if (view.equals("gui")) {
+            tgdf = new TouristGuideDao();
+        } else if (view.equals("cli")) {
+            tgdf = new TouristGuideDaoL();
         }
 
         assert tgdf != null;

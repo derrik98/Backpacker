@@ -1,18 +1,18 @@
-package it.ispw.daniele.backpacker.dao.GeneralUserDao;
+package it.ispw.daniele.backpacker.dao.general_user_dao;
 
 import it.ispw.daniele.backpacker.entity.GeneralUser;
+import it.ispw.daniele.backpacker.exceptions.GenericException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
 public class GeneralUserDaoL extends GeneralUserDaoFactory {
 
-    private final String path_general_user = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/general_user.json";
+    private static final String PATH_GENERAL_USER = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/general_user.json";
 
     public GeneralUser findUser(String username, String password) {
         return this.execute(() -> {
@@ -20,7 +20,7 @@ public class GeneralUserDaoL extends GeneralUserDaoFactory {
             GeneralUser u;
             JSONParser parser = new JSONParser();
 
-            try (FileReader fileReader = new FileReader(path_general_user)) {
+            try (FileReader fileReader = new FileReader(PATH_GENERAL_USER)) {
 
                 JSONObject o = (JSONObject) parser.parse(fileReader);
                 JSONArray arr = (JSONArray) o.get("general_user");
@@ -43,7 +43,7 @@ public class GeneralUserDaoL extends GeneralUserDaoFactory {
                 }
 
             } catch (IOException | ParseException e) {
-                throw new RuntimeException(e);
+                throw new GenericException("Error");
             }
 
             return null;

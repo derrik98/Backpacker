@@ -1,4 +1,4 @@
-package it.ispw.daniele.backpacker.dao.ItineraryDao;
+package it.ispw.daniele.backpacker.dao.itinerary_dao;
 
 import it.ispw.daniele.backpacker.entity.Itinerary;
 import org.json.simple.JSONArray;

@@ -1,4 +1,4 @@
-package it.ispw.daniele.backpacker.dao.TouristGuideDao;
+package it.ispw.daniele.backpacker.dao.tourist_guide_dao;
 
 import it.ispw.daniele.backpacker.entity.TouristGuide;
 import org.json.simple.JSONArray;

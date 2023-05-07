@@ -18,7 +18,6 @@ public abstract class DaoTemplate {
         try {
             return daoAction.act();
         }catch ( SQLException | GenericException exception){
-            //throw exception;
             logger.log(Level.WARNING, exception.toString(), exception.getMessage());
         }
         return null;

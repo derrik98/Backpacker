@@ -1,7 +1,6 @@
-package it.ispw.daniele.backpacker.dao.ItineraryDao;
+package it.ispw.daniele.backpacker.dao.itinerary_dao;
 
 import it.ispw.daniele.backpacker.entity.Itinerary;
-import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.utils.DatabaseUserConnection;
 
 import java.sql.Connection;
@@ -15,16 +14,8 @@ import java.util.Objects;
 
 public class ItineraryDao extends ItineraryDaoFactory {
 
-    private static final String ID = "id";
-    private static final String LOCATION = "location";
-    private static final String GUIDE_ID = "guideId";
-    private static final String DATE = "date";
-    private static final String TIME = "time";
-    private static final String PARTICIPANTS = "participants";
-    private static final String PRICE = "price";
-    private static final String STEPS = "steps";
-    private static final String ADD_PART = "add_part";
-    private static final String REMOVE_PART = "remove_part";
+//    private static final String ADD_PART = "add_part";
+//    private static final String REMOVE_PART = "remove_part";
 
 
     public List<Itinerary> getItinerary(String city) {
@@ -51,14 +42,6 @@ public class ItineraryDao extends ItineraryDaoFactory {
         return Objects.requireNonNullElse(ret, Collections.emptyList());
     }
 
-//    public void addParticipation(String username, int itineraryId) {
-//        this.manageParticipation(username, itineraryId, ADD_PART);
-//    }
-//
-//    public void removeParticipation(String username, int itineraryId) {
-//        this.manageParticipation(username, itineraryId, REMOVE_PART);
-//    }
-
     public Boolean isParticipating(String username, int itineraryId) {
         Boolean ret = this.execute(() -> {
             Connection conn = DatabaseUserConnection.getUserConnection();
@@ -70,57 +53,12 @@ public class ItineraryDao extends ItineraryDaoFactory {
                     //DatabaseUserConnection.closeUserConnection(conn);
                     return (rs.first());
                 }
-            }finally {
+            } finally {
                 DatabaseUserConnection.closeUserConnection(conn);
             }
         });
         return Objects.requireNonNullElse(ret, false);
     }
-
-//    private void manageParticipation(String username, int id, String operation) {
-//        this.execute((DaoAction<Void>) () -> {
-//            Connection conn;
-//            PreparedStatement stm = null;
-//            String sql = null;
-//            try {
-//                conn = DatabaseUserConnection.getUserConnection();
-//                if (operation.equals(ADD_PART)) {
-//                    sql = "call backpacker.add_participation(?, ?);\r\n";
-//                } else if (operation.equals(REMOVE_PART)) {
-//                    sql = "call backpacker.remove_participation(?, ?);\r\n";
-//                }
-//                stm = conn.prepareStatement(sql);
-//                stm.setString(1, username);
-//                stm.setInt(2, id);
-//                stm.executeUpdate();
-//            } finally {
-//                if (stm != null)
-//                    stm.close();
-//            }
-//            DatabaseUserConnection.closeUserConnection(conn);
-//            return null;
-//        });
-//    }
-
-//    public boolean addItinerary(String guideId, String location, Date date, String time, int participants, int price, String steps) {
-//        return (this.execute(() -> {
-//            Connection con = DatabaseTouristGuideConnection.getTouristGuideConnection();
-//            String sql = "call backpacker.add_itinerary(?, ?, ?, ?, ?, ?, ?);\r\n";
-//            try (PreparedStatement stm = con.prepareStatement(sql)) {
-//                java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-//
-//                stm.setString(1, guideId);
-//                stm.setString(2, location);
-//                stm.setDate(3, sqlDate);
-//                stm.setString(4, time);
-//                stm.setInt(5, participants);
-//                stm.setInt(6, price);
-//                stm.setString(7, steps);
-//                stm.executeUpdate();
-//                return true;
-//            }
-//        }) != null);
-//    }
 
     public int getItineraryId(String guideId, String location, String date, String time, int participants, int price, String steps) throws SQLException {
 
@@ -131,13 +69,13 @@ public class ItineraryDao extends ItineraryDaoFactory {
         sql = "call backpacker.get_itinerary_id(?, ?, ?, ?, ?, ?, ?);\r\n";
 
         try (PreparedStatement stm = conn.prepareStatement(sql)) {
-            stm.setString(1,guideId);
-            stm.setString(2,location);
-            stm.setString(3,date);
-            stm.setString(4,time);
-            stm.setInt(5,participants);
-            stm.setInt(6,price);
-            stm.setString(7,steps);
+            stm.setString(1, guideId);
+            stm.setString(2, location);
+            stm.setString(3, date);
+            stm.setString(4, time);
+            stm.setInt(5, participants);
+            stm.setInt(6, price);
+            stm.setString(7, steps);
 
             try (ResultSet rs = stm.executeQuery()) {
 
@@ -160,14 +98,14 @@ public class ItineraryDao extends ItineraryDaoFactory {
             conn = DatabaseUserConnection.getUserConnection();
             sql = "call backpacker.get_booked_itineraries(?);\r\n";
 
-            try(PreparedStatement stm = conn.prepareStatement(sql)) {
+            try (PreparedStatement stm = conn.prepareStatement(sql)) {
 
                 stm.setString(1, input);
 
                 try (ResultSet rs = stm.executeQuery()) {
                     itinerary = unpackResultSet(rs);
                 }
-            }finally {
+            } finally {
                 DatabaseUserConnection.closeUserConnection(conn);
             }
             return itinerary;
@@ -175,13 +113,13 @@ public class ItineraryDao extends ItineraryDaoFactory {
         return Objects.requireNonNullElse(ret, Collections.emptyList());
     }
 
-    private List<Itinerary> unpackResultSet(ResultSet rs) throws SQLException{
+    private List<Itinerary> unpackResultSet(ResultSet rs) throws SQLException {
         List<Itinerary> l = new ArrayList<>();
 
         if (!rs.first()) // rs not empty
             return Collections.emptyList();
 
-        do{
+        do {
             int id = rs.getInt(ID);
             String guideId = rs.getString(GUIDE_ID);
             String location = rs.getString(LOCATION);
@@ -198,24 +136,6 @@ public class ItineraryDao extends ItineraryDaoFactory {
         return l;
     }
 
-//    public void saveTour(String username, String itinerary) {
-//        this.execute(new DaoAction<Boolean>() {
-//            @Override
-//            public Boolean act() throws SQLException {
-//                Connection con = DatabaseUserConnection.getUserConnection();
-//                String sql = "call backpacker.save_itinerary(?, ?);\r\n";
-//
-//                try (PreparedStatement stm = con.prepareStatement(sql)) {
-//                    stm.setString(1, username);
-//                    stm.setString(2, itinerary);
-//                    stm.executeUpdate();
-//
-//                }
-//                return true;
-//            }
-//        });
-//    }
-
     public List<Itinerary> getSavedItinerary(String input) {
         List<Itinerary> ret = this.execute(() -> {
             Connection conn;
@@ -225,14 +145,14 @@ public class ItineraryDao extends ItineraryDaoFactory {
             conn = DatabaseUserConnection.getUserConnection();
             sql = "call backpacker.get_saved_itinerary(?);\r\n";
 
-            try(PreparedStatement stm = conn.prepareStatement(sql)) {
+            try (PreparedStatement stm = conn.prepareStatement(sql)) {
 
                 stm.setString(1, input);
 
                 try (ResultSet rs = stm.executeQuery()) {
                     itinerary = unpackResult(rs);
                 }
-            }finally {
+            } finally {
                 DatabaseUserConnection.closeUserConnection(conn);
             }
             return itinerary;
@@ -247,7 +167,7 @@ public class ItineraryDao extends ItineraryDaoFactory {
         if (!rs.first()) // rs not empty
             return Collections.emptyList();
 
-        do{
+        do {
             int id = rs.getInt(ID);
             String steps = rs.getString(STEPS);
 
@@ -257,20 +177,5 @@ public class ItineraryDao extends ItineraryDaoFactory {
         } while (rs.next());
         return l;
     }
-
-//    public void removeTour(String username, String steps) {
-//
-//        this.execute(() -> {
-//            Connection con = DatabaseUserConnection.getUserConnection();
-//            String sql = "call backpacker.remove_itinerary(?, ?);\r\n";
-//
-//            try (PreparedStatement stm = con.prepareStatement(sql)) {
-//                stm.setString(1, username);
-//                stm.setString(2, steps);
-//                stm.executeUpdate();
-//            }
-//            return true;
-//        });
-//    }
 
 }

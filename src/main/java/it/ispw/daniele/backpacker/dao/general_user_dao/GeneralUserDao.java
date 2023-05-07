@@ -1,4 +1,4 @@
-package it.ispw.daniele.backpacker.dao.GeneralUserDao;
+package it.ispw.daniele.backpacker.dao.general_user_dao;
 
 import it.ispw.daniele.backpacker.entity.GeneralUser;
 import it.ispw.daniele.backpacker.utils.DatabaseLoginConnection;

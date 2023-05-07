@@ -1,4 +1,4 @@
-package it.ispw.daniele.backpacker.dao.ItineraryDao;
+package it.ispw.daniele.backpacker.dao.itinerary_dao;
 
 import it.ispw.daniele.backpacker.dao.DaoAction;
 import it.ispw.daniele.backpacker.dao.DaoTemplate;
@@ -24,19 +24,19 @@ import java.util.Map;
 
 public abstract class ItineraryDaoFactory extends DaoTemplate {
 
-    protected final String path_goes_to = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/goes_to.json";
-    protected final String path_itinerary = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/itinerary.json";
-    protected final String path_saved_itinerary = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/saved_itinerary.json";
-    protected final String ID = "id";
-    protected final String LOCATION = "location";
-    protected final String GUIDE_ID = "guideId";
-    protected final String DATE = "date";
-    protected final String TIME = "time";
-    protected final String PARTICIPANTS = "participants";
-    protected final String PRICE = "price";
-    protected final String STEPS = "steps";
-    private final String ADD_PART = "add_part";
-    private final String REMOVE_PART = "remove_part";
+    protected static final String PATH_GOES_TO = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/goes_to.json";
+    protected static final String PATH_ITINERARY = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/itinerary.json";
+    protected static final String PATH_SAVED_ITINERARY = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/saved_itinerary.json";
+    protected static final String ID = "id";
+    protected static final String LOCATION = "location";
+    protected static final String GUIDE_ID = "guideId";
+    protected static final String DATE = "date";
+    protected static final String TIME = "time";
+    protected static final String PARTICIPANTS = "participants";
+    protected static final String PRICE = "price";
+    protected static final String STEPS = "steps";
+    private static final String ADD_PART = "add_part";
+    private static final String REMOVE_PART = "remove_part";
 
     public void addParticipation(String username, int itineraryId)  {
         this.manageParticipation(username, itineraryId, ADD_PART);
@@ -72,7 +72,7 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
             try {
 
                 JSONParser parser = new JSONParser();
-                FileReader fileReader = new FileReader(path_goes_to);
+                FileReader fileReader = new FileReader(PATH_GOES_TO);
 
                 JSONObject o = (JSONObject) parser.parse(fileReader);
                 JSONArray arr = (JSONArray) o.get("goes_to");
@@ -102,13 +102,8 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
                     }
                 }
 
-                try (FileWriter file = new FileWriter(path_goes_to)) {
+                try (FileWriter file = new FileWriter(PATH_GOES_TO)) {
                     file.write(o.toString());
-                    System.out.println("Successfully updated json object to file...!!");
-
-                    file.close();
-                    fileReader.close();
-
                 }
             } catch (IOException | ParseException e) {
                 throw new RuntimeException(e);
@@ -151,7 +146,7 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
             Map<String, String> jsonMap;
 
             try {
-                o = (JSONObject) parser.parse(new FileReader(path_itinerary));
+                o = (JSONObject) parser.parse(new FileReader(PATH_ITINERARY));
             } catch (IOException | ParseException e) {
                 throw new RuntimeException(e);
             }
@@ -173,9 +168,8 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
 
             arr.add(newUser);
 
-            try (FileWriter file = new FileWriter(path_itinerary)) {
+            try (FileWriter file = new FileWriter(PATH_ITINERARY)) {
                 file.write(o.toString());
-                System.out.println("Successfully updated json object to file...!!");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -209,7 +203,7 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
             Map<String, String> jsonMap;
 
             try {
-                o = (JSONObject) parser.parse(new FileReader(path_saved_itinerary));
+                o = (JSONObject) parser.parse(new FileReader(PATH_SAVED_ITINERARY));
             } catch (IOException | ParseException e) {
                 throw new RuntimeException(e);
             }
@@ -225,9 +219,8 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
 
             arr.add(newItinerary);
 
-            try (FileWriter file = new FileWriter(path_saved_itinerary)) {
+            try (FileWriter file = new FileWriter(PATH_SAVED_ITINERARY)) {
                 file.write(o.toString());
-                System.out.println("Successfully updated json object to file...!!");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -255,7 +248,7 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
             try {
                 JSONParser parser = new JSONParser();
 
-                FileReader fileReader = new FileReader(path_saved_itinerary);
+                FileReader fileReader = new FileReader(PATH_SAVED_ITINERARY);
 
                 JSONObject o = (JSONObject) parser.parse(fileReader);
                 JSONArray arr = (JSONArray) o.get("saved_itinerary");
@@ -270,9 +263,8 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
                         System.out.println(object);
                         arr.remove(object);
 
-                        try (FileWriter file = new FileWriter(path_saved_itinerary)) {
+                        try (FileWriter file = new FileWriter(PATH_SAVED_ITINERARY)) {
                             file.write(o.toString());
-                            System.out.println("Successfully updated json object to file...!!");
                             return true;
                         } catch (IOException e) {
                             throw new RuntimeException(e);

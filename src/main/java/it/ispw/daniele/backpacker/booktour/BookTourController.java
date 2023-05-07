@@ -2,9 +2,9 @@ package it.ispw.daniele.backpacker.booktour;
 
 import it.ispw.daniele.backpacker.bean.GeneralUserBean;
 import it.ispw.daniele.backpacker.bean.ItineraryBean;
-import it.ispw.daniele.backpacker.dao.ItineraryDao.ItineraryDao;
-import it.ispw.daniele.backpacker.dao.ItineraryDao.ItineraryDaoFactory;
-import it.ispw.daniele.backpacker.dao.ItineraryDao.ItineraryDaoL;
+import it.ispw.daniele.backpacker.dao.itinerary_dao.ItineraryDao;
+import it.ispw.daniele.backpacker.dao.itinerary_dao.ItineraryDaoFactory;
+import it.ispw.daniele.backpacker.dao.itinerary_dao.ItineraryDaoL;
 import it.ispw.daniele.backpacker.entity.Itinerary;
 import it.ispw.daniele.backpacker.utils.Controller;
 
@@ -20,15 +20,14 @@ public class BookTourController extends Controller {
 
         this.view = view;
 
-        //ItineraryDaoFactory id = null;
-        switch (view) {
-            case "gui" -> this.id = new ItineraryDao();
-            case "cli" -> this.id = new ItineraryDaoL();
+        if (this.view.equals("gui")) {
+            this.id = new ItineraryDao();
+        } else if (view.equals("cli")) {
+            this.id = new ItineraryDaoL();
         }
     }
 
     public List<ItineraryBean> getItinerary(String input, String type) {
-        //ItineraryDaoFactory id = null;
 
         List<Itinerary> itinerary;
         switch (type) {

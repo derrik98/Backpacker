@@ -1,17 +1,12 @@
-package it.ispw.daniele.backpacker.dao.UserDao;
+package it.ispw.daniele.backpacker.dao.user_dao;
 
-import it.ispw.daniele.backpacker.dao.DaoTemplate;
-import it.ispw.daniele.backpacker.entity.Itinerary;
 import it.ispw.daniele.backpacker.entity.User;
-import it.ispw.daniele.backpacker.exceptions.GenericException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 

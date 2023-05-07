@@ -2,9 +2,9 @@ package it.ispw.daniele.backpacker.booktour;
 
 import it.ispw.daniele.backpacker.bean.GeneralUserBean;
 import it.ispw.daniele.backpacker.bean.ItineraryBean;
-import it.ispw.daniele.backpacker.dao.ItineraryDao.ItineraryDao;
-import it.ispw.daniele.backpacker.dao.ItineraryDao.ItineraryDaoFactory;
-import it.ispw.daniele.backpacker.dao.ItineraryDao.ItineraryDaoL;
+import it.ispw.daniele.backpacker.dao.itinerary_dao.ItineraryDao;
+import it.ispw.daniele.backpacker.dao.itinerary_dao.ItineraryDaoFactory;
+import it.ispw.daniele.backpacker.dao.itinerary_dao.ItineraryDaoL;
 
 public class AddParticipationController {
 
@@ -12,25 +12,23 @@ public class AddParticipationController {
 
     public AddParticipationController(String view) {
 
-        switch (view) {
-            case "gui" -> this.id = new ItineraryDao();
-            case "cli" -> this.id = new ItineraryDaoL();
+        if (view.equals("gui")) {
+            this.id = new ItineraryDao();
+        } else if (view.equals("cli")) {
+            this.id = new ItineraryDaoL();
         }
     }
 
     public void addParticipation(GeneralUserBean user, ItineraryBean itinerary) {
-            //ItineraryDao id = new ItineraryDao();
-            this.id.addParticipation(user.getUsername(), itinerary.getItineraryId());
-        }
-
-        public void removeParticipation(GeneralUserBean user, ItineraryBean itinerary) {
-            //ItineraryDao id = new ItineraryDao();
-            this.id.removeParticipation(user.getUsername(), itinerary.getItineraryId());
-        }
-
-        public boolean isParticipating(GeneralUserBean user, ItineraryBean itinerary) {
-            //ItineraryDao id = new ItineraryDao();
-            return this.id.isParticipating(user.getUsername(), itinerary.getItineraryId());
-        }
+        this.id.addParticipation(user.getUsername(), itinerary.getItineraryId());
     }
+
+    public void removeParticipation(GeneralUserBean user, ItineraryBean itinerary) {
+        this.id.removeParticipation(user.getUsername(), itinerary.getItineraryId());
+    }
+
+    public boolean isParticipating(GeneralUserBean user, ItineraryBean itinerary) {
+        return this.id.isParticipating(user.getUsername(), itinerary.getItineraryId());
+    }
+}
 
