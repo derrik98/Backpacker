@@ -25,7 +25,7 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
 
             JSONParser parser = new JSONParser();
 
-            try (FileReader fileReader = new FileReader(path_itinerary)) {
+            try (FileReader fileReader = new FileReader(PATH_ITINERARY)) {
 
                 JSONObject o = (JSONObject) parser.parse(fileReader);
                 JSONArray arr = (JSONArray) o.get("itinerary");
@@ -80,7 +80,7 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
 
             JSONParser parser = new JSONParser();
 
-            try (FileReader fileReader = new FileReader(path_goes_to)) {
+            try (FileReader fileReader = new FileReader(PATH_GOES_TO)) {
 
                 JSONObject o = (JSONObject) parser.parse(fileReader);
                 JSONArray arr = (JSONArray) o.get("goes_to");
@@ -115,7 +115,7 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
 
         JSONParser parser = new JSONParser();
 
-        try (FileReader fileReader = new FileReader(path_itinerary)) {
+        try (FileReader fileReader = new FileReader(PATH_ITINERARY)) {
 
             JSONObject o = (JSONObject) parser.parse(fileReader);
             JSONArray arr = (JSONArray) o.get("itinerary");
@@ -154,7 +154,7 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
 
             JSONParser parser = new JSONParser();
 
-            try (FileReader fileItinerary = new FileReader(path_itinerary); FileReader fileGoesTo = new FileReader(path_goes_to)) {
+            try (FileReader fileItinerary = new FileReader(PATH_ITINERARY); FileReader fileGoesTo = new FileReader(PATH_GOES_TO)) {
 
                 JSONObject objectGoesTo = (JSONObject) parser.parse(fileGoesTo);
                 JSONArray arrayGoesTo = (JSONArray) objectGoesTo.get("goes_to");
@@ -211,7 +211,7 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
 
             JSONParser parser = new JSONParser();
 
-            try(FileReader fileReader = new FileReader(path_saved_itinerary)) {
+            try(FileReader fileReader = new FileReader(PATH_SAVED_ITINERARY)) {
 
                 JSONObject o = (JSONObject) parser.parse(fileReader);
                 JSONArray arr = (JSONArray) o.get("saved_itinerary");
