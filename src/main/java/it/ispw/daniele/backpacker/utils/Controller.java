@@ -34,9 +34,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Controller{
+public class Controller {
 
-    private final String style = "Arial";
+    private static final String style = "Arial";
 
     protected UserBean convert(User l) {
         UserBean ub = new UserBean();
@@ -114,14 +114,11 @@ public class Controller{
             Label output = new Label();
             this.setLabelOutput(output, contentPane);
 
-            if (type.equals("suggested")) {
+            if (type.equals("suggested") && !from.equals("profile")) {
 
-                if (!from.equals("profile")) {
+                //Setting of buy image
+                this.setIvBuy(titledPane, itineraryBean, stackPane, contentPane);
 
-                    //Setting of buy image
-                    this.setIvBuy(titledPane, itineraryBean, stackPane, contentPane);
-
-                }
             }
 
             //Setting of delete image
@@ -146,8 +143,8 @@ public class Controller{
             titledPane.setCollapsible(true);
             accordion.getPanes().add(titledPane);
         }
-            return accordion;
-        }
+        return accordion;
+    }
 
     private void setIvSave(TitledPane titledPane, ItineraryBean itineraryBean, HBox hBox, Label output) {
 
@@ -292,10 +289,9 @@ public class Controller{
     private void saveItinerary(ItineraryBean itineraryBean, String type) {
         SaveTour st = new SaveTour("gui");
 
-        if(type.equals("save")){
+        if (type.equals("save")) {
             st.saveTour(SessionUser.getInstance().getSession(), itineraryBean);
-        }
-        else {
+        } else {
             st.removeTour(SessionUser.getInstance().getSession(), itineraryBean);
         }
     }
@@ -305,15 +301,15 @@ public class Controller{
         WebView webView = new WebView();
         webView.setMinHeight(550);
 
-        StringBuilder Url = new StringBuilder("https://google.it/maps/dir/" + als.get(0));
+        StringBuilder URL = new StringBuilder("https://google.it/maps/dir/" + als.get(0));
 
         for (String element : als) {
 
-            Url.append("/").append(element);
+            URL.append("/").append(element);
 
         }
 
-        webView.getEngine().load(Url.toString());
+        webView.getEngine().load(URL.toString());
 
         VBox v = new VBox(webView);
         titledPane.setContent(v);

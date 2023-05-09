@@ -22,8 +22,16 @@ import java.util.Map;
 public abstract class UserDaoFactory extends DaoTemplate {
 
     protected static final String SEARCH_USER = "search_user";
-    protected final String path_user = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/user.json";
-    protected final String path_general_user = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/general_user.json";
+    protected static final String path_user = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/user.json";
+    protected static final String path_general_user = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/general_user.json";
+
+    protected static final String USERNAME = "username";
+    protected static final String NAME = "name";
+    protected static final String SURNAME = "surname";
+    protected static final String PROFILE_PICTURE_PATH = "profile_picture_path";
+    protected static final String EMAIL = "email";
+    protected static final String PASSWORD = "password";
+    protected static final String ROLE = "user";
 
     public Boolean createUser(String username, String name, String surname, String email, String password, String profilePicture) throws SQLException, GenericException {
         return (this.execute(() -> {
@@ -36,7 +44,6 @@ public abstract class UserDaoFactory extends DaoTemplate {
             }
 
             String sql = "call backpacker.add_user(?, ?, ?, ?, ?, ?);\r\n";
-            //PreparedStatement stm = conn.prepareStatement(sql);
 
             try (PreparedStatement stm = conn.prepareStatement(sql)){
                 stm.setString(1, username);
@@ -50,21 +57,6 @@ public abstract class UserDaoFactory extends DaoTemplate {
             finally {
                 DatabaseLoginConnection.closeLoginConnection(conn);
             }
-
-            /*finally {
-                if (stm != null) {
-                    try {
-                        stm.close();
-                    } catch (SQLException e1) {
-                        System.out.println("error");
-                    }
-                }
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    System.out.println("error");
-                }
-            }*/
 
             //Save on File System
             JSONParser parser = new JSONParser();
@@ -81,10 +73,10 @@ public abstract class UserDaoFactory extends DaoTemplate {
             arr = (JSONArray) o.get("user");
 
             jsonMap = new HashMap<>();
-            jsonMap.put("username", username);
-            jsonMap.put("name", name);
-            jsonMap.put("surname", surname);
-            jsonMap.put("profile_picture_path", profilePicture);
+            jsonMap.put(USERNAME, username);
+            jsonMap.put(NAME, name);
+            jsonMap.put(SURNAME, surname);
+            jsonMap.put(PROFILE_PICTURE_PATH, profilePicture);
 
             JSONObject newUser = new JSONObject(jsonMap);
 
@@ -93,7 +85,7 @@ public abstract class UserDaoFactory extends DaoTemplate {
 
             try (FileWriter file = new FileWriter(path_user)) {
                 file.write(o.toString());
-                System.out.println("Successfully updated json object to file...!!");
+
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -107,10 +99,10 @@ public abstract class UserDaoFactory extends DaoTemplate {
             arr = (JSONArray) o.get("general_user");
 
             jsonMap = new HashMap<>();
-            jsonMap.put("username", username);
-            jsonMap.put("email", email);
-            jsonMap.put("password", password);
-            jsonMap.put("role", "user");
+            jsonMap.put(USERNAME, username);
+            jsonMap.put(EMAIL, email);
+            jsonMap.put(PASSWORD, password);
+            jsonMap.put(ROLE, "user");
 
             JSONObject newUser1 = new JSONObject(jsonMap);
 
@@ -118,7 +110,6 @@ public abstract class UserDaoFactory extends DaoTemplate {
 
             try (FileWriter file = new FileWriter(path_general_user)) {
                 file.write(o.toString());
-                System.out.println("Successfully updated json object to file...!!");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

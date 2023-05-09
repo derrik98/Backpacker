@@ -6,7 +6,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,6 +15,7 @@ import java.util.Objects;
 
 public class ItineraryDaoL extends ItineraryDaoFactory {
 
+    protected static final String ITINERARY = "itinerary";
 
     @Override
     public List<Itinerary> getItinerary(String city) {
@@ -28,7 +28,7 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
             try (FileReader fileReader = new FileReader(PATH_ITINERARY)) {
 
                 JSONObject o = (JSONObject) parser.parse(fileReader);
-                JSONArray arr = (JSONArray) o.get("itinerary");
+                JSONArray arr = (JSONArray) o.get(ITINERARY);
                 if (arr.isEmpty()) {
                     return Collections.emptyList();
                 }
@@ -37,7 +37,7 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
 
                     JSONObject object = (JSONObject) arr.get(index);
 
-                    if (String.valueOf(object.get("location")).equals(city)) {
+                    if (String.valueOf(object.get(LOCATION)).equals(city)) {
 
                         System.out.println(object.get(ID));
 
@@ -56,14 +56,10 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
 
                         itineraryList.add(itinerary);
 
-                        fileReader.close();
-
                         return itineraryList;
                     }
                 }
 
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
             } catch (IOException | ParseException e) {
                 throw new RuntimeException(e);
             }
@@ -75,8 +71,6 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
     @Override
     public Boolean isParticipating(String username, int itineraryId) {
         Boolean ret = (Boolean) this.execute(() -> {
-//            Connection conn = DatabaseUserConnection.getUserConnection();
-//            String sql = "call backpacker.is_participating(?, ?);\r\n";
 
             JSONParser parser = new JSONParser();
 
@@ -93,9 +87,7 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
 
                     JSONObject object = (JSONObject) arr.get(index);
 
-                    if (object.get("username").equals(username) && object.get("itinerary_id").equals(itineraryId)) {
-
-                        fileReader.close();
+                    if (object.get(USERNAME).equals(username) && object.get(ITINERARY_ID).equals(itineraryId)) {
 
                         return true;
                     }
@@ -118,7 +110,7 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
         try (FileReader fileReader = new FileReader(PATH_ITINERARY)) {
 
             JSONObject o = (JSONObject) parser.parse(fileReader);
-            JSONArray arr = (JSONArray) o.get("itinerary");
+            JSONArray arr = (JSONArray) o.get(ITINERARY);
             if (arr.isEmpty()) {
                 return 0;
             }
@@ -127,13 +119,11 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
 
                 JSONObject object = (JSONObject) arr.get(index);
 
-                if (object.get("guide_id").equals(guideId) && object.get("location").equals(location) && object.get("date").equals(date) &&
-                        object.get("time").equals(time) && object.get("participants").equals(String.valueOf(participants))
-                        && object.get("price").equals(String.valueOf(price)) && object.get("steps").equals(steps)) {
+                if (object.get(GUIDE_ID).equals(guideId) && object.get(LOCATION).equals(location) && object.get(DATE).equals(date) &&
+                        object.get(TIME).equals(time) && object.get(PARTICIPANTS).equals(String.valueOf(participants))
+                        && object.get(PRICE).equals(String.valueOf(price)) && object.get(STEPS).equals(steps)) {
 
                     int id = (int) object.get(ID);
-
-                    fileReader.close();
 
                     return id;
                 }
@@ -160,7 +150,7 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
                 JSONArray arrayGoesTo = (JSONArray) objectGoesTo.get("goes_to");
 
                 JSONObject objectItinerary = (JSONObject) parser.parse(fileItinerary);
-                JSONArray arrayItinerary = (JSONArray) objectItinerary.get("itinerary");
+                JSONArray arrayItinerary = (JSONArray) objectItinerary.get(ITINERARY);
 
                 if (arrayGoesTo.isEmpty() || arrayItinerary.isEmpty()) {
                     return Collections.emptyList();
@@ -174,7 +164,7 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
 
                         JSONObject objectI = (JSONObject) arrayItinerary.get(indexI);
 
-                        if (objectG.get("itinerary_id").equals(objectI.get("id")) && objectG.get("username").equals(input)) {
+                        if (objectG.get(ITINERARY_ID).equals(objectI.get(ID)) && objectG.get(USERNAME).equals(input)) {
 
                             int id = (int) objectG.get(ID);
                             String guideId = (String) objectI.get(GUIDE_ID);
@@ -224,7 +214,7 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
 
                     JSONObject object = (JSONObject) arr.get(index);
 
-                    if (object.get("username").equals(input)) {
+                    if (object.get(USERNAME).equals(input)) {
 
                         String id = (String) object.get(ID);
                         String steps = (String) object.get(STEPS);
@@ -236,7 +226,6 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
                     }
                 }
 
-                fileReader.close();
                 return itineraryList;
             } catch (IOException | ParseException e) {
                 throw new RuntimeException(e);

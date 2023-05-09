@@ -259,8 +259,7 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
                     JSONObject object = (JSONObject) arr.get(index);
 
                     if (object.get(USERNAME).equals(username) && object.get(STEPS).equals(steps)) {
-                        //System.out.println(object.get(USERNAME) + " " + object.get(STEPS));
-                        //System.out.println(object);
+                        
                         arr.remove(object);
 
                         try (FileWriter file = new FileWriter(PATH_SAVED_ITINERARY)) {

@@ -23,14 +23,6 @@ public class Itinerary {
         this.steps = steps;
     }
 
-//    public Itinerary(int id ,String steps) {
-//        this.steps = steps;
-//        this.guideId = "";
-//        this.id = id;
-//        this.location = "";
-//        this.date = "";
-//    }
-
     public String getSteps() {
         return this.steps;
     }

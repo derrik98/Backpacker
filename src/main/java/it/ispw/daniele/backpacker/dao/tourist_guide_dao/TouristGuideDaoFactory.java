@@ -21,9 +21,17 @@ public  abstract class TouristGuideDaoFactory extends DaoTemplate {
 
     protected static final String SEARCH_T_GUIDE = "search_t_guide";
 
-    protected final String path_tourist_guide = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/tourist_guide.json";
-    protected final String path_general_user = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/general_user.json";
+    protected static final String path_tourist_guide = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/tourist_guide.json";
+    protected static final String path_general_user = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/general_user.json";
 
+    protected static final String USERNAME = "username";
+    protected static final String NAME = "name";
+    protected static final String SURNAME = "surname";
+    protected static final String PROFILE_PICTURE_PATH = "profile_picture_path";
+    protected static final String IDENTIFICATION_CODE = "identification_code";
+    protected static final String EMAIL = "email";
+    protected static final String PASSWORD = "password";
+    protected static final String ROLE = "tourist_guide";
 
     public Boolean createTouristGuide(String username, String name, String surname,
                                       String email, String password, String profilePicture, String identificationCode) {
@@ -66,20 +74,19 @@ public  abstract class TouristGuideDaoFactory extends DaoTemplate {
             arr = (JSONArray) o.get("tourist_guide");
 
             jsonMap = new HashMap<>();
-            jsonMap.put("username", username);
-            jsonMap.put("name", name);
-            jsonMap.put("surname", surname);
-            jsonMap.put("profile_picture_path", profilePicture);
-            jsonMap.put("identification_code", identificationCode);
+            jsonMap.put(USERNAME, username);
+            jsonMap.put(NAME, name);
+            jsonMap.put(SURNAME, surname);
+            jsonMap.put(PROFILE_PICTURE_PATH, profilePicture);
+            jsonMap.put(IDENTIFICATION_CODE, identificationCode);
 
             JSONObject newUser = new JSONObject(jsonMap);
 
-            //arr.put(newUser);
             arr.add(newUser);
 
             try (FileWriter file = new FileWriter(path_tourist_guide)) {
                 file.write(o.toString());
-                System.out.println("Successfully updated json object to file...!!");
+                //System.out.println("Successfully updated json object to file...!!");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -93,10 +100,10 @@ public  abstract class TouristGuideDaoFactory extends DaoTemplate {
             arr = (JSONArray) o.get("general_user");
 
             jsonMap = new HashMap<>();
-            jsonMap.put("username", username);
-            jsonMap.put("email", email);
-            jsonMap.put("password", password);
-            jsonMap.put("role", "tourist_guide");
+            jsonMap.put(USERNAME, username);
+            jsonMap.put(EMAIL, email);
+            jsonMap.put(PASSWORD, password);
+            jsonMap.put(ROLE, "tourist_guide");
 
             JSONObject newUser1 = new JSONObject(jsonMap);
 
@@ -104,7 +111,7 @@ public  abstract class TouristGuideDaoFactory extends DaoTemplate {
 
             try (FileWriter file = new FileWriter(path_general_user)) {
                 file.write(o.toString());
-                System.out.println("Successfully updated json object to file...!!");
+                //System.out.println("Successfully updated json object to file...!!");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

@@ -43,16 +43,16 @@ public class TouristGuideDaoL extends TouristGuideDaoFactory {
 
                             JSONObject objectGU = (JSONObject) arrayGeneralUser.get(indexGU);
 
-                            if (objectU.get("username").equals(caller) && objectGU.get("username").equals(caller)) {
+                            if (objectU.get(USERNAME).equals(caller) && objectGU.get(USERNAME).equals(caller)) {
 
-                                String username = (String) objectT.get("username");
-                                String name = (String) objectT.get("name");
-                                String surname = (String) objectT.get("surname");
-                                String profilePicture = (String) objectT.get("profile_picture_path");
-                                String email = (String) objectGU.get("email");
-                                String vatNum = (String) objectT.get("identification_code");
+                                String username = (String) objectT.get(USERNAME);
+                                String name = (String) objectT.get(NAME);
+                                String surname = (String) objectT.get(SURNAME);
+                                String profilePicture = (String) objectT.get(PROFILE_PICTURE_PATH);
+                                String email = (String) objectGU.get(EMAIL);
+                                String vatNum = (String) objectT.get(IDENTIFICATION_CODE);
 
-                                if (objectU.get("profile_picture_path") == null || objectU.get("profile_picture_path").equals("")) {
+                                if (objectU.get(PROFILE_PICTURE_PATH) == null || objectU.get(PROFILE_PICTURE_PATH).equals("")) {
                                     profilePicture = "user.png";
                                 }
 
