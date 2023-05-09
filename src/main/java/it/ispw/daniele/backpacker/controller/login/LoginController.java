@@ -17,6 +17,7 @@ import it.ispw.daniele.backpacker.exceptions.EmptyFieldException;
 import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.exceptions.LoginFailException;
 
+import java.lang.module.Configuration;
 import java.sql.SQLException;
 
 public class LoginController {
@@ -94,7 +95,7 @@ public class LoginController {
         }
 
         assert tgdf != null;
-        if(tgdf.createTouristGuide(tgb.getUsername(), tgb.getName(), tgb.getSurname(), tgb.getEmail(), tgb.getPassword(), tgb.getProfilePicture(), tgb.getIdentificationCode())){
+        if(tgdf.createTouristGuide(tgb.getUsername(), tgb.getName(), tgb.getSurname(), tgb.getEmail(), tgb.getPassword(), tgb.getProfilePicture(), tgb.getIdentificationCode()).equals(true)){
             return true;
         }
         else {

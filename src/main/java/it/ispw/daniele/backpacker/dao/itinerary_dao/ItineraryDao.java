@@ -14,10 +14,6 @@ import java.util.Objects;
 
 public class ItineraryDao extends ItineraryDaoFactory {
 
-//    private static final String ADD_PART = "add_part";
-//    private static final String REMOVE_PART = "remove_part";
-
-
     public List<Itinerary> getItinerary(String city) {
         List<Itinerary> ret = this.execute(() -> {
             Connection conn;
@@ -50,7 +46,6 @@ public class ItineraryDao extends ItineraryDaoFactory {
                 stm.setString(1, username);
                 stm.setInt(2, itineraryId);
                 try (ResultSet rs = stm.executeQuery()) {
-                    //DatabaseUserConnection.closeUserConnection(conn);
                     return (rs.first());
                 }
             } finally {

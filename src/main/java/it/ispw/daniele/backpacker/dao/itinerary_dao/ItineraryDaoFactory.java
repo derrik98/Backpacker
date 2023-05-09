@@ -28,8 +28,11 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
     protected static final String PATH_ITINERARY = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/itinerary.json";
     protected static final String PATH_SAVED_ITINERARY = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/saved_itinerary.json";
     protected static final String ID = "id";
+    protected static final String ITINERARY_ID = "itinerary_id";
+    protected static final String USERNAME = "username";
     protected static final String LOCATION = "location";
     protected static final String GUIDE_ID = "guideId";
+    protected static final String WITH_GUIDE = "with_guide";
     protected static final String DATE = "date";
     protected static final String TIME = "time";
     protected static final String PARTICIPANTS = "participants";
@@ -81,9 +84,9 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
                     Map<String, String> jsonMap;
 
                     jsonMap = new HashMap<>();
-                    jsonMap.put("username", username);
-                    jsonMap.put("itinerary_id", String.valueOf(id));
-                    jsonMap.put("with_guide", String.valueOf(true));
+                    jsonMap.put(USERNAME, username);
+                    jsonMap.put(ITINERARY_ID, String.valueOf(id));
+                    jsonMap.put(WITH_GUIDE, String.valueOf(true));
 
                     JSONObject newUser = new JSONObject(jsonMap);
 
@@ -94,21 +97,18 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
 
                         JSONObject object = (JSONObject) arr.get(index);
 
-                        if (object.get("username").equals(username) && object.get("itinerary_id").equals(id)) {
+                        if (object.get(USERNAME).equals(username) && object.get(ITINERARY_ID).equals(id)) {
 
                             arr.remove(object);
                         }
-
                     }
                 }
-
                 try (FileWriter file = new FileWriter(PATH_GOES_TO)) {
                     file.write(o.toString());
                 }
             } catch (IOException | ParseException e) {
                 throw new RuntimeException(e);
             }
-
 
             return null;
         });
@@ -155,14 +155,14 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
 
 
             jsonMap = new HashMap<>();
-            jsonMap.put("id", String.valueOf(arr.size() + 1));  //controllare bene indice
-            jsonMap.put("guide_id", guideId);
-            jsonMap.put("location", location);
-            jsonMap.put("date", String.valueOf(date));
-            jsonMap.put("time", time);
-            jsonMap.put("participants", String.valueOf(participants));
-            jsonMap.put("price", String.valueOf(price));
-            jsonMap.put("steps", steps);
+            jsonMap.put(ID, String.valueOf(arr.size() + 1));  //controllare bene indice
+            jsonMap.put(GUIDE_ID, guideId);
+            jsonMap.put(LOCATION, location);
+            jsonMap.put(DATE, String.valueOf(date));
+            jsonMap.put(TIME, time);
+            jsonMap.put(PARTICIPANTS, String.valueOf(participants));
+            jsonMap.put(PRICE, String.valueOf(price));
+            jsonMap.put(STEPS, steps);
 
             JSONObject newUser = new JSONObject(jsonMap);
 
@@ -211,9 +211,9 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
             arr = (JSONArray) o.get("saved_itinerary");
 
             jsonMap = new HashMap<>();
-            jsonMap.put("id", String.valueOf(arr.size() + 1));  //controllare bene indice
-            jsonMap.put("username", username);
-            jsonMap.put("steps", itinerary);
+            jsonMap.put(ID, String.valueOf(arr.size() + 1));  //controllare bene indice
+            jsonMap.put(USERNAME, username);
+            jsonMap.put(STEPS, itinerary);
 
             JSONObject newItinerary = new JSONObject(jsonMap);
 
@@ -258,9 +258,9 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
 
                     JSONObject object = (JSONObject) arr.get(index);
 
-                    if (object.get("username").equals(username) && object.get("steps").equals(steps)) {
-                        System.out.println(object.get("username") + " " + object.get("steps"));
-                        System.out.println(object);
+                    if (object.get(USERNAME).equals(username) && object.get(STEPS).equals(steps)) {
+                        //System.out.println(object.get(USERNAME) + " " + object.get(STEPS));
+                        //System.out.println(object);
                         arr.remove(object);
 
                         try (FileWriter file = new FileWriter(PATH_SAVED_ITINERARY)) {
