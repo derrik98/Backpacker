@@ -24,9 +24,9 @@ import java.util.Map;
 
 public abstract class ItineraryDaoFactory extends DaoTemplate {
 
-    protected static final String PATH_GOES_TO = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/goes_to.json";
-    protected static final String PATH_ITINERARY = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/itinerary.json";
-    protected static final String PATH_SAVED_ITINERARY = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/saved_itinerary.json";
+    protected static final String PATH_GOES_TO = System.getProperty("path_goes_to");
+    protected static final String PATH_ITINERARY = System.getProperty("path_itinerary");
+    protected static final String PATH_SAVED_ITINERARY = System.getProperty("path_saved_itinerary");
     protected static final String ID = "id";
     protected static final String ITINERARY_ID = "itinerary_id";
     protected static final String USERNAME = "username";

@@ -12,8 +12,6 @@ import java.io.IOException;
 
 public class GeneralUserDaoL extends GeneralUserDaoFactory {
 
-    //private static final String PATH_GENERAL_USER = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/general_user.json";
-
     private static final String PATH_GENERAL_USER = System.getProperty("path_general_user");
 
     public GeneralUser findUser(String username, String password) {

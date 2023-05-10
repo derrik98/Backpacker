@@ -11,6 +11,7 @@ public class GeneralUserDao extends GeneralUserDaoFactory {
 
     public GeneralUser findUser(String username, String password) {
         return this.execute(() -> {
+
             Connection conn;
             GeneralUser generalUser = null;
             conn = DatabaseLoginConnection.getLoginConnection();
