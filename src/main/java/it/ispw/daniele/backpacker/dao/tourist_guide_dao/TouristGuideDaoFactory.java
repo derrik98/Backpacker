@@ -31,7 +31,9 @@ public  abstract class TouristGuideDaoFactory extends DaoTemplate {
     protected static final String IDENTIFICATION_CODE = "identification_code";
     protected static final String EMAIL = "email";
     protected static final String PASSWORD = "password";
-    protected static final String ROLE = "tourist_guide";
+
+    protected static final String TOURIST_GUIDE = "tourist_guide";
+    protected static final String ROLE = "role";
 
     public Boolean createTouristGuide(String username, String name, String surname,
                                       String email, String password, String profilePicture, String identificationCode) {
@@ -71,7 +73,7 @@ public  abstract class TouristGuideDaoFactory extends DaoTemplate {
                 throw new RuntimeException(e);
             }
 
-            arr = (JSONArray) o.get("tourist_guide");
+            arr = (JSONArray) o.get(TOURIST_GUIDE);
 
             jsonMap = new HashMap<>();
             jsonMap.put(USERNAME, username);
@@ -86,7 +88,6 @@ public  abstract class TouristGuideDaoFactory extends DaoTemplate {
 
             try (FileWriter file = new FileWriter(path_tourist_guide)) {
                 file.write(o.toString());
-                //System.out.println("Successfully updated json object to file...!!");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -103,7 +104,7 @@ public  abstract class TouristGuideDaoFactory extends DaoTemplate {
             jsonMap.put(USERNAME, username);
             jsonMap.put(EMAIL, email);
             jsonMap.put(PASSWORD, password);
-            jsonMap.put(ROLE, "tourist_guide");
+            jsonMap.put(ROLE, TOURIST_GUIDE);
 
             JSONObject newUser1 = new JSONObject(jsonMap);
 
@@ -111,7 +112,6 @@ public  abstract class TouristGuideDaoFactory extends DaoTemplate {
 
             try (FileWriter file = new FileWriter(path_general_user)) {
                 file.write(o.toString());
-                //System.out.println("Successfully updated json object to file...!!");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

@@ -5,6 +5,7 @@ import it.ispw.daniele.backpacker.dao.itinerary_dao.ItineraryDao;
 import it.ispw.daniele.backpacker.dao.itinerary_dao.ItineraryDaoFactory;
 import it.ispw.daniele.backpacker.dao.itinerary_dao.ItineraryDaoL;
 import it.ispw.daniele.backpacker.exceptions.DateException;
+import it.ispw.daniele.backpacker.exceptions.GenericException;
 
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
@@ -27,7 +28,7 @@ public class AddItineraryController {
 
     }
 
-    public int getItineraryId(ItineraryBean itineraryBean) throws SQLException, FileNotFoundException {
+    public int getItineraryId(ItineraryBean itineraryBean) throws SQLException, FileNotFoundException, GenericException {
         ///MODIFICARE CODICE SQL
         return this.itineraryDao.getItineraryId(itineraryBean.getGuideId(), itineraryBean.getLocation(), itineraryBean.getDate(), itineraryBean.getTime(), itineraryBean.getParticipants(), itineraryBean.getPrice(), itineraryBean.getSteps());
     }

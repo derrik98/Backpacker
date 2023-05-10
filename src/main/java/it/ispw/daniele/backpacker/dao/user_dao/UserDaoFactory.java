@@ -31,7 +31,9 @@ public abstract class UserDaoFactory extends DaoTemplate {
     protected static final String PROFILE_PICTURE_PATH = "profile_picture_path";
     protected static final String EMAIL = "email";
     protected static final String PASSWORD = "password";
-    protected static final String ROLE = "user";
+    protected static final String USER = "user";
+    protected static final String GENERAL_USER = "general_user";
+    protected static final String ROLE = "role";
 
     public Boolean createUser(String username, String name, String surname, String email, String password, String profilePicture) throws SQLException, GenericException {
         return (this.execute(() -> {
@@ -70,7 +72,7 @@ public abstract class UserDaoFactory extends DaoTemplate {
                 throw new RuntimeException(e);
             }
 
-            arr = (JSONArray) o.get("user");
+            arr = (JSONArray) o.get(USER);
 
             jsonMap = new HashMap<>();
             jsonMap.put(USERNAME, username);
@@ -96,13 +98,13 @@ public abstract class UserDaoFactory extends DaoTemplate {
                 throw new RuntimeException(e);
             }
 
-            arr = (JSONArray) o.get("general_user");
+            arr = (JSONArray) o.get(GENERAL_USER);
 
             jsonMap = new HashMap<>();
             jsonMap.put(USERNAME, username);
             jsonMap.put(EMAIL, email);
             jsonMap.put(PASSWORD, password);
-            jsonMap.put(ROLE, "user");
+            jsonMap.put(ROLE, USER);
 
             JSONObject newUser1 = new JSONObject(jsonMap);
 
