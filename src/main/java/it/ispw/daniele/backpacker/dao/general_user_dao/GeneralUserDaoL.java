@@ -12,7 +12,9 @@ import java.io.IOException;
 
 public class GeneralUserDaoL extends GeneralUserDaoFactory {
 
-    private static final String PATH_GENERAL_USER = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/general_user.json";
+    //private static final String PATH_GENERAL_USER = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/general_user.json";
+
+    private static final String PATH_GENERAL_USER = System.getProperty("path_general_user");
 
     public GeneralUser findUser(String username, String password) {
         return this.execute(() -> {
@@ -23,7 +25,7 @@ public class GeneralUserDaoL extends GeneralUserDaoFactory {
             try (FileReader fileReader = new FileReader(PATH_GENERAL_USER)) {
 
                 JSONObject o = (JSONObject) parser.parse(fileReader);
-                JSONArray arr = (JSONArray) o.get("general_user");
+                JSONArray arr = (JSONArray) o.get(GENERAL_USER);
                 if (arr.isEmpty()) {
                     return null;
                 }
@@ -31,9 +33,9 @@ public class GeneralUserDaoL extends GeneralUserDaoFactory {
                 for (int index = 0; index < arr.size(); index++) {
 
                     JSONObject object = (JSONObject) arr.get(index);
-                    if (object.get("username").equals(username) && object.get("password").equals(password)) {
-                        String role = (String) object.get("role");
-                        String usernameLoaded = (String) object.get("username");
+                    if (object.get(USERNAME).equals(username) && object.get(PASSWORD).equals(password)) {
+                        String role = (String) object.get(ROLE);
+                        String usernameLoaded = (String) object.get(USERNAME);
 
                         if (usernameLoaded.equals(username)) {
                             u = new GeneralUser(usernameLoaded, "", role);

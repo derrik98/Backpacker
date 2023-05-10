@@ -28,8 +28,8 @@ public class GeneralUserDao extends GeneralUserDaoFactory {
                     assert !moreThanOne;
                     rs.first();
 
-                    String role = rs.getString("role");
-                    String usernameLoaded = rs.getString("username");
+                    String role = rs.getString(ROLE);
+                    String usernameLoaded = rs.getString(USERNAME);
 
                     if (usernameLoaded.equals(username)) {
                         generalUser = new GeneralUser(usernameLoaded, "", role);
