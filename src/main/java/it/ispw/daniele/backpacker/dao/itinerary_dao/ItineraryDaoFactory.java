@@ -3,6 +3,7 @@ package it.ispw.daniele.backpacker.dao.itinerary_dao;
 import it.ispw.daniele.backpacker.dao.DaoAction;
 import it.ispw.daniele.backpacker.dao.DaoTemplate;
 import it.ispw.daniele.backpacker.entity.Itinerary;
+import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.utils.DatabaseTouristGuideConnection;
 import it.ispw.daniele.backpacker.utils.DatabaseUserConnection;
 import org.json.simple.JSONArray;
@@ -41,7 +42,7 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
     private static final String ADD_PART = "add_part";
     private static final String REMOVE_PART = "remove_part";
 
-    public void addParticipation(String username, int itineraryId) {
+    public void addParticipation(String username, int itineraryId)  {
         this.manageParticipation(username, itineraryId, ADD_PART);
     }
 
@@ -52,131 +53,70 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
     private void manageParticipation(String username, int id, String operation) {
         this.execute((DaoAction<Void>) () -> {
 
+            Connection conn = DatabaseUserConnection.getUserConnection();
+            PreparedStatement stm;
+            String sql = null;
+
+            //Save on Database
             try {
-                this.saveOnDatabase(username, id, operation);
+                if (operation.equals(ADD_PART)) {
+                    sql = "call backpacker.add_participation(?, ?);\r\n";
+                } else if (operation.equals(REMOVE_PART)) {
+                    sql = "call backpacker.remove_participation(?, ?);\r\n";
+                }
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, username);
+                stm.setInt(2, id);
+                stm.executeUpdate();
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                throw new GenericException(e.getMessage());
             }
-//            Connection conn = DatabaseUserConnection.getUserConnection();
-//            PreparedStatement stm;
-//            String sql = null;
-//
-//            //Save on Database
-//            try {
-//                if (operation.equals(ADD_PART)) {
-//                    sql = "call backpacker.add_participation(?, ?);\r\n";
-//                } else if (operation.equals(REMOVE_PART)) {
-//                    sql = "call backpacker.remove_participation(?, ?);\r\n";
-//                }
-//                stm = conn.prepareStatement(sql);
-//                stm.setString(1, username);
-//                stm.setInt(2, id);
-//                stm.executeUpdate();
-//            } finally {
-//                DatabaseUserConnection.closeUserConnection(conn);
-//            }
+            finally {
+                DatabaseUserConnection.closeUserConnection(conn);
+            }
 
             //Save on File System
             try {
-                this.saveOnFileSystem(username, id, operation);
-//                JSONParser parser = new JSONParser();
-//                FileReader fileReader = new FileReader(PATH_GOES_TO);
-//
-//                JSONObject o = (JSONObject) parser.parse(fileReader);
-//                JSONArray arr = (JSONArray) o.get("goes_to");
-//
-//                if (operation.equals(ADD_PART)) {
-//                    Map<String, String> jsonMap;
-//
-//                    jsonMap = new HashMap<>();
-//                    jsonMap.put(USERNAME, username);
-//                    jsonMap.put(ITINERARY_ID, String.valueOf(id));
-//                    jsonMap.put(WITH_GUIDE, String.valueOf(true));
-//
-//                    JSONObject newUser = new JSONObject(jsonMap);
-//
-//                    arr.add(newUser);
-//
-//                } else if (operation.equals(REMOVE_PART)) {
-//                    for (int index = 0; index < arr.size(); index++) {
-//
-//                        JSONObject object = (JSONObject) arr.get(index);
-//
-//                        if (object.get(USERNAME).equals(username) && object.get(ITINERARY_ID).equals(id)) {
-//
-//                            arr.remove(object);
-//                        }
-//                    }
-//                }
-//                try (FileWriter file = new FileWriter(PATH_GOES_TO)) {
-//                    file.write(o.toString());
-//                }
+
+                JSONParser parser = new JSONParser();
+                FileReader fileReader = new FileReader(PATH_GOES_TO);
+
+                JSONObject o = (JSONObject) parser.parse(fileReader);
+                JSONArray arr = (JSONArray) o.get("goes_to");
+
+                if (operation.equals(ADD_PART)) {
+                    Map<String, String> jsonMap;
+
+                    jsonMap = new HashMap<>();
+                    jsonMap.put(USERNAME, username);
+                    jsonMap.put(ITINERARY_ID, String.valueOf(id));
+                    jsonMap.put(WITH_GUIDE, String.valueOf(true));
+
+                    JSONObject newUser = new JSONObject(jsonMap);
+
+                    arr.add(newUser);
+
+                } else if (operation.equals(REMOVE_PART)) {
+                    for (int index = 0; index < arr.size(); index++) {
+
+                        JSONObject object = (JSONObject) arr.get(index);
+
+                        if (object.get(USERNAME).equals(username) && object.get(ITINERARY_ID).equals(id)) {
+
+                            arr.remove(object);
+                        }
+                    }
+                }
+                try (FileWriter file = new FileWriter(PATH_GOES_TO)) {
+                    file.write(o.toString());
+                }
             } catch (IOException | ParseException e) {
-                throw new RuntimeException(e);
+                throw new GenericException(e.getMessage());
             }
 
             return null;
         });
     }
-
-    private void saveOnDatabase(String username, int id, String operation) throws SQLException {
-
-        Connection conn = DatabaseUserConnection.getUserConnection();
-        PreparedStatement stm;
-        String sql = null;
-
-        //Save on Database
-        try {
-            if (operation.equals(ADD_PART)) {
-                sql = "call backpacker.add_participation(?, ?);\r\n";
-            } else if (operation.equals(REMOVE_PART)) {
-                sql = "call backpacker.remove_participation(?, ?);\r\n";
-            }
-            stm = conn.prepareStatement(sql);
-            stm.setString(1, username);
-            stm.setInt(2, id);
-            stm.executeUpdate();
-        } finally {
-            DatabaseUserConnection.closeUserConnection(conn);
-        }
-
-    }
-
-    private void saveOnFileSystem(String username, int id, String operation) throws IOException, ParseException {
-        JSONParser parser = new JSONParser();
-        FileReader fileReader = new FileReader(PATH_GOES_TO);
-
-        JSONObject o = (JSONObject) parser.parse(fileReader);
-        JSONArray arr = (JSONArray) o.get("goes_to");
-
-        if (operation.equals(ADD_PART)) {
-            Map<String, String> jsonMap;
-
-            jsonMap = new HashMap<>();
-            jsonMap.put(USERNAME, username);
-            jsonMap.put(ITINERARY_ID, String.valueOf(id));
-            jsonMap.put(WITH_GUIDE, String.valueOf(true));
-
-            JSONObject newUser = new JSONObject(jsonMap);
-
-            arr.add(newUser);
-
-        } else if (operation.equals(REMOVE_PART)) {
-            for (int index = 0; index < arr.size(); index++) {
-
-                JSONObject object = (JSONObject) arr.get(index);
-
-                if (object.get(USERNAME).equals(username) && object.get(ITINERARY_ID).equals(id)) {
-
-                    arr.remove(object);
-                }
-            }
-        }
-        try (FileWriter file = new FileWriter(PATH_GOES_TO)) {
-            file.write(o.toString());
-        }
-    }
-
 
     public boolean addItinerary(String guideId, String location, Date date, String time, int participants, int price, String steps) {
         return (this.execute(() -> {
@@ -197,7 +137,8 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
                 stm.setString(7, steps);
                 stm.executeUpdate();
 
-            } finally {
+            }
+            finally {
                 DatabaseTouristGuideConnection.closeTouristGuideConnection(conn);
             }
 
@@ -211,7 +152,7 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
             try {
                 o = (JSONObject) parser.parse(new FileReader(PATH_ITINERARY));
             } catch (IOException | ParseException e) {
-                throw new RuntimeException(e);
+                throw new GenericException(e.getMessage());
             }
 
             arr = (JSONArray) o.get("itinerary");
@@ -234,7 +175,7 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
             try (FileWriter file = new FileWriter(PATH_ITINERARY)) {
                 file.write(o.toString());
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                throw new GenericException(e.getMessage());
             }
 
             return true;
@@ -255,7 +196,7 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
                 stm.setString(2, itinerary);
                 stm.executeUpdate();
 
-            } finally {
+            }finally {
                 DatabaseUserConnection.closeUserConnection(conn);
             }
 
@@ -268,7 +209,7 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
             try {
                 o = (JSONObject) parser.parse(new FileReader(PATH_SAVED_ITINERARY));
             } catch (IOException | ParseException e) {
-                throw new RuntimeException(e);
+                throw new GenericException(e.getMessage());
             }
 
             arr = (JSONArray) o.get("saved_itinerary");
@@ -285,7 +226,7 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
             try (FileWriter file = new FileWriter(PATH_SAVED_ITINERARY)) {
                 file.write(o.toString());
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                throw new GenericException(e.getMessage());
             }
 
             return true;
@@ -303,7 +244,7 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
                 stm.setString(1, username);
                 stm.setString(2, steps);
                 stm.executeUpdate();
-            } finally {
+            }finally {
                 DatabaseUserConnection.closeUserConnection(conn);
             }
 
@@ -329,12 +270,12 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
                             file.write(o.toString());
                             return true;
                         } catch (IOException e) {
-                            throw new RuntimeException(e);
+                            throw new GenericException(e.getMessage());
                         }
                     }
                 }
             } catch (IOException | ParseException e) {
-                throw new RuntimeException(e);
+                throw new GenericException(e.getMessage());
             }
 
             return true;
