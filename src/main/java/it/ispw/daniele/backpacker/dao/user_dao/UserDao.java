@@ -35,11 +35,11 @@ public class UserDao extends UserDaoFactory {
                         return Collections.emptyList();
 
                     do{
-                        String username = rs.getString("username");
-                        String name = rs.getString("name");
-                        String surname = rs.getString("surname");
-                        String profilePicture = rs.getString("profile_picture_path");
-                        String email = rs.getString("email");
+                        String username = rs.getString(USERNAME);
+                        String name = rs.getString(NAME);
+                        String surname = rs.getString(SURNAME);
+                        String profilePicture = rs.getString(PROFILE_PICTURE_PATH);
+                        String email = rs.getString(EMAIL);
 
                         if(profilePicture == null || profilePicture.equals("")) {
                             profilePicture = "user.png";

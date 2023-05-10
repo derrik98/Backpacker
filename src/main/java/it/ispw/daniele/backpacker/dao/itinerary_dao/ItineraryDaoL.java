@@ -1,6 +1,7 @@
 package it.ispw.daniele.backpacker.dao.itinerary_dao;
 
 import it.ispw.daniele.backpacker.entity.Itinerary;
+import it.ispw.daniele.backpacker.exceptions.GenericException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -39,8 +40,6 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
 
                     if (String.valueOf(object.get(LOCATION)).equals(city)) {
 
-                        System.out.println(object.get(ID));
-
                         String id = String.valueOf(object.get(ID));
                         String guideId = String.valueOf(object.get(GUIDE_ID));
                         String location = String.valueOf(object.get(LOCATION));
@@ -61,7 +60,7 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
                 }
 
             } catch (IOException | ParseException e) {
-                throw new RuntimeException(e);
+                throw new GenericException(e.getMessage());
             }
             return null;
         });
@@ -94,7 +93,7 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
                 }
 
             } catch (IOException | ParseException e) {
-                throw new RuntimeException(e);
+                throw new GenericException(e.getMessage());
             }
 
             return false;
@@ -103,7 +102,7 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
     }
 
     @Override
-    public int getItineraryId(String guideId, String location, String date, String time, int participants, int price, String steps) {
+    public int getItineraryId(String guideId, String location, String date, String time, int participants, int price, String steps) throws GenericException {
 
         JSONParser parser = new JSONParser();
 
@@ -123,14 +122,12 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
                         object.get(TIME).equals(time) && object.get(PARTICIPANTS).equals(String.valueOf(participants))
                         && object.get(PRICE).equals(String.valueOf(price)) && object.get(STEPS).equals(steps)) {
 
-                    int id = (int) object.get(ID);
-
-                    return id;
+                    return (int) object.get(ID);
                 }
 
             }
         } catch (IOException | ParseException e) {
-            throw new RuntimeException(e);
+            throw new GenericException(e.getMessage());
         }
 
         return 0;
@@ -183,7 +180,7 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
                     }
                 }
             } catch (IOException | ParseException e) {
-                throw new RuntimeException(e);
+                throw new GenericException(e.getMessage());
             }
 
             return itineraryList;
@@ -228,7 +225,7 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
 
                 return itineraryList;
             } catch (IOException | ParseException e) {
-                throw new RuntimeException(e);
+                throw new GenericException(e.getMessage());
             }
 
         });

@@ -22,8 +22,8 @@ import java.util.Map;
 public abstract class UserDaoFactory extends DaoTemplate {
 
     protected static final String SEARCH_USER = "search_user";
-    protected static final String path_user = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/user.json";
-    protected static final String path_general_user = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/general_user.json";
+    protected static final String path_user = System.getProperty("path_user");
+    protected static final String path_general_user = System.getProperty("path_general_user");
 
     protected static final String USERNAME = "username";
     protected static final String NAME = "name";

@@ -42,7 +42,7 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
     private static final String ADD_PART = "add_part";
     private static final String REMOVE_PART = "remove_part";
 
-    public void addParticipation(String username, int itineraryId)  {
+    public void addParticipation(String username, int itineraryId) {
         this.manageParticipation(username, itineraryId, ADD_PART);
     }
 
@@ -70,8 +70,7 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
                 stm.executeUpdate();
             } catch (SQLException e) {
                 throw new GenericException(e.getMessage());
-            }
-            finally {
+            } finally {
                 DatabaseUserConnection.closeUserConnection(conn);
             }
 
@@ -107,8 +106,10 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
                         }
                     }
                 }
-                try (FileWriter file = new FileWriter(PATH_GOES_TO)) {
-                    file.write(o.toString());
+                try {
+                    this.writeOnFile(PATH_GOES_TO, o);
+                } catch (IOException e) {
+                    throw new GenericException(e.getMessage());
                 }
             } catch (IOException | ParseException e) {
                 throw new GenericException(e.getMessage());
@@ -137,8 +138,7 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
                 stm.setString(7, steps);
                 stm.executeUpdate();
 
-            }
-            finally {
+            } finally {
                 DatabaseTouristGuideConnection.closeTouristGuideConnection(conn);
             }
 
@@ -172,8 +172,8 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
 
             arr.add(newUser);
 
-            try (FileWriter file = new FileWriter(PATH_ITINERARY)) {
-                file.write(o.toString());
+            try {
+                this.writeOnFile(PATH_ITINERARY, o);
             } catch (IOException e) {
                 throw new GenericException(e.getMessage());
             }
@@ -196,7 +196,7 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
                 stm.setString(2, itinerary);
                 stm.executeUpdate();
 
-            }finally {
+            } finally {
                 DatabaseUserConnection.closeUserConnection(conn);
             }
 
@@ -223,8 +223,8 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
 
             arr.add(newItinerary);
 
-            try (FileWriter file = new FileWriter(PATH_SAVED_ITINERARY)) {
-                file.write(o.toString());
+            try {
+                this.writeOnFile(PATH_SAVED_ITINERARY, o);
             } catch (IOException e) {
                 throw new GenericException(e.getMessage());
             }
@@ -244,7 +244,7 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
                 stm.setString(1, username);
                 stm.setString(2, steps);
                 stm.executeUpdate();
-            }finally {
+            } finally {
                 DatabaseUserConnection.closeUserConnection(conn);
             }
 
@@ -257,7 +257,6 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
                 JSONObject o = (JSONObject) parser.parse(fileReader);
                 JSONArray arr = (JSONArray) o.get("saved_itinerary");
 
-                System.out.println(username + " " + steps);
                 for (int index = 0; index < arr.size(); index++) {
 
                     JSONObject object = (JSONObject) arr.get(index);
@@ -266,9 +265,8 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
 
                         arr.remove(object);
 
-                        try (FileWriter file = new FileWriter(PATH_SAVED_ITINERARY)) {
-                            file.write(o.toString());
-                            return true;
+                        try {
+                            this.writeOnFile(PATH_SAVED_ITINERARY, o);
                         } catch (IOException e) {
                             throw new GenericException(e.getMessage());
                         }
@@ -282,11 +280,20 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
         });
     }
 
+    private void writeOnFile(String path, JSONObject object) throws IOException, GenericException {
+
+        try (FileWriter file = new FileWriter(path);){
+            file.write(object.toString());
+        } catch (IOException e) {
+            throw new GenericException(e.getMessage());
+        }
+    }
+
     public abstract List<Itinerary> getItinerary(String city);
 
     public abstract Boolean isParticipating(String username, int itineraryId);
 
-    public abstract int getItineraryId(String guideId, String location, String date, String time, int participants, int price, String steps) throws SQLException, FileNotFoundException;
+    public abstract int getItineraryId(String guideId, String location, String date, String time, int participants, int price, String steps) throws SQLException, FileNotFoundException, GenericException;
 
     public abstract List<Itinerary> getBookedItineraries(String input);
 

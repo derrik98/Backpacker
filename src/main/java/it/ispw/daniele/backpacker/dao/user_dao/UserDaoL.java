@@ -12,6 +12,9 @@ import java.util.*;
 
 public class UserDaoL extends UserDaoFactory {
 
+    protected static final String USER = "user";
+    protected static final String GENERAL_USER = "general_user";
+
     protected List<User> queryDatabase(String caller, String operation) {
         List<User> ret = this.execute(() -> {
             List<User> l = new ArrayList<>();
@@ -23,10 +26,10 @@ public class UserDaoL extends UserDaoFactory {
                 try (FileReader fileUser = new FileReader(path_user); FileReader fileGeneralUser = new FileReader(path_general_user)) {
 
                     JSONObject objectUser = (JSONObject) parser.parse(fileUser);
-                    JSONArray arrayUser = (JSONArray) objectUser.get("user");
+                    JSONArray arrayUser = (JSONArray) objectUser.get(USER);
 
                     JSONObject objectGeneralUser = (JSONObject) parser.parse(fileGeneralUser);
-                    JSONArray arrayGeneralUser = (JSONArray) objectGeneralUser.get("general_user");
+                    JSONArray arrayGeneralUser = (JSONArray) objectGeneralUser.get(GENERAL_USER);
 
                     if (arrayUser.isEmpty() || arrayGeneralUser.isEmpty()) {
                         return Collections.emptyList();

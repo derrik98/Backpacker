@@ -21,8 +21,8 @@ public  abstract class TouristGuideDaoFactory extends DaoTemplate {
 
     protected static final String SEARCH_T_GUIDE = "search_t_guide";
 
-    protected static final String path_tourist_guide = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/tourist_guide.json";
-    protected static final String path_general_user = "C:/Users/danie/Desktop/Backpacker/src/main/resources/localDB/general_user.json";
+    protected static final String path_tourist_guide = System.getProperty("path_tourist_guide");
+    protected static final String path_general_user = System.getProperty("path_general_user");
 
     protected static final String USERNAME = "username";
     protected static final String NAME = "name";

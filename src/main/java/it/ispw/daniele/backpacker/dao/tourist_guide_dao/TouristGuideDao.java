@@ -13,8 +13,6 @@ import java.util.Objects;
 
 public class TouristGuideDao extends TouristGuideDaoFactory {
 
-    private static final String SEARCH_T_GUIDE = "search_t_guide";
-
     protected List<TouristGuide> queryDatabase(String caller, String operation) {
         List <TouristGuide> ret = this.execute(() -> {
             List<TouristGuide> l = new ArrayList<>();
