@@ -9,12 +9,12 @@ public class DatabaseLoginConnection {
     private static Connection connection = null;
     private static final String PSW = System.getProperty("login_password");
     private static final String DB_URL = "jdbc:mysql://localhost/backpacker?allowPublicKeyRetrieval=true&useSSL=false";
-    //private static final String DRIVER_CLASS_NAME = "com.mysql.jdbc.Driver";
+    private static final String DRIVER_CLASS_NAME = "com.mysql.jdbc.Driver";
 
-    public static Connection getLoginConnection() throws SQLException {
+    public static Connection getLoginConnection() throws SQLException, ClassNotFoundException {
 
         if (connection == null) {
-            //Class.forName(driver_class_name);
+            Class.forName(DRIVER_CLASS_NAME);
             connection = DriverManager.getConnection(DB_URL, "login", PSW);
         }
         return connection;

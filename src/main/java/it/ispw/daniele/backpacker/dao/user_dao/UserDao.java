@@ -13,35 +13,31 @@ import java.util.Objects;
 
 public class UserDao extends UserDaoFactory {
 
-    protected List<User> queryDatabase(String caller, String operation) {
-        List <User> ret = this.execute(() -> {
+    protected List<User> queryDatabase(String caller) {
+        List<User> ret = this.execute(() -> {
             List<User> l = new ArrayList<>();
             Connection conn = DatabaseUserConnection.getUserConnection();
-            PreparedStatement stm = null;
+            PreparedStatement stm;
             try {
                 String sql;
-                if (operation.equals(SEARCH_USER)) {
 
-                    sql = "call backpacker.search_user(?);\r\n";
-                    stm = conn.prepareStatement(sql);
-                    stm.setString(1, caller);
-                } else {
+                sql = "call backpacker.search_user(?);\r\n";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, caller);
 
-                    return Collections.emptyList();
-                }
                 try (ResultSet rs = stm.executeQuery()) {
 
                     if (!rs.first()) // rs not empty
                         return Collections.emptyList();
 
-                    do{
+                    do {
                         String username = rs.getString(USERNAME);
                         String name = rs.getString(NAME);
                         String surname = rs.getString(SURNAME);
                         String profilePicture = rs.getString(PROFILE_PICTURE_PATH);
                         String email = rs.getString(EMAIL);
 
-                        if(profilePicture == null || profilePicture.equals("")) {
+                        if (profilePicture == null || profilePicture.equals("")) {
                             profilePicture = "user.png";
                         }
 

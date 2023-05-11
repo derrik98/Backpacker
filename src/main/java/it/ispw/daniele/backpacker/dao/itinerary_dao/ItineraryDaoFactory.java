@@ -106,11 +106,9 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
                         }
                     }
                 }
-                try {
-                    this.writeOnFile(PATH_GOES_TO, o);
-                } catch (IOException e) {
-                    throw new GenericException(e.getMessage());
-                }
+
+                this.writeOnFile(PATH_GOES_TO, o);
+
             } catch (IOException | ParseException e) {
                 throw new GenericException(e.getMessage());
             }
@@ -265,11 +263,8 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
 
                         arr.remove(object);
 
-                        try {
-                            this.writeOnFile(PATH_SAVED_ITINERARY, o);
-                        } catch (IOException e) {
-                            throw new GenericException(e.getMessage());
-                        }
+                        this.writeOnFile(PATH_SAVED_ITINERARY, o);
+
                     }
                 }
             } catch (IOException | ParseException e) {
@@ -282,7 +277,7 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
 
     private void writeOnFile(String path, JSONObject object) throws IOException, GenericException {
 
-        try (FileWriter file = new FileWriter(path);){
+        try (FileWriter file = new FileWriter(path);) {
             file.write(object.toString());
         } catch (IOException e) {
             throw new GenericException(e.getMessage());

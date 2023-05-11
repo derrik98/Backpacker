@@ -13,27 +13,24 @@ import java.util.Objects;
 
 public class TouristGuideDao extends TouristGuideDaoFactory {
 
-    protected List<TouristGuide> queryDatabase(String caller, String operation) {
-        List <TouristGuide> ret = this.execute(() -> {
+    protected List<TouristGuide> queryDatabase(String caller) {
+        List<TouristGuide> ret = this.execute(() -> {
             List<TouristGuide> l = new ArrayList<>();
             Connection conn = DatabaseTouristGuideConnection.getTouristGuideConnection();
-            PreparedStatement stm = null;
+            PreparedStatement stm;
+
             try {
                 String sql;
-                if (operation.equals(SEARCH_T_GUIDE)) {
 
-                    sql = "call backpacker.search_t_guide(?);\r\n";
-                    stm = conn.prepareStatement(sql);
-                    stm.setString(1, caller);
-                } else {
+                sql = "call backpacker.search_t_guide(?);\r\n";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, caller);
 
-                    return Collections.emptyList();
-                }
                 try (ResultSet rs = stm.executeQuery()) {
                     if (!rs.first()) // rs not empty
                         return Collections.emptyList();
 
-                    do{
+                    do {
                         String username = rs.getString("username");
                         String name = rs.getString("name");
                         String surname = rs.getString("surname");
@@ -41,7 +38,7 @@ public class TouristGuideDao extends TouristGuideDaoFactory {
                         String email = rs.getString("email");
                         String vatNum = rs.getString("identification_code");
 
-                        if(profilePicture == null || profilePicture.equals("")) {
+                        if (profilePicture == null || profilePicture.equals("")) {
                             profilePicture = "tourist_guide.png";
                         }
 

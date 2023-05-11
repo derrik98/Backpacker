@@ -17,7 +17,7 @@ public abstract class DaoTemplate {
     public final <G> G execute(DaoAction<G> daoAction) {
         try {
             return daoAction.act();
-        }catch ( SQLException | GenericException exception){
+        }catch (SQLException | GenericException | ClassNotFoundException exception){
             logger.log(Level.WARNING, exception.toString(), exception.getMessage());
         }
         return null;

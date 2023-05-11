@@ -2,6 +2,7 @@ package it.ispw.daniele.backpacker.dao.tourist_guide_dao;
 
 import it.ispw.daniele.backpacker.dao.DaoTemplate;
 import it.ispw.daniele.backpacker.entity.TouristGuide;
+import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.utils.DatabaseLoginConnection;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -19,10 +20,8 @@ import java.util.Map;
 
 public  abstract class TouristGuideDaoFactory extends DaoTemplate {
 
-    protected static final String SEARCH_T_GUIDE = "search_t_guide";
-
-    protected static final String path_tourist_guide = System.getProperty("path_tourist_guide");
-    protected static final String path_general_user = System.getProperty("path_general_user");
+    protected static final String PATH_TOURIST_GUIDE = System.getProperty("path_tourist_guide");
+    protected static final String PATH_GENERAL_USER = System.getProperty("path_general_user");
 
     protected static final String USERNAME = "username";
     protected static final String NAME = "name";
@@ -68,7 +67,7 @@ public  abstract class TouristGuideDaoFactory extends DaoTemplate {
             Map<String, String> jsonMap;
 
             try {
-                o = (JSONObject) parser.parse(new FileReader(path_tourist_guide));
+                o = (JSONObject) parser.parse(new FileReader(PATH_TOURIST_GUIDE));
             } catch (IOException | ParseException e) {
                 throw new RuntimeException(e);
             }
@@ -86,16 +85,16 @@ public  abstract class TouristGuideDaoFactory extends DaoTemplate {
 
             arr.add(newUser);
 
-            try (FileWriter file = new FileWriter(path_tourist_guide)) {
+            try (FileWriter file = new FileWriter(PATH_TOURIST_GUIDE)) {
                 file.write(o.toString());
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                throw new GenericException(e.getMessage());
             }
 
             try {
-                o = (JSONObject) parser.parse(new FileReader(path_general_user));
+                o = (JSONObject) parser.parse(new FileReader(PATH_GENERAL_USER));
             } catch (IOException | ParseException e) {
-                throw new RuntimeException(e);
+                throw new GenericException(e.getMessage());
             }
 
             arr = (JSONArray) o.get("general_user");
@@ -110,10 +109,10 @@ public  abstract class TouristGuideDaoFactory extends DaoTemplate {
 
             arr.add(newUser1);
 
-            try (FileWriter file = new FileWriter(path_general_user)) {
+            try (FileWriter file = new FileWriter(PATH_GENERAL_USER)) {
                 file.write(o.toString());
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                throw new GenericException(e.getMessage());
             }
 
             return true;
@@ -121,8 +120,8 @@ public  abstract class TouristGuideDaoFactory extends DaoTemplate {
     }
 
     public List<TouristGuide> getSearchUser(String caller){
-        return this.queryDatabase(caller, SEARCH_T_GUIDE);
+        return this.queryDatabase(caller);
     }
 
-    protected abstract List<TouristGuide> queryDatabase(String caller, String operation);
+    protected abstract List<TouristGuide> queryDatabase(String caller);
 }

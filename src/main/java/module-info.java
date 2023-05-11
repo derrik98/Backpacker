@@ -15,6 +15,7 @@ module it.ispw.daniele.backpacker {
     requires org.jetbrains.annotations;
     requires json.simple;
     requires org.json;
+    requires mysql.connector.java;
 
     exports it.ispw.daniele.backpacker.utils;
     exports it.ispw.daniele.backpacker.entity;

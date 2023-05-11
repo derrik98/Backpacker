@@ -36,7 +36,7 @@ import java.util.Objects;
 
 public class Controller {
 
-    private static final String style = "Arial";
+    private static final String STYLE = "Arial";
 
     protected UserBean convert(User l) {
         UserBean ub = new UserBean();
@@ -238,7 +238,7 @@ public class Controller {
         region.setMaxWidth(Double.MAX_VALUE);
         HBox.setHgrow(region, Priority.ALWAYS);
 
-        output.setFont(new Font(style, 14));
+        output.setFont(new Font(STYLE, 14));
         output.setPrefWidth(Control.USE_COMPUTED_SIZE);
         hBox.getChildren().addAll(region, output);
     }
@@ -252,7 +252,7 @@ public class Controller {
             if (indexMonument != 0) {
 
                 Label space = new Label(" - ");
-                space.setFont(new Font(style, 14));
+                space.setFont(new Font(STYLE, 14));
                 space.setPrefWidth(Control.USE_COMPUTED_SIZE);
 
                 hBox.getChildren().add(space);
@@ -261,7 +261,7 @@ public class Controller {
 
             }
 
-            label.setFont(new Font(style, 14));
+            label.setFont(new Font(STYLE, 14));
             label.setPrefWidth(Control.USE_COMPUTED_SIZE);
             hBox.getChildren().add(label);
         }
@@ -301,15 +301,15 @@ public class Controller {
         WebView webView = new WebView();
         webView.setMinHeight(550);
 
-        StringBuilder URL = new StringBuilder("https://google.it/maps/dir/" + als.get(0));
+        StringBuilder url = new StringBuilder("https://google.it/maps/dir/" + als.get(0));
 
         for (String element : als) {
 
-            URL.append("/").append(element);
+            url.append("/").append(element);
 
         }
 
-        webView.getEngine().load(URL.toString());
+        webView.getEngine().load(url.toString());
 
         VBox v = new VBox(webView);
         titledPane.setContent(v);

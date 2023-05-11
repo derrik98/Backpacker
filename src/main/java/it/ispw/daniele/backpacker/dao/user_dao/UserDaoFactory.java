@@ -20,10 +20,8 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class UserDaoFactory extends DaoTemplate {
-
-    protected static final String SEARCH_USER = "search_user";
-    protected static final String path_user = System.getProperty("path_user");
-    protected static final String path_general_user = System.getProperty("path_general_user");
+    protected static final String PATH_USER = System.getProperty("path_user");
+    protected static final String PATH_GENERAL_USER = System.getProperty("path_general_user");
 
     protected static final String USERNAME = "username";
     protected static final String NAME = "name";
@@ -31,11 +29,12 @@ public abstract class UserDaoFactory extends DaoTemplate {
     protected static final String PROFILE_PICTURE_PATH = "profile_picture_path";
     protected static final String EMAIL = "email";
     protected static final String PASSWORD = "password";
+
     protected static final String USER = "user";
     protected static final String GENERAL_USER = "general_user";
     protected static final String ROLE = "role";
 
-    public Boolean createUser(String username, String name, String surname, String email, String password, String profilePicture) throws SQLException, GenericException {
+    public Boolean createUser(String username, String name, String surname, String email, String password, String profilePicture) {
         return (this.execute(() -> {
 
             //Save on Database
@@ -67,9 +66,9 @@ public abstract class UserDaoFactory extends DaoTemplate {
             Map<String, String> jsonMap;
 
             try {
-                o = (JSONObject) parser.parse(new FileReader(path_user));
+                o = (JSONObject) parser.parse(new FileReader(PATH_USER));
             } catch (IOException | ParseException e) {
-                throw new RuntimeException(e);
+                throw new GenericException(e.getMessage());
             }
 
             arr = (JSONArray) o.get(USER);
@@ -85,7 +84,7 @@ public abstract class UserDaoFactory extends DaoTemplate {
             arr.add(newUser);
 
 
-            try (FileWriter file = new FileWriter(path_user)) {
+            try (FileWriter file = new FileWriter(PATH_USER)) {
                 file.write(o.toString());
 
             } catch (IOException e) {
@@ -93,9 +92,9 @@ public abstract class UserDaoFactory extends DaoTemplate {
             }
 
             try {
-                o = (JSONObject) parser.parse(new FileReader(path_general_user));
+                o = (JSONObject) parser.parse(new FileReader(PATH_GENERAL_USER));
             } catch (IOException | ParseException e) {
-                throw new RuntimeException(e);
+                throw new GenericException(e.getMessage());
             }
 
             arr = (JSONArray) o.get(GENERAL_USER);
@@ -110,10 +109,10 @@ public abstract class UserDaoFactory extends DaoTemplate {
 
             arr.add(newUser1);
 
-            try (FileWriter file = new FileWriter(path_general_user)) {
+            try (FileWriter file = new FileWriter(PATH_GENERAL_USER)) {
                 file.write(o.toString());
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                throw new GenericException(e.getMessage());
             }
 
             return true;
@@ -121,9 +120,9 @@ public abstract class UserDaoFactory extends DaoTemplate {
     }
 
     public List<User> getSearchUser(String caller) {
-        return this.queryDatabase(caller, SEARCH_USER);
+        return this.queryDatabase(caller);
     }
 
-    protected abstract List<User> queryDatabase(String caller, String operation);
+    protected abstract List<User> queryDatabase(String caller);
 
 }
