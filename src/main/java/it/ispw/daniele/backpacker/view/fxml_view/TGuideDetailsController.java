@@ -92,19 +92,13 @@ public class TGuideDetailsController extends Controller {
         this.surname.setText(tUsers.getSurname());
         this.vat.setText(tUsers.getIdentificationCode());
 
-        File file = new File(FileManager.PROFILE + File.separator + tUsers.getProfilePicture());
-        Image image = new Image(file.toURI().toString());
-        this.profilePicture.setImage(image);
-        this.profilePicture.setFitHeight(150);
-        this.profilePicture.setFitWidth(150);
+        this.setImage(tUsers.getProfilePicture(), this.profilePicture);
 
-        //BookTourController btc = new BookTourController();
         List<ItineraryBean> booked;
         booked = new BookTourController("gui").getItinerary(tUsers.getUsername(), "user");
 
-        SaveTour st = new SaveTour("gui");
         List<ItineraryBean> saved;
-        saved = st.getItinerary(tUsers.getUsername());
+        saved = new SaveTour("gui").getItinerary(tUsers.getUsername());
 
         if(booked == null){
             textBookedItineraries.setText(textBookedItineraries.getText() + ": EMPTY");

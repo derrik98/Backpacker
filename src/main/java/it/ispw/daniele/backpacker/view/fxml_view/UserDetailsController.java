@@ -90,19 +90,13 @@ public class UserDetailsController extends Controller {
         this.email.setText(users.getEmail());
         this.surname.setText(users.getSurname());
 
-        File file = new File(FileManager.PROFILE + File.separator + users.getProfilePicture());
-        Image image = new Image(file.toURI().toString());
-        this.profilePicture.setImage(image);
-        this.profilePicture.setFitHeight(150);
-        this.profilePicture.setFitWidth(150);
+        this.setImage(users.getProfilePicture(), this.profilePicture);
 
-        //BookTourController btc = new BookTourController();
         List<ItineraryBean> booked;
-        booked = new BookTourController("gui").getItinerary(users.getUsername(), "user");//btc.getItinerary(users.getUsername(), "user");
+        booked = new BookTourController("gui").getItinerary(users.getUsername(), "user");
 
-        SaveTour st = new SaveTour("gui");
         List<ItineraryBean> saved;
-        saved = st.getItinerary(users.getUsername());
+        saved = new SaveTour("gui").getItinerary(users.getUsername());
 
         if(booked.isEmpty()){
             this.textBookedItineraries.setText(this.textBookedItineraries.getText() + ": EMPTY");

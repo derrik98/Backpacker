@@ -28,6 +28,7 @@ import javafx.scene.text.Font;
 import javafx.scene.web.WebView;
 import javafx.util.Duration;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -316,4 +317,11 @@ public class Controller {
 
     }
 
+    protected void setImage(String user, ImageView profilePicture) {
+        File file = new File(FileManager.PROFILE + File.separator + user);
+        Image image = new Image(file.toURI().toString());
+        profilePicture.setImage(image);
+        profilePicture.setFitHeight(150);
+        profilePicture.setFitWidth(150);
+    }
 }
