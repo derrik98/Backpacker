@@ -4,6 +4,12 @@ import it.ispw.daniele.backpacker.bean.HomeBean;
 import it.ispw.daniele.backpacker.bean.ItineraryBean;
 import it.ispw.daniele.backpacker.bean.TouristGuideBean;
 import it.ispw.daniele.backpacker.bean.UserBean;
+import it.ispw.daniele.backpacker.utils.FileManager;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.nio.file.Files;
 
 public abstract class InterfaceController {
 
@@ -49,5 +55,22 @@ public abstract class InterfaceController {
         hb.setRestaurant(restaurant);
         hb.setRange(range);
         return hb;
+    }
+
+    protected void setImage(File imageFile, String fileName, String newFileName){
+        if(imageFile != null){
+            String path = FileManager.PROFILE;
+            System.out.println(path);
+            File file = new File(path, fileName);
+            File newFile = new File(path, newFileName);
+            try(InputStream inputStream = new FileInputStream(imageFile)){
+                Files.copy(inputStream, file.toPath());
+            }catch (Exception e){
+                System.out.println("Warning image");
+            }
+            if(!file.renameTo(newFile)){
+                System.out.println("unable to rename");
+            }
+        }
     }
 }

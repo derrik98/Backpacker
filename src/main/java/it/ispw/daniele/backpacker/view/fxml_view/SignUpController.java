@@ -95,21 +95,22 @@ public class SignUpController extends InterfaceController {
         }
 
         if (Boolean.TRUE.equals(regResult)) {
+            this.setImage(this.imageFile, fileName, newFileName);
             System.out.println("REGISTRATION SUCCESSFULLY");
-            if (this.imageFile != null) {
-                String path = FileManager.PROFILE;
-                System.out.println(path);
-                File file = new File(path, fileName);
-                File newFile = new File(path, newFileName);
-                try (InputStream inputStream = new FileInputStream(this.imageFile)) {
-                    Files.copy(inputStream, file.toPath());
-                } catch (Exception e) {
-                    System.out.println("Warning image");
-                }
-                if (!file.renameTo(newFile)) {
-                    System.out.println("unable to rename");
-                }
-            }
+//            if (this.imageFile != null) {
+//                String path = FileManager.PROFILE;
+//                System.out.println(path);
+//                File file = new File(path, fileName);
+//                File newFile = new File(path, newFileName);
+//                try (InputStream inputStream = new FileInputStream(this.imageFile)) {
+//                    Files.copy(inputStream, file.toPath());
+//                } catch (Exception e) {
+//                    System.out.println("Warning image");
+//                }
+//                if (!file.renameTo(newFile)) {
+//                    System.out.println("unable to rename");
+//                }
+//            }
             this.errorText.setText("");
         } else {
             System.out.println("unsuccessfully registration");

@@ -39,7 +39,6 @@ public class CliSignUpController extends InterfaceController {
         String password;
         String userType;
         String VATNumb;
-        String ProfilePicture = "";
 
         System.out.println("Email:");
         email = scanner.nextLine();
@@ -110,35 +109,29 @@ public class CliSignUpController extends InterfaceController {
         }
 
         if(Boolean.TRUE.equals(regResult)){
-            if(this.imageFile != null){
-                String path = FileManager.PROFILE;
-                System.out.println(path);
-                File file = new File(path, fileName);
-                File newFile = new File(path, newFileName);
-                try(InputStream inputStream = new FileInputStream(this.imageFile)){
-                    Files.copy(inputStream, file.toPath());
-                }catch (Exception e){
-                    System.out.println("Warning image");
-                }
-                if(!file.renameTo(newFile)){
-                    System.out.println("unable to rename");
-                }
-            }
+
+            this.setImage(this.imageFile, fileName, newFileName);
+//            if(this.imageFile != null){
+//                String path = FileManager.PROFILE;
+//                System.out.println(path);
+//                File file = new File(path, fileName);
+//                File newFile = new File(path, newFileName);
+//                try(InputStream inputStream = new FileInputStream(this.imageFile)){
+//                    Files.copy(inputStream, file.toPath());
+//                }catch (Exception e){
+//                    System.out.println("Warning image");
+//                }
+//                if(!file.renameTo(newFile)){
+//                    System.out.println("unable to rename");
+//                }
+//            }
             System.out.println(GREEN + "REGISTRATION SUCCESSFULLY" + RESET);
         }
         else{
             System.out.println(RED + "UNSUCCESSFUL REGISTRATION" + RESET);
         }
 
-        email = "";
-        username = "";
-        name = "";
-        surname = "";
-        password = "";
-        userType = "";
-        VATNumb = "";
         this.imageFile = null;
-        ProfilePicture = "";
 
     }
 }
