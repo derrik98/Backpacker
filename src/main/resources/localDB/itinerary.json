@@ -1,5 +1,14 @@
 {
   "itinerary": [
-
+    {
+      "date": "Sat May 27 00:00:00 CEST 2023",
+      "price": "20",
+      "guideId": "yu",
+      "location": "roma",
+      "id": "1",
+      "time": "9:00",
+      "steps": "q-w-e-r-t-y-",
+      "participants": "20"
+    }
   ]
 }

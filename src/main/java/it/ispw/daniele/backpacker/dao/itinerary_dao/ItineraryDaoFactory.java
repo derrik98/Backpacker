@@ -78,10 +78,6 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
             //Save on File System
             try {
 
-                //JSONParser parser = new JSONParser();
-                //FileReader fileReader = new FileReader(PATH_GOES_TO);
-
-                //JSONObject o = (JSONObject) parser.parse(fileReader);
                 JSONObject o = this.openFile(PATH_GOES_TO);
                 JSONArray arr = (JSONArray) o.get("goes_to");
 
@@ -144,16 +140,9 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
 
 
             //Save on File System
-            //JSONParser parser = new JSONParser();
             JSONObject o;
             JSONArray arr;
             Map<String, String> jsonMap;
-
-//            try {
-//                o = (JSONObject) parser.parse(new FileReader(PATH_ITINERARY));
-//            } catch (IOException | ParseException e) {
-//                throw new GenericException(e.getMessage());
-//            }
 
             o = this.openFile(PATH_ITINERARY);
 
@@ -203,16 +192,9 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
             }
 
             //Save on File System
-            //JSONParser parser = new JSONParser();
             JSONObject o;
             JSONArray arr;
             Map<String, String> jsonMap;
-
-//            try {
-//                o = (JSONObject) parser.parse(new FileReader(PATH_SAVED_ITINERARY));
-//            } catch (IOException | ParseException e) {
-//                throw new GenericException(e.getMessage());
-//            }
 
             o = this.openFile(PATH_SAVED_ITINERARY);
             arr = (JSONArray) o.get("saved_itinerary");
@@ -253,11 +235,6 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
 
             //Remove from File System
             try {
-                //JSONParser parser = new JSONParser();
-
-                //FileReader fileReader = new FileReader(PATH_SAVED_ITINERARY);
-
-                //JSONObject o = (JSONObject) parser.parse(fileReader);
 
                 JSONObject o = openFile(PATH_SAVED_ITINERARY);
                 JSONArray arr = (JSONArray) o.get("saved_itinerary");
