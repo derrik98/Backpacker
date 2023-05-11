@@ -307,7 +307,6 @@ public class Controller {
         for (String element : als) {
 
             url.append("/").append(element);
-
         }
 
         webView.getEngine().load(url.toString());
