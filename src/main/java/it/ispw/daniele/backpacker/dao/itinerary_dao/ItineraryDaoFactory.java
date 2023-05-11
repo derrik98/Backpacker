@@ -288,7 +288,7 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
 
     public abstract Boolean isParticipating(String username, int itineraryId);
 
-    public abstract int getItineraryId(String guideId, String location, String date, String time, int participants, int price, String steps) throws SQLException, FileNotFoundException, GenericException;
+    public abstract int getItineraryId(String guideId, String location, String date, String time, int participants, int price, String steps) throws SQLException, FileNotFoundException, GenericException, ClassNotFoundException;
 
     public abstract List<Itinerary> getBookedItineraries(String input);
 

@@ -1,8 +1,5 @@
 package it.ispw.daniele.backpacker.view.command_line_interface;
 
-
-import java.util.Scanner;
-
 public class CLI {
 
     public static final String RESET = "\033[0m";  // TEXT RESET

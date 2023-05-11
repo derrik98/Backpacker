@@ -54,7 +54,7 @@ public class LoginController {
         }
     }
 
-    public boolean createUser(UserBean ub, String view) throws EmptyFieldException, GenericException, SQLException {
+    public boolean createUser(UserBean ub, String view) throws EmptyFieldException, GenericException {
 
         if (ub.getUsername().equals("") || ub.getName().equals("") || ub.getSurname().equals("") || ub.getEmail().equals("") || ub.getPassword().equals("")) {
             throw new EmptyFieldException("Missing Data");

@@ -88,7 +88,7 @@ public abstract class UserDaoFactory extends DaoTemplate {
                 file.write(o.toString());
 
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                throw new GenericException(e.getMessage());
             }
 
             try {

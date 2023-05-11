@@ -11,6 +11,9 @@ public class DatabaseLoginConnection {
     private static final String DB_URL = "jdbc:mysql://localhost/backpacker?allowPublicKeyRetrieval=true&useSSL=false";
     private static final String DRIVER_CLASS_NAME = "com.mysql.jdbc.Driver";
 
+    public DatabaseLoginConnection() {
+    }
+
     public static Connection getLoginConnection() throws SQLException, ClassNotFoundException {
 
         if (connection == null) {
@@ -20,7 +23,7 @@ public class DatabaseLoginConnection {
         return connection;
     }
 
-    public static void closeLoginConnection(Connection conn) throws SQLException{
+    public static void closeLoginConnection(Connection conn) throws SQLException {
         conn.close();
         connection = null;
     }

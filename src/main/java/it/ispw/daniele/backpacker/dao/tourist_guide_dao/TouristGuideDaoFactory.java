@@ -69,7 +69,7 @@ public  abstract class TouristGuideDaoFactory extends DaoTemplate {
             try {
                 o = (JSONObject) parser.parse(new FileReader(PATH_TOURIST_GUIDE));
             } catch (IOException | ParseException e) {
-                throw new RuntimeException(e);
+                throw new GenericException(e.getMessage());
             }
 
             arr = (JSONArray) o.get(TOURIST_GUIDE);

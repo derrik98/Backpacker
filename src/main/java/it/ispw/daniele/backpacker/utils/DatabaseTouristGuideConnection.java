@@ -10,13 +10,15 @@ public class DatabaseTouristGuideConnection {
     private static final String TOURIST_GUIDE_PSW = System.getProperty("tourist_guide_password");
     private static final String DB_URL = "jdbc:mysql://localhost/backpacker?allowPublicKeyRetrieval=true&useSSL=false";
 
-    //private static final String DRIVER_CLASS_NAME = "com.mysql.jdbc.Driver";
+    private static final String DRIVER_CLASS_NAME = "com.mysql.jdbc.Driver";
 
+    private DatabaseTouristGuideConnection() {
+    }
 
-    public static Connection getTouristGuideConnection() throws SQLException {
+    public static Connection getTouristGuideConnection() throws SQLException, ClassNotFoundException {
 
         if(connection == null) {
-            //Class.forName(driver_class_name);
+            Class.forName(DRIVER_CLASS_NAME);
             connection = DriverManager.getConnection(DB_URL, "tourist_guide", TOURIST_GUIDE_PSW);
         }
         return connection;

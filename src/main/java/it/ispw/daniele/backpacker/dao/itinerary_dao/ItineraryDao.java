@@ -55,7 +55,7 @@ public class ItineraryDao extends ItineraryDaoFactory {
         return Objects.requireNonNullElse(ret, false);
     }
 
-    public int getItineraryId(String guideId, String location, String date, String time, int participants, int price, String steps) throws SQLException {
+    public int getItineraryId(String guideId, String location, String date, String time, int participants, int price, String steps) throws SQLException, ClassNotFoundException {
 
         Connection conn;
         String sql;
