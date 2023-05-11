@@ -17,9 +17,6 @@ import it.ispw.daniele.backpacker.exceptions.EmptyFieldException;
 import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.exceptions.LoginFailException;
 
-import java.lang.module.Configuration;
-import java.sql.SQLException;
-
 public class LoginController {
 
     public GeneralUserBean login(GeneralUserBean userBean, String view) throws EmptyFieldException {

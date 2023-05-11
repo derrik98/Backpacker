@@ -78,7 +78,7 @@ public class SignUpController extends InterfaceController {
 
             try {
                 regResult = lc.createUser(ub, "gui");
-            } catch (EmptyFieldException | GenericException | SQLException exception) {
+            } catch (EmptyFieldException | GenericException exception) {
                 this.errorText.setText(exception.getMessage());
             }
 

@@ -28,7 +28,7 @@ public class AddItineraryController {
 
     }
 
-    public int getItineraryId(ItineraryBean itineraryBean) throws SQLException, FileNotFoundException, GenericException {
+    public int getItineraryId(ItineraryBean itineraryBean) throws SQLException, FileNotFoundException, GenericException, ClassNotFoundException {
         ///MODIFICARE CODICE SQL
         return this.itineraryDao.getItineraryId(itineraryBean.getGuideId(), itineraryBean.getLocation(), itineraryBean.getDate(), itineraryBean.getTime(), itineraryBean.getParticipants(), itineraryBean.getPrice(), itineraryBean.getSteps());
     }
