@@ -147,8 +147,7 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
             o = this.openFile(PATH_ITINERARY);
 
             arr = (JSONArray) o.get("itinerary");
-
-
+            
             jsonMap = new HashMap<>();
             jsonMap.put(ID, String.valueOf(arr.size() + 1));  //controllare bene indice
             jsonMap.put(GUIDE_ID, guideId);

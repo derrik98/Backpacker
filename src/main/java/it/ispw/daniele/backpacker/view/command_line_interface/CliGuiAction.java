@@ -7,5 +7,6 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 public interface CliGuiAction {
-    public void action() throws IOException, AddressNotFoundException, CityNotFoundException, MonumentNotFoundException, NoSuchAlgorithmException, GenericException, SQLException, EmptyFieldException;
+    void action() throws IOException, AddressNotFoundException, CityNotFoundException,
+            MonumentNotFoundException, NoSuchAlgorithmException, GenericException, SQLException, EmptyFieldException;
 }

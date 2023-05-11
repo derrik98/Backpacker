@@ -43,27 +43,21 @@ public class CliSignUpController extends InterfaceController {
 
         System.out.println("Email:");
         email = scanner.nextLine();
-        System.out.flush();
 
         System.out.println("Username:");
         username = scanner.nextLine();
-        System.out.flush();
 
         System.out.println("Name:");
         name = scanner.nextLine();
-        System.out.flush();
 
         System.out.println("Surname:");
         surname = scanner.nextLine();
-        System.out.flush();
 
         System.out.println("Password:");
         password = scanner.nextLine();
-        System.out.flush();
 
         System.out.println("Type of user: Generic[0] - Tourist_Guide[1]");
         userType = scanner.nextLine();
-        System.out.flush();
 
         if (userType.equals("1")) {
             userType = "TOURIST_GUIDE";

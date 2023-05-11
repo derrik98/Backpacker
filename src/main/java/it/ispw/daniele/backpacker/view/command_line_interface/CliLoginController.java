@@ -51,8 +51,6 @@ public class CliLoginController {
 
             }
 
-            System.out.flush();
-
         } while (true);
 
     }
@@ -63,11 +61,9 @@ public class CliLoginController {
 
         System.out.println("Username:");
         String username = scanner.nextLine();
-        System.out.flush();
 
         System.out.println("Password:");
         String password = scanner.nextLine();
-        System.out.flush();
 
         GeneralUserBean gub = new GeneralUserBean();
         gub.setUsername(username);

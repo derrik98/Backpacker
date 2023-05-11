@@ -13,7 +13,6 @@ import static it.ispw.daniele.backpacker.view.command_line_interface.CLI.RESET;
 public class CliItineraryDetailsController {
 
     private String command = "SUBSCRIBE";
-
     private final BookTourController controller = new BookTourController("cli");
     private ItineraryBean ib = new ItineraryBean();
     private final GeneralUserBean sessionUser = SessionUser.getInstance().getSession();
@@ -37,7 +36,6 @@ public class CliItineraryDetailsController {
 
         System.out.print("\033[H\033[2J");
         System.out.println(BOLD + "ITINERARY DETAILS PAGE\n" + RESET);
-        //System.out.flush();
 
         System.out.println("Itinerary id: " + itineraryBean.getItineraryId());
 

@@ -54,23 +54,18 @@ public class CliAddItineraryController extends InterfaceController {
 
         System.out.println("Location:");
         String location = scanner.nextLine();
-        //System.out.flush();
 
         System.out.println("Date: format[YYYY/MM/DD]");
         String date = scanner.nextLine().replace("/", "-");
-        //System.out.flush();
 
         System.out.println("Time:");
         String time = scanner.nextLine();
-        //System.out.flush();
 
         System.out.println("Participants:");
         String participants = scanner.nextLine();
-        //System.out.flush();
 
         System.out.println("Price:");
         String price = scanner.nextLine();
-        //System.out.flush();
 
         boolean result;
 

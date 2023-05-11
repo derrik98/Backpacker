@@ -33,7 +33,7 @@ public class CliResultController {
         System.out.println("Country: " + homeBean.getCountry() + ", City: " + homeBean.getCity() + ", Address: " + homeBean.getAddress() + ", Restaurant: " + homeBean.isRestaurant() + ", Range: " + homeBean.getRange() + "\n");
 
         BookTourController btc = new BookTourController("cli");
-        //List<ItineraryBean> it;
+
         it = btc.getItinerary(homeBean.getCity(), "city");
         int bookedSize = 0;
 
@@ -47,7 +47,7 @@ public class CliResultController {
 
         SearchController sc = new SearchController();
         List<ItineraryBean> iti;
-        //iti = sc.createItinerary(homeBean.getAddress());
+
         iti = sc.createItinerary(homeBean);
 
         if (iti == null) {
@@ -91,7 +91,6 @@ public class CliResultController {
                         try {
                             desktop.browse(new URI(Url.toString().replace(" ", "+")));
                         } catch (IOException | URISyntaxException e) {
-                            // TODO Auto-generated catch block
                             e.printStackTrace();
                         }
                     } else {
@@ -99,7 +98,6 @@ public class CliResultController {
                         try {
                             runtime.exec("xdg-open " + Url);
                         } catch (IOException e) {
-                            // TODO Auto-generated catch block
                             e.printStackTrace();
                         }
                     }
