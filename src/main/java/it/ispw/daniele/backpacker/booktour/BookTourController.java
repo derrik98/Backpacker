@@ -6,6 +6,7 @@ import it.ispw.daniele.backpacker.dao.itinerary_dao.ItineraryDao;
 import it.ispw.daniele.backpacker.dao.itinerary_dao.ItineraryDaoFactory;
 import it.ispw.daniele.backpacker.dao.itinerary_dao.ItineraryDaoL;
 import it.ispw.daniele.backpacker.entity.Itinerary;
+import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.utils.Controller;
 
 import java.util.Collections;
@@ -27,7 +28,7 @@ public class BookTourController extends Controller {
         }
     }
 
-    public List<ItineraryBean> getItinerary(String input, String type) {
+    public List<ItineraryBean> getItinerary(String input, String type) throws GenericException {
 
         List<Itinerary> itinerary;
         switch (type) {
@@ -43,17 +44,17 @@ public class BookTourController extends Controller {
         }
     }
 
-    public void addParticipation(GeneralUserBean user, ItineraryBean itinerary) {
+    public void addParticipation(GeneralUserBean user, ItineraryBean itinerary) throws GenericException {
         AddParticipationController apc = new AddParticipationController(this.view);
         apc.addParticipation(user, itinerary);
     }
 
-    public void removeParticipation(GeneralUserBean user, ItineraryBean itinerary) {
+    public void removeParticipation(GeneralUserBean user, ItineraryBean itinerary) throws GenericException {
         AddParticipationController apc = new AddParticipationController(this.view);
         apc.removeParticipation(user, itinerary);
     }
 
-    public boolean isParticipating(GeneralUserBean user, ItineraryBean itinerary) {
+    public boolean isParticipating(GeneralUserBean user, ItineraryBean itinerary) throws GenericException {
         AddParticipationController apc = new AddParticipationController(this.view);
         return apc.isParticipating(user, itinerary);
     }

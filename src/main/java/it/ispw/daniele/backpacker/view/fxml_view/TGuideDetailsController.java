@@ -6,6 +6,7 @@ import it.ispw.daniele.backpacker.booktour.BookTourController;
 import it.ispw.daniele.backpacker.booktour.SaveTour;
 import it.ispw.daniele.backpacker.dao.tourist_guide_dao.TouristGuideDao;
 import it.ispw.daniele.backpacker.entity.TouristGuide;
+import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.utils.Controller;
 import it.ispw.daniele.backpacker.utils.FileManager;
 import it.ispw.daniele.backpacker.utils.SessionUser;
@@ -25,6 +26,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 public class TGuideDetailsController extends Controller {
     @FXML
@@ -75,8 +77,13 @@ public class TGuideDetailsController extends Controller {
 
     private TouristGuideBean getSearchUser(String caller) {
         TouristGuideDao ud = new TouristGuideDao();
-        List<TouristGuide> l = ud.getSearchUser(caller);
-        return this.convert(l.get(0));
+        List<TouristGuide> l = null;
+        try {
+            l = ud.getSearchUser(caller);
+        } catch (GenericException e) {
+            System.out.println(e.getMessage());
+        }
+        return this.convert(Objects.requireNonNull(l).get(0));
     }
 
     public void init(TouristGuideBean myUser) {
@@ -94,11 +101,19 @@ public class TGuideDetailsController extends Controller {
 
         this.setImage(tUsers.getProfilePicture(), this.profilePicture);
 
-        List<ItineraryBean> booked;
-        booked = new BookTourController("gui").getItinerary(tUsers.getUsername(), "user");
+        List<ItineraryBean> booked = null;
+        try {
+            booked = new BookTourController("gui").getItinerary(tUsers.getUsername(), "user");
+        } catch (GenericException e) {
+            System.out.println(e.getMessage());
+        }
 
-        List<ItineraryBean> saved;
-        saved = new SaveTour("gui").getItinerary(tUsers.getUsername());
+        List<ItineraryBean> saved = null;
+        try {
+            saved = new SaveTour("gui").getItinerary(tUsers.getUsername());
+        } catch (GenericException e) {
+            System.out.println(e.getMessage());
+        }
 
         if(booked == null){
             textBookedItineraries.setText(textBookedItineraries.getText() + ": EMPTY");

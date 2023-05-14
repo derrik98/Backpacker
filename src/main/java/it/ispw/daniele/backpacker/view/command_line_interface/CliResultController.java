@@ -108,7 +108,11 @@ public class CliResultController {
                     int input = Integer.parseInt(scanner.nextLine());
 
                     if (input <= itineraryBeanList.size() && input >= 0) {
-                        st.saveTour(SessionUser.getInstance().getSession(), itineraryBeanList.get(input));
+                        try {
+                            st.saveTour(SessionUser.getInstance().getSession(), itineraryBeanList.get(input));
+                        } catch (GenericException e) {
+                            System.out.println(e.getMessage());
+                        }
                         System.out.println(GREEN + "Itinerary added successfully" + RESET);
                     } else {
                         System.out.println(RED + "Incorrect id" + RESET);

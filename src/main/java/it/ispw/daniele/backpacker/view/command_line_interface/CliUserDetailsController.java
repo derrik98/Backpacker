@@ -7,10 +7,12 @@ import it.ispw.daniele.backpacker.booktour.SaveTour;
 import it.ispw.daniele.backpacker.dao.user_dao.UserDaoFactory;
 import it.ispw.daniele.backpacker.dao.user_dao.UserDaoL;
 import it.ispw.daniele.backpacker.entity.User;
+import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.utils.Controller;
 import it.ispw.daniele.backpacker.utils.SessionUser;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 import static it.ispw.daniele.backpacker.view.command_line_interface.CLI.BOLD;
@@ -21,8 +23,13 @@ public class CliUserDetailsController extends Controller {
     private UserBean getSearchUser(String caller) {
 
         UserDaoFactory ud = new UserDaoL();
-        List<User> l = ud.getSearchUser(caller);
-        return this.convert(l.get(0));
+        List<User> l = null;
+        try {
+            l = ud.getSearchUser(caller);
+        } catch (GenericException e) {
+            System.out.println(e.getMessage());
+        }
+        return this.convert(Objects.requireNonNull(l).get(0));
     }
 
     public void init() {
@@ -41,14 +48,22 @@ public class CliUserDetailsController extends Controller {
             System.out.println("\n");
 
             BookTourController btc = new BookTourController("cli");
-            List<ItineraryBean> booked;
-            booked = btc.getItinerary(users.getUsername(), "user");
+            List<ItineraryBean> booked = null;
+            try {
+                booked = btc.getItinerary(users.getUsername(), "user");
+            } catch (GenericException e) {
+                System.out.println(e.getMessage());
+            }
 
             SaveTour st = new SaveTour("cli");
-            List<ItineraryBean> saved;
-            saved = st.getItinerary(users.getUsername());
+            List<ItineraryBean> saved = null;
+            try {
+                saved = st.getItinerary(users.getUsername());
+            } catch (GenericException e) {
+                System.out.println(e.getMessage());
+            }
 
-            if (booked.isEmpty()) {
+            if (Objects.requireNonNull(booked).isEmpty()) {
                 System.out.println("Booked itineraries: ");
                 System.out.println("EMPTY_DATABASE\n");
             } else {
@@ -57,7 +72,7 @@ public class CliUserDetailsController extends Controller {
                     System.out.print("ID [" + booked.get(indexB).getItineraryId() + "] " + booked.get(indexB).getSteps() + "\n");
                 }
             }
-            if (saved.isEmpty()) {
+            if (Objects.requireNonNull(saved).isEmpty()) {
                 System.out.println("Saved itineraries: ");
                 System.out.println("EMPTY_DATABASE\n");
             } else {

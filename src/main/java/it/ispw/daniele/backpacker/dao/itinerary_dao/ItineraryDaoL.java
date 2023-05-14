@@ -19,7 +19,7 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
     protected static final String ITINERARY = "itinerary";
 
     @Override
-    public List<Itinerary> getItinerary(String city) {
+    public List<Itinerary> getItinerary(String city) throws GenericException {
         List<Itinerary> ret = this.execute(() -> {
 
             List<Itinerary> itineraryList = new ArrayList<>();
@@ -68,7 +68,7 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
     }
 
     @Override
-    public Boolean isParticipating(String username, int itineraryId) {
+    public Boolean isParticipating(String username, int itineraryId) throws GenericException {
         Boolean ret = (Boolean) this.execute(() -> {
 
             JSONParser parser = new JSONParser();
@@ -134,7 +134,7 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
     }
 
     @Override
-    public List<Itinerary> getBookedItineraries(String input) {
+    public List<Itinerary> getBookedItineraries(String input) throws GenericException {
         List<Itinerary> ret = this.execute(() -> {
 
             List<Itinerary> itineraryList = null;
@@ -191,7 +191,7 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
     }
 
     @Override
-    public List<Itinerary> getSavedItinerary(String input) {
+    public List<Itinerary> getSavedItinerary(String input) throws GenericException {
         List<Itinerary> ret = this.execute(() -> {
 
             List<Itinerary> itineraryList = new ArrayList<>();

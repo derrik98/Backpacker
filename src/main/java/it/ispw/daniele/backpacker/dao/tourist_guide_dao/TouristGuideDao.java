@@ -1,6 +1,7 @@
 package it.ispw.daniele.backpacker.dao.tourist_guide_dao;
 
 import it.ispw.daniele.backpacker.entity.TouristGuide;
+import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.utils.DatabaseTouristGuideConnection;
 
 import java.sql.Connection;
@@ -13,7 +14,7 @@ import java.util.Objects;
 
 public class TouristGuideDao extends TouristGuideDaoFactory {
 
-    protected List<TouristGuide> queryDatabase(String caller) {
+    protected List<TouristGuide> queryDatabase(String caller) throws GenericException {
         List<TouristGuide> ret = this.execute(() -> {
             List<TouristGuide> l = new ArrayList<>();
             Connection conn = DatabaseTouristGuideConnection.getTouristGuideConnection();

@@ -35,7 +35,7 @@ public  abstract class TouristGuideDaoFactory extends DaoTemplate {
     protected static final String ROLE = "role";
 
     public Boolean createTouristGuide(String username, String name, String surname,
-                                      String email, String password, String profilePicture, String identificationCode) {
+                                      String email, String password, String profilePicture, String identificationCode) throws GenericException {
         return (this.execute(() -> {
 
             //Save on Database
@@ -119,9 +119,9 @@ public  abstract class TouristGuideDaoFactory extends DaoTemplate {
         }) != null);
     }
 
-    public List<TouristGuide> getSearchUser(String caller){
+    public List<TouristGuide> getSearchUser(String caller) throws GenericException {
         return this.queryDatabase(caller);
     }
 
-    protected abstract List<TouristGuide> queryDatabase(String caller);
+    protected abstract List<TouristGuide> queryDatabase(String caller) throws GenericException;
 }

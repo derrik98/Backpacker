@@ -3,6 +3,7 @@ package it.ispw.daniele.backpacker.view.command_line_interface;
 import it.ispw.daniele.backpacker.bean.GeneralUserBean;
 import it.ispw.daniele.backpacker.controller.login.LoginController;
 import it.ispw.daniele.backpacker.exceptions.EmptyFieldException;
+import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.utils.SessionUser;
 
 import java.util.Scanner;
@@ -71,20 +72,26 @@ public class CliLoginController {
 
         LoginController controller = new LoginController();
         GeneralUserBean gu;
-        gu = controller.login(gub, "cli");
-        if (gu == null) {
-            System.out.println(RED + "LOGIN FAILED" + RESET);
-        } else {
-            String role = gu.getRole();
+        try {
+            gu = controller.login(gub, "cli");
 
-            //SET SESSION GENERAL USER
-            SessionUser su = SessionUser.getInstance();
-            su.setSession(gu);
+            if (gu == null) {
+                System.out.println(RED + "LOGIN FAILED" + RESET);
+            } else {
+                String role = gu.getRole();
 
-            switch (role) {
-                case "user" -> CliUserGraphicChange.getInstance().menuBar(scanner);
-                case "tourist_guide" -> CliTouristGuideGraphicChange.getInstance().menuBar(scanner);
+                //SET SESSION GENERAL USER
+                SessionUser su = SessionUser.getInstance();
+                su.setSession(gu);
+
+                switch (role) {
+                    case "user" -> CliUserGraphicChange.getInstance().menuBar(scanner);
+                    case "tourist_guide" -> CliTouristGuideGraphicChange.getInstance().menuBar(scanner);
+                }
             }
+        } catch (GenericException e) {
+            System.out.println(e.getMessage());
         }
+
     }
 }

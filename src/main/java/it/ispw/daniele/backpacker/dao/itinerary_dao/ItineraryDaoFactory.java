@@ -43,15 +43,15 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
     private static final String ADD_PART = "add_part";
     private static final String REMOVE_PART = "remove_part";
 
-    public void addParticipation(String username, int itineraryId) {
+    public void addParticipation(String username, int itineraryId) throws GenericException {
         this.manageParticipation(username, itineraryId, ADD_PART);
     }
 
-    public void removeParticipation(String username, int itineraryId) {
+    public void removeParticipation(String username, int itineraryId) throws GenericException {
         this.manageParticipation(username, itineraryId, REMOVE_PART);
     }
 
-    private void manageParticipation(String username, int id, String operation) {
+    private void manageParticipation(String username, int id, String operation) throws GenericException {
         this.execute((DaoAction<Void>) () -> {
 
             Connection conn = DatabaseUserConnection.getUserConnection();
@@ -115,7 +115,7 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
         });
     }
 
-    public boolean addItinerary(String guideId, String location, Date date, String time, int participants, int price, String steps) {
+    public boolean addItinerary(String guideId, String location, Date date, String time, int participants, int price, String steps) throws GenericException {
         return (this.execute(() -> {
 
             //Save on Database
@@ -174,7 +174,7 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
     }
 
 
-    public void saveTour(String username, String itinerary) {
+    public void saveTour(String username, String itinerary) throws GenericException {
         this.execute(() -> {
 
             //Save on Database
@@ -217,7 +217,7 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
         });
     }
 
-    public void removeTour(String username, String steps) {
+    public void removeTour(String username, String steps) throws GenericException {
         this.execute(() -> {
 
             //Remove from Database
@@ -280,13 +280,13 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
         return o;
     }
 
-    public abstract List<Itinerary> getItinerary(String city);
+    public abstract List<Itinerary> getItinerary(String city) throws GenericException;
 
-    public abstract Boolean isParticipating(String username, int itineraryId);
+    public abstract Boolean isParticipating(String username, int itineraryId) throws GenericException;
 
     public abstract int getItineraryId(String guideId, String location, String date, String time, int participants, int price, String steps) throws SQLException, FileNotFoundException, GenericException, ClassNotFoundException;
 
-    public abstract List<Itinerary> getBookedItineraries(String input);
+    public abstract List<Itinerary> getBookedItineraries(String input) throws GenericException;
 
-    public abstract List<Itinerary> getSavedItinerary(String input);
+    public abstract List<Itinerary> getSavedItinerary(String input) throws GenericException;
 }

@@ -1,6 +1,7 @@
 package it.ispw.daniele.backpacker.dao.user_dao;
 
 import it.ispw.daniele.backpacker.entity.User;
+import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.utils.DatabaseUserConnection;
 
 import java.sql.Connection;
@@ -13,7 +14,7 @@ import java.util.Objects;
 
 public class UserDao extends UserDaoFactory {
 
-    protected List<User> queryDatabase(String caller) {
+    protected List<User> queryDatabase(String caller) throws GenericException {
         List<User> ret = this.execute(() -> {
             List<User> l = new ArrayList<>();
             Connection conn = DatabaseUserConnection.getUserConnection();

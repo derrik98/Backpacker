@@ -1,6 +1,7 @@
 package it.ispw.daniele.backpacker.dao.itinerary_dao;
 
 import it.ispw.daniele.backpacker.entity.Itinerary;
+import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.utils.DatabaseUserConnection;
 
 import java.sql.Connection;
@@ -14,7 +15,7 @@ import java.util.Objects;
 
 public class ItineraryDao extends ItineraryDaoFactory {
 
-    public List<Itinerary> getItinerary(String city) {
+    public List<Itinerary> getItinerary(String city) throws GenericException {
         List<Itinerary> ret = this.execute(() -> {
             Connection conn;
             List<Itinerary> itinerary;
@@ -38,7 +39,7 @@ public class ItineraryDao extends ItineraryDaoFactory {
         return Objects.requireNonNullElse(ret, Collections.emptyList());
     }
 
-    public Boolean isParticipating(String username, int itineraryId) {
+    public Boolean isParticipating(String username, int itineraryId) throws GenericException {
         Boolean ret = this.execute(() -> {
             Connection conn = DatabaseUserConnection.getUserConnection();
             String sql = "call backpacker.is_participating(?, ?);\r\n";
@@ -84,7 +85,7 @@ public class ItineraryDao extends ItineraryDaoFactory {
         }
     }
 
-    public List<Itinerary> getBookedItineraries(String input) {
+    public List<Itinerary> getBookedItineraries(String input) throws GenericException {
         List<Itinerary> ret = this.execute(() -> {
             Connection conn;
             List<Itinerary> itinerary;
@@ -131,7 +132,7 @@ public class ItineraryDao extends ItineraryDaoFactory {
         return l;
     }
 
-    public List<Itinerary> getSavedItinerary(String input) {
+    public List<Itinerary> getSavedItinerary(String input) throws GenericException {
         List<Itinerary> ret = this.execute(() -> {
             Connection conn;
             List<Itinerary> itinerary;

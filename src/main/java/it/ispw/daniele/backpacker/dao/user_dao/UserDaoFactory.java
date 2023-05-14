@@ -34,7 +34,7 @@ public abstract class UserDaoFactory extends DaoTemplate {
     protected static final String GENERAL_USER = "general_user";
     protected static final String ROLE = "role";
 
-    public Boolean createUser(String username, String name, String surname, String email, String password, String profilePicture) {
+    public Boolean createUser(String username, String name, String surname, String email, String password, String profilePicture) throws GenericException {
         return (this.execute(() -> {
 
             //Save on Database
@@ -119,10 +119,10 @@ public abstract class UserDaoFactory extends DaoTemplate {
         }) != null);
     }
 
-    public List<User> getSearchUser(String caller) {
+    public List<User> getSearchUser(String caller) throws GenericException {
         return this.queryDatabase(caller);
     }
 
-    protected abstract List<User> queryDatabase(String caller);
+    protected abstract List<User> queryDatabase(String caller) throws GenericException;
 
 }

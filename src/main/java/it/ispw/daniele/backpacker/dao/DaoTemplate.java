@@ -14,12 +14,13 @@ public abstract class DaoTemplate {
 
     protected static final Logger logger = Logger.getLogger("Dao");
 
-    public final <G> G execute(DaoAction<G> daoAction) {
+    public final <G> G execute(DaoAction<G> daoAction) throws GenericException {
         try {
             return daoAction.act();
         }catch (SQLException | GenericException | ClassNotFoundException exception){
-            logger.log(Level.WARNING, exception.toString(), exception.getMessage());
+            throw new GenericException("ERRORE");
+            //logger.log(Level.WARNING, exception.toString(), exception.getMessage());
         }
-        return null;
+        //return null;
     }
 }

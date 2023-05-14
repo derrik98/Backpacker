@@ -16,7 +16,7 @@ public class UserDaoL extends UserDaoFactory {
     protected static final String USER = "user";
     protected static final String GENERAL_USER = "general_user";
 
-    protected List<User> queryDatabase(String caller) {
+    protected List<User> queryDatabase(String caller) throws GenericException {
         List<User> ret = this.execute(() -> {
             List<User> l = new ArrayList<>();
 

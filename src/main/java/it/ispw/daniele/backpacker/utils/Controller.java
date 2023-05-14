@@ -7,6 +7,7 @@ import it.ispw.daniele.backpacker.booktour.SaveTour;
 import it.ispw.daniele.backpacker.entity.Itinerary;
 import it.ispw.daniele.backpacker.entity.TouristGuide;
 import it.ispw.daniele.backpacker.entity.User;
+import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.view.fxml_view.ItineraryDetailsController;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXMLLoader;
@@ -287,7 +288,7 @@ public class Controller {
         }
     }
 
-    private void saveItinerary(ItineraryBean itineraryBean, String type) {
+    private void saveItinerary(ItineraryBean itineraryBean, String type) throws GenericException {
         SaveTour st = new SaveTour("gui");
 
         if (type.equals("save")) {

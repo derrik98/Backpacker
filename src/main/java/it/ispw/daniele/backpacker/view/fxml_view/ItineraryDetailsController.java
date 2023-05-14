@@ -3,6 +3,7 @@ package it.ispw.daniele.backpacker.view.fxml_view;
 import it.ispw.daniele.backpacker.bean.GeneralUserBean;
 import it.ispw.daniele.backpacker.bean.ItineraryBean;
 import it.ispw.daniele.backpacker.booktour.BookTourController;
+import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.utils.SessionUser;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -49,16 +50,22 @@ public class ItineraryDetailsController {
     @FXML
     public void subscribe() {
 
-        boolean isPart = controller.isParticipating(this.sessionUser, ib);
-        if(isPart){
-            controller.removeParticipation(this.sessionUser, ib);
-            this.subscribeButton.setText("Subscribe");
+        boolean isPart = false;
+        try {
+            isPart = controller.isParticipating(this.sessionUser, ib);
+            if(isPart){
+                controller.removeParticipation(this.sessionUser, ib);
+                this.subscribeButton.setText("Subscribe");
 
-        } else {
-            controller.addParticipation(this.sessionUser, ib);
-            this.subscribeButton.setText("Remove");
+            } else {
+                controller.addParticipation(this.sessionUser, ib);
+                this.subscribeButton.setText("Remove");
 
+            }
+        } catch (GenericException e) {
+            System.out.println(e.getMessage());
         }
+
     }
 
     public void init(ItineraryBean itineraryBean) {

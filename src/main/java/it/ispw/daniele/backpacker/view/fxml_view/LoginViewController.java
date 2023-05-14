@@ -3,6 +3,7 @@ package it.ispw.daniele.backpacker.view.fxml_view;
 import it.ispw.daniele.backpacker.bean.GeneralUserBean;
 import it.ispw.daniele.backpacker.controller.login.LoginController;
 import it.ispw.daniele.backpacker.exceptions.EmptyFieldException;
+import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.utils.SessionUser;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -61,6 +62,8 @@ public class LoginViewController {
             }
         }catch (EmptyFieldException exception){
             this.errorText.setText(exception.getMessage());
+        } catch (GenericException e) {
+            System.out.println(e.getMessage());
         }
     }
 

@@ -6,8 +6,8 @@ import it.ispw.daniele.backpacker.booktour.BookTourController;
 import it.ispw.daniele.backpacker.booktour.SaveTour;
 import it.ispw.daniele.backpacker.dao.user_dao.UserDao;
 import it.ispw.daniele.backpacker.entity.User;
+import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.utils.Controller;
-import it.ispw.daniele.backpacker.utils.FileManager;
 import it.ispw.daniele.backpacker.utils.SessionUser;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,16 +15,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 public class UserDetailsController extends Controller {
 
@@ -72,8 +71,13 @@ public class UserDetailsController extends Controller {
 
     private UserBean getSearchUser(String caller) {
         UserDao ud = new UserDao();
-        List<User> l = ud.getSearchUser(caller);
-        return this.convert(l.get(0));
+        List<User> l = null;
+        try {
+            l = ud.getSearchUser(caller);
+        } catch (GenericException e) {
+            System.out.println(e.getMessage());
+        }
+        return this.convert(Objects.requireNonNull(l).get(0));
     }
 
 
@@ -92,13 +96,21 @@ public class UserDetailsController extends Controller {
 
         this.setImage(users.getProfilePicture(), this.profilePicture);
 
-        List<ItineraryBean> booked;
-        booked = new BookTourController("gui").getItinerary(users.getUsername(), "user");
+        List<ItineraryBean> booked = null;
+        try {
+            booked = new BookTourController("gui").getItinerary(users.getUsername(), "user");
+        } catch (GenericException e) {
+            System.out.println(e.getMessage());
+        }
 
-        List<ItineraryBean> saved;
-        saved = new SaveTour("gui").getItinerary(users.getUsername());
+        List<ItineraryBean> saved = null;
+        try {
+            saved = new SaveTour("gui").getItinerary(users.getUsername());
+        } catch (GenericException e) {
+            System.out.println(e.getMessage());
+        }
 
-        if(booked.isEmpty()){
+        if(Objects.requireNonNull(booked).isEmpty()){
             this.textBookedItineraries.setText(this.textBookedItineraries.getText() + ": EMPTY");
         }
         else {
@@ -106,7 +118,7 @@ public class UserDetailsController extends Controller {
             vBoxBooked.getChildren().addAll(accordionSuggested);
         }
 
-        if(saved.isEmpty()){
+        if(Objects.requireNonNull(saved).isEmpty()){
             this.textSavedItineraries.setText(this.textSavedItineraries.getText() + ": EMPTY");
         }
         else {

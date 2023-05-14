@@ -14,7 +14,7 @@ public class GeneralUserDaoL extends GeneralUserDaoFactory {
 
     private static final String PATH_GENERAL_USER = System.getProperty("path_general_user");
 
-    public GeneralUser findUser(String username, String password) {
+    public GeneralUser findUser(String username, String password) throws GenericException {
         return this.execute(() -> {
 
             GeneralUser u;

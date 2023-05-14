@@ -1,6 +1,7 @@
 package it.ispw.daniele.backpacker.dao.general_user_dao;
 
 import it.ispw.daniele.backpacker.entity.GeneralUser;
+import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.utils.DatabaseLoginConnection;
 
 import java.sql.Connection;
@@ -9,7 +10,7 @@ import java.sql.ResultSet;
 
 public class GeneralUserDao extends GeneralUserDaoFactory {
 
-    public GeneralUser findUser(String username, String password) {
+    public GeneralUser findUser(String username, String password) throws GenericException {
         return this.execute(() -> {
 
             Connection conn;

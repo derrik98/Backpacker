@@ -16,7 +16,7 @@ import java.util.Objects;
 
 public class TouristGuideDaoL extends TouristGuideDaoFactory {
 
-    protected List<TouristGuide> queryDatabase(String caller) {
+    protected List<TouristGuide> queryDatabase(String caller) throws GenericException {
         List<TouristGuide> ret = this.execute(() -> {
             List<TouristGuide> l = new ArrayList<>();
 

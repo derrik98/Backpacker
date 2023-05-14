@@ -4,10 +4,12 @@ import it.ispw.daniele.backpacker.bean.GeneralUserBean;
 import it.ispw.daniele.backpacker.bean.TouristGuideBean;
 import it.ispw.daniele.backpacker.dao.tourist_guide_dao.TouristGuideDao;
 import it.ispw.daniele.backpacker.entity.TouristGuide;
+import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.utils.Controller;
 import it.ispw.daniele.backpacker.utils.SessionUser;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 import static it.ispw.daniele.backpacker.view.command_line_interface.CLI.BOLD;
@@ -17,8 +19,13 @@ public class CliGuideDetailsController extends Controller {
 
     private TouristGuideBean getSearchUser(String caller) {
         TouristGuideDao ud = new TouristGuideDao();
-        List<TouristGuide> l = ud.getSearchUser(caller);
-        return this.convert(l.get(0));
+        List<TouristGuide> l = null;
+        try {
+            l = ud.getSearchUser(caller);
+        } catch (GenericException e) {
+            System.out.println(e.getMessage());
+        }
+        return this.convert(Objects.requireNonNull(l).get(0));
     }
 
     public void init() {

@@ -33,7 +33,7 @@ public class AddItineraryController {
         return this.itineraryDao.getItineraryId(itineraryBean.getGuideId(), itineraryBean.getLocation(), itineraryBean.getDate(), itineraryBean.getTime(), itineraryBean.getParticipants(), itineraryBean.getPrice(), itineraryBean.getSteps());
     }
 
-    public boolean addItinerary(ItineraryBean itineraryBean) throws DateException {
+    public boolean addItinerary(ItineraryBean itineraryBean) throws DateException, GenericException {
         Date date;
         Date currentDate = new Date();
 

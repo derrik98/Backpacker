@@ -3,8 +3,10 @@ package it.ispw.daniele.backpacker.view.command_line_interface;
 import it.ispw.daniele.backpacker.bean.GeneralUserBean;
 import it.ispw.daniele.backpacker.bean.ItineraryBean;
 import it.ispw.daniele.backpacker.booktour.BookTourController;
+import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.utils.SessionUser;
 
+import java.io.PrintStream;
 import java.util.Scanner;
 
 import static it.ispw.daniele.backpacker.view.command_line_interface.CLI.BOLD;
@@ -20,16 +22,23 @@ public class CliItineraryDetailsController {
 
         System.out.println(ib);
 
-        boolean isPart = controller.isParticipating(this.sessionUser, ib);
-        if(isPart){
-            controller.removeParticipation(this.sessionUser, ib);
-            System.out.print("Itinerary removed!");
-            this.command = "SUBSCRIBE";
-        } else {
-            controller.addParticipation(this.sessionUser, ib);
-            System.out.println("Itinerary added!");
-            this.command = "REMOVE";
+        boolean isPart = false;
+        try {
+            isPart = controller.isParticipating(this.sessionUser, ib);
+
+            if(isPart){
+                controller.removeParticipation(this.sessionUser, ib);
+                System.out.print("Itinerary removed!");
+                this.command = "SUBSCRIBE";
+            } else {
+                controller.addParticipation(this.sessionUser, ib);
+                System.out.println("Itinerary added!");
+                this.command = "REMOVE";
+            }
+        } catch (GenericException e) {
+            System.out.println(e.getMessage());
         }
+
     }
 
     public void init(ItineraryBean itineraryBean) {
