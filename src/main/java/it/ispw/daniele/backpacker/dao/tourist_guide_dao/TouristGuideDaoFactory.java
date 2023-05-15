@@ -61,7 +61,6 @@ public  abstract class TouristGuideDaoFactory extends DaoTemplate {
 
 
             //Save on File System
-            JSONParser parser = new JSONParser();
             JSONArray arr;
             Map<String, String> jsonMap;
 

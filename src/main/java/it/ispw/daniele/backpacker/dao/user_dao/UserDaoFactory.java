@@ -7,14 +7,9 @@ import it.ispw.daniele.backpacker.utils.DatabaseLoginConnection;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,17 +57,12 @@ public abstract class UserDaoFactory extends DaoTemplate {
             }
 
             //Save on File System
-            //JSONParser parser = new JSONParser();
+
             JSONObject o;
             JSONArray arr;
             Map<String, String> jsonMap;
 
-            try {
-                o = (JSONObject) parser.parse(new FileReader(PATH_USER));
-            } catch (IOException | ParseException e) {
-                throw new GenericException(e.getMessage());
-            }
-
+            o = this.openFile(PATH_USER);
             arr = (JSONArray) o.get(USER);
 
             jsonMap = new HashMap<>();
@@ -85,20 +75,10 @@ public abstract class UserDaoFactory extends DaoTemplate {
 
             arr.add(newUser);
 
+            this.writeOnFile(PATH_USER, o);
 
-            try (FileWriter file = new FileWriter(PATH_USER)) {
-                file.write(o.toString());
 
-            } catch (IOException e) {
-                throw new GenericException(e.getMessage());
-            }
-
-            try {
-                o = (JSONObject) parser.parse(new FileReader(PATH_GENERAL_USER));
-            } catch (IOException | ParseException e) {
-                throw new GenericException(e.getMessage());
-            }
-
+            o = this.openFile(PATH_GENERAL_USER);
             arr = (JSONArray) o.get(GENERAL_USER);
 
             jsonMap = new HashMap<>();
@@ -111,11 +91,7 @@ public abstract class UserDaoFactory extends DaoTemplate {
 
             arr.add(newUser1);
 
-            try (FileWriter file = new FileWriter(PATH_GENERAL_USER)) {
-                file.write(o.toString());
-            } catch (IOException e) {
-                throw new GenericException(e.getMessage());
-            }
+            this.writeOnFile(PATH_GENERAL_USER, o);
 
             return true;
         }) != null);
