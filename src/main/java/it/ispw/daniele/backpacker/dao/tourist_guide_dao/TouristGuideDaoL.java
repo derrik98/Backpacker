@@ -67,6 +67,6 @@ public class TouristGuideDaoL extends TouristGuideDaoFactory {
             }
         }
 
-        return null;
+        return Collections.emptyList();
     }
 }
