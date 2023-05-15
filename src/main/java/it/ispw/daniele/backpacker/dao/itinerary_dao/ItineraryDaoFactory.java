@@ -59,56 +59,48 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
             String sql;
 
             //Save on Database
-            //try {
-                if (operation.equals(ADD_PART)) {
-                    sql = "call backpacker.add_participation(?, ?);\r\n";
-                } else {
-                    sql = "call backpacker.remove_participation(?, ?);\r\n";
-                }
-                stm = conn.prepareStatement(sql);
-                stm.setString(1, username);
-                stm.setInt(2, id);
-                stm.executeUpdate();
-            //}
-            //finally {
-                DatabaseUserConnection.closeUserConnection(conn);
-            //}
+            if (operation.equals(ADD_PART)) {
+                sql = "call backpacker.add_participation(?, ?);\r\n";
+            } else {
+                sql = "call backpacker.remove_participation(?, ?);\r\n";
+            }
+            stm = conn.prepareStatement(sql);
+            stm.setString(1, username);
+            stm.setInt(2, id);
+            stm.executeUpdate();
+
+            DatabaseUserConnection.closeUserConnection(conn);
+
 
             //Save on File System
-            //try {
+            JSONObject o = this.openFile(PATH_GOES_TO);
+            JSONArray arr = (JSONArray) o.get("goes_to");
 
-                JSONObject o = this.openFile(PATH_GOES_TO);
-                JSONArray arr = (JSONArray) o.get("goes_to");
+            if (operation.equals(ADD_PART)) {
+                Map<String, String> jsonMap;
 
-                if (operation.equals(ADD_PART)) {
-                    Map<String, String> jsonMap;
+                jsonMap = new HashMap<>();
+                jsonMap.put(USERNAME, username);
+                jsonMap.put(ITINERARY_ID, String.valueOf(id));
+                jsonMap.put(WITH_GUIDE, String.valueOf(true));
 
-                    jsonMap = new HashMap<>();
-                    jsonMap.put(USERNAME, username);
-                    jsonMap.put(ITINERARY_ID, String.valueOf(id));
-                    jsonMap.put(WITH_GUIDE, String.valueOf(true));
+                JSONObject newUser = new JSONObject(jsonMap);
 
-                    JSONObject newUser = new JSONObject(jsonMap);
+                arr.add(newUser);
 
-                    arr.add(newUser);
+            } else if (operation.equals(REMOVE_PART)) {
+                for (int index = 0; index < arr.size(); index++) {
 
-                } else if (operation.equals(REMOVE_PART)) {
-                    for (int index = 0; index < arr.size(); index++) {
+                    JSONObject object = (JSONObject) arr.get(index);
 
-                        JSONObject object = (JSONObject) arr.get(index);
+                    if (object.get(USERNAME).equals(username) && object.get(ITINERARY_ID).equals(id)) {
 
-                        if (object.get(USERNAME).equals(username) && object.get(ITINERARY_ID).equals(id)) {
-
-                            arr.remove(object);
-                        }
+                        arr.remove(object);
                     }
                 }
+            }
 
-                this.writeOnFile(PATH_GOES_TO, o);
-
-            //} catch (IOException e) {
-            //    throw new GenericException(e.getMessage());
-            //}
+            this.writeOnFile(PATH_GOES_TO, o);
 
             return null;
         });
@@ -146,7 +138,7 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
             o = this.openFile(PATH_ITINERARY);
 
             arr = (JSONArray) o.get("itinerary");
-            
+
             jsonMap = new HashMap<>();
             jsonMap.put(ID, String.valueOf(arr.size() + 1));  //controllare bene indice
             jsonMap.put(GUIDE_ID, guideId);
@@ -161,11 +153,8 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
 
             arr.add(newUser);
 
-            //try {
-                this.writeOnFile(PATH_ITINERARY, o);
-            //} catch (IOException e) {
-            //    throw new GenericException(e.getMessage());
-            //}
+            this.writeOnFile(PATH_ITINERARY, o);
+
 
             return true;
 
@@ -206,11 +195,8 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
 
             arr.add(newItinerary);
 
-            //try {
-                this.writeOnFile(PATH_SAVED_ITINERARY, o);
-            //} catch (IOException e) {
-            //    throw new GenericException(e.getMessage());
-            //}
+
+            this.writeOnFile(PATH_SAVED_ITINERARY, o);
 
             return true;
         });
@@ -232,26 +218,21 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
             }
 
             //Remove from File System
-            //try {
+            JSONObject o = openFile(PATH_SAVED_ITINERARY);
+            JSONArray arr = (JSONArray) o.get("saved_itinerary");
 
-                JSONObject o = openFile(PATH_SAVED_ITINERARY);
-                JSONArray arr = (JSONArray) o.get("saved_itinerary");
+            for (int index = 0; index < arr.size(); index++) {
 
-                for (int index = 0; index < arr.size(); index++) {
+                JSONObject object = (JSONObject) arr.get(index);
 
-                    JSONObject object = (JSONObject) arr.get(index);
+                if (object.get(USERNAME).equals(username) && object.get(STEPS).equals(steps)) {
 
-                    if (object.get(USERNAME).equals(username) && object.get(STEPS).equals(steps)) {
+                    arr.remove(object);
 
-                        arr.remove(object);
+                    this.writeOnFile(PATH_SAVED_ITINERARY, o);
 
-                        this.writeOnFile(PATH_SAVED_ITINERARY, o);
-
-                    }
                 }
-            //} catch (IOException e) {
-            //    throw new GenericException(e.getMessage());
-            //}
+            }
 
             return true;
         });
