@@ -218,7 +218,7 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
             }
 
             //Remove from File System
-            JSONObject o = openFile(PATH_SAVED_ITINERARY);
+            JSONObject o = this.openFile(PATH_SAVED_ITINERARY);
             JSONArray arr = (JSONArray) o.get("saved_itinerary");
 
             for (int index = 0; index < arr.size(); index++) {
@@ -245,19 +245,6 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
         } catch (IOException e) {
             throw new GenericException(e.getMessage());
         }
-    }
-
-    private JSONObject openFile(String path) throws GenericException {
-
-        JSONParser parser = new JSONParser();
-        JSONObject object;
-
-        try {
-            object = (JSONObject) parser.parse(new FileReader(path));
-        } catch (IOException | ParseException e) {
-            throw new GenericException(e.getMessage());
-        }
-        return object;
     }
 
     public abstract List<Itinerary> getItinerary(String city) throws GenericException;
