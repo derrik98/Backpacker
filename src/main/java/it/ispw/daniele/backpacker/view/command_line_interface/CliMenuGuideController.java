@@ -47,6 +47,6 @@ public class CliMenuGuideController {
                 default -> System.out.println(RED + "Command not found\n" + RESET);
             }
 
-        } while (scanner.hasNext());
+        } while (true);
     }
 }
