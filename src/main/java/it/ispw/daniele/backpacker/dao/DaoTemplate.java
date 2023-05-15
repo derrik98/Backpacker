@@ -1,13 +1,12 @@
 package it.ispw.daniele.backpacker.dao;
 
 import it.ispw.daniele.backpacker.exceptions.GenericException;
-import it.ispw.daniele.backpacker.exceptions.LoginFailException;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -28,6 +27,15 @@ public abstract class DaoTemplate {
             throw new GenericException(e.getMessage());
         }
         return object;
+    }
+
+    protected void writeOnFile(String path, JSONObject object) throws GenericException {
+
+        try (FileWriter file = new FileWriter(path)) {
+            file.write(object.toString());
+        } catch (IOException e) {
+            throw new GenericException(e.getMessage());
+        }
     }
 
     public final <G> G execute(DaoAction<G> daoAction) throws GenericException {

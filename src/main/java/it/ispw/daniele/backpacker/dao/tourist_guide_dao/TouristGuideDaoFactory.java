@@ -62,16 +62,10 @@ public  abstract class TouristGuideDaoFactory extends DaoTemplate {
 
             //Save on File System
             JSONParser parser = new JSONParser();
-            JSONObject o;
             JSONArray arr;
             Map<String, String> jsonMap;
 
-            try {
-                o = (JSONObject) parser.parse(new FileReader(PATH_TOURIST_GUIDE));
-            } catch (IOException | ParseException e) {
-                throw new GenericException(e.getMessage());
-            }
-
+            JSONObject o = this.openFile(PATH_TOURIST_GUIDE);
             arr = (JSONArray) o.get(TOURIST_GUIDE);
 
             jsonMap = new HashMap<>();
@@ -85,18 +79,9 @@ public  abstract class TouristGuideDaoFactory extends DaoTemplate {
 
             arr.add(newUser);
 
-            try (FileWriter file = new FileWriter(PATH_TOURIST_GUIDE)) {
-                file.write(o.toString());
-            } catch (IOException e) {
-                throw new GenericException(e.getMessage());
-            }
+            this.writeOnFile(PATH_TOURIST_GUIDE, o);
 
-            try {
-                o = (JSONObject) parser.parse(new FileReader(PATH_GENERAL_USER));
-            } catch (IOException | ParseException e) {
-                throw new GenericException(e.getMessage());
-            }
-
+            o = this.openFile(PATH_GENERAL_USER);
             arr = (JSONArray) o.get("general_user");
 
             jsonMap = new HashMap<>();
@@ -109,11 +94,7 @@ public  abstract class TouristGuideDaoFactory extends DaoTemplate {
 
             arr.add(newUser1);
 
-            try (FileWriter file = new FileWriter(PATH_GENERAL_USER)) {
-                file.write(o.toString());
-            } catch (IOException e) {
-                throw new GenericException(e.getMessage());
-            }
+            this.writeOnFile(PATH_GENERAL_USER, o);
 
             return true;
         }) != null);

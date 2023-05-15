@@ -238,15 +238,6 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
         });
     }
 
-    private void writeOnFile(String path, JSONObject object) throws GenericException {
-
-        try (FileWriter file = new FileWriter(path)) {
-            file.write(object.toString());
-        } catch (IOException e) {
-            throw new GenericException(e.getMessage());
-        }
-    }
-
     public abstract List<Itinerary> getItinerary(String city) throws GenericException;
 
     public abstract Boolean isParticipating(String username, int itineraryId) throws GenericException;
