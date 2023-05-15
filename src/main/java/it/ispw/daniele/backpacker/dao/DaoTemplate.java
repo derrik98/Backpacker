@@ -18,9 +18,8 @@ public abstract class DaoTemplate {
         try {
             return daoAction.act();
         }catch (SQLException | GenericException | ClassNotFoundException exception){
-            throw new GenericException("ERRORE");
-            //logger.log(Level.WARNING, exception.toString(), exception.getMessage());
+            logger.log(Level.WARNING, exception.toString(), exception.getMessage());
+            throw new GenericException("Database error");
         }
-        //return null;
     }
 }
