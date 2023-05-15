@@ -4,11 +4,7 @@ import it.ispw.daniele.backpacker.entity.TouristGuide;
 import it.ispw.daniele.backpacker.exceptions.GenericException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -31,7 +27,9 @@ public class TouristGuideDaoL extends TouristGuideDaoFactory {
                 return Collections.emptyList();
             }
 
-            for (int indexT = 0; indexT < arrayT.size(); indexT++) {
+            return this.getTguide(objectT, arrayGeneralUser, caller);
+
+            /*for (int indexT = 0; indexT < arrayT.size(); indexT++) {
 
                 JSONObject objectU = (JSONObject) arrayT.get(indexT);
 
@@ -59,10 +57,47 @@ public class TouristGuideDaoL extends TouristGuideDaoFactory {
                     }
                 }
             }
-            return null;
+            return null;*/
         });
 
         return Objects.requireNonNullElse(ret, Collections.emptyList());
     }
 
+    private List<TouristGuide> getTguide(JSONObject objectT, JSONArray arrayGeneralUser, String caller){
+
+        List<TouristGuide> l = new ArrayList<>();
+
+        JSONArray arrayT = (JSONArray) objectT.get("tourist_guide");
+
+        for (int indexT = 0; indexT < arrayT.size(); indexT++) {
+
+            JSONObject objectU = (JSONObject) arrayT.get(indexT);
+
+            for (int indexGU = 0; indexGU < arrayGeneralUser.size(); indexGU++) {
+
+                JSONObject objectGU = (JSONObject) arrayGeneralUser.get(indexGU);
+
+                if (objectU.get(USERNAME).equals(caller) && objectGU.get(USERNAME).equals(caller)) {
+
+                    String username = (String) objectT.get(USERNAME);
+                    String name = (String) objectT.get(NAME);
+                    String surname = (String) objectT.get(SURNAME);
+                    String profilePicture = (String) objectT.get(PROFILE_PICTURE_PATH);
+                    String email = (String) objectGU.get(EMAIL);
+                    String vatNum = (String) objectT.get(IDENTIFICATION_CODE);
+
+                    if (objectU.get(PROFILE_PICTURE_PATH) == null || objectU.get(PROFILE_PICTURE_PATH).equals("")) {
+                        profilePicture = "user.png";
+                    }
+
+                    l.add(new TouristGuide(username, name, surname, profilePicture, email, vatNum));
+
+                    return l;
+
+                }
+            }
+        }
+
+        return null;
+    }
 }
