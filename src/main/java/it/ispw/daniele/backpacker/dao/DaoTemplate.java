@@ -19,7 +19,9 @@ public abstract class DaoTemplate {
             return daoAction.act();
         }catch (SQLException | GenericException | ClassNotFoundException exception){
             logger.log(Level.WARNING, exception.toString(), exception.getMessage());
-            throw new GenericException("Database error");
+            throw new GenericException("Remote Database Error");
+        } catch (IOException e) {
+            throw new GenericException("Local Database Error");
         }
     }
 }

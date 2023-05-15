@@ -75,7 +75,7 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
             //}
 
             //Save on File System
-            try {
+            //try {
 
                 JSONObject o = this.openFile(PATH_GOES_TO);
                 JSONArray arr = (JSONArray) o.get("goes_to");
@@ -106,15 +106,16 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
 
                 this.writeOnFile(PATH_GOES_TO, o);
 
-            } catch (IOException e) {
-                throw new GenericException(e.getMessage());
-            }
+            //} catch (IOException e) {
+            //    throw new GenericException(e.getMessage());
+            //}
 
             return null;
         });
     }
 
-    public boolean addItinerary(String guideId, String location, Date date, String time, int participants, int price, String steps) throws GenericException {
+    public boolean addItinerary(String guideId, String location, Date date, String time, int participants, int price, String steps)
+            throws GenericException {
         return (this.execute(() -> {
 
             //Save on Database
@@ -160,11 +161,11 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
 
             arr.add(newUser);
 
-            try {
+            //try {
                 this.writeOnFile(PATH_ITINERARY, o);
-            } catch (IOException e) {
-                throw new GenericException(e.getMessage());
-            }
+            //} catch (IOException e) {
+            //    throw new GenericException(e.getMessage());
+            //}
 
             return true;
 
@@ -205,11 +206,11 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
 
             arr.add(newItinerary);
 
-            try {
+            //try {
                 this.writeOnFile(PATH_SAVED_ITINERARY, o);
-            } catch (IOException e) {
-                throw new GenericException(e.getMessage());
-            }
+            //} catch (IOException e) {
+            //    throw new GenericException(e.getMessage());
+            //}
 
             return true;
         });
@@ -231,7 +232,7 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
             }
 
             //Remove from File System
-            try {
+            //try {
 
                 JSONObject o = openFile(PATH_SAVED_ITINERARY);
                 JSONArray arr = (JSONArray) o.get("saved_itinerary");
@@ -248,15 +249,15 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
 
                     }
                 }
-            } catch (IOException e) {
-                throw new GenericException(e.getMessage());
-            }
+            //} catch (IOException e) {
+            //    throw new GenericException(e.getMessage());
+            //}
 
             return true;
         });
     }
 
-    private void writeOnFile(String path, JSONObject object) throws IOException, GenericException {
+    private void writeOnFile(String path, JSONObject object) throws GenericException {
 
         try (FileWriter file = new FileWriter(path)) {
             file.write(object.toString());
