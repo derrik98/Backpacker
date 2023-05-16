@@ -20,7 +20,7 @@ public class CliItineraryDetailsController {
     private final GeneralUserBean sessionUser = SessionUser.getInstance().getSession();
     public void subscribe() {
 
-        System.out.println(ib);
+        //System.out.println(ib);
 
         boolean isPart = false;
         try {

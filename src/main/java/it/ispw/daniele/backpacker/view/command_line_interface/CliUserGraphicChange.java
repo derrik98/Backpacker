@@ -44,7 +44,6 @@ public class CliUserGraphicChange extends CliGuiChangeTemplate{
 
                 System.out.println(stackScene);
                 System.out.println(stackScene.get(stackScene.size() - 2));
-
                 String from = stackScene.get(stackScene.size() - 2);
                 switch (from) {
                     case "home" -> this.switchToHome(scanner);

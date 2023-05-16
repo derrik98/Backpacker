@@ -5,6 +5,7 @@ import it.ispw.daniele.backpacker.controller.search.SearchController;
 import it.ispw.daniele.backpacker.exceptions.AddressNotFoundException;
 import it.ispw.daniele.backpacker.exceptions.CityNotFoundException;
 import it.ispw.daniele.backpacker.exceptions.MonumentNotFoundException;
+import it.ispw.daniele.backpacker.utils.SessionUser;
 import it.ispw.daniele.backpacker.view.utils_view.InterfaceController;
 
 import java.io.FileNotFoundException;
@@ -41,6 +42,8 @@ public class CliHomeController extends InterfaceController {
             if (country.equals("") || city.equals("") || address.equals("")) {
                 throw new FileNotFoundException("ERROR");
             }
+
+            SessionUser.getInstance().setSearchSession(homeBean);
 
             SearchController sc = new SearchController();
             sc.checkInput(homeBean);

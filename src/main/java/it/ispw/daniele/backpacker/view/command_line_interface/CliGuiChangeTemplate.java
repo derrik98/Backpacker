@@ -1,6 +1,5 @@
 package it.ispw.daniele.backpacker.view.command_line_interface;
 
-import it.ispw.daniele.backpacker.bean.HomeBean;
 import it.ispw.daniele.backpacker.exceptions.*;
 import it.ispw.daniele.backpacker.utils.Roles;
 
@@ -26,11 +25,9 @@ public abstract class CliGuiChangeTemplate {
     public void catcher(CliGuiAction cliGuiAction) {
         try {
             cliGuiAction.action();
-        } catch (IOException | AddressNotFoundException | CityNotFoundException ioException) {
+        } catch (IOException | AddressNotFoundException | CityNotFoundException | SQLException | GenericException |
+                 EmptyFieldException | MonumentNotFoundException | NoSuchAlgorithmException ioException) {
             logger.log(Level.WARNING, ioException.toString(), ioException.getCause());
-        } catch (SQLException | GenericException | EmptyFieldException | MonumentNotFoundException |
-                 NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
         }
     }
 
