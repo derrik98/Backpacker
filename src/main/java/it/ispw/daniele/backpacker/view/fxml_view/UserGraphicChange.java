@@ -36,14 +36,14 @@ public class UserGraphicChange extends GUIChangeTemplate{
         });
     }
 
-    public void switchToUserDet(Scene scene, UserBean myUser){
+    public void switchToUserDet(Scene scene){
         this.catcher(() -> {
             FXMLLoader loader = new FXMLLoader();
             FileInputStream fileInputStream = new FileInputStream("src/main/java/it/ispw/daniele/backpacker/view/fxml_view/User-Details-Page.fxml");
             Parent fxmlLoader = loader.load(fileInputStream);
             UserDetailsController pc = loader.getController();
             scene.setRoot(fxmlLoader);
-            pc.init(myUser);
+            pc.init();
         });
     }
 }

@@ -25,7 +25,6 @@ public class MenuBarController {
     protected static Stack<String> stackScene = new Stack<>();
 
     private UserGraphicChange ugc;
-    private UserBean myUser;
 
     @FXML
     public void switchToHome() {
@@ -41,7 +40,7 @@ public class MenuBarController {
 
     @FXML
     public void switchToUserDet(){
-        this.ugc.switchToUserDet(this.LabelProfile.getScene(), this.myUser);
+        this.ugc.switchToUserDet(this.LabelProfile.getScene());
         stackScene.push("profile");
     }
 
@@ -61,7 +60,7 @@ public class MenuBarController {
             switch (from) {
                 case "home" -> this.ugc.switchToHomePage(this.LabelHome.getScene());
                 case "result" -> this.ugc.switchToResult(this.LabelResult.getScene());
-                case "profile" -> this.ugc.switchToUserDet(this.LabelProfile.getScene(), this.myUser);
+                case "profile" -> this.ugc.switchToUserDet(this.LabelProfile.getScene());
             }
             stackScene.remove(stackScene.size() - 1);
 

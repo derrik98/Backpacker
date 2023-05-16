@@ -38,6 +38,8 @@ public class UserDetailsController extends Controller {
     @FXML
     public Text textSavedItineraries;
     @FXML
+    private Text errorText;
+    @FXML
     private ImageView imageSettings;
     @FXML
     private Text textSettings;
@@ -80,9 +82,7 @@ public class UserDetailsController extends Controller {
         return this.convert(Objects.requireNonNull(l).get(0));
     }
 
-
-
-    public void init(UserBean myUser) {
+    public void init() {
 
         UserGraphicChange ugc = UserGraphicChange.getInstance();
         ugc.menuBar(this.menuBar, "profile");
@@ -100,14 +100,14 @@ public class UserDetailsController extends Controller {
         try {
             booked = new BookTourController("gui").getItinerary(users.getUsername(), "user");
         } catch (GenericException e) {
-            System.out.println(e.getMessage());
+            errorText.setText(e.getMessage());
         }
 
         List<ItineraryBean> saved = null;
         try {
             saved = new SaveTour("gui").getItinerary(users.getUsername());
         } catch (GenericException e) {
-            System.out.println(e.getMessage());
+            errorText.setText(e.getMessage());
         }
 
         if(Objects.requireNonNull(booked).isEmpty()){
