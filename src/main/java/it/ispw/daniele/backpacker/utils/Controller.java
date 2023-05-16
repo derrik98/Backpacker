@@ -31,6 +31,7 @@ import javafx.util.Duration;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -119,6 +120,7 @@ public class Controller {
             if (type.equals("suggested") && !from.equals("profile")) {
 
                 //Setting of buy image
+
                 this.setIvBuy(titledPane, itineraryBean, stackPane, contentPane);
 
             }
@@ -225,6 +227,7 @@ public class Controller {
         ivBuy.setOnMouseClicked(mouseEvent -> {
 
             titledPane.setExpanded(false);
+
             this.buyItinerary(itineraryBean, stackPane);
 
         });
@@ -274,8 +277,10 @@ public class Controller {
         FXMLLoader loader = new FXMLLoader();
         FileInputStream fileInputStream;
 
+
         try {
             fileInputStream = new FileInputStream("src/main/java/it/ispw/daniele/backpacker/view/fxml_view/ItineraryDetails-Page.fxml");
+
             Parent fxmlLoader = loader.load(fileInputStream);
             ItineraryDetailsController idc = loader.getController();
             idc.init(itineraryBean);
@@ -284,8 +289,10 @@ public class Controller {
             stackPane.getChildren().get(0).setDisable(true);
 
         } catch (IOException e) {
-            throw new RuntimeException();
+            throw new RuntimeException(e);
         }
+
+
     }
 
     private void saveItinerary(ItineraryBean itineraryBean, String type) throws GenericException {

@@ -20,15 +20,21 @@ public class UserDaoL extends UserDaoFactory {
         List<User> ret = this.execute(() -> {
             List<User> l = new ArrayList<>();
 
-            JSONParser parser = new JSONParser();
+            JSONObject objectUser = this.openFile(PATH_USER);
+            JSONArray arrayUser = (JSONArray) objectUser.get(USER);
 
-            try (FileReader fileUser = new FileReader(PATH_USER); FileReader fileGeneralUser = new FileReader(PATH_GENERAL_USER)) {
+            JSONObject objectGeneralUser = this.openFile(PATH_GENERAL_USER);
+            JSONArray arrayGeneralUser = (JSONArray) objectGeneralUser.get(GENERAL_USER);
 
-                JSONObject objectUser = (JSONObject) parser.parse(fileUser);
-                JSONArray arrayUser = (JSONArray) objectUser.get(USER);
+            //JSONParser parser = new JSONParser();
 
-                JSONObject objectGeneralUser = (JSONObject) parser.parse(fileGeneralUser);
-                JSONArray arrayGeneralUser = (JSONArray) objectGeneralUser.get(GENERAL_USER);
+//            try (FileReader fileUser = new FileReader(PATH_USER); FileReader fileGeneralUser = new FileReader(PATH_GENERAL_USER)) {
+//
+//                JSONObject objectUser = (JSONObject) parser.parse(fileUser);
+//                JSONArray arrayUser = (JSONArray) objectUser.get(USER);
+//
+//                JSONObject objectGeneralUser = (JSONObject) parser.parse(fileGeneralUser);
+//                JSONArray arrayGeneralUser = (JSONArray) objectGeneralUser.get(GENERAL_USER);
 
                 if (arrayUser.isEmpty() || arrayGeneralUser.isEmpty()) {
                     return Collections.emptyList();
@@ -60,9 +66,9 @@ public class UserDaoL extends UserDaoFactory {
                         }
                     }
                 }
-            } catch (IOException | ParseException e) {
-                throw new GenericException(e.getMessage());
-            }
+            //} catch (IOException | ParseException e) {
+            //    throw new GenericException(e.getMessage());
+            //}
 
             return null;
         });
