@@ -40,7 +40,6 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
 
                     if (String.valueOf(object.get(LOCATION)).equals(city)) {
 
-                        String id = String.valueOf(object.get(ID));
                         String guideId = String.valueOf(object.get(GUIDE_ID));
                         String location = String.valueOf(object.get(LOCATION));
                         String date = String.valueOf(object.get(DATE));
@@ -51,8 +50,6 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
 
 
                         Itinerary itinerary = new Itinerary(guideId, location, date, time, Integer.parseInt(participants),
-//                        Itinerary itinerary = new Itinerary(Integer.parseInt(id), guideId, location, date, time, Integer.parseInt(participants),
-//                                Integer.parseInt(price), steps);
                                 Integer.parseInt(price), steps);
 
                         itineraryList.add(itinerary);
@@ -139,7 +136,7 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
     public List<Itinerary> getBookedItineraries(String input) throws GenericException {
         List<Itinerary> ret = this.execute(() -> {
 
-            List<Itinerary> itineraryList = null;
+            List<Itinerary> itineraryList = new ArrayList<>();
 
             JSONParser parser = new JSONParser();
 
@@ -165,7 +162,6 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
 
                         if (objectG.get(ITINERARY_ID).equals(objectI.get(ID)) && objectG.get(USERNAME).equals(input)) {
 
-                            int id = (int) objectG.get(ID);
                             String guideId = (String) objectI.get(GUIDE_ID);
                             String location = (String) objectI.get(LOCATION);
                             String date = (String) objectI.get(DATE);
@@ -174,7 +170,6 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
                             int price = (int) objectI.get(PRICE);
                             String steps = (String) objectI.get(STEPS);
 
-                            //Itinerary itinerary = new Itinerary(id, guideId, location, date, time, participants, price, steps);
                             Itinerary itinerary = new Itinerary(guideId, location, date, time, participants, price, steps);
 
                             itineraryList.add(itinerary);
@@ -216,10 +211,8 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
 
                     if (object.get(USERNAME).equals(input)) {
 
-                        String id = (String) object.get(ID);
                         String steps = (String) object.get(STEPS);
 
-                        //Itinerary itinerary = new Itinerary(Integer.parseInt(id), "", "", "", "", 0, 0, steps);
                         Itinerary itinerary = new Itinerary( "", "", "", "", 0, 0, steps);
 
                         itineraryList.add(itinerary);

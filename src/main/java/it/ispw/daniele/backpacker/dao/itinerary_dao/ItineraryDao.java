@@ -116,7 +116,6 @@ public class ItineraryDao extends ItineraryDaoFactory {
             return Collections.emptyList();
 
         do {
-            int id = rs.getInt(ID);
             String guideId = rs.getString(GUIDE_ID);
             String location = rs.getString(LOCATION);
             String date = rs.getString(DATE);
@@ -126,8 +125,6 @@ public class ItineraryDao extends ItineraryDaoFactory {
             String steps = rs.getString(STEPS);
 
             Itinerary itinerary = new Itinerary(guideId, location, date, time, participants, price, steps);
-            //Itinerary itinerary = new Itinerary(id, guideId, location, date, time, participants, price, steps);
-
 
             l.add(itinerary);
         } while (rs.next());
@@ -166,10 +163,9 @@ public class ItineraryDao extends ItineraryDaoFactory {
             return Collections.emptyList();
 
         do {
-            int id = rs.getInt(ID);
+
             String steps = rs.getString(STEPS);
 
-            //Itinerary itinerary = new Itinerary(id, "", "", "", "", 0, 0, steps);
             Itinerary itinerary = new Itinerary("", "", "", "", 0, 0, steps);
 
             l.add(itinerary);
