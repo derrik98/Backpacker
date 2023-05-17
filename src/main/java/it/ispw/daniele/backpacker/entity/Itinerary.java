@@ -10,7 +10,6 @@ public class Itinerary {
     private int price;
     private String steps;
 
-
     public Itinerary(int id, String guideId, String location, String date, String time, int participants, int price, String steps) {
 
         this.id = id;
@@ -24,68 +23,35 @@ public class Itinerary {
     }
 
     public String getSteps() {
-        return this.steps;
-    }
-
-    public void setSteps(String steps) {
-        this.steps = steps;
+        return steps;
     }
 
     public int getId() {
-        return this.id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        return id;
     }
 
     public String getGuideId() {
-        return this.guideId;
-    }
-
-    public void setGuideId(String guideId) {
-        this.guideId = guideId;
+        return guideId;
     }
 
     public String getLocation() {
-        return this.location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
+        return location;
     }
 
     public String getDate() {
-        return this.date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
+        return date;
     }
 
     public String getTime() {
-        return this.time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
+        return time;
     }
 
     public int getParticipants() {
-        return this.participants;
-    }
-
-    public void setParticipants(int participants) {
-        this.participants = participants;
+        return participants;
     }
 
     public int getPrice() {
-        return this.price;
+        return price;
     }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
 
 }

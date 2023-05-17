@@ -127,6 +127,7 @@ public class ItineraryDao extends ItineraryDaoFactory {
 
             Itinerary itinerary = new Itinerary(id, guideId, location, date, time, participants, price, steps);
 
+
             l.add(itinerary);
         } while (rs.next());
         return l;
