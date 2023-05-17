@@ -23,7 +23,7 @@ public class SearchController extends Controller {
 
         if (checkCityCountry.getJSON(bean)) {
             JSONFactory checkAddressCity = new AddressFromCity();
-            if(checkAddressCity.getJSON(bean)) {
+            if (checkAddressCity.getJSON(bean)) {
                 MonumentFromAddress monuments = new MonumentFromAddress();
                 monuments.getJSON(bean);
             }
@@ -39,7 +39,7 @@ public class SearchController extends Controller {
 
         ArrayList<Itinerary> it = new ArrayList<>();
 
-        for(int i = 0; i < 5; i++) {
+        for (int i = 0; i < 5; i++) {
 
             Random rand;
             try {
@@ -56,21 +56,15 @@ public class SearchController extends Controller {
 
                 if (!vector.toString().contains(result.get(index)) && j != 0) {
                     vector.append("/").append(result.get(index));
-                }
-                else {
+                } else {
                     vector.append(result.get(index));
                 }
             }
 
             Itinerary itinerary;
-            try {
-                //itinerary = new Itinerary(SecureRandom.getInstanceStrong().nextInt(1000), "", "", "", "", 0, 0, vector.toString());
-                itinerary = new Itinerary("", "", "", "", 0, 0, vector.toString());
-            } /*catch (NoSuchAlgorithmException e) {
-                throw new GenericException("Search error");
-            }*/ finally {
 
-            }
+            itinerary = new Itinerary("", "", "", "", 0, 0, vector.toString());
+
             it.add(itinerary);
         }
         return this.convert(it);

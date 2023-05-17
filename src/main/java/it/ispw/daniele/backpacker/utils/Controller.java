@@ -76,7 +76,7 @@ public class Controller {
 
     protected ItineraryBean convert(Itinerary itinerary) {
         ItineraryBean ib = new ItineraryBean();
-        ib.setItineraryId(itinerary.getId());
+        //ib.setItineraryId(itinerary.getId());
         ib.setGuideId(itinerary.getGuideId());
         ib.setLocation(itinerary.getLocation());
         ib.setDate(itinerary.getDate());

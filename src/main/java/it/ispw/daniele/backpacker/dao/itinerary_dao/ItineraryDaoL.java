@@ -30,6 +30,7 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
 
                 JSONObject o = (JSONObject) parser.parse(fileReader);
                 JSONArray arr = (JSONArray) o.get(ITINERARY);
+
                 if (arr.isEmpty()) {
                     return Collections.emptyList();
                 }
@@ -54,14 +55,13 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
 
                         itineraryList.add(itinerary);
 
-                        return itineraryList;
+
                     }
                 }
-
+                return itineraryList;
             } catch (IOException | ParseException e) {
                 throw new GenericException(e.getMessage());
             }
-            return null;
         });
         return Objects.requireNonNullElse(ret, Collections.emptyList());
     }
@@ -196,7 +196,7 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
 
             JSONParser parser = new JSONParser();
 
-            try(FileReader fileReader = new FileReader(PATH_SAVED_ITINERARY)) {
+            try (FileReader fileReader = new FileReader(PATH_SAVED_ITINERARY)) {
 
                 JSONObject o = (JSONObject) parser.parse(fileReader);
                 JSONArray arr = (JSONArray) o.get("saved_itinerary");
@@ -213,7 +213,7 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
 
                         String steps = (String) object.get(STEPS);
 
-                        Itinerary itinerary = new Itinerary( "", "", "", "", 0, 0, steps);
+                        Itinerary itinerary = new Itinerary("", "", "", "", 0, 0, steps);
 
                         itineraryList.add(itinerary);
 

@@ -9,6 +9,16 @@
       "time": "9:00",
       "steps": "q-w-e-r-t-y-",
       "participants": "20"
+    },
+    {
+      "date": "Thu Dec 12 00:00:00 CET 2024",
+      "price": "20",
+      "guideId": "yu",
+      "location": "roma",
+      "id": "2",
+      "time": "10:00",
+      "steps": "f-t-y-h-j-",
+      "participants": "30"
     }
   ]
 }
