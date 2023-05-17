@@ -50,7 +50,9 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
                         String steps = String.valueOf(object.get(STEPS));
 
 
-                        Itinerary itinerary = new Itinerary(Integer.parseInt(id), guideId, location, date, time, Integer.parseInt(participants),
+                        Itinerary itinerary = new Itinerary(guideId, location, date, time, Integer.parseInt(participants),
+//                        Itinerary itinerary = new Itinerary(Integer.parseInt(id), guideId, location, date, time, Integer.parseInt(participants),
+//                                Integer.parseInt(price), steps);
                                 Integer.parseInt(price), steps);
 
                         itineraryList.add(itinerary);
@@ -172,7 +174,8 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
                             int price = (int) objectI.get(PRICE);
                             String steps = (String) objectI.get(STEPS);
 
-                            Itinerary itinerary = new Itinerary(id, guideId, location, date, time, participants, price, steps);
+                            //Itinerary itinerary = new Itinerary(id, guideId, location, date, time, participants, price, steps);
+                            Itinerary itinerary = new Itinerary(guideId, location, date, time, participants, price, steps);
 
                             itineraryList.add(itinerary);
 
@@ -216,7 +219,8 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
                         String id = (String) object.get(ID);
                         String steps = (String) object.get(STEPS);
 
-                        Itinerary itinerary = new Itinerary(Integer.parseInt(id), "", "", "", "", 0, 0, steps);
+                        //Itinerary itinerary = new Itinerary(Integer.parseInt(id), "", "", "", "", 0, 0, steps);
+                        Itinerary itinerary = new Itinerary( "", "", "", "", 0, 0, steps);
 
                         itineraryList.add(itinerary);
 

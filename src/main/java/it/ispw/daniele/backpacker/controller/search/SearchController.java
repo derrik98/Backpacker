@@ -64,9 +64,12 @@ public class SearchController extends Controller {
 
             Itinerary itinerary;
             try {
-                itinerary = new Itinerary(SecureRandom.getInstanceStrong().nextInt(1000), "", "", "", "", 0, 0, vector.toString());
-            } catch (NoSuchAlgorithmException e) {
+                //itinerary = new Itinerary(SecureRandom.getInstanceStrong().nextInt(1000), "", "", "", "", 0, 0, vector.toString());
+                itinerary = new Itinerary("", "", "", "", 0, 0, vector.toString());
+            } /*catch (NoSuchAlgorithmException e) {
                 throw new GenericException("Search error");
+            }*/ finally {
+
             }
             it.add(itinerary);
         }
