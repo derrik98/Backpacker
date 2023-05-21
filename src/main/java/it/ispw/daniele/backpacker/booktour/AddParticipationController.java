@@ -32,4 +32,3 @@ public class AddParticipationController {
         return this.id.isParticipating(user.getUsername(), itinerary.getItineraryId());
     }
 }
-

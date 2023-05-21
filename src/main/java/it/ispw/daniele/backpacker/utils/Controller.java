@@ -31,7 +31,6 @@ import javafx.util.Duration;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -76,7 +75,7 @@ public class Controller {
 
     protected ItineraryBean convert(Itinerary itinerary) {
         ItineraryBean ib = new ItineraryBean();
-        //ib.setItineraryId(itinerary.getId());
+
         ib.setGuideId(itinerary.getGuideId());
         ib.setLocation(itinerary.getLocation());
         ib.setDate(itinerary.getDate());
@@ -120,28 +119,21 @@ public class Controller {
             if (type.equals("suggested") && !from.equals("profile")) {
 
                 //Setting of buy image
-
                 this.setIvBuy(titledPane, itineraryBean, stackPane, contentPane);
-
             }
 
             //Setting of delete image
             if (from.equals("profile")) {
-
                 this.setIvDelete(titledPane, itineraryBean, accordion, contentPane, output);
-
             }
 
             //Setting of save image
             else {
-
                 this.setIvSave(titledPane, itineraryBean, contentPane, output);
-
             }
 
             titledPane.setGraphic(contentPane);
             this.goToMap(als, titledPane);
-
 
             titledPane.setExpanded(true);
             titledPane.setCollapsible(true);
@@ -228,7 +220,12 @@ public class Controller {
 
             titledPane.setExpanded(false);
 
-            this.buyItinerary(itineraryBean, stackPane);
+            try {
+                this.buyItinerary(itineraryBean, stackPane);
+            } catch (GenericException e) {
+                ivBuy.setOnMouseClicked(null);
+                ivBuy.setOpacity(0.5f);
+            }
 
         });
 
@@ -273,7 +270,7 @@ public class Controller {
     }
 
 
-    private void buyItinerary(ItineraryBean itineraryBean, StackPane stackPane) {
+    private void buyItinerary(ItineraryBean itineraryBean, StackPane stackPane) throws GenericException {
         FXMLLoader loader = new FXMLLoader();
         FileInputStream fileInputStream;
 
@@ -289,7 +286,7 @@ public class Controller {
             stackPane.getChildren().get(0).setDisable(true);
 
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new GenericException("Page not found");
         }
 
 
