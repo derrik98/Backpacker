@@ -86,7 +86,7 @@ public class TGuideDetailsController extends Controller {
         return this.convert(Objects.requireNonNull(l).get(0));
     }
 
-    public void init(TouristGuideBean myUser) {
+    public void init() {
 
         TouristGuideGraphicChange tgc = new TouristGuideGraphicChange();
         tgc.menuBar(this.menuBar, PROFILE);

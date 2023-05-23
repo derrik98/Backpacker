@@ -84,10 +84,13 @@ public class CliLoginController {
                 SessionUser su = SessionUser.getInstance();
                 su.setSession(gu);
 
-                switch (role) {
-                    case "user" -> CliUserGraphicChange.getInstance().menuBar(scanner);
-                    case "tourist_guide" -> CliTouristGuideGraphicChange.getInstance().menuBar(scanner);
+                if(role.equals("user")){
+                    CliUserGraphicChange.getInstance().menuBar(scanner);
                 }
+                else {
+                    CliTouristGuideGraphicChange.getInstance().menuBar(scanner);
+                }
+
             }
         } catch (GenericException e) {
             System.out.println(e.getMessage());

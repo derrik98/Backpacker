@@ -1,6 +1,5 @@
 package it.ispw.daniele.backpacker.view.fxml_view;
 
-import it.ispw.daniele.backpacker.bean.TouristGuideBean;
 import it.ispw.daniele.backpacker.utils.SessionUser;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -12,40 +11,39 @@ import java.util.Stack;
 public class TouristGuideMenuBarController {
 
     @FXML
-    private Label LabelHome = new Label();
+    private Label labelHome = new Label();
     @FXML
-    public Label LabelResult = new Label();
+    public Label labelResult = new Label();
     @FXML
-    private Label LabelProfile = new Label();
+    private Label labelProfile = new Label();
     @FXML
-    public Label LabelAddItinerary = new Label();
+    public Label labelAddItinerary = new Label();
     @FXML
     public ImageView imageUndo;
 
     protected static Stack<String> stackScene = new Stack<>();
 
     private TouristGuideGraphicChange guideGraphicChange;
-    private TouristGuideBean myUser;
 
     @FXML
     public void switchToHome() {
-        this.guideGraphicChange.switchToHomePage(this.LabelHome.getScene());
+        this.guideGraphicChange.switchToHomePage(this.labelHome.getScene());
         stackScene.push("home");
     }
     @FXML
     public void switchToResult() {
-        this.guideGraphicChange.switchToResult(this.LabelResult.getScene());
+        this.guideGraphicChange.switchToResult(this.labelResult.getScene());
         stackScene.push("result");
     }
     @FXML
     public void switchToTGuideDetails() {
-        this.guideGraphicChange.switchToTGuideDet(this.LabelProfile.getScene(), this.myUser);
+        this.guideGraphicChange.switchToTGuideDet(this.labelProfile.getScene());
         stackScene.push("profile");
     }
 
     @FXML
     public void switchToAddItinerary() throws IOException {
-        this.guideGraphicChange.switchToAddItinerary(this.LabelAddItinerary.getScene());
+        this.guideGraphicChange.switchToAddItinerary(this.labelAddItinerary.getScene());
         stackScene.push("addItinerary");
     }
 
@@ -53,7 +51,7 @@ public class TouristGuideMenuBarController {
     public void logout(){
         stackScene.empty();
         SessionUser.getInstance().closeSession();
-        this.guideGraphicChange.switchToLogin(this.LabelHome.getScene());
+        this.guideGraphicChange.switchToLogin(this.labelHome.getScene());
     }
 
     public void undoScene() throws IOException {
@@ -61,10 +59,10 @@ public class TouristGuideMenuBarController {
         if (stackScene.size() > 1) {
             String from = stackScene.get(stackScene.size() - 2);
             switch (from) {
-                case "home" -> this.guideGraphicChange.switchToHomePage(this.LabelHome.getScene());
-                case "result" -> this.guideGraphicChange.switchToResult(this.LabelResult.getScene());
-                case "profile" -> this.guideGraphicChange.switchToTGuideDet(this.LabelProfile.getScene(), this.myUser);
-                case "addItinerary" -> this.guideGraphicChange.switchToAddItinerary(this.LabelAddItinerary.getScene());
+                case "home" -> this.guideGraphicChange.switchToHomePage(this.labelHome.getScene());
+                case "result" -> this.guideGraphicChange.switchToResult(this.labelResult.getScene());
+                case "profile" -> this.guideGraphicChange.switchToTGuideDet(this.labelProfile.getScene());
+                case "addItinerary" -> this.guideGraphicChange.switchToAddItinerary(this.labelAddItinerary.getScene());
             }
 
             stackScene.remove(stackScene.size() - 1);
@@ -86,10 +84,10 @@ public class TouristGuideMenuBarController {
         String style = "-fx-underline: true;";
 
         switch (selected){
-            case "home" -> this.LabelHome.setStyle(style);
-            case "profile" -> this.LabelProfile.setStyle(style);
-            case "result" -> this.LabelResult.setStyle(style);
-            case "addItinerary" -> this.LabelAddItinerary.setStyle(style);
+            case "home" -> this.labelHome.setStyle(style);
+            case "profile" -> this.labelProfile.setStyle(style);
+            case "result" -> this.labelResult.setStyle(style);
+            case "addItinerary" -> this.labelAddItinerary.setStyle(style);
             default -> {
             }
         }

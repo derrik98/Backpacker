@@ -5,7 +5,6 @@ import it.ispw.daniele.backpacker.exceptions.CityNotFoundException;
 import it.ispw.daniele.backpacker.exceptions.MonumentNotFoundException;
 import it.ispw.daniele.backpacker.utils.SessionUser;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 import static it.ispw.daniele.backpacker.view.command_line_interface.CLI.RED;
@@ -13,7 +12,7 @@ import static it.ispw.daniele.backpacker.view.command_line_interface.CLI.RESET;
 
 public class CliMenuUserController {
 
-    public void init(Scanner scanner) throws AddressNotFoundException, IOException, CityNotFoundException, MonumentNotFoundException {
+    public void init(Scanner scanner) throws AddressNotFoundException, CityNotFoundException, MonumentNotFoundException {
 
 
         CliUserGraphicChange ugc = CliUserGraphicChange.getInstance();

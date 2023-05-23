@@ -54,8 +54,8 @@ public class ResultController extends Controller {
     @FXML
     private HBox menuBar = new HBox();
 
-    private static final String home = "home";
-    private static final String result = "result";
+    private static final String HOME = "home";
+    private static final String RESULT = "result";
 
     private static ResultController instance = null;
 
@@ -63,11 +63,11 @@ public class ResultController extends Controller {
 
         if(SessionUser.getInstance().getSession().getRole().equals(Roles.TOURIST_GUIDE.name().toLowerCase())) {
             TouristGuideGraphicChange i = TouristGuideGraphicChange.getInstance();
-            i.menuBar(this.menuBar, result);
+            i.menuBar(this.menuBar, RESULT);
         }
         else {
             UserGraphicChange ugc = UserGraphicChange.getInstance();
-            ugc.menuBar(this.menuBar, result);
+            ugc.menuBar(this.menuBar, RESULT);
         }
 
         HomeBean homeBean = SessionUser.getInstance().getSearchSession();
@@ -94,12 +94,12 @@ public class ResultController extends Controller {
             link.setOnMouseClicked(mouseEvent -> {
                 if(SessionUser.getInstance().getSession().getRole().equals(Roles.TOURIST_GUIDE.name().toLowerCase())) {
                     TouristGuideGraphicChange i = TouristGuideGraphicChange.getInstance();
-                    i.menuBar(this.menuBar, home);
+                    i.menuBar(this.menuBar, HOME);
                 }
                 else {
                     UserGraphicChange ugc = UserGraphicChange.getInstance();
                     ugc.switchToHomePage(this.menuBar.getScene());
-                    ugc.menuBar(this.menuBar, home);
+                    ugc.menuBar(this.menuBar, HOME);
                 }
             });
 
@@ -120,7 +120,7 @@ public class ResultController extends Controller {
             guideImage.setFitHeight(50);
             guideImage.setFitHeight(50);
 
-            Accordion accordionSuggested = this.createTable(sItinerary, "suggested", result, this.stackPaneResult);
+            Accordion accordionSuggested = this.createTable(sItinerary, "suggested", RESULT, this.stackPaneResult);
             vBoxResultGuide.getChildren().add(accordionSuggested);
         }
 
@@ -138,7 +138,7 @@ public class ResultController extends Controller {
         else {
             selfItinerary.setText("Self Itinerary");
 
-            Accordion accordionSelf = this.createTable(iti, "self", result, null);
+            Accordion accordionSelf = this.createTable(iti, "self", RESULT, null);
             vBoxResult.getChildren().add(accordionSelf);
         }
     }

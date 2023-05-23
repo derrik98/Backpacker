@@ -12,7 +12,7 @@
 
 <AnchorPane prefWidth="1920.0" xmlns="http://javafx.com/javafx/17.0.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.ispw.daniele.backpacker.view.fxml_view.TouristGuideMenuBarController">
    <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" spacing="35.0" style="-fx-background-color: rgba(139,103,40,0.95);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      <Label fx:id="LabelHome" contentDisplay="TEXT_ONLY" onMouseClicked="#switchToHome" text="Home">
+      <Label fx:id="labelHome" contentDisplay="TEXT_ONLY" onMouseClicked="#switchToHome" text="Home">
          <font>
             <Font size="40.0" />
          </font>
@@ -23,7 +23,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </Label>
-      <Label fx:id="LabelResult" onMouseClicked="#switchToResult" text="Result">
+      <Label fx:id="labelResult" onMouseClicked="#switchToResult" text="Result">
          <font>
             <Font size="40.0" />
          </font>
@@ -34,7 +34,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </Label>
-      <Label fx:id="LabelAddItinerary" onMouseClicked="#switchToAddItinerary" text="Add Itinerary">
+      <Label fx:id="labelAddItinerary" onMouseClicked="#switchToAddItinerary" text="Add Itinerary">
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
@@ -45,7 +45,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <Label fx:id="LabelProfile" onMouseClicked="#switchToTGuideDetails" text="Profile">
+      <Label fx:id="labelProfile" onMouseClicked="#switchToTGuideDetails" text="Profile">
          <font>
             <Font size="40.0" />
          </font>

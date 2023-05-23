@@ -44,14 +44,14 @@ public class TouristGuideGraphicChange extends GUIChangeTemplate{
         addItineraryViewController.init();
     }
 
-    public void switchToTGuideDet(Scene scene, TouristGuideBean myUser){
+    public void switchToTGuideDet(Scene scene){
         this.catcher(() -> {
             FXMLLoader loader = new FXMLLoader();
             FileInputStream fileInputStream = new FileInputStream("src/main/java/it/ispw/daniele/backpacker/view/fxml_view/TGuide-Details-Page.fxml");
             Parent fxmlLoader = loader.load(fileInputStream);
             TGuideDetailsController gdc = loader.getController();
             scene.setRoot(fxmlLoader);
-            gdc.init(myUser);
+            gdc.init();
         });
     }
 }

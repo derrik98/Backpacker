@@ -5,7 +5,6 @@ import it.ispw.daniele.backpacker.bean.UserBean;
 import it.ispw.daniele.backpacker.controller.login.LoginController;
 import it.ispw.daniele.backpacker.exceptions.EmptyFieldException;
 import it.ispw.daniele.backpacker.exceptions.GenericException;
-import it.ispw.daniele.backpacker.utils.FileManager;
 import it.ispw.daniele.backpacker.utils.Roles;
 import it.ispw.daniele.backpacker.view.utils_view.InterfaceController;
 import javafx.fxml.FXML;
@@ -18,21 +17,25 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.sql.SQLException;
 
 public class SignUpController extends InterfaceController {
 
     @FXML
-    private Label TOURIST_GUIDE;
+    private Label touristGuide;
     @FXML
     private TextField textFieldImage;
     @FXML
-    private Label USER;
+    private Label user;
     @FXML
-    private TextField textFieldEmailSignUp, textFieldNameSignUp, textFieldSurnameSignUp, textFieldPassSignUp, textFieldConfPassSignUp;
+    private TextField textFieldEmailSignUp;
+    @FXML
+    private TextField textFieldNameSignUp;
+    @FXML
+    private TextField textFieldSurnameSignUp;
+    @FXML
+    private TextField textFieldPassSignUp;
+    @FXML
+    private TextField textFieldConfPassSignUp;
     @FXML
     private TextField textFieldVATNumber;
     @FXML
@@ -49,15 +52,15 @@ public class SignUpController extends InterfaceController {
         String username;
         String password;
         String userType;
-        String VATNumb;
+        String vatNumb;
 
         email = textFieldEmailSignUp.getText();
         username = textFieldNameSignUp.getText();
         password = textFieldPassSignUp.getText();
-        if (this.USER.isUnderline()) {
-            userType = USER.getId();
+        if (this.user.isUnderline()) {
+            userType = user.getId();
         } else {
-            userType = TOURIST_GUIDE.getId();
+            userType = touristGuide.getId();
         }
 
         String fileName;
@@ -85,8 +88,8 @@ public class SignUpController extends InterfaceController {
         } else if (userType.equals(Roles.TOURIST_GUIDE.name())) {
             String name = this.textFieldNameSignUp.getText();
             String surname = this.textFieldSurnameSignUp.getText();
-            VATNumb = textFieldVATNumber.getText();
-            TouristGuideBean tgb = this.setTouristGuideBean(username, name, surname, email, password, newFileName, VATNumb);
+            vatNumb = textFieldVATNumber.getText();
+            TouristGuideBean tgb = this.setTouristGuideBean(username, name, surname, email, password, newFileName, vatNumb);
             try {
                 regResult = lc.createTouristGuide(tgb, "gui");
             } catch (EmptyFieldException | GenericException exception) {
@@ -140,15 +143,15 @@ public class SignUpController extends InterfaceController {
     @FXML
     public void switchToUserSignUpPage() {
         this.textFieldVATNumber.setDisable(true);
-        this.USER.setUnderline(true);
-        this.TOURIST_GUIDE.setUnderline(false);
+        this.user.setUnderline(true);
+        this.touristGuide.setUnderline(false);
     }
 
     @FXML
     public void switchToTGuideSignUpPage() {
         this.textFieldVATNumber.setDisable(false);
-        this.USER.setUnderline(false);
-        this.TOURIST_GUIDE.setUnderline(true);
+        this.user.setUnderline(false);
+        this.touristGuide.setUnderline(true);
     }
 
     @FXML
