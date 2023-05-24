@@ -59,6 +59,13 @@ public class ResultController extends Controller {
 
     private static ResultController instance = null;
 
+    public static ResultController getInstance() {
+        if(instance == null){
+            instance = new ResultController();
+        }
+        return instance;
+    }
+
     public void init() throws GenericException {
 
         if(SessionUser.getInstance().getSession().getRole().equals(Roles.TOURIST_GUIDE.name().toLowerCase())) {
@@ -141,13 +148,6 @@ public class ResultController extends Controller {
             Accordion accordionSelf = this.createTable(iti, "self", RESULT, null);
             vBoxResult.getChildren().add(accordionSelf);
         }
-    }
-
-    public static ResultController getInstance() {
-        if(instance == null){
-            instance = new ResultController();
-        }
-        return instance;
     }
 
 }

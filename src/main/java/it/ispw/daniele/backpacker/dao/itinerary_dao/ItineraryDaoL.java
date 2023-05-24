@@ -1,5 +1,6 @@
 package it.ispw.daniele.backpacker.dao.itinerary_dao;
 
+import it.ispw.daniele.backpacker.bean.ItineraryBean;
 import it.ispw.daniele.backpacker.entity.Itinerary;
 import it.ispw.daniele.backpacker.exceptions.GenericException;
 import org.json.simple.JSONArray;
@@ -101,7 +102,7 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
     }
 
     @Override
-    public int getItineraryId(String guideId, String location, String date, String time, int participants, int price, String steps) throws GenericException {
+    public int getItineraryId(ItineraryBean itineraryBean) throws GenericException {
 
         JSONParser parser = new JSONParser();
 
@@ -117,9 +118,11 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
 
                 JSONObject object = (JSONObject) arr.get(index);
 
-                if (object.get(GUIDE_ID).equals(guideId) && object.get(LOCATION).equals(location) && object.get(DATE).equals(date) &&
-                        object.get(TIME).equals(time) && object.get(PARTICIPANTS).equals(String.valueOf(participants))
-                        && object.get(PRICE).equals(String.valueOf(price)) && object.get(STEPS).equals(steps)) {
+                if (object.get(GUIDE_ID).equals(itineraryBean.getGuideId()) && object.get(LOCATION).equals(itineraryBean.getLocation())
+                        && object.get(DATE).equals(itineraryBean.getDate()) && object.get(TIME).equals(itineraryBean.getTime())
+                        && object.get(PARTICIPANTS).equals(String.valueOf(itineraryBean.getParticipants()))
+                        && object.get(PRICE).equals(String.valueOf(itineraryBean.getPrice()))
+                        && object.get(STEPS).equals(itineraryBean.getSteps())) {
 
                     return (int) object.get(ID);
                 }

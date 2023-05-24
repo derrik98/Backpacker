@@ -4,7 +4,7 @@ import it.ispw.daniele.backpacker.utils.Roles;
 
 import java.util.Scanner;
 
-public class CliUserGraphicChange extends CliGuiChangeTemplate{
+public class CliUserGraphicChange extends CliChangeTemplate {
 
     private static CliUserGraphicChange instance = null;
 

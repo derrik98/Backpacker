@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 import static it.ispw.daniele.backpacker.view.command_line_interface.CLI.RED;
 import static it.ispw.daniele.backpacker.view.command_line_interface.CLI.RESET;
 
-public abstract class CliGuiChangeTemplate {
+public abstract class CliChangeTemplate {
 
     protected final Logger logger = Logger.getLogger("GraphicChange");
 
@@ -22,7 +22,7 @@ public abstract class CliGuiChangeTemplate {
 
     protected static Stack<String> stackScene = new Stack<>();
 
-    public void catcher(CliGuiAction cliGuiAction) {
+    public void catcher(CliAction cliGuiAction) {
         try {
             cliGuiAction.action();
         } catch (IOException | AddressNotFoundException | CityNotFoundException | SQLException | GenericException |

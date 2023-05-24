@@ -1,6 +1,5 @@
 package it.ispw.daniele.backpacker.view.fxml_view;
 
-import it.ispw.daniele.backpacker.bean.ItineraryBean;
 import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.exceptions.MonumentNotFoundException;
 import it.ispw.daniele.backpacker.utils.Roles;
@@ -9,24 +8,22 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public abstract class GUIChangeTemplate{
+public abstract class GuiChangeTemplate {
 
     protected final Logger logger = Logger.getLogger("GraphicChange");
 
     protected Roles whoAmI;
 
-    public GUIChangeTemplate(){
+    public GuiChangeTemplate(){
     }
 
-    public void catcher(GUIAction guiAction){
+    public void catcher(GuiAction guiAction){
         try {
             guiAction.action();
         }catch (IOException | MonumentNotFoundException | GenericException ioException){

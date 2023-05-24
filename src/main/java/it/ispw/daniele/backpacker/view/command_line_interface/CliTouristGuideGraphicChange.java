@@ -4,7 +4,7 @@ import it.ispw.daniele.backpacker.utils.Roles;
 
 import java.util.Scanner;
 
-public class CliTouristGuideGraphicChange extends CliGuiChangeTemplate {
+public class CliTouristGuideGraphicChange extends CliChangeTemplate {
     private static CliTouristGuideGraphicChange instance = null;
 
     private CliTouristGuideGraphicChange() {

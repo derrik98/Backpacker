@@ -1,5 +1,6 @@
 package it.ispw.daniele.backpacker.dao.itinerary_dao;
 
+import it.ispw.daniele.backpacker.bean.ItineraryBean;
 import it.ispw.daniele.backpacker.entity.Itinerary;
 import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.utils.DatabaseUserConnection;
@@ -56,7 +57,7 @@ public class ItineraryDao extends ItineraryDaoFactory {
         return Objects.requireNonNullElse(ret, false);
     }
 
-    public int getItineraryId(String guideId, String location, String date, String time, int participants, int price, String steps) throws SQLException, ClassNotFoundException {
+    public int getItineraryId(ItineraryBean itineraryBean) throws SQLException, ClassNotFoundException {
 
         Connection conn;
         String sql;
@@ -65,13 +66,13 @@ public class ItineraryDao extends ItineraryDaoFactory {
         sql = "call backpacker.get_itinerary_id(?, ?, ?, ?, ?, ?, ?);\r\n";
 
         try (PreparedStatement stm = conn.prepareStatement(sql)) {
-            stm.setString(1, guideId);
-            stm.setString(2, location);
-            stm.setString(3, date);
-            stm.setString(4, time);
-            stm.setInt(5, participants);
-            stm.setInt(6, price);
-            stm.setString(7, steps);
+            stm.setString(1, itineraryBean.getGuideId());
+            stm.setString(2, itineraryBean.getLocation());
+            stm.setString(3, itineraryBean.getDate());
+            stm.setString(4, itineraryBean.getTime());
+            stm.setInt(5, itineraryBean.getParticipants());
+            stm.setInt(6, itineraryBean.getPrice());
+            stm.setString(7, itineraryBean.getSteps());
 
             try (ResultSet rs = stm.executeQuery()) {
 

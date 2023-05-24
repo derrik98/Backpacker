@@ -1,6 +1,5 @@
 package it.ispw.daniele.backpacker.view.fxml_view;
 
-import it.ispw.daniele.backpacker.bean.TouristGuideBean;
 import it.ispw.daniele.backpacker.utils.Roles;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,7 +8,7 @@ import javafx.scene.Scene;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-public class TouristGuideGraphicChange extends GUIChangeTemplate{
+public class TouristGuideGraphicChange extends GuiChangeTemplate {
 
     private static TouristGuideGraphicChange instance = null;
 

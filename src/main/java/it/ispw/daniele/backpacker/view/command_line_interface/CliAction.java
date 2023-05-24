@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
-public interface CliGuiAction {
+public interface CliAction {
     void action() throws IOException, AddressNotFoundException, CityNotFoundException,
             MonumentNotFoundException, NoSuchAlgorithmException, GenericException, SQLException, EmptyFieldException;
 }

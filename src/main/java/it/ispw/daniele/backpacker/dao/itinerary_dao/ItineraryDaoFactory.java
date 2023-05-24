@@ -1,5 +1,6 @@
 package it.ispw.daniele.backpacker.dao.itinerary_dao;
 
+import it.ispw.daniele.backpacker.bean.ItineraryBean;
 import it.ispw.daniele.backpacker.dao.DaoAction;
 import it.ispw.daniele.backpacker.dao.DaoTemplate;
 import it.ispw.daniele.backpacker.entity.Itinerary;
@@ -8,13 +9,8 @@ import it.ispw.daniele.backpacker.utils.DatabaseTouristGuideConnection;
 import it.ispw.daniele.backpacker.utils.DatabaseUserConnection;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -106,8 +102,7 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
         });
     }
 
-    public boolean addItinerary(String guideId, String location, Date date, String time, int participants, int price, String steps)
-            throws GenericException {
+    public boolean addItinerary(ItineraryBean itineraryBean, Date date) throws GenericException {
         return (this.execute(() -> {
 
             //Save on Database
@@ -117,13 +112,13 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
             try (PreparedStatement stm = conn.prepareStatement(sql)) {
 
                 java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-                stm.setString(1, guideId);
-                stm.setString(2, location);
+                stm.setString(1, itineraryBean.getGuideId());
+                stm.setString(2, itineraryBean.getLocation());
                 stm.setDate(3, sqlDate);
-                stm.setString(4, time);
-                stm.setInt(5, participants);
-                stm.setInt(6, price);
-                stm.setString(7, steps);
+                stm.setString(4, itineraryBean.getTime());
+                stm.setInt(5, itineraryBean.getParticipants());
+                stm.setInt(6, itineraryBean.getPrice());
+                stm.setString(7, itineraryBean.getSteps());
                 stm.executeUpdate();
 
             } finally {
@@ -141,13 +136,13 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
 
             jsonMap = new HashMap<>();
             jsonMap.put(ID, String.valueOf(arr.size() + 1));  //controllare bene indice
-            jsonMap.put(GUIDE_ID, guideId);
-            jsonMap.put(LOCATION, location);
+            jsonMap.put(GUIDE_ID, itineraryBean.getGuideId());
+            jsonMap.put(LOCATION, itineraryBean.getLocation());
             jsonMap.put(DATE, String.valueOf(date));
-            jsonMap.put(TIME, time);
-            jsonMap.put(PARTICIPANTS, String.valueOf(participants));
-            jsonMap.put(PRICE, String.valueOf(price));
-            jsonMap.put(STEPS, steps);
+            jsonMap.put(TIME, itineraryBean.getTime());
+            jsonMap.put(PARTICIPANTS, String.valueOf(itineraryBean.getParticipants()));
+            jsonMap.put(PRICE, String.valueOf(itineraryBean.getPrice()));
+            jsonMap.put(STEPS, itineraryBean.getSteps());
 
             JSONObject newUser = new JSONObject(jsonMap);
 
@@ -242,7 +237,7 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
 
     public abstract Boolean isParticipating(String username, int itineraryId) throws GenericException;
 
-    public abstract int getItineraryId(String guideId, String location, String date, String time, int participants, int price, String steps) throws SQLException, FileNotFoundException, GenericException, ClassNotFoundException;
+    public abstract int getItineraryId(ItineraryBean itineraryBean) throws SQLException, FileNotFoundException, GenericException, ClassNotFoundException;
 
     public abstract List<Itinerary> getBookedItineraries(String input) throws GenericException;
 

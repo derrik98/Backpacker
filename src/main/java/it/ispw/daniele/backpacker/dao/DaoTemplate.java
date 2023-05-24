@@ -38,7 +38,7 @@ public abstract class DaoTemplate {
         }
     }
 
-    public final <G> G execute(DaoAction<G> daoAction) throws GenericException {
+    protected final <G> G execute(DaoAction<G> daoAction) throws GenericException {
         try {
             return daoAction.act();
         }catch (SQLException | GenericException | ClassNotFoundException exception){

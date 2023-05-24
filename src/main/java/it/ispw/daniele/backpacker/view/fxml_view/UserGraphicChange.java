@@ -1,15 +1,13 @@
 package it.ispw.daniele.backpacker.view.fxml_view;
 
-import it.ispw.daniele.backpacker.bean.UserBean;
 import it.ispw.daniele.backpacker.utils.Roles;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 import java.io.FileInputStream;
-import java.io.IOException;
 
-public class UserGraphicChange extends GUIChangeTemplate{
+public class UserGraphicChange extends GuiChangeTemplate {
 
     private static UserGraphicChange instance = null;
 

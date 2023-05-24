@@ -5,7 +5,7 @@ import it.ispw.daniele.backpacker.exceptions.MonumentNotFoundException;
 
 import java.io.IOException;
 
-public interface GUIAction {
+public interface GuiAction {
 
     void action() throws IOException, MonumentNotFoundException, GenericException;
 

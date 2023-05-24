@@ -36,7 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Controller {
+public abstract class Controller {
 
     private static final String STYLE = "Arial";
 
