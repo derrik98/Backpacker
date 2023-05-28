@@ -50,7 +50,7 @@ public class ItineraryDetailsController {
     @FXML
     public void subscribe() {
 
-        boolean isPart = false;
+        boolean isPart;
         try {
             isPart = controller.isParticipating(this.sessionUser, ib);
             if(isPart){

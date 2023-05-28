@@ -2,6 +2,7 @@ package it.ispw.daniele.backpacker.entity;
 
 public class Itinerary {
 
+    private int id;
     private String guideId;
     private String location;
     private String date;

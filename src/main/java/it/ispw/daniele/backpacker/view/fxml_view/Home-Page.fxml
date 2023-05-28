@@ -130,7 +130,7 @@
                              </padding>
                          </HBox>
                          <HBox alignment="CENTER" prefWidth="900.0">
-                             <Button id="search" mnemonicParsing="false" onMouseClicked="#searchRoutes" text="Search">
+                             <Button id="search" mnemonicParsing="false" onMouseClicked="#searchItinerary" text="Search">
                                  <font>
                                      <Font size="27.0"/>
                                  </font>

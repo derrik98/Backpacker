@@ -8,13 +8,11 @@ import it.ispw.daniele.backpacker.entity.Itinerary;
 import it.ispw.daniele.backpacker.entity.TouristGuide;
 import it.ispw.daniele.backpacker.entity.User;
 import it.ispw.daniele.backpacker.exceptions.GenericException;
-import it.ispw.daniele.backpacker.view.fxml_view.ItineraryDetailsController;
+import it.ispw.daniele.backpacker.view.fxml_view.UserGraphicChange;
 import javafx.animation.PauseTransition;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
-import javafx.scene.Parent;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
@@ -30,8 +28,6 @@ import javafx.scene.web.WebView;
 import javafx.util.Duration;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -220,12 +216,8 @@ public abstract class Controller {
 
             titledPane.setExpanded(false);
 
-            try {
-                this.buyItinerary(itineraryBean, stackPane);
-            } catch (GenericException e) {
-                ivBuy.setOnMouseClicked(null);
-                ivBuy.setOpacity(0.5f);
-            }
+            UserGraphicChange ugc = UserGraphicChange.getInstance();
+            ugc.switchToItineraryDet(itineraryBean, stackPane);
 
         });
 
@@ -267,29 +259,6 @@ public abstract class Controller {
             label.setPrefWidth(Control.USE_COMPUTED_SIZE);
             hBox.getChildren().add(label);
         }
-    }
-
-
-    private void buyItinerary(ItineraryBean itineraryBean, StackPane stackPane) throws GenericException {
-        FXMLLoader loader = new FXMLLoader();
-        FileInputStream fileInputStream;
-
-
-        try {
-            fileInputStream = new FileInputStream("src/main/java/it/ispw/daniele/backpacker/view/fxml_view/ItineraryDetails-Page.fxml");
-
-            Parent fxmlLoader = loader.load(fileInputStream);
-            ItineraryDetailsController idc = loader.getController();
-            idc.init(itineraryBean);
-
-            stackPane.getChildren().add(fxmlLoader);
-            stackPane.getChildren().get(0).setDisable(true);
-
-        } catch (IOException e) {
-            throw new GenericException("Page not found");
-        }
-
-
     }
 
     private void saveItinerary(ItineraryBean itineraryBean, String type) throws GenericException {

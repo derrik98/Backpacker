@@ -22,7 +22,7 @@ import javafx.scene.text.Text;
 
 import java.util.List;
 
-public class ResultController extends Controller {
+public class ResultController  extends Controller {
     @FXML
     public Text suggestedItinerary = new Text();
     @FXML

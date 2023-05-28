@@ -2,6 +2,7 @@ package it.ispw.daniele.backpacker.dao.tourist_guide_dao;
 
 import it.ispw.daniele.backpacker.entity.TouristGuide;
 import it.ispw.daniele.backpacker.exceptions.GenericException;
+import it.ispw.daniele.backpacker.utils.Controller;
 import it.ispw.daniele.backpacker.utils.DatabaseTouristGuideConnection;
 
 import java.sql.Connection;

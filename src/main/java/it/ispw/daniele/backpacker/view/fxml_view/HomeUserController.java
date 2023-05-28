@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class HomeUserController{
+public class HomeUserController {
 
     @FXML
     private Text errorText;
@@ -41,7 +41,7 @@ public class HomeUserController{
     @FXML
     public void enterKeyPressed(KeyEvent keyEvent) throws  IOException {
         if (keyEvent.getCode().equals(KeyCode.ENTER)){
-            this.searchRoutes();
+            this.searchItinerary();
         }
     }
 
@@ -50,7 +50,7 @@ public class HomeUserController{
         labelRange.setText(sliderValue.setScale(1, RoundingMode.HALF_UP) + " km");
     }
 
-    public void searchRoutes() throws IOException {
+    public void searchItinerary() throws IOException {
 
         HomeBean homeBean = new HomeBean();
         homeBean.setCountry(this.textFieldCountry.getText());
