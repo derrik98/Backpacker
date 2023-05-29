@@ -33,7 +33,6 @@ public class UserGraphicChange extends GuiChangeTemplate {
             HomeUserController huc = loader.getController();
             scene.setRoot(fxmlLoader);
             huc.init();
-            //stackScene.push(fxmlLoader);
         });
     }
 
@@ -52,7 +51,6 @@ public class UserGraphicChange extends GuiChangeTemplate {
         this.catcher(() -> {
             FXMLLoader loader = new FXMLLoader();
             FileInputStream fileInputStream = new FileInputStream("src/main/java/it/ispw/daniele/backpacker/view/fxml_view/ItineraryDetails-Page.fxml");
-
             Parent fxmlLoader = loader.load(fileInputStream);
             ItineraryDetailsController idc = loader.getController();
             idc.init(itineraryBean);

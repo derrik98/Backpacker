@@ -74,7 +74,7 @@ public class CliAddItineraryController extends InterfaceController {
         try {
             result = controller.addItinerary(itineraryBean);
             if (result) {
-                System.out.println("Correct share!\n");
+                System.out.println("Itinerary added successfully\n");
             } else {
                 System.out.print(RED + "Error share\n" + RESET);
             }

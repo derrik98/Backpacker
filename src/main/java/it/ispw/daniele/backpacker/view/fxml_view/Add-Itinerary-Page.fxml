@@ -177,27 +177,27 @@
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </VBox.margin>
                         </HBox>
-                        <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="146.0">
-                           <VBox.margin>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </VBox.margin>
-                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Itinerary ID:">
-                              <font>
-                                 <Font size="27.0" />
-                              </font>
-                              <HBox.margin>
-                                 <Insets right="10.0" />
-                              </HBox.margin>
-                           </Text>
-                           <TextField fx:id="textFieldId">
-                              <font>
-                                 <Font size="20.0" />
-                              </font>
-                              <HBox.margin>
-                                 <Insets right="10.0" />
-                              </HBox.margin>
-                           </TextField>
-                        </HBox>
+<!--                        <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="146.0">-->
+<!--                           <VBox.margin>-->
+<!--                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />-->
+<!--                           </VBox.margin>-->
+<!--                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Itinerary ID:">-->
+<!--                              <font>-->
+<!--                                 <Font size="27.0" />-->
+<!--                              </font>-->
+<!--&lt;!&ndash;                              <HBox.margin>&ndash;&gt;-->
+<!--&lt;!&ndash;                                 <Insets right="10.0" />&ndash;&gt;-->
+<!--&lt;!&ndash;                              </HBox.margin>&ndash;&gt;-->
+<!--                           </Text>-->
+<!--                           <TextField fx:id="textFieldId">-->
+<!--                              <font>-->
+<!--                                 <Font size="20.0" />-->
+<!--                              </font>-->
+<!--                              <HBox.margin>-->
+<!--                                 <Insets right="10.0" />-->
+<!--                              </HBox.margin>-->
+<!--                           </TextField>-->
+<!--                        </HBox>-->
                      </VBox>
                   </HBox>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Select steps">
@@ -221,6 +221,16 @@
                         <Insets bottom="40.0" top="20.0" />
                      </VBox.margin>
                   </Button>
+                  <HBox alignment="CENTER" style="-fx-background-color:rgba(139,103,40,0.95); -fx-background-radius:25 25 25 25;">
+                     <Text fx:id="errorText" fill="BLACK" strokeType="OUTSIDE" strokeWidth="0.0">
+                        <font>
+                           <Font size="24" />
+                        </font>
+                        <HBox.margin>
+                           <Insets bottom="40.0" top="40.0" />
+                        </HBox.margin>
+                     </Text>
+                  </HBox>
                </VBox>
             </VBox>
          </StackPane>

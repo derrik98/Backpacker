@@ -85,7 +85,6 @@ public class MenuBarController {
             case "result" -> this.LabelResult.setStyle(style);
             default -> {
             }
-
         }
     }
 }

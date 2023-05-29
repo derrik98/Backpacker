@@ -53,7 +53,7 @@ public class ItineraryDetailsController {
         boolean isPart;
         try {
             isPart = controller.isParticipating(this.sessionUser, ib);
-            if(isPart){
+            if (isPart) {
                 controller.removeParticipation(this.sessionUser, ib);
                 this.subscribeButton.setText("Subscribe");
 

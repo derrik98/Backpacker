@@ -103,5 +103,4 @@ public class LoginViewController {
         this.textFieldUsername.setText("");
         this.textFieldPassword.setText("");
     }
-
 }

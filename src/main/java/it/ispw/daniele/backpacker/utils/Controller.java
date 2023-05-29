@@ -176,7 +176,7 @@ public abstract class Controller {
         region2.setMaxWidth(Double.MAX_VALUE);
 
         ImageView ivDelete;
-        ivDelete = new ImageView(new Image(Objects.requireNonNull(getClass().getResource("/cestino.png")).toExternalForm()));
+        ivDelete = new ImageView(new Image(Objects.requireNonNull(getClass().getResource("/bin.png")).toExternalForm()));
 
         ivDelete.setOnMouseClicked(mouseEvent -> {
 

@@ -20,19 +20,19 @@ public abstract class GuiChangeTemplate {
 
     protected Roles whoAmI;
 
-    public GuiChangeTemplate(){
+    public GuiChangeTemplate() {
     }
 
-    public void catcher(GuiAction guiAction){
+    public void catcher(GuiAction guiAction) {
         try {
             guiAction.action();
-        }catch (IOException | MonumentNotFoundException | GenericException ioException){
+        } catch (IOException | MonumentNotFoundException | GenericException ioException) {
             logger.log(Level.WARNING, ioException.toString(), ioException.getCause());
         }
     }
 
     @FXML
-    public void switchToLogin(Scene scene){
+    public void switchToLogin(Scene scene) {
         this.catcher(() -> {
             FXMLLoader loader = new FXMLLoader();
             FileInputStream fileInputStream = new FileInputStream("src/main/java/it/ispw/daniele/backpacker/view/fxml_view/LoginView-Page.fxml");
@@ -51,39 +51,14 @@ public abstract class GuiChangeTemplate {
             Parent fxmlLoader = loader.load(fileInputStream);
             ResultController rc = loader.getController();
             scene.setRoot(fxmlLoader);
-            try {
-                rc.init();
-            } catch (GenericException e) {
-                throw new GenericException("Page not found");
-            }
+            rc.init();
         });
     }
 
-    /*public void switchToItineraryDetails(Scene scene, ItineraryBean itineraryBean){
-        this.catcher(() -> {
-            FXMLLoader loader = new FXMLLoader();
-            FileInputStream fileInputStream;
-
-            fileInputStream = new FileInputStream("src/main/java/it/ispw/daniele/backpacker/view/fxml_view/ItineraryDetails-Page.fxml");
-            Parent fxmlLoader = loader.load(fileInputStream);
-            ItineraryDetailsController idc = loader.getController();
-            idc.init(itineraryBean);
-
-            StackPane stackPaneResult = ResultController.getInstance().stackPaneResult;
-            VBox vBox = ResultController.getInstance().vBoxDynamic;
-            //StackPane stackPaneResult = new StackPane();
-
-            System.out.println(itineraryBean);
-            System.out.println(stackPaneResult.getChildren());
-            stackPaneResult.getChildren().add(fxmlLoader);
-            stackPaneResult.getChildren().get(0).setDisable(true);// OOOOOOOOO
-        });
-    }*/
-
-    public void menuBar (HBox pos, String sel){
+    public void menuBar(HBox pos, String sel) {
         this.catcher(() -> {
             FXMLLoader loader;
-            switch (whoAmI){
+            switch (whoAmI) {
                 case USER -> {
                     loader = new FXMLLoader();
                     FileInputStream fileInputStream = new FileInputStream("src/main/java/it/ispw/daniele/backpacker/view/fxml_view/MenuBar.fxml");
