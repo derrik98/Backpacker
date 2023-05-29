@@ -1,14 +1,12 @@
 package it.ispw.daniele.backpacker.view.fxml_view;
 
-import it.ispw.daniele.backpacker.bean.HomeBean;
-import it.ispw.daniele.backpacker.bean.UserBean;
 import it.ispw.daniele.backpacker.utils.SessionUser;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
-import java.util.Stack;
+import java.util.Vector;
 
 public class MenuBarController {
 
@@ -22,31 +20,30 @@ public class MenuBarController {
     @FXML
     public ImageView imageUndo;
 
-    protected static Stack<String> stackScene = new Stack<>();
+    protected static Vector<String> stackScene = new Vector<>();
 
     private UserGraphicChange ugc;
 
     @FXML
     public void switchToHome() {
         this.ugc.switchToHomePage(this.LabelHome.getScene());
-        stackScene.push("home");
+        stackScene.add("home");
     }
 
     @FXML
     public void switchToResult() {
         this.ugc.switchToResult(this.LabelResult.getScene());
-        stackScene.push("result");
+        stackScene.add("result");
     }
 
     @FXML
     public void switchToUserDet(){
         this.ugc.switchToUserDet(this.LabelProfile.getScene());
-        stackScene.push("profile");
+        stackScene.add("profile");
     }
 
     @FXML
     public void logout(){
-        stackScene.empty();
         SessionUser.getInstance().closeSession();
         this.ugc.switchToLogin(this.LabelHome.getScene());
     }
@@ -74,7 +71,7 @@ public class MenuBarController {
         this.ugc = UserGraphicChange.getInstance();
 
         if(stackScene.isEmpty()){
-            stackScene.push("home");
+            stackScene.add("home");
         }
 
         String style = "-fx-underline: true;";
