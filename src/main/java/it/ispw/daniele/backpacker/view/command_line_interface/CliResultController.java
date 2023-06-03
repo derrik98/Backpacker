@@ -125,14 +125,14 @@ public class CliResultController {
             try {
                 desktop.browse(new URI(url.toString().replace(" ", "+")));
             } catch (IOException | URISyntaxException e) {
-                e.printStackTrace();
+                System.out.println(RED + "Unable to view on map\n" + RESET);
             }
         } else {
             Runtime runtime = Runtime.getRuntime();
             try {
                 runtime.exec("xdg-open " + url);
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println(RED + "Unable to view on map\n" + RESET);
             }
         }
     }
@@ -146,7 +146,7 @@ public class CliResultController {
             try {
                 st.saveTour(SessionUser.getInstance().getSession(), itineraryBeanList.get(input));
             } catch (GenericException e) {
-                System.out.println(e.getMessage());
+                System.out.println(RED + e.getMessage() + "\n" + RESET);
             }
             System.out.println(GREEN + "Itinerary added successfully" + RESET);
         } else {

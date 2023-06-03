@@ -6,11 +6,9 @@ import it.ispw.daniele.backpacker.booktour.BookTourController;
 import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.utils.SessionUser;
 
-import java.io.PrintStream;
 import java.util.Scanner;
 
-import static it.ispw.daniele.backpacker.view.command_line_interface.CLI.BOLD;
-import static it.ispw.daniele.backpacker.view.command_line_interface.CLI.RESET;
+import static it.ispw.daniele.backpacker.view.command_line_interface.CLI.*;
 
 public class CliItineraryDetailsController {
 
@@ -34,7 +32,7 @@ public class CliItineraryDetailsController {
                 this.command = "REMOVE";
             }
         } catch (GenericException e) {
-            System.out.println(e.getMessage());
+            System.out.println(RED + e.getMessage() + "\n" + RESET);
         }
 
     }
@@ -72,9 +70,7 @@ public class CliItineraryDetailsController {
 
 
             switch (scanner.nextInt()) {
-                case 0 -> {
-                    this.subscribe();
-                }
+                case 0 -> this.subscribe();
                 case 1 -> {
                     System.out.println("undo");
                     return;

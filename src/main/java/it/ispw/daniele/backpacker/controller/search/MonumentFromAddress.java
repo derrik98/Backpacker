@@ -47,7 +47,7 @@ public class MonumentFromAddress extends JSONFactory{
                 throw new MonumentNotFoundException("No result");
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new MonumentNotFoundException("Error to get data");
         }
         return true;
     }
