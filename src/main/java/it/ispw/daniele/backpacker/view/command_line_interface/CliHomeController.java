@@ -4,6 +4,7 @@ import it.ispw.daniele.backpacker.bean.HomeBean;
 import it.ispw.daniele.backpacker.controller.search.SearchController;
 import it.ispw.daniele.backpacker.exceptions.AddressNotFoundException;
 import it.ispw.daniele.backpacker.exceptions.CityNotFoundException;
+import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.exceptions.MonumentNotFoundException;
 import it.ispw.daniele.backpacker.utils.SessionUser;
 import it.ispw.daniele.backpacker.view.utils_view.InterfaceController;
@@ -16,7 +17,7 @@ import static it.ispw.daniele.backpacker.view.command_line_interface.CLI.*;
 
 public class CliHomeController extends InterfaceController {
 
-    public void init(Scanner scanner) throws IOException, AddressNotFoundException, CityNotFoundException, MonumentNotFoundException {
+    public void init(Scanner scanner) throws IOException, AddressNotFoundException, CityNotFoundException, MonumentNotFoundException, GenericException {
 
         System.out.print("\033[H\033[2J");
         System.out.println(BOLD + "SEARCH PAGE\n" + RESET);
@@ -40,7 +41,7 @@ public class CliHomeController extends InterfaceController {
 
         try {
             if (country.equals("") || city.equals("") || address.equals("")) {
-                throw new FileNotFoundException("ERROR");
+                throw new GenericException("Data missing"); //eliminare if e gestire tramite throw
             }
 
             SessionUser.getInstance().setSearchSession(homeBean);

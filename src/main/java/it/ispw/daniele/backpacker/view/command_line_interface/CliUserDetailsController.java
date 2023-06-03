@@ -47,21 +47,9 @@ public class CliUserDetailsController extends Controller {
             System.out.println("Surname: " + users.getSurname());
             System.out.println("\n");
 
-            BookTourController btc = new BookTourController("cli");
-            List<ItineraryBean> booked = null;
-            try {
-                booked = btc.getItinerary(users.getUsername(), "user");
-            } catch (GenericException e) {
-                System.out.println(e.getMessage());
-            }
+            List<ItineraryBean> booked = this.getBookedIt(users);
 
-            SaveTour st = new SaveTour("cli");
-            List<ItineraryBean> saved = null;
-            try {
-                saved = st.getItinerary(users.getUsername());
-            } catch (GenericException e) {
-                System.out.println(e.getMessage());
-            }
+            List<ItineraryBean> saved = this.getIt(users);
 
             if (Objects.requireNonNull(booked).isEmpty()) {
                 System.out.println("Booked itineraries: ");
@@ -91,5 +79,29 @@ public class CliUserDetailsController extends Controller {
             }
 
         } while (scanner.hasNext());
+    }
+
+    private List<ItineraryBean> getBookedIt(UserBean users) {
+
+        BookTourController btc = new BookTourController("cli");
+        List<ItineraryBean> booked = null;
+        try {
+            booked = btc.getItinerary(users.getUsername(), "user");
+        } catch (GenericException e) {
+            System.out.println(e.getMessage());
+        }
+        return booked;
+    }
+
+    private List<ItineraryBean> getIt(UserBean users) {
+
+        SaveTour st = new SaveTour("cli");
+        List<ItineraryBean> saved = null;
+        try {
+            saved = st.getItinerary(users.getUsername());
+        } catch (GenericException e) {
+            System.out.println(e.getMessage());
+        }
+        return saved;
     }
 }

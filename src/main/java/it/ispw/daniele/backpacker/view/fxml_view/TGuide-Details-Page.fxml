@@ -180,7 +180,30 @@
                         </VBox.margin>
                      </Text>
                      <VBox fx:id="vBoxSaved" alignment="TOP_CENTER" layoutX="10.0" layoutY="86.0"/>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                     </padding>
                   </VBox>
+                  <VBox.margin>
+                     <Insets/>
+                  </VBox.margin>
+               </HBox>
+               <HBox alignment="CENTER"
+                     style="-fx-background-color:rgba(139,103,40,0.95); -fx-background-radius:25 25 25 25;">
+                  <Text fx:id="errorText" fill="BLACK" strokeType="OUTSIDE" strokeWidth="0.0">
+                     <font>
+                        <Font size="24"/>
+                     </font>
+                     <HBox.margin>
+                        <Insets bottom="40.0" top="40.0"/>
+                     </HBox.margin>
+                  </Text>
+                  <VBox.margin>
+                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                  </VBox.margin>
+                  <padding>
+                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                  </padding>
                </HBox>
             </VBox>
          </StackPane>

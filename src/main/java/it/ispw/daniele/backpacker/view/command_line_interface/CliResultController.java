@@ -68,73 +68,15 @@ public class CliResultController {
             System.out.println("Commands : VIEW ON MAP[0] - SAVE[1] - BUY[2] (Only for suggester itinerary) - QUIT[3]");
 
             switch (scanner.nextLine()) {
-                case "0" -> {
-                    System.out.println("Digit Itinerary id");
-                    int input = Integer.parseInt(scanner.nextLine());
-
-                    String[] steps = itineraryBeanList.get(input).getSteps().split("/");
-
-                    ArrayList<String> als = new ArrayList<>();
-                    for (int i = 0; i < steps.length; i++) {
-                        als.add(i, steps[i]);
-                    }
-
-                    StringBuilder Url = new StringBuilder("https://google.it/maps/dir");
-
-                    for (int indexMonument = 0; indexMonument < als.size(); indexMonument++) {
-                        Url.append("/").append(als.get(indexMonument));
-                    }
-
-                    if (Desktop.isDesktopSupported()) {
-                        Desktop desktop = Desktop.getDesktop();
-                        try {
-                            desktop.browse(new URI(Url.toString().replace(" ", "+")));
-                        } catch (IOException | URISyntaxException e) {
-                            e.printStackTrace();
-                        }
-                    } else {
-                        Runtime runtime = Runtime.getRuntime();
-                        try {
-                            runtime.exec("xdg-open " + Url);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-                case "1" -> {
-                    SaveTour st = new SaveTour("cli");
-                    System.out.println("Digit Itinerary id");
-                    int input = Integer.parseInt(scanner.nextLine());
-
-                    if (input <= itineraryBeanList.size() && input >= 0) {
-                        try {
-                            st.saveTour(SessionUser.getInstance().getSession(), itineraryBeanList.get(input));
-                        } catch (GenericException e) {
-                            System.out.println(e.getMessage());
-                        }
-                        System.out.println(GREEN + "Itinerary added successfully" + RESET);
-                    } else {
-                        System.out.println(RED + "Incorrect id" + RESET);
-                    }
-
-                }
-                case "2" -> {
-                    System.out.println("Digit Itinerary id");
-                    int input = Integer.parseInt(scanner.nextLine());
-                    if (input <= bSize && input >= bSize) {
-                        CliItineraryDetailsController cidc = new CliItineraryDetailsController();
-                        cidc.init(itineraryBeanList.get(input));
-                    } else {
-                        System.out.println(RED + "Incorrect id" + RESET);
-                    }
-                }
+                case "0" -> this.viewOnMap(scanner, itineraryBeanList);
+                case "1" -> this.save(scanner, itineraryBeanList);
+                case "2" -> this.buy(scanner, itineraryBeanList, bSize);
                 case "3" -> {
                     System.out.println("QUIT");
                     return;
                 }
                 default -> System.out.println(RED + "Command not found\n" + RESET);
             }
-
         } while (true);
     }
 
@@ -158,6 +100,68 @@ public class CliResultController {
             System.out.println(line);
             System.out.print("\n");
 
+        }
+    }
+
+    private void viewOnMap(Scanner scanner, List<ItineraryBean> itineraryBeanList) {
+        System.out.println("Digit Itinerary id");
+        int input = Integer.parseInt(scanner.nextLine());
+
+        String[] steps = itineraryBeanList.get(input).getSteps().split("/");
+
+        ArrayList<String> als = new ArrayList<>();
+        for (int i = 0; i < steps.length; i++) {
+            als.add(i, steps[i]);
+        }
+
+        StringBuilder url = new StringBuilder("https://google.it/maps/dir");
+
+        for (int indexMonument = 0; indexMonument < als.size(); indexMonument++) {
+            url.append("/").append(als.get(indexMonument));
+        }
+
+        if (Desktop.isDesktopSupported()) {
+            Desktop desktop = Desktop.getDesktop();
+            try {
+                desktop.browse(new URI(url.toString().replace(" ", "+")));
+            } catch (IOException | URISyntaxException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Runtime runtime = Runtime.getRuntime();
+            try {
+                runtime.exec("xdg-open " + url);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void save(Scanner scanner, List<ItineraryBean> itineraryBeanList) {
+        SaveTour st = new SaveTour("cli");
+        System.out.println("Digit Itinerary id");
+        int input = Integer.parseInt(scanner.nextLine());
+
+        if (input <= itineraryBeanList.size() && input >= 0) {
+            try {
+                st.saveTour(SessionUser.getInstance().getSession(), itineraryBeanList.get(input));
+            } catch (GenericException e) {
+                System.out.println(e.getMessage());
+            }
+            System.out.println(GREEN + "Itinerary added successfully" + RESET);
+        } else {
+            System.out.println(RED + "Incorrect id" + RESET);
+        }
+    }
+
+    private void buy(Scanner scanner, List<ItineraryBean> itineraryBeanList, int bSize){
+        System.out.println("Digit Itinerary id");
+        int input = Integer.parseInt(scanner.nextLine());
+        if (input <= bSize && input >= bSize) {
+            CliItineraryDetailsController cidc = new CliItineraryDetailsController();
+            cidc.init(itineraryBeanList.get(input));
+        } else {
+            System.out.println(RED + "Incorrect id" + RESET);
         }
     }
 }

@@ -21,7 +21,7 @@ public class CliUserGraphicChange extends CliChangeTemplate {
 
     public  void switchToHome(Scanner scanner){
         this.catcher(() -> {
-            stackScene.push("home");
+            stackScene.add("home");
             CliHomeController homeController = new CliHomeController();
             homeController.init(scanner);
         });
@@ -29,7 +29,7 @@ public class CliUserGraphicChange extends CliChangeTemplate {
 
     public  void switchToUserDetails(){
         this.catcher(() -> {
-            stackScene.push("profile");
+            stackScene.add("profile");
             CliUserDetailsController cliUserDetailsController = new CliUserDetailsController();
             cliUserDetailsController.init();
         });
@@ -38,12 +38,8 @@ public class CliUserGraphicChange extends CliChangeTemplate {
     public void undo(Scanner scanner){
         this.catcher(() -> {
 
-            System.out.println(stackScene);
-
             if (stackScene.size() > 1) {
 
-                System.out.println(stackScene);
-                System.out.println(stackScene.get(stackScene.size() - 2));
                 String from = stackScene.get(stackScene.size() - 2);
                 switch (from) {
                     case "home" -> this.switchToHome(scanner);
@@ -55,8 +51,6 @@ public class CliUserGraphicChange extends CliChangeTemplate {
             } else {
                 this.switchToHome(scanner);
             }
-
         });
     }
-
 }

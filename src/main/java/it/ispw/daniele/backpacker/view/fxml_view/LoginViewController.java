@@ -22,9 +22,9 @@ import java.io.IOException;
 public class LoginViewController {
 
     @FXML
-    public Label LabelLogin;
+    public Label labelLogin;
     @FXML
-    public Label LabelSignUp;
+    public Label labelSignUp;
     @FXML
     public VBox dynamicZone;
     @FXML
@@ -58,12 +58,11 @@ public class LoginViewController {
                 switch (role) {
                     case "user" -> UserGraphicChange.getInstance().switchToHomePage(this.textFieldUsername.getScene());
                     case "tourist_guide" -> TouristGuideGraphicChange.getInstance().switchToHomePage(this.textFieldUsername.getScene());
+                    default -> this.errorText.setText("Unable to login");
                 }
             }
-        }catch (EmptyFieldException exception){
+        }catch (EmptyFieldException | GenericException exception){
             this.errorText.setText(exception.getMessage());
-        } catch (GenericException e) {
-            System.out.println(e.getMessage());
         }
     }
 
@@ -76,8 +75,8 @@ public class LoginViewController {
 
         dynamicZone.getChildren().remove(0, dynamicZone.getChildren().size());
         dynamicZone.getChildren().add(fxmlLoader);
-        this.LabelSignUp.setUnderline(true);
-        this.LabelLogin.setUnderline(false);
+        this.labelSignUp.setUnderline(true);
+        this.labelLogin.setUnderline(false);
     }
 
     public void switchToLogin() throws IOException {
@@ -86,9 +85,9 @@ public class LoginViewController {
         FileInputStream fileInputStream = new FileInputStream("src/main/java/it/ispw/daniele/backpacker/view/fxml_view/LoginView-Page.fxml");
         Parent fxmlLoader = loader.load(fileInputStream);
         loader.setController(lvc);
-        this.LabelLogin.getScene().setRoot(fxmlLoader);
-        this.LabelSignUp.setUnderline(false);
-        this.LabelLogin.setUnderline(true);
+        this.labelLogin.getScene().setRoot(fxmlLoader);
+        this.labelSignUp.setUnderline(false);
+        this.labelLogin.setUnderline(true);
 
     }
 

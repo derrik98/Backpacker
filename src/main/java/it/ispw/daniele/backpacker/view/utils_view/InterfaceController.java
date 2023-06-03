@@ -4,6 +4,7 @@ import it.ispw.daniele.backpacker.bean.HomeBean;
 import it.ispw.daniele.backpacker.bean.ItineraryBean;
 import it.ispw.daniele.backpacker.bean.TouristGuideBean;
 import it.ispw.daniele.backpacker.bean.UserBean;
+import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.utils.FileManager;
 
 import java.io.File;
@@ -57,19 +58,19 @@ public abstract class InterfaceController {
         return hb;
     }
 
-    protected void setImage(File imageFile, String fileName, String newFileName){
+    protected void setImage(File imageFile, String fileName, String newFileName) throws GenericException {
         if(imageFile != null){
             String path = FileManager.PROFILE;
-            System.out.println(path);
+
             File file = new File(path, fileName);
             File newFile = new File(path, newFileName);
             try(InputStream inputStream = new FileInputStream(imageFile)){
                 Files.copy(inputStream, file.toPath());
             }catch (Exception e){
-                System.out.println("Warning image");
+                throw new GenericException("Warning image");
             }
             if(!file.renameTo(newFile)){
-                System.out.println("unable to rename");
+                throw new GenericException("Unable to rename");
             }
         }
     }

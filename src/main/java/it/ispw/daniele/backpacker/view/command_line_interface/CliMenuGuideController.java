@@ -33,7 +33,6 @@ public class CliMenuGuideController {
                 case "3" -> {
                     System.out.println(RED + "LOGOUT" + RESET);
                     SessionUser.getInstance().closeSession();
-                    //touristGuideGraphicChange.switchToLogin();
                     return;
                 }
                 case "u" -> {

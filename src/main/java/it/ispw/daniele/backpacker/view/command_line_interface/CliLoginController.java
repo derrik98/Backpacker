@@ -76,7 +76,7 @@ public class CliLoginController {
             gu = controller.login(gub, "cli");
 
             if (gu == null) {
-                System.out.println(RED + "LOGIN FAILED" + RESET);
+                System.out.println(RED + "Login failed" + RESET);
             } else {
                 String role = gu.getRole();
 

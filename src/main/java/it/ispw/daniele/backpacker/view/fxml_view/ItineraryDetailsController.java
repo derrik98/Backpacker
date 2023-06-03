@@ -38,6 +38,8 @@ public class ItineraryDetailsController {
 
     private final BookTourController controller = new BookTourController("gui");
     private final GeneralUserBean sessionUser = SessionUser.getInstance().getSession();
+    @FXML
+    private Text errorText;
     private ItineraryBean ib = new ItineraryBean();
 
     @FXML
@@ -63,22 +65,23 @@ public class ItineraryDetailsController {
 
             }
         } catch (GenericException e) {
-            System.out.println(e.getMessage());
+            this.errorText.setText("Error to subscribe");
         }
 
     }
 
     public void init(ItineraryBean itineraryBean) {
 
-        itineraryId.setText(String.valueOf(itineraryBean.getItineraryId()));
-        guideId.setText(itineraryBean.getGuideId());
-        location = new Text(itineraryBean.getLocation());
-        date.setText(itineraryBean.getDate());
-        time.setText(itineraryBean.getTime());
-        participants.setText(String.valueOf(itineraryBean.getParticipants()));
-        price.setText(String.valueOf(itineraryBean.getPrice()));
-        steps.setText(itineraryBean.getSteps().replace("/", " - "));
+        this.itineraryId.setText(String.valueOf(itineraryBean.getItineraryId()));
+        this.guideId.setText(itineraryBean.getGuideId());
+        this.location = new Text(itineraryBean.getLocation());
+        this.date.setText(itineraryBean.getDate());
+        this.time.setText(itineraryBean.getTime());
+        this.participants.setText(String.valueOf(itineraryBean.getParticipants()));
+        this.price.setText(String.valueOf(itineraryBean.getPrice()));
+        this.steps.setText(itineraryBean.getSteps().replace("/", " - "));
+        this.errorText.setText("");
 
-        ib = itineraryBean;
+        this.ib = itineraryBean;
     }
 }

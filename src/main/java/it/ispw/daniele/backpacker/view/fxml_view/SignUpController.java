@@ -98,8 +98,11 @@ public class SignUpController extends InterfaceController {
         }
 
         if (Boolean.TRUE.equals(regResult)) {
-            this.setImage(this.imageFile, fileName, newFileName);
-            this.errorText.setText("");
+            try {
+                this.setImage(this.imageFile, fileName, newFileName);
+            } catch (GenericException e) {
+                this.errorText.setText(e.getMessage());
+            }
         } else {
             this.errorText.setText("Unable to sign up");
         }
@@ -112,6 +115,7 @@ public class SignUpController extends InterfaceController {
         this.textFieldVATNumber.setText("");
         this.imageFile = null;
         this.textFieldImage.setText("No image selected");
+        this.errorText.setText("");
     }
 
     @FXML

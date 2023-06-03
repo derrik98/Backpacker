@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.Scanner;
-import java.util.Stack;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,7 +20,7 @@ public abstract class CliChangeTemplate {
 
     protected Roles whoAmI;
 
-    protected static Stack<String> stackScene = new Stack<>();
+    protected static Vector<String> stackScene = new Vector<>();
 
     public void catcher(CliAction cliGuiAction) {
         try {
@@ -33,7 +33,7 @@ public abstract class CliChangeTemplate {
 
     public void switchToLogin() {
         this.catcher(() -> {
-            stackScene.push("login");
+            stackScene.add("login");
             CliLoginController clc = new CliLoginController();
             clc.init();
         });
@@ -41,7 +41,7 @@ public abstract class CliChangeTemplate {
 
     public void switchToResult(Scanner scanner) {
         this.catcher(() -> {
-            stackScene.push("result");
+            stackScene.add("result");
             CliResultController crc = new CliResultController();
             crc.init(scanner);
         });
@@ -49,7 +49,7 @@ public abstract class CliChangeTemplate {
 
     public void switchToSignUp(Scanner scanner) {
         this.catcher(() -> {
-            stackScene.push("signUp");
+            stackScene.add("signUp");
             CliSignUpController signUpController = new CliSignUpController();
             signUpController.init(scanner);
         });
@@ -58,7 +58,7 @@ public abstract class CliChangeTemplate {
     public void menuBar(Scanner scanner) {
         this.catcher(() -> {
 
-            stackScene.push("home");
+            stackScene.add("home");
 
             switch (whoAmI) {
                 case USER -> {
@@ -69,7 +69,7 @@ public abstract class CliChangeTemplate {
                     CliMenuGuideController cliMenuGuideController = new CliMenuGuideController();
                     cliMenuGuideController.init(scanner);
                 }
-                default -> System.out.println(RED + "ERROR\n" + RESET);
+                default -> System.out.println(RED + "Error menu\n" + RESET);
             }
         });
     }

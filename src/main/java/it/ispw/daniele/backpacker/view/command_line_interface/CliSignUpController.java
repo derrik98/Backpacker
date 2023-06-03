@@ -5,15 +5,11 @@ import it.ispw.daniele.backpacker.bean.UserBean;
 import it.ispw.daniele.backpacker.controller.login.LoginController;
 import it.ispw.daniele.backpacker.exceptions.EmptyFieldException;
 import it.ispw.daniele.backpacker.exceptions.GenericException;
-import it.ispw.daniele.backpacker.utils.FileManager;
 import it.ispw.daniele.backpacker.utils.Roles;
 import it.ispw.daniele.backpacker.view.utils_view.InterfaceController;
 import javafx.stage.FileChooser;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.nio.file.Files;
 import java.sql.SQLException;
 import java.util.Scanner;
 
@@ -38,7 +34,7 @@ public class CliSignUpController extends InterfaceController {
         String surname;
         String password;
         String userType;
-        String VATNumb;
+        String vatNumb;
 
         System.out.println("Email:");
         email = scanner.nextLine();
@@ -69,41 +65,38 @@ public class CliSignUpController extends InterfaceController {
         String fileName = "";
         String newFileName = "";
 
-        switch (scanner.nextLine()){
-            case "n":
-                fileName = "";
-                newFileName = "";
-            case "y":
-                final FileChooser fc = new FileChooser();
-                fc.setTitle("Select image");
-                fc.setInitialDirectory(new File(System.getProperty("user.home")));
-                fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("JPG","*.jpg"),
-                        new FileChooser.ExtensionFilter("PNG","*.png"));
-                // this.imageFile = fc.showOpenDialog(new Stage());
-                ////if(this.imageFile!=null){
-                //    ProfilePicture = this.imageFile.getName();
-                //}
-                //assert this.imageFile != null;
-                //fileName = this.imageFile.getName();;
-                //newFileName = username+fileName;
-                //C'ERANO
-
+        if(scanner.nextLine().equals("y")){
+            final FileChooser fc = new FileChooser();
+            fc.setTitle("Select image");
+            fc.setInitialDirectory(new File(System.getProperty("user.home")));
+            fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("JPG","*.jpg"),
+                    new FileChooser.ExtensionFilter("PNG","*.png"));
+            // this.imageFile = fc.showOpenDialog(new Stage());
+            ////if(this.imageFile!=null){
+            //    ProfilePicture = this.imageFile.getName();
+            //}
+            //assert this.imageFile != null;
+            //fileName = this.imageFile.getName();;
+            //newFileName = username+fileName;
+            //C'ERANO
+        }
+        else {
+            fileName = "";
+            newFileName = "";
         }
 
-        System.out.flush();
 
         if (userType.equals(Roles.USER.name())){
             UserBean ub = this.setUserBean(username, name, surname, email, password, newFileName);
 
             regResult = lc.createUser(ub, "cli");
-
         }
         else {
             System.out.println("VAT Number:");
-            VATNumb = scanner.nextLine();
+            vatNumb = scanner.nextLine();
             System.out.flush();
 
-            TouristGuideBean tgb = this.setTouristGuideBean(username, name, surname, email, password, newFileName, VATNumb);
+            TouristGuideBean tgb = this.setTouristGuideBean(username, name, surname, email, password, newFileName, vatNumb);
 
             regResult = lc.createTouristGuide(tgb, "cli");
         }

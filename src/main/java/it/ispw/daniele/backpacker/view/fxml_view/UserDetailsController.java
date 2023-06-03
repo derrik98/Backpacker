@@ -10,9 +10,6 @@ import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.utils.Controller;
 import it.ispw.daniele.backpacker.utils.SessionUser;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -20,8 +17,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
@@ -40,8 +35,6 @@ public class UserDetailsController extends Controller {
     @FXML
     private Text errorText;
     @FXML
-    private ImageView imageSettings;
-    @FXML
     private Text textSettings;
     @FXML
     private Label username;
@@ -54,14 +47,7 @@ public class UserDetailsController extends Controller {
     @FXML
     private HBox menuBar = new HBox();
 
-    public void switchToSettings() throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        FileInputStream fileInputStream = new FileInputStream("src/main/resources/it/ispw/daniele/backpacker/Edit-User-Details-Page.fxml");
-        Parent fxmlLoader = loader.load(fileInputStream);
-        Scene scene = this.imageSettings.getScene();
-        scene.setRoot(fxmlLoader);
-        //stackScene.push(fxmlLoader);
-    }
+    private final String PROFILE = "profile";
 
     public void showInfoSettings() {
         textSettings.setVisible(true);
@@ -77,7 +63,7 @@ public class UserDetailsController extends Controller {
         try {
             l = ud.getSearchUser(caller);
         } catch (GenericException e) {
-            System.out.println(e.getMessage());
+            this.errorText.setText(e.getMessage());
         }
         return this.convert(Objects.requireNonNull(l).get(0));
     }
@@ -85,7 +71,7 @@ public class UserDetailsController extends Controller {
     public void init() {
 
         UserGraphicChange ugc = UserGraphicChange.getInstance();
-        ugc.menuBar(this.menuBar, "profile");
+        ugc.menuBar(this.menuBar, PROFILE);
 
         UserBean users = this.getSearchUser(SessionUser.getInstance().getSession().getUsername());
 
@@ -100,21 +86,21 @@ public class UserDetailsController extends Controller {
         try {
             booked = new BookTourController("gui").getItinerary(users.getUsername(), "user");
         } catch (GenericException e) {
-            errorText.setText(e.getMessage());
+            this.errorText.setText(e.getMessage());
         }
 
         List<ItineraryBean> saved = null;
         try {
             saved = new SaveTour("gui").getItinerary(users.getUsername());
         } catch (GenericException e) {
-            errorText.setText(e.getMessage());
+            this.errorText.setText(e.getMessage());
         }
 
         if(Objects.requireNonNull(booked).isEmpty()){
             this.textBookedItineraries.setText(this.textBookedItineraries.getText() + ": EMPTY");
         }
         else {
-            Accordion accordionSuggested = this.createTable(booked, "suggested", "profile", null);
+            Accordion accordionSuggested = this.createTable(booked, "suggested", PROFILE, null);
             vBoxBooked.getChildren().addAll(accordionSuggested);
         }
 
@@ -122,7 +108,7 @@ public class UserDetailsController extends Controller {
             this.textSavedItineraries.setText(this.textSavedItineraries.getText() + ": EMPTY");
         }
         else {
-            Accordion accordionSelf = this.createTable(saved, "self", "profile", null);
+            Accordion accordionSelf = this.createTable(saved, "self", PROFILE, null);
             vBoxSaved.getChildren().addAll(accordionSelf);
         }
     }

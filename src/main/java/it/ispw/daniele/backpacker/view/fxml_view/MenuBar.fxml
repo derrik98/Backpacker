@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="APMenuBar" prefHeight="70.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17.0.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.ispw.daniele.backpacker.view.fxml_view.MenuBarController">
+<AnchorPane fx:id="apMenuBar" prefHeight="70.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17.0.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.ispw.daniele.backpacker.view.fxml_view.MenuBarController">
    <HBox alignment="CENTER" prefWidth="1920.0" spacing="35.0" style="-fx-background-color: rgba(139,103,40,0.95);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      <Label fx:id="LabelHome" onMouseClicked="#switchToHome" style="-fx-border: none;" text="Home" wrapText="true">
+      <Label fx:id="labelHome" onMouseClicked="#switchToHome" style="-fx-border: none;" text="Home" wrapText="true">
          <font>
             <Font size="40.0" />
          </font>
@@ -23,7 +23,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </Label>
-      <Label fx:id="LabelResult" onMouseClicked="#switchToResult" style="-fx-border: none;" text="Result">
+      <Label fx:id="labelResult" onMouseClicked="#switchToResult" style="-fx-border: none;" text="Result">
          <font>
             <Font size="40.0" />
          </font>
@@ -34,7 +34,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </Label>
-      <Label fx:id="LabelProfile" onMouseClicked="#switchToUserDet" style="-fx-border: none;;" text="Profile">
+      <Label fx:id="labelProfile" onMouseClicked="#switchToUserDet" style="-fx-border: none;;" text="Profile">
          <font>
             <Font size="40.0" />
          </font>

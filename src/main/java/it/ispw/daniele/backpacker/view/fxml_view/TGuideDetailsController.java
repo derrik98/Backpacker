@@ -52,8 +52,11 @@ public class TGuideDetailsController extends Controller {
     public Text textSavedItineraries;
     @FXML
     public VBox vBoxSaved;
+    @FXML
+    public Text errorText;
 
     private static final String PROFILE = "profile";
+
 
     public void switchToSettings() throws IOException {
         FXMLLoader loader = new FXMLLoader();
@@ -61,7 +64,6 @@ public class TGuideDetailsController extends Controller {
         Parent fxmlLoader = loader.load(fileInputStream);
         Scene scene = this.imageSettings.getScene();
         scene.setRoot(fxmlLoader);
-        //stackScene.push(fxmlLoader);
     }
 
     public void showInfoSettings() {
@@ -78,7 +80,7 @@ public class TGuideDetailsController extends Controller {
         try {
             l = ud.getSearchUser(caller);
         } catch (GenericException e) {
-            System.out.println(e.getMessage());
+            this.errorText.setText(e.getMessage());
         }
         return this.convert(Objects.requireNonNull(l).get(0));
     }
@@ -102,14 +104,14 @@ public class TGuideDetailsController extends Controller {
         try {
             booked = new BookTourController("gui").getItinerary(tUsers.getUsername(), "user");
         } catch (GenericException e) {
-            System.out.println(e.getMessage());
+            this.errorText.setText(e.getMessage());
         }
 
         List<ItineraryBean> saved = null;
         try {
             saved = new SaveTour("gui").getItinerary(tUsers.getUsername());
         } catch (GenericException e) {
-            System.out.println(e.getMessage());
+            this.errorText.setText(e.getMessage());
         }
 
         if(booked == null){

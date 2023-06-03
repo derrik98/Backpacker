@@ -21,7 +21,7 @@ public class CliTouristGuideGraphicChange extends CliChangeTemplate {
     @Override
     protected void switchToHome(Scanner scanner) {
         this.catcher(() -> {
-            stackScene.push("home");
+            stackScene.add("home");
             CliHomeController homeController = new CliHomeController();
             homeController.init(scanner);
         });
@@ -34,7 +34,7 @@ public class CliTouristGuideGraphicChange extends CliChangeTemplate {
 
     public void switchToGuideDetails() {
         this.catcher(() -> {
-            stackScene.push("home");
+            stackScene.add("home");
             CliGuideDetailsController cliGuideDetailsController = new CliGuideDetailsController();
             cliGuideDetailsController.init();
         });
@@ -42,7 +42,7 @@ public class CliTouristGuideGraphicChange extends CliChangeTemplate {
 
     public void switchToAddItinerary(){
         this.catcher(() -> {
-            stackScene.push("addIt");
+            stackScene.add("addIt");
             CliAddItineraryController cliAddItineraryController = new CliAddItineraryController();
             cliAddItineraryController.init();
         });

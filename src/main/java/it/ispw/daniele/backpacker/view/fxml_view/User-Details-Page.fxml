@@ -109,9 +109,8 @@
                             </HBox>
                             <HBox alignment="CENTER_LEFT" spacing="5.0">
                                 <ImageView fx:id="imageSettings" fitHeight="30.0" fitWidth="30.0"
-                                           onMouseClicked="#switchToSettings" onMouseEntered="#showInfoSettings"
-                                           onMouseExited="#notShowInfoSettings" onMouseMoved="#showInfoSettings"
-                                           pickOnBounds="true" preserveRatio="true">
+                                           onMouseEntered="#showInfoSettings" onMouseExited="#notShowInfoSettings"
+                                           onMouseMoved="#showInfoSettings" pickOnBounds="true" preserveRatio="true">
                                     <cursor>
                                         <Cursor fx:constant="HAND"/>
                                     </cursor>

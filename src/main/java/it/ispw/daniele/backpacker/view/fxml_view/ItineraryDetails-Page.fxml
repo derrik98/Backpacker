@@ -60,6 +60,9 @@
                         </padding>
                         <Button fx:id="subscribeButton" mnemonicParsing="false" onMouseClicked="#subscribe" text="Subscribe" />
                      </HBox>
+                     <HBox layoutX="10.0" layoutY="116.0" alignment="CENTER">
+                        <Text fx:id="errorText" strokeType="OUTSIDE" strokeWidth="0.0"/>
+                     </HBox>
                   </VBox>
                </HBox>
             </AnchorPane>

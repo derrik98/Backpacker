@@ -19,6 +19,7 @@ import java.util.Random;
 public class SearchController extends Controller {
 
     public void checkInput(HomeBean bean) throws CityNotFoundException, AddressNotFoundException, MonumentNotFoundException, IOException {
+
         JSONFactory checkCityCountry = new CityFromCountry();
 
         if (checkCityCountry.getJSON(bean)) {
