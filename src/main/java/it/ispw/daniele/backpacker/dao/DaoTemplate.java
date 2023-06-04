@@ -1,11 +1,5 @@
 package it.ispw.daniele.backpacker.dao;
 
-import it.ispw.daniele.backpacker.bean.ItineraryBean;
-import it.ispw.daniele.backpacker.bean.TouristGuideBean;
-import it.ispw.daniele.backpacker.bean.UserBean;
-import it.ispw.daniele.backpacker.entity.Itinerary;
-import it.ispw.daniele.backpacker.entity.TouristGuide;
-import it.ispw.daniele.backpacker.entity.User;
 import it.ispw.daniele.backpacker.exceptions.GenericException;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -15,8 +9,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
