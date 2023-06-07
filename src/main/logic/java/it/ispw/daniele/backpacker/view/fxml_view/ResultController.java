@@ -57,15 +57,6 @@ public class ResultController  extends Controller {
     private static final String HOME = "home";
     private static final String RESULT = "result";
 
-    private static ResultController instance = null;
-
-    public static ResultController getInstance() {
-        if(instance == null){
-            instance = new ResultController();
-        }
-        return instance;
-    }
-
     public void init() throws GenericException {
 
         if(SessionUser.getInstance().getSession().getRole().equals(Roles.tourist_guide.name().toLowerCase())) {
