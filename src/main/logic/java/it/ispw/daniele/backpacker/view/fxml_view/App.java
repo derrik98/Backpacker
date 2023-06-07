@@ -18,7 +18,7 @@ public class App extends Application {
         stage.setTitle("Backpacker");
         stage.getIcons().add(new Image("/backpack.png"));
         FXMLLoader loader = new FXMLLoader();
-        FileInputStream fileInputStream = new FileInputStream("src/logic/java/it/ispw/daniele/backpacker/view/fxml_view/LoginView-Page.fxml");
+        FileInputStream fileInputStream = new FileInputStream("src/main/logic/java/it/ispw/daniele/backpacker/view/fxml_view/LoginView-Page.fxml");
         Parent fxmlLoader = loader.load(fileInputStream);
         Scene scene = new Scene(fxmlLoader);
         LoginViewController lvc = loader.getController();

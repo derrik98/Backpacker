@@ -20,7 +20,7 @@
                 AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <VBox alignment="TOP_CENTER">
             <StackPane>
-                <Region style="-fx-background-image: url('../../../../../../../resources/background_image.jpg'); -fx-background-size: 100% 100%;"
+                <Region style="-fx-background-image: url('background_image.jpg'); -fx-background-size: 100% 100%;"
                         StackPane.alignment="CENTER"/>
                 <VBox alignment="CENTER">
                     <Text stroke="WHITE" strokeType="OUTSIDE" strokeWidth="5.0" text="Backpacker">
@@ -108,7 +108,7 @@
                                 </Label>
                             </HBox>
                             <HBox alignment="CENTER_LEFT" spacing="5.0">
-                                <ImageView fx:id="imageSettings" fitHeight="30.0" fitWidth="30.0"
+                                <ImageView fitHeight="30.0" fitWidth="30.0"
                                            onMouseEntered="#showInfoSettings" onMouseExited="#notShowInfoSettings"
                                            onMouseMoved="#showInfoSettings" pickOnBounds="true" preserveRatio="true">
                                     <cursor>

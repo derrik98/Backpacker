@@ -19,7 +19,7 @@
      <ScrollPane fitToHeight="true" fitToWidth="true" onKeyPressed="#enterKeyPressed" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <VBox alignment="TOP_CENTER">
              <StackPane>
-                 <Region prefHeight="835.0" prefWidth="1278.0" style="-fx-background-image: url('../../../../../../../resources/background_image.jpg'); -fx-background-size: 100% 100%;" StackPane.alignment="CENTER" />
+                 <Region prefHeight="835.0" prefWidth="1278.0" style="-fx-background-image: url('background_image.jpg'); -fx-background-size: 100% 100%;" StackPane.alignment="CENTER" />
                  <VBox alignment="CENTER">
                      <Text stroke="WHITE" strokeType="OUTSIDE" strokeWidth="5.0" text="Backpacker">
                          <font>

@@ -68,7 +68,7 @@ public class ResultController  extends Controller {
 
     public void init() throws GenericException {
 
-        if(SessionUser.getInstance().getSession().getRole().equals(Roles.TOURIST_GUIDE.name().toLowerCase())) {
+        if(SessionUser.getInstance().getSession().getRole().equals(Roles.tourist_guide.name().toLowerCase())) {
             TouristGuideGraphicChange i = TouristGuideGraphicChange.getInstance();
             i.menuBar(this.menuBar, RESULT);
         }
@@ -99,7 +99,7 @@ public class ResultController  extends Controller {
             hBoxInput.getChildren().removeAll();
             Hyperlink link = new Hyperlink("Start from the Home-Page");
             link.setOnMouseClicked(mouseEvent -> {
-                if(SessionUser.getInstance().getSession().getRole().equals(Roles.TOURIST_GUIDE.name().toLowerCase())) {
+                if(SessionUser.getInstance().getSession().getRole().equals(Roles.tourist_guide.name().toLowerCase())) {
                     TouristGuideGraphicChange i = TouristGuideGraphicChange.getInstance();
                     i.menuBar(this.menuBar, HOME);
                 }

@@ -1,1 +1,166 @@
-{"general_user":[{"password":"dan","role":"user","email":"dan","username":"dan"},{"password":"sw","role":"user","email":"sw","username":"sw"},{"password":"fr","role":"user","email":"fr","username":"fr"},{"password":"hy","role":"tourist_guide","email":"hy","username":"hy"},{"password":"","role":"tourist_guide","email":"","username":""},{"password":"gt","role":"user","email":"gt","username":"gt"},{"password":"aq","role":"user","email":"aq","username":"aq"},{"password":"ju","role":"user","email":"ju","username":"ju"},{"password":"xs","role":"user","email":"xs","username":"xs"},{"password":"nh","role":"user","email":"nh","username":"nh"},{"password":"qw","role":"user","email":"qw","username":"qw"},{"password":"vg","role":"user","email":"vg","username":"vg"},{"password":"bh","role":"user","email":"bh","username":"bh"},{"password":"mu","role":"user","email":"mu","username":"mu"},{"password":"ce","role":"user","email":"ce","username":"ce"},{"password":"zq","role":"user","email":"zq","username":"zq"},{"password":"v","role":"user","email":"v","username":"v"},{"password":"q","role":"user","email":"q","username":"q"},{"password":"w","role":"user","email":"w","username":"w"},{"password":"x","role":"user","email":"x","username":"x"},{"password":"b","role":"user","email":"b","username":"b"},{"password":"p","role":"user","email":"p","username":"p"},{"password":"yu","role":"tourist_guide","email":"yu","username":"yu"},{"password":"ew","role":"user","email":"ew","username":"ew"}]}
+{
+  "general_user": [
+    {
+      "password": "dan",
+      "role": "user",
+      "email": "dan",
+      "username": "dan"
+    },
+    {
+      "password": "sw",
+      "role": "user",
+      "email": "sw",
+      "username": "sw"
+    },
+    {
+      "password": "fr",
+      "role": "user",
+      "email": "fr",
+      "username": "fr"
+    },
+    {
+      "password": "hy",
+      "role": "tourist_guide",
+      "email": "hy",
+      "username": "hy"
+    },
+    {
+      "password": "",
+      "role": "tourist_guide",
+      "email": "",
+      "username": ""
+    },
+    {
+      "password": "gt",
+      "role": "user",
+      "email": "gt",
+      "username": "gt"
+    },
+    {
+      "password": "aq",
+      "role": "user",
+      "email": "aq",
+      "username": "aq"
+    },
+    {
+      "password": "ju",
+      "role": "user",
+      "email": "ju",
+      "username": "ju"
+    },
+    {
+      "password": "xs",
+      "role": "user",
+      "email": "xs",
+      "username": "xs"
+    },
+    {
+      "password": "nh",
+      "role": "user",
+      "email": "nh",
+      "username": "nh"
+    },
+    {
+      "password": "qw",
+      "role": "user",
+      "email": "qw",
+      "username": "qw"
+    },
+    {
+      "password": "vg",
+      "role": "user",
+      "email": "vg",
+      "username": "vg"
+    },
+    {
+      "password": "bh",
+      "role": "user",
+      "email": "bh",
+      "username": "bh"
+    },
+    {
+      "password": "mu",
+      "role": "user",
+      "email": "mu",
+      "username": "mu"
+    },
+    {
+      "password": "ce",
+      "role": "user",
+      "email": "ce",
+      "username": "ce"
+    },
+    {
+      "password": "zq",
+      "role": "user",
+      "email": "zq",
+      "username": "zq"
+    },
+    {
+      "password": "v",
+      "role": "user",
+      "email": "v",
+      "username": "v"
+    },
+    {
+      "password": "q",
+      "role": "user",
+      "email": "q",
+      "username": "q"
+    },
+    {
+      "password": "w",
+      "role": "user",
+      "email": "w",
+      "username": "w"
+    },
+    {
+      "password": "x",
+      "role": "user",
+      "email": "x",
+      "username": "x"
+    },
+    {
+      "password": "b",
+      "role": "user",
+      "email": "b",
+      "username": "b"
+    },
+    {
+      "password": "p",
+      "role": "user",
+      "email": "p",
+      "username": "p"
+    },
+    {
+      "password": "yu",
+      "role": "tourist_guide",
+      "email": "yu",
+      "username": "yu"
+    },
+    {
+      "password": "ew",
+      "role": "user",
+      "email": "ew",
+      "username": "ew"
+    },
+    {
+      "password": "ji",
+      "role": "user",
+      "email": "ji",
+      "username": "ji"
+    },
+    {
+      "password": "mi",
+      "role": "tourist_guide",
+      "email": "mi",
+      "username": "mi"
+    },
+    {
+      "password": "sa",
+      "role": "user",
+      "email": "sa",
+      "username": "sa"
+    }
+  ]
+}

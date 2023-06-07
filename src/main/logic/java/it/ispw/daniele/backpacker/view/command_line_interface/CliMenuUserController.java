@@ -60,7 +60,7 @@ public class CliMenuUserController {
                 case "u" -> {
                     this.undo(scanner);
                     //System.out.println("undo");
-                    //return;
+                    return;
                 }
                 default -> System.out.println(RED + "COMMAND NOT FOUND\n" + RESET);
             }
@@ -85,7 +85,8 @@ public class CliMenuUserController {
             stackScene.remove(stackScene.size() - 1);
 
         } else {
-            this.ugc.switchToHome(scanner);
+            //SessionUser.getInstance().closeSession();
+            //this.ugc.switchToLogin();
         }
     }
 }

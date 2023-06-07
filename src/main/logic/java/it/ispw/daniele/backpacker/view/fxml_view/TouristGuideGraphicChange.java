@@ -13,7 +13,7 @@ public class TouristGuideGraphicChange extends GuiChangeTemplate {
     private static TouristGuideGraphicChange instance = null;
 
     TouristGuideGraphicChange(){
-        whoAmI = Roles.TOURIST_GUIDE;
+        whoAmI = Roles.tourist_guide;
     }
 
     public static TouristGuideGraphicChange getInstance(){
@@ -26,7 +26,7 @@ public class TouristGuideGraphicChange extends GuiChangeTemplate {
     public void switchToHomePage(Scene scene) {
         this.catcher(() -> {
             FXMLLoader loader = new FXMLLoader();
-            FileInputStream fileInputStream = new FileInputStream("src/logic/java/it/ispw/daniele/backpacker/view/fxml_view/Home-Page.fxml");
+            FileInputStream fileInputStream = new FileInputStream("src/main/logic/java/it/ispw/daniele/backpacker/view/fxml_view/Home-Page.fxml");
             Parent fxmlLoader = loader.load(fileInputStream);
             HomeUserController huc = loader.getController();
             scene.setRoot(fxmlLoader);
@@ -36,7 +36,7 @@ public class TouristGuideGraphicChange extends GuiChangeTemplate {
 
     public void switchToAddItinerary(Scene scene) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        FileInputStream fileInputStream = new FileInputStream("src/logic/java/it/ispw/daniele/backpacker/view/fxml_view/Add-Itinerary-Page.fxml");
+        FileInputStream fileInputStream = new FileInputStream("src/main/logic/java/it/ispw/daniele/backpacker/view/fxml_view/Add-Itinerary-Page.fxml");
         Parent fxmlLoader = loader.load(fileInputStream);
         AddItineraryViewController addItineraryViewController = loader.getController();
         scene.setRoot(fxmlLoader);
@@ -46,7 +46,7 @@ public class TouristGuideGraphicChange extends GuiChangeTemplate {
     public void switchToTGuideDet(Scene scene){
         this.catcher(() -> {
             FXMLLoader loader = new FXMLLoader();
-            FileInputStream fileInputStream = new FileInputStream("src/logic/java/it/ispw/daniele/backpacker/view/fxml_view/TGuide-Details-Page.fxml");
+            FileInputStream fileInputStream = new FileInputStream("src/main/logic/java/it/ispw/daniele/backpacker/view/fxml_view/TGuide-Details-Page.fxml");
             Parent fxmlLoader = loader.load(fileInputStream);
             TGuideDetailsController gdc = loader.getController();
             scene.setRoot(fxmlLoader);

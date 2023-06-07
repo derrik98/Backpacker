@@ -6,7 +6,6 @@ import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.utils.DatabaseLoginConnection;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -28,8 +27,6 @@ public abstract class UserDaoFactory extends DaoTemplate {
     protected static final String USER = "user";
     protected static final String GENERAL_USER = "general_user";
     protected static final String ROLE = "role";
-
-    protected static final JSONParser parser = new JSONParser();
 
     public Boolean createUser(String username, String name, String surname, String email, String password, String profilePicture) throws GenericException {
         return (this.execute(() -> {

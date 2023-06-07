@@ -60,7 +60,7 @@ public class TGuideDetailsController extends Controller {
 
     public void switchToSettings() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        FileInputStream fileInputStream = new FileInputStream("src/main/resources/it/ispw/daniele/backpacker/Edit-User-Details-Page.fxml");
+        FileInputStream fileInputStream = new FileInputStream("src/main/logic/resources/it/ispw/daniele/backpacker/Edit-User-Details-Page.fxml");
         Parent fxmlLoader = loader.load(fileInputStream);
         Scene scene = this.imageSettings.getScene();
         scene.setRoot(fxmlLoader);

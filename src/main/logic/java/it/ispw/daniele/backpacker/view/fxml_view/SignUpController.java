@@ -44,6 +44,7 @@ public class SignUpController extends InterfaceController {
 
     @FXML
     public void signUp() {
+
         LoginController lc = new LoginController();
 
         boolean regResult = false;
@@ -74,7 +75,7 @@ public class SignUpController extends InterfaceController {
             newFileName = username + fileName;
         }
 
-        if (userType.equals(Roles.USER.name())) {
+        if (userType.equals(Roles.user.name())) {
             String name = this.textFieldNameSignUp.getText();
             String surname = this.textFieldSurnameSignUp.getText();
             UserBean ub = this.setUserBean(username, name, surname, email, password, newFileName);
@@ -85,7 +86,7 @@ public class SignUpController extends InterfaceController {
                 this.errorText.setText(exception.getMessage());
             }
 
-        } else if (userType.equals(Roles.TOURIST_GUIDE.name())) {
+        } else if (userType.equals(Roles.tourist_guide.name())) {
             String name = this.textFieldNameSignUp.getText();
             String surname = this.textFieldSurnameSignUp.getText();
             vatNumb = textFieldVATNumber.getText();
@@ -98,6 +99,7 @@ public class SignUpController extends InterfaceController {
         }
 
         if (Boolean.TRUE.equals(regResult)) {
+
             try {
                 this.setImage(this.imageFile, fileName, newFileName);
             } catch (GenericException e) {
