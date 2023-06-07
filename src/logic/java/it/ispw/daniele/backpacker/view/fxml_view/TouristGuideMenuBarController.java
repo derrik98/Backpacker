@@ -7,7 +7,6 @@ import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Stack;
 
 public class TouristGuideMenuBarController {
 
@@ -26,10 +25,10 @@ public class TouristGuideMenuBarController {
 
     private TouristGuideGraphicChange guideGraphicChange;
 
-    private final String HOME = "home";
-    private final String PROFILE = "profile";
-    private final String RESULT = "result";
-    private final String ADD_ITINERARY = "addItinerary";
+    private static final String HOME = "home";
+    private static final String PROFILE = "profile";
+    private static final String RESULT = "result";
+    private static final String ADD_ITINERARY = "addItinerary";
 
     @FXML
     public void switchToHome() {

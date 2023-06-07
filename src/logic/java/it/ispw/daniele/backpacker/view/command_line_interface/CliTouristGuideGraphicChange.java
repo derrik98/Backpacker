@@ -27,11 +27,6 @@ public class CliTouristGuideGraphicChange extends CliChangeTemplate {
         });
     }
 
-    @Override
-    protected void undo(Scanner scanner) {
-
-    }
-
     public void switchToGuideDetails() {
         this.catcher(() -> {
             stackScene.add("home");
@@ -45,6 +40,27 @@ public class CliTouristGuideGraphicChange extends CliChangeTemplate {
             stackScene.add("addIt");
             CliAddItineraryController cliAddItineraryController = new CliAddItineraryController();
             cliAddItineraryController.init();
+        });
+    }
+
+    @Override
+    protected void undo(Scanner scanner) {
+        this.catcher(() -> {
+
+            if (stackScene.size() > 1) {
+
+                String from = stackScene.get(stackScene.size() - 2);
+                switch (from) {
+                    case "home" -> this.switchToHome(scanner);
+                    case "result" -> this.switchToResult(scanner);
+                    case "profile" -> this.switchToGuideDetails();
+                    default -> System.out.println("Unable to undo");
+                }
+                stackScene.remove(stackScene.size() - 1);
+
+            } else {
+                this.switchToHome(scanner);
+            }
         });
     }
 }

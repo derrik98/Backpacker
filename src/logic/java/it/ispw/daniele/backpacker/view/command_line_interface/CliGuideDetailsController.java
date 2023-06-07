@@ -49,7 +49,7 @@ public class CliGuideDetailsController extends Controller {
                 return;
             }
             else {
-                System.out.println("Incorrect command!");
+                System.out.println("Command not found");
             }
         }while (true);
     }

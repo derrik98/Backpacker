@@ -6,8 +6,8 @@ import it.ispw.daniele.backpacker.utils.Roles;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,7 +20,7 @@ public abstract class CliChangeTemplate {
 
     protected Roles whoAmI;
 
-    protected static Vector<String> stackScene = new Vector<>();
+    protected static ArrayList<String> stackScene = new ArrayList<>();
 
     public void catcher(CliAction cliGuiAction) {
         try {

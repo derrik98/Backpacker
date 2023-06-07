@@ -71,14 +71,6 @@ public class CliSignUpController extends InterfaceController {
             fc.setInitialDirectory(new File(System.getProperty("user.home")));
             fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("JPG","*.jpg"),
                     new FileChooser.ExtensionFilter("PNG","*.png"));
-            // this.imageFile = fc.showOpenDialog(new Stage());
-            ////if(this.imageFile!=null){
-            //    ProfilePicture = this.imageFile.getName();
-            //}
-            //assert this.imageFile != null;
-            //fileName = this.imageFile.getName();;
-            //newFileName = username+fileName;
-            //C'ERANO
         }
         else {
             fileName = "";
@@ -94,7 +86,6 @@ public class CliSignUpController extends InterfaceController {
         else {
             System.out.println("VAT Number:");
             vatNumb = scanner.nextLine();
-            System.out.flush();
 
             TouristGuideBean tgb = this.setTouristGuideBean(username, name, surname, email, password, newFileName, vatNumb);
 
@@ -104,20 +95,6 @@ public class CliSignUpController extends InterfaceController {
         if(Boolean.TRUE.equals(regResult)){
 
             this.setImage(this.imageFile, fileName, newFileName);
-//            if(this.imageFile != null){
-//                String path = FileManager.PROFILE;
-//                System.out.println(path);
-//                File file = new File(path, fileName);
-//                File newFile = new File(path, newFileName);
-//                try(InputStream inputStream = new FileInputStream(this.imageFile)){
-//                    Files.copy(inputStream, file.toPath());
-//                }catch (Exception e){
-//                    System.out.println("Warning image");
-//                }
-//                if(!file.renameTo(newFile)){
-//                    System.out.println("unable to rename");
-//                }
-//            }
             System.out.println(GREEN + "REGISTRATION SUCCESSFULLY" + RESET);
         }
         else{

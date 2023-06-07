@@ -20,9 +20,9 @@ public class MenuBarController {
     @FXML
     public ImageView imageUndo;
 
-    private final String HOME = "home";
-    private final String RESULT = "result";
-    private final String PROFILE = "profile";
+    private static final String HOME = "home";
+    private static final String RESULT = "result";
+    private static final String PROFILE = "profile";
 
     protected static ArrayList<String> stackScene = new ArrayList<>();
 

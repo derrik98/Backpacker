@@ -45,6 +45,7 @@ public class CliUserGraphicChange extends CliChangeTemplate {
                     case "home" -> this.switchToHome(scanner);
                     case "result" -> this.switchToResult(scanner);
                     case "profile" -> this.switchToUserDetails();
+                    default -> System.out.println("Unable to undo");
                 }
                 stackScene.remove(stackScene.size() - 1);
 

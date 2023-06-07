@@ -9,7 +9,6 @@ import it.ispw.daniele.backpacker.exceptions.MonumentNotFoundException;
 import it.ispw.daniele.backpacker.utils.SessionUser;
 import it.ispw.daniele.backpacker.view.utils_view.InterfaceController;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -41,7 +40,7 @@ public class CliHomeController extends InterfaceController {
 
         try {
             if (country.equals("") || city.equals("") || address.equals("")) {
-                throw new GenericException("Data missing"); //eliminare if e gestire tramite throw
+                throw new GenericException("Data missing");
             }
 
             SessionUser.getInstance().setSearchSession(homeBean);

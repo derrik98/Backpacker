@@ -47,7 +47,7 @@ public class UserDetailsController extends Controller {
     @FXML
     private HBox menuBar = new HBox();
 
-    private final String PROFILE = "profile";
+    private static final String PROFILE = "profile";
 
     public void showInfoSettings() {
         textSettings.setVisible(true);
