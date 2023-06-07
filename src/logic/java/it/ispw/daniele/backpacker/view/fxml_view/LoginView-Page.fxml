@@ -20,7 +20,7 @@
     <ScrollPane fitToHeight="true" fitToWidth="true" onKeyPressed="#enterKeyPressed" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <VBox alignment="TOP_CENTER" prefHeight="800.0" prefWidth="1280.0">
             <StackPane prefHeight="800.0" prefWidth="1280.0">
-                <Region style="-fx-background-image: url('../../../../../../../resources/background_image.jpg'); -fx-background-size: 100% 100%;" StackPane.alignment="CENTER" />
+                <Region style="-fx-background-image: url('background_image.jpg'); -fx-background-size: 100% 100%;" StackPane.alignment="CENTER" />
                 <VBox alignment="CENTER">
                     <Text stroke="WHITE" strokeType="OUTSIDE" strokeWidth="5.0" text="Backpacker">
                         <font>
