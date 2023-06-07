@@ -8,7 +8,6 @@ import it.ispw.daniele.backpacker.controller.search.SearchController;
 import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.exceptions.MonumentNotFoundException;
 import it.ispw.daniele.backpacker.utils.SessionUser;
-import it.ispw.daniele.backpacker.view.fxml_view.ResultController;
 
 import java.awt.*;
 import java.io.IOException;
