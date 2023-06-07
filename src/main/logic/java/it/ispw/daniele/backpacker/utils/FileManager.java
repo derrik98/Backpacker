@@ -3,6 +3,8 @@ package it.ispw.daniele.backpacker.utils;
 import java.io.File;
 
 public class FileManager {
+    public FileManager() {
+    }
 
     private static final String PROJECT = System.getProperty("user.home") + File.separator
             + "Desktop" + File.separator + "ISPW_Project" + File.separator + "trunk" + File.separator
