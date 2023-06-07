@@ -1,7 +1,6 @@
 package it.ispw.daniele.backpacker.view.command_line_interface;
 
 import it.ispw.daniele.backpacker.utils.SessionUser;
-import it.ispw.daniele.backpacker.view.fxml_view.UserGraphicChange;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -56,6 +55,7 @@ public class CliMenuUserController {
                     System.out.println(RED + "LOGOUT" + RESET);
                     SessionUser.getInstance().closeSession();
                     ugc.switchToLogin();
+                    return;
                 }
                 case "u" -> {
                     this.undo(scanner);
