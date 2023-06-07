@@ -72,6 +72,7 @@ public class CliItineraryDetailsController {
             switch (scanner.nextInt()) {
                 case 0 -> this.subscribe();
                 case 1 -> {
+
                     System.out.println("undo");
                     return;
                 }

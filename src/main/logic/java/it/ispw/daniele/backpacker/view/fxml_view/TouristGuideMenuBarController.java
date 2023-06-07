@@ -21,7 +21,7 @@ public class TouristGuideMenuBarController {
     @FXML
     public ImageView imageUndo;
 
-    protected static ArrayList<String> stackScene = new ArrayList<>();
+    private static final ArrayList<String> stackScene = new ArrayList<>();
 
     private TouristGuideGraphicChange guideGraphicChange;
 
@@ -69,13 +69,11 @@ public class TouristGuideMenuBarController {
                 case ADD_ITINERARY -> this.guideGraphicChange.switchToAddItinerary(this.labelAddItinerary.getScene());
                 default -> this.imageUndo.setDisable(true);
             }
-
             stackScene.remove(stackScene.size() - 1);
 
         } else {
             this.guideGraphicChange.switchToHomePage(this.imageUndo.getScene());
         }
-
     }
 
     public void init(String selected) {

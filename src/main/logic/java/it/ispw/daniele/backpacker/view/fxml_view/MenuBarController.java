@@ -24,7 +24,7 @@ public class MenuBarController {
     private static final String RESULT = "result";
     private static final String PROFILE = "profile";
 
-    protected static ArrayList<String> stackScene = new ArrayList<>();
+    private static final ArrayList<String> stackScene = new ArrayList<>();
 
     private UserGraphicChange ugc;
 

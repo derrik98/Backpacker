@@ -75,6 +75,4 @@ public abstract class CliChangeTemplate {
     }
 
     protected abstract void switchToHome(Scanner scanner) throws IOException;
-
-    protected abstract void undo(Scanner scanner);
 }
