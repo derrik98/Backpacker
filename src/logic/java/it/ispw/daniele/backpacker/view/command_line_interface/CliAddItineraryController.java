@@ -79,7 +79,6 @@ public class CliAddItineraryController extends InterfaceController {
                 System.out.print(RED + "Error share\n" + RESET);
             }
         } catch (Exception e) {
-            e.printStackTrace();
             System.out.print(RED + "Error share\n" + RESET);
         }
     }
