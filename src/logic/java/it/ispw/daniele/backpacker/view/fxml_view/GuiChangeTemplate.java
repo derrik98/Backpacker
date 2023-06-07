@@ -34,7 +34,7 @@ public abstract class GuiChangeTemplate {
     public void switchToLogin(Scene scene) {
         this.catcher(() -> {
             FXMLLoader loader = new FXMLLoader();
-            FileInputStream fileInputStream = new FileInputStream("src/main/java/it/ispw/daniele/backpacker/view/fxml_view/LoginView-Page.fxml");
+            FileInputStream fileInputStream = new FileInputStream("src/logic/java/it/ispw/daniele/backpacker/view/fxml_view/LoginView-Page.fxml");
             Parent fxmlLoader = loader.load(fileInputStream);
             LoginViewController lvc = loader.getController();
             scene.setRoot(fxmlLoader);
@@ -45,7 +45,7 @@ public abstract class GuiChangeTemplate {
     public void switchToResult(Scene scene) {
         this.catcher(() -> {
             FXMLLoader loader = new FXMLLoader();
-            FileInputStream fileInputStream = new FileInputStream("src/main/java/it/ispw/daniele/backpacker/view/fxml_view/Result-Page.fxml");
+            FileInputStream fileInputStream = new FileInputStream("src/logic/java/it/ispw/daniele/backpacker/view/fxml_view/Result-Page.fxml");
             Parent fxmlLoader = loader.load(fileInputStream);
             ResultController rc = loader.getController();
             scene.setRoot(fxmlLoader);
@@ -60,7 +60,7 @@ public abstract class GuiChangeTemplate {
 
             if(whoAmI.equals(USER)){
                 loader = new FXMLLoader();
-                FileInputStream fileInputStream = new FileInputStream("src/main/java/it/ispw/daniele/backpacker/view/fxml_view/MenuBar.fxml");
+                FileInputStream fileInputStream = new FileInputStream("src/logic/java/it/ispw/daniele/backpacker/view/fxml_view/MenuBar.fxml");
                 Parent fxmlLoader = loader.load(fileInputStream);
                 MenuBarController mbc = loader.getController();
                 pos.getChildren().add(fxmlLoader);
@@ -68,7 +68,7 @@ public abstract class GuiChangeTemplate {
             }
             else {
                 loader = new FXMLLoader();
-                FileInputStream fileInputStream = new FileInputStream("src/main/java/it/ispw/daniele/backpacker/view/fxml_view/TouristGuideMenuBar.fxml");
+                FileInputStream fileInputStream = new FileInputStream("src/logic/java/it/ispw/daniele/backpacker/view/fxml_view/TouristGuideMenuBar.fxml");
                 Parent fxmlLoader = loader.load(fileInputStream);
                 TouristGuideMenuBarController gbc = loader.getController();
                 pos.getChildren().add(fxmlLoader);

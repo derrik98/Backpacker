@@ -4,7 +4,6 @@ import it.ispw.daniele.backpacker.bean.HomeBean;
 import it.ispw.daniele.backpacker.exceptions.AddressNotFoundException;
 import it.ispw.daniele.backpacker.exceptions.CityNotFoundException;
 import it.ispw.daniele.backpacker.exceptions.MonumentNotFoundException;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;

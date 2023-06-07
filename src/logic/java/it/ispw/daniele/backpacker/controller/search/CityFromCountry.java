@@ -38,7 +38,5 @@ public class CityFromCountry extends JSONFactory{
         else{
             throw new CityNotFoundException("City not found in this country");
         }
-
     }
-
 }

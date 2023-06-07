@@ -41,9 +41,7 @@ public class AddressFromCity extends JSONFactory{
             return true;
         }
         else{
-            throw new AddressNotFoundException("Address not present in this city");
+            throw new AddressNotFoundException("Address not found in this city");
         }
-
     }
-
 }

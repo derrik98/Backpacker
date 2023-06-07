@@ -28,7 +28,7 @@ public class UserGraphicChange extends GuiChangeTemplate {
     public void switchToHomePage(Scene scene) {
         this.catcher(() -> {
             FXMLLoader loader = new FXMLLoader();
-            FileInputStream fileInputStream = new FileInputStream("src/main/java/it/ispw/daniele/backpacker/view/fxml_view/Home-Page.fxml");
+            FileInputStream fileInputStream = new FileInputStream("src/logic/java/it/ispw/daniele/backpacker/view/fxml_view/Home-Page.fxml");
             Parent fxmlLoader = loader.load(fileInputStream);
             HomeUserController huc = loader.getController();
             scene.setRoot(fxmlLoader);
@@ -39,7 +39,7 @@ public class UserGraphicChange extends GuiChangeTemplate {
     public void switchToUserDet(Scene scene) {
         this.catcher(() -> {
             FXMLLoader loader = new FXMLLoader();
-            FileInputStream fileInputStream = new FileInputStream("src/main/java/it/ispw/daniele/backpacker/view/fxml_view/User-Details-Page.fxml");
+            FileInputStream fileInputStream = new FileInputStream("src/logic/java/it/ispw/daniele/backpacker/view/fxml_view/User-Details-Page.fxml");
             Parent fxmlLoader = loader.load(fileInputStream);
             UserDetailsController pc = loader.getController();
             scene.setRoot(fxmlLoader);
@@ -50,7 +50,7 @@ public class UserGraphicChange extends GuiChangeTemplate {
     public void switchToItineraryDet(ItineraryBean itineraryBean, StackPane stackPane) {
         this.catcher(() -> {
             FXMLLoader loader = new FXMLLoader();
-            FileInputStream fileInputStream = new FileInputStream("src/main/java/it/ispw/daniele/backpacker/view/fxml_view/ItineraryDetails-Page.fxml");
+            FileInputStream fileInputStream = new FileInputStream("src/logic/java/it/ispw/daniele/backpacker/view/fxml_view/ItineraryDetails-Page.fxml");
             Parent fxmlLoader = loader.load(fileInputStream);
             ItineraryDetailsController idc = loader.getController();
             idc.init(itineraryBean);

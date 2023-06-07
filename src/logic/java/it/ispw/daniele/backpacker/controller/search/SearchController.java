@@ -23,6 +23,7 @@ public class SearchController extends Controller {
         JSONFactory checkCityCountry = new CityFromCountry();
 
         if (checkCityCountry.getJSON(bean)) {
+            System.out.println(checkCityCountry.getJSON(bean));
             JSONFactory checkAddressCity = new AddressFromCity();
             if (checkAddressCity.getJSON(bean)) {
                 MonumentFromAddress monuments = new MonumentFromAddress();
