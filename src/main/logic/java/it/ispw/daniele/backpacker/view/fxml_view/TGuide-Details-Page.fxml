@@ -18,7 +18,7 @@
    <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="10.0" layoutY="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <VBox alignment="TOP_CENTER">
          <StackPane>
-            <Region style="-fx-background-image: url('background_image.jpg'); -fx-background-size: 100% 100%;" StackPane.alignment="CENTER" />
+            <Region style="-fx-background-image: url('../../../../../../../resources/background_image.jpg'); -fx-background-size: 100% 100%;" StackPane.alignment="CENTER" />
             <VBox alignment="CENTER">
                <StackPane.margin>
                   <Insets/>
