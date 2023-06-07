@@ -96,7 +96,7 @@ public class UserDetailsController extends Controller {
             this.errorText.setText(e.getMessage());
         }
 
-        if(Objects.requireNonNull(booked).isEmpty()){
+        if(booked == null){
             this.textBookedItineraries.setText(this.textBookedItineraries.getText() + ": EMPTY");
         }
         else {
@@ -104,7 +104,7 @@ public class UserDetailsController extends Controller {
             vBoxBooked.getChildren().addAll(accordionSuggested);
         }
 
-        if(Objects.requireNonNull(saved).isEmpty()){
+        if(saved == null){
             this.textSavedItineraries.setText(this.textSavedItineraries.getText() + ": EMPTY");
         }
         else {

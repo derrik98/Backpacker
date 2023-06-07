@@ -23,6 +23,8 @@ public class CliResultController {
 
     List<ItineraryBean> it;
 
+    private static final String ITINERARY_ID = "Itinerary id";
+
     public void init(Scanner scanner) throws MonumentNotFoundException, GenericException {
         System.out.print("\033[H\033[2J");
 
@@ -104,7 +106,7 @@ public class CliResultController {
     }
 
     private void viewOnMap(Scanner scanner, List<ItineraryBean> itineraryBeanList) {
-        System.out.println("Digit Itinerary id");
+        System.out.println(ITINERARY_ID);
         int input = Integer.parseInt(scanner.nextLine());
 
         String[] steps = itineraryBeanList.get(input).getSteps().split("/");
@@ -139,7 +141,7 @@ public class CliResultController {
 
     private void save(Scanner scanner, List<ItineraryBean> itineraryBeanList) {
         SaveTour st = new SaveTour("cli");
-        System.out.println("Digit Itinerary id");
+        System.out.println(ITINERARY_ID);
         int input = Integer.parseInt(scanner.nextLine());
 
         if (input <= itineraryBeanList.size() && input >= 0) {
@@ -155,7 +157,7 @@ public class CliResultController {
     }
 
     private void buy(Scanner scanner, List<ItineraryBean> itineraryBeanList, int bSize){
-        System.out.println("Digit Itinerary id");
+        System.out.println(ITINERARY_ID);
         int input = Integer.parseInt(scanner.nextLine());
         if (input <= bSize && input >= bSize) {
             CliItineraryDetailsController cidc = new CliItineraryDetailsController();
