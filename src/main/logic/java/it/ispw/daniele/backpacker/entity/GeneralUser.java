@@ -2,7 +2,6 @@ package it.ispw.daniele.backpacker.entity;
 
 public class GeneralUser {
 
-    //prova
     protected String username;
     protected String password;
     protected String email;
