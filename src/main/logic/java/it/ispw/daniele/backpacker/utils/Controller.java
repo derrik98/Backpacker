@@ -310,4 +310,18 @@ public abstract class Controller {
         profilePicture.setFitHeight(150);
         profilePicture.setFitWidth(150);
     }
+
+    protected void cliDisplayIt(List<ItineraryBean> saved) {
+        for (int indexS = 0; indexS < saved.size(); indexS++) {
+            System.out.println("Saved itineraries: ");
+            System.out.print("ID [" + saved.get(indexS).getItineraryId() + "] " + saved.get(indexS).getSteps() + "\n");
+        }
+    }
+
+    protected void cliDisplayBIt(List<ItineraryBean> booked) {
+        for (int indexB = 0; indexB < booked.size(); indexB++) {
+            System.out.println("Booked itineraries: ");
+            System.out.print("ID [" + booked.get(indexB).getItineraryId() + "] " + booked.get(indexB).getSteps() + "\n");
+        }
+    }
 }

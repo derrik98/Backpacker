@@ -55,14 +55,14 @@ public class CliGuideDetailsController extends Controller {
                 System.out.println("Booked itineraries: ");
                 System.out.println("EMPTY_DATABASE\n");
             } else {
-                this.displayBIt(booked);
+                this.cliDisplayBIt(booked);
             }
 
             if(saved == null){
                 System.out.println("Saved itineraries: ");
                 System.out.println("EMPTY_DATABASE\n");
             } else {
-                this.displayIt(saved);
+                this.cliDisplayIt(saved);
             }
 
             System.out.println("Go Back [press 'b']: ");
@@ -73,21 +73,7 @@ public class CliGuideDetailsController extends Controller {
             else {
                 System.out.println("Command not found");
             }
-        }while (true);
-    }
-
-    private void displayIt(List<ItineraryBean> saved) {
-        for (int indexS = 0; indexS < saved.size(); indexS++) {
-            System.out.println("Saved itineraries: ");
-            System.out.print("ID [" + saved.get(indexS).getItineraryId() + "] " + saved.get(indexS).getSteps() + "\n");
-        }
-    }
-
-    private void displayBIt(List<ItineraryBean> booked) {
-        for (int indexB = 0; indexB < booked.size(); indexB++) {
-            System.out.println("Booked itineraries: ");
-            System.out.print("ID [" + booked.get(indexB).getItineraryId() + "] " + booked.get(indexB).getSteps() + "\n");
-        }
+        }while (scanner.hasNext());
     }
 
     private List<ItineraryBean> getBookedIt(TouristGuideBean guide) {
