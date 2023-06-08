@@ -21,11 +21,11 @@ import java.io.File;
 public class SignUpController extends InterfaceController {
 
     @FXML
-    private static Label TOURIST_GUIDE;
+    private static Label TouristGuide;
     @FXML
     private TextField textFieldImage;
     @FXML
-    private static Label USER;
+    private static Label User;
     @FXML
     private TextField textFieldEmailSignUp;
     @FXML
@@ -41,9 +41,6 @@ public class SignUpController extends InterfaceController {
     @FXML
     public Text errorText;
     private File imageFile = null;
-
-    public SignUpController() {
-    }
 
     @FXML
     public void signUp() {
@@ -61,10 +58,10 @@ public class SignUpController extends InterfaceController {
         email = textFieldEmailSignUp.getText();
         username = textFieldNameSignUp.getText();
         password = textFieldPassSignUp.getText();
-        if (USER.isUnderline()) {
-            userType = USER.getId();
+        if (User.isUnderline()) {
+            userType = User.getId();
         } else {
-            userType = TOURIST_GUIDE.getId();
+            userType = TouristGuide.getId();
         }
 
         String fileName;
@@ -78,7 +75,7 @@ public class SignUpController extends InterfaceController {
             newFileName = username + fileName;
         }
 
-        if (userType.equals(Roles.USER.name())) {
+        if (userType.equals(Roles.User.name())) {
             String name = this.textFieldNameSignUp.getText();
             String surname = this.textFieldSurnameSignUp.getText();
             UserBean ub = this.setUserBean(username, name, surname, email, password, newFileName);
@@ -89,7 +86,7 @@ public class SignUpController extends InterfaceController {
                 this.errorText.setText(exception.getMessage());
             }
 
-        } else if (userType.equals(Roles.TOURIST_GUIDE.name())) {
+        } else if (userType.equals(Roles.TouristGuide.name())) {
             String name = this.textFieldNameSignUp.getText();
             String surname = this.textFieldSurnameSignUp.getText();
             vatNumb = textFieldVATNumber.getText();
@@ -137,15 +134,15 @@ public class SignUpController extends InterfaceController {
     @FXML
     public void switchToUserSignUpPage() {
         this.textFieldVATNumber.setDisable(true);
-        USER.setUnderline(true);
-        TOURIST_GUIDE.setUnderline(false);
+        User.setUnderline(true);
+        TouristGuide.setUnderline(false);
     }
 
     @FXML
     public void switchToTGuideSignUpPage() {
         this.textFieldVATNumber.setDisable(false);
-        USER.setUnderline(false);
-        TOURIST_GUIDE.setUnderline(true);
+        User.setUnderline(false);
+        TouristGuide.setUnderline(true);
     }
 
     @FXML

@@ -76,7 +76,7 @@ public class HomeUserController {
     }
 
     public void init() {
-        if(SessionUser.getInstance().getSession().getRole().equals(Roles.TOURIST_GUIDE.name().toLowerCase())) {
+        if(SessionUser.getInstance().getSession().getRole().equals(Roles.TouristGuide.name().toLowerCase())) {
             TouristGuideGraphicChange tGuideGraphicChange = TouristGuideGraphicChange.getInstance();
             tGuideGraphicChange.menuBar(this.menuBar, "home");
         }

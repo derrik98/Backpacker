@@ -55,9 +55,9 @@ public class CliSignUpController extends InterfaceController {
         userType = scanner.nextLine();
 
         if (userType.equals("1")) {
-            userType = "TOURIST_GUIDE";
+            userType = "TouristGuide";
         } else {
-            userType = "USER";
+            userType = "User";
         }
 
         System.out.println("Would you like profile image? Yes[y] - No[n]");
@@ -78,7 +78,7 @@ public class CliSignUpController extends InterfaceController {
         }
 
 
-        if (userType.equals(Roles.USER.name())){
+        if (userType.equals(Roles.User.name())){
             UserBean ub = this.setUserBean(username, name, surname, email, password, newFileName);
 
             regResult = lc.createUser(ub, "cli");

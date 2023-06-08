@@ -13,7 +13,7 @@ public class TouristGuideGraphicChange extends GuiChangeTemplate {
     private static TouristGuideGraphicChange instance = null;
 
     TouristGuideGraphicChange(){
-        whoAmI = Roles.TOURIST_GUIDE;
+        whoAmI = Roles.TouristGuide;
     }
 
     public static TouristGuideGraphicChange getInstance(){

@@ -56,7 +56,7 @@ public abstract class GuiChangeTemplate {
 
             FXMLLoader loader;
 
-            if(whoAmI.equals(Roles.USER)){
+            if(whoAmI.equals(Roles.User)){
                 loader = new FXMLLoader();
                 FileInputStream fileInputStream = new FileInputStream("src/main/logic/java/it/ispw/daniele/backpacker/view/fxml_view/MenuBar.fxml");
                 Parent fxmlLoader = loader.load(fileInputStream);

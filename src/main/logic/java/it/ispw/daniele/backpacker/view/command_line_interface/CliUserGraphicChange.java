@@ -9,7 +9,7 @@ public class CliUserGraphicChange extends CliChangeTemplate {
     private static CliUserGraphicChange instance = null;
 
     private CliUserGraphicChange(){
-        whoAmI = Roles.USER;
+        whoAmI = Roles.User;
     }
 
     public static CliUserGraphicChange getInstance(){
