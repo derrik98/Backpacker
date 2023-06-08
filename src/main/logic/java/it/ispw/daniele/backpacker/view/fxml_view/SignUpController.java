@@ -101,6 +101,8 @@ public class SignUpController extends InterfaceController {
 
             try {
                 this.setImage(this.imageFile, fileName, newFileName);
+                this.errorText.setText("Registration successful");
+
             } catch (GenericException e) {
                 this.errorText.setText(e.getMessage());
             }
