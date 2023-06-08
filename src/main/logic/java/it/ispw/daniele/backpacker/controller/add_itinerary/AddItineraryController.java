@@ -36,21 +36,20 @@ public class AddItineraryController {
         Date date;
         Date currentDate = new Date();
 
+        String DATA_MISSING = "Data missing";
 
         if(itineraryBean.getGuideId().equals("") || itineraryBean.getLocation().equals("")) {
-            throw new GenericException("Data missing");
+            throw new GenericException(DATA_MISSING);
         }
 
         if (itineraryBean.getDate() != null) {
             try {
                 date = new SimpleDateFormat("yyyy-MM-dd").parse(itineraryBean.getDate());
-                System.out.println(date);
-                System.out.println(itineraryBean.getDate());
             } catch (ParseException e) {
-                throw new GenericException("Data missing");
+                throw new GenericException(DATA_MISSING);
             }
         } else {
-            throw new GenericException("Data missing");
+            throw new GenericException(DATA_MISSING);
         }
 
         if(date.before(currentDate)){

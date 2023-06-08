@@ -8,7 +8,7 @@ public class CliTouristGuideGraphicChange extends CliChangeTemplate {
     private static CliTouristGuideGraphicChange instance = null;
 
     private CliTouristGuideGraphicChange() {
-        whoAmI = Roles.tourist_guide;
+        whoAmI = Roles.TOURIST_GUIDE;
     }
 
     public static CliTouristGuideGraphicChange getInstance() {

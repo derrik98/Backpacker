@@ -14,8 +14,6 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static it.ispw.daniele.backpacker.utils.Roles.user;
-
 public abstract class GuiChangeTemplate {
 
     protected final Logger logger = Logger.getLogger("GraphicChange");
@@ -58,7 +56,7 @@ public abstract class GuiChangeTemplate {
 
             FXMLLoader loader;
 
-            if(whoAmI.equals(user)){
+            if(whoAmI.equals(Roles.USER)){
                 loader = new FXMLLoader();
                 FileInputStream fileInputStream = new FileInputStream("src/main/logic/java/it/ispw/daniele/backpacker/view/fxml_view/MenuBar.fxml");
                 Parent fxmlLoader = loader.load(fileInputStream);

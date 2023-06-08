@@ -61,11 +61,11 @@ public abstract class CliChangeTemplate {
             stackScene.add("home");
 
             switch (whoAmI) {
-                case user -> {
+                case USER -> {
                     CliMenuUserController cliMenuUserController = new CliMenuUserController();
                     cliMenuUserController.init(scanner);
                 }
-                case tourist_guide -> {
+                case TOURIST_GUIDE -> {
                     CliMenuGuideController cliMenuGuideController = new CliMenuGuideController();
                     cliMenuGuideController.init(scanner);
                 }

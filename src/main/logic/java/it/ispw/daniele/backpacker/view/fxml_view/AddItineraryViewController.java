@@ -18,6 +18,7 @@ import java.io.FileNotFoundException;
 import java.sql.SQLException;
 
 public class AddItineraryViewController extends InterfaceController {
+
     @FXML
     public TextField textFieldLanguages;
     @FXML
