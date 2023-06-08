@@ -2,14 +2,26 @@ package it.ispw.daniele.backpacker.entity;
 
 public class Itinerary {
 
-    private int id;
-    private String guideId;
-    private String location;
-    private String date;
-    private String time;
-    private int participants;
-    private int price;
-    private String steps;
+    protected int id;
+    protected String guideId;
+    protected String location;
+    protected String date;
+    protected String time;
+    protected int participants;
+    protected int price;
+    protected String steps;
+
+    public Itinerary(int id, String guideId, String location, String date, String time, int participants, int price, String steps) {
+
+        this.id = id;
+        this.guideId = guideId;
+        this.location = location;
+        this.date = date;
+        this.time = time;
+        this.participants = participants;
+        this.price = price;
+        this.steps = steps;
+    }
 
     public Itinerary(String guideId, String location, String date, String time, int participants, int price, String steps) {
 
@@ -50,4 +62,7 @@ public class Itinerary {
         return this.price;
     }
 
+    public int getId() {
+        return id;
+    }
 }

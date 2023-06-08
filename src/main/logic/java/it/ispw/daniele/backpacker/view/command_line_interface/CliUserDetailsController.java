@@ -3,7 +3,7 @@ package it.ispw.daniele.backpacker.view.command_line_interface;
 import it.ispw.daniele.backpacker.bean.ItineraryBean;
 import it.ispw.daniele.backpacker.bean.UserBean;
 import it.ispw.daniele.backpacker.booktour.BookTourController;
-import it.ispw.daniele.backpacker.booktour.SaveTour;
+import it.ispw.daniele.backpacker.booktour.SaveItinerary;
 import it.ispw.daniele.backpacker.dao.user_dao.UserDaoFactory;
 import it.ispw.daniele.backpacker.dao.user_dao.UserDaoL;
 import it.ispw.daniele.backpacker.entity.User;
@@ -104,7 +104,7 @@ public class CliUserDetailsController extends Controller {
 
     private List<ItineraryBean> getIt(UserBean users) {
 
-        SaveTour st = new SaveTour("cli");
+        SaveItinerary st = new SaveItinerary("cli");
         List<ItineraryBean> saved = null;
         try {
             saved = st.getItinerary(users.getUsername());

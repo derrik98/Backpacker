@@ -4,7 +4,7 @@ import it.ispw.daniele.backpacker.bean.GeneralUserBean;
 import it.ispw.daniele.backpacker.bean.ItineraryBean;
 import it.ispw.daniele.backpacker.bean.TouristGuideBean;
 import it.ispw.daniele.backpacker.booktour.BookTourController;
-import it.ispw.daniele.backpacker.booktour.SaveTour;
+import it.ispw.daniele.backpacker.booktour.SaveItinerary;
 import it.ispw.daniele.backpacker.dao.tourist_guide_dao.TouristGuideDao;
 import it.ispw.daniele.backpacker.entity.TouristGuide;
 import it.ispw.daniele.backpacker.exceptions.GenericException;
@@ -104,7 +104,7 @@ public class CliGuideDetailsController extends Controller {
 
     private List<ItineraryBean> getIt(TouristGuideBean guide) {
 
-        SaveTour st = new SaveTour("cli");
+        SaveItinerary st = new SaveItinerary("cli");
         List<ItineraryBean> saved = null;
         try {
             saved = st.getItinerary(guide.getUsername());

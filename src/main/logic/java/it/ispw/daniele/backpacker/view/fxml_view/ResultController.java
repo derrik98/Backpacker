@@ -91,8 +91,9 @@ public class ResultController  extends Controller {
             Hyperlink link = new Hyperlink("Start from the Home-Page");
             link.setOnMouseClicked(mouseEvent -> {
                 if(SessionUser.getInstance().getSession().getRole().equals(Roles.TOURIST_GUIDE.name().toLowerCase())) {
-                    TouristGuideGraphicChange i = TouristGuideGraphicChange.getInstance();
-                    i.menuBar(this.menuBar, HOME);
+                    TouristGuideGraphicChange ggc = TouristGuideGraphicChange.getInstance();
+                    ggc.switchToHomePage(this.menuBar.getScene());
+                    ggc.menuBar(this.menuBar, HOME);
                 }
                 else {
                     UserGraphicChange ugc = UserGraphicChange.getInstance();

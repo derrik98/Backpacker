@@ -33,7 +33,6 @@ public class ItineraryDao extends ItineraryDaoFactory {
                     itinerary = unpackResultSet(rs);
                 }
             }
-
             DatabaseUserConnection.closeUserConnection(conn);
             return itinerary;
         });
@@ -57,7 +56,7 @@ public class ItineraryDao extends ItineraryDaoFactory {
         return Objects.requireNonNullElse(ret, false);
     }
 
-    public int getItineraryId(ItineraryBean itineraryBean) throws SQLException, ClassNotFoundException {
+    public int getItineraryId(ItineraryBean itineraryBean) throws SQLException, ClassNotFoundException, GenericException {
 
         Connection conn;
         String sql;
@@ -77,9 +76,10 @@ public class ItineraryDao extends ItineraryDaoFactory {
             try (ResultSet rs = stm.executeQuery()) {
 
                 if (!rs.first()) { // rs not empty
-                    return rs.getInt("id");
+                    throw new GenericException("Itinerary id error");
                 }
-                return 0;
+
+                return rs.getInt("id");
             } finally {
                 DatabaseUserConnection.closeUserConnection(conn);
             }
@@ -117,6 +117,7 @@ public class ItineraryDao extends ItineraryDaoFactory {
             return Collections.emptyList();
 
         do {
+            int id = rs.getInt(ID);
             String guideId = rs.getString(GUIDE_ID);
             String location = rs.getString(LOCATION);
             String date = rs.getString(DATE);
@@ -125,7 +126,7 @@ public class ItineraryDao extends ItineraryDaoFactory {
             int price = rs.getInt(PRICE);
             String steps = rs.getString(STEPS);
 
-            Itinerary itinerary = new Itinerary(guideId, location, date, time, participants, price, steps);
+            Itinerary itinerary = new Itinerary(id, guideId, location, date, time, participants, price, steps);
 
             l.add(itinerary);
         } while (rs.next());
@@ -165,9 +166,10 @@ public class ItineraryDao extends ItineraryDaoFactory {
 
         do {
 
+            int id = rs.getInt(ID);
             String steps = rs.getString(STEPS);
 
-            Itinerary itinerary = new Itinerary("", "", "", "", 0, 0, steps);
+            Itinerary itinerary = new Itinerary(id, "", "", "", "", 0, 0, steps);
 
             l.add(itinerary);
         } while (rs.next());

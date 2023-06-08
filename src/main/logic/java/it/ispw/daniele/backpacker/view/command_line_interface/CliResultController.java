@@ -3,7 +3,7 @@ package it.ispw.daniele.backpacker.view.command_line_interface;
 import it.ispw.daniele.backpacker.bean.SearchBean;
 import it.ispw.daniele.backpacker.bean.ItineraryBean;
 import it.ispw.daniele.backpacker.booktour.BookTourController;
-import it.ispw.daniele.backpacker.booktour.SaveTour;
+import it.ispw.daniele.backpacker.booktour.SaveItinerary;
 import it.ispw.daniele.backpacker.controller.search.SearchController;
 import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.exceptions.MonumentNotFoundException;
@@ -140,13 +140,13 @@ public class CliResultController {
     }
 
     private void save(Scanner scanner, List<ItineraryBean> itineraryBeanList) {
-        SaveTour st = new SaveTour("cli");
+        SaveItinerary st = new SaveItinerary("cli");
         System.out.println(ITINERARY_ID);
         int input = Integer.parseInt(scanner.nextLine());
 
         if (input <= itineraryBeanList.size() && input >= 0) {
             try {
-                st.saveTour(SessionUser.getInstance().getSession(), itineraryBeanList.get(input));
+                st.saveItinerary(SessionUser.getInstance().getSession(), itineraryBeanList.get(input));
             } catch (GenericException e) {
                 System.out.println(RED + e.getMessage() + "\n" + RESET);
             }

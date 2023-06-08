@@ -3,7 +3,7 @@ package it.ispw.daniele.backpacker.view.fxml_view;
 import it.ispw.daniele.backpacker.bean.ItineraryBean;
 import it.ispw.daniele.backpacker.bean.UserBean;
 import it.ispw.daniele.backpacker.booktour.BookTourController;
-import it.ispw.daniele.backpacker.booktour.SaveTour;
+import it.ispw.daniele.backpacker.booktour.SaveItinerary;
 import it.ispw.daniele.backpacker.dao.user_dao.UserDao;
 import it.ispw.daniele.backpacker.entity.User;
 import it.ispw.daniele.backpacker.exceptions.GenericException;
@@ -91,7 +91,7 @@ public class UserDetailsController extends Controller {
 
         List<ItineraryBean> saved = null;
         try {
-            saved = new SaveTour("gui").getItinerary(users.getUsername());
+            saved = new SaveItinerary("gui").getItinerary(users.getUsername());
         } catch (GenericException e) {
             this.errorText.setText(e.getMessage());
         }

@@ -60,6 +60,7 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
             } else {
                 sql = "call backpacker.remove_participation(?, ?);\r\n";
             }
+
             stm = conn.prepareStatement(sql);
             stm.setString(1, username);
             stm.setInt(2, id);
@@ -157,16 +158,17 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
     }
 
 
-    public void saveTour(String username, String itinerary) throws GenericException {
+    public void saveItinerary(int id, String username, String itinerary) throws GenericException {
         this.execute(() -> {
 
             //Save on Database
             Connection conn = DatabaseUserConnection.getUserConnection();
-            String sql = "call backpacker.save_itinerary(?, ?);\r\n";
+            String sql = "call backpacker.save_itinerary(?, ?, ?);\r\n";
 
             try (PreparedStatement stm = conn.prepareStatement(sql)) {
-                stm.setString(1, username);
-                stm.setString(2, itinerary);
+                stm.setInt(1, id);
+                stm.setString(2, username);
+                stm.setString(3, itinerary);
                 stm.executeUpdate();
 
             } finally {
@@ -182,7 +184,7 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
             arr = (JSONArray) o.get("saved_itinerary");
 
             jsonMap = new HashMap<>();
-            jsonMap.put(ID, String.valueOf(arr.size() + 1));  //controllare bene indice
+            jsonMap.put(ID, String.valueOf(id));
             jsonMap.put(USERNAME, username);
             jsonMap.put(STEPS, itinerary);
 
@@ -197,16 +199,17 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
         });
     }
 
-    public void removeTour(String username, String steps) throws GenericException {
+    public void removeItinerary(int id, String username, String steps) throws GenericException {
         this.execute(() -> {
 
             //Remove from Database
             Connection conn = DatabaseUserConnection.getUserConnection();
-            String sql = "call backpacker.remove_itinerary(?, ?);\r\n";
+            String sql = "call backpacker.remove_itinerary(?, ?, ?);\r\n";
 
             try (PreparedStatement stm = conn.prepareStatement(sql)) {
-                stm.setString(1, username);
-                stm.setString(2, steps);
+                stm.setInt(1, id);
+                stm.setString(2, username);
+                stm.setString(3, steps);
                 stm.executeUpdate();
             } finally {
                 DatabaseUserConnection.closeUserConnection(conn);
@@ -220,7 +223,7 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
 
                 JSONObject object = (JSONObject) arr.get(index);
 
-                if (object.get(USERNAME).equals(username) && object.get(STEPS).equals(steps)) {
+                if (object.get(ID).equals(id) && object.get(USERNAME).equals(username) && object.get(STEPS).equals(steps)) {
 
                     arr.remove(object);
 
@@ -228,7 +231,6 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
 
                 }
             }
-
             return true;
         });
     }

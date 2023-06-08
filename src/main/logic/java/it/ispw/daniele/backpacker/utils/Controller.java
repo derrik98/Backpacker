@@ -3,7 +3,8 @@ package it.ispw.daniele.backpacker.utils;
 import it.ispw.daniele.backpacker.bean.ItineraryBean;
 import it.ispw.daniele.backpacker.bean.TouristGuideBean;
 import it.ispw.daniele.backpacker.bean.UserBean;
-import it.ispw.daniele.backpacker.booktour.SaveTour;
+import it.ispw.daniele.backpacker.booktour.BookTourController;
+import it.ispw.daniele.backpacker.booktour.SaveItinerary;
 import it.ispw.daniele.backpacker.entity.Itinerary;
 import it.ispw.daniele.backpacker.entity.TouristGuide;
 import it.ispw.daniele.backpacker.entity.User;
@@ -72,6 +73,7 @@ public abstract class Controller {
     protected ItineraryBean convert(Itinerary itinerary) {
         ItineraryBean ib = new ItineraryBean();
 
+        ib.setItineraryId(itinerary.getId());
         ib.setGuideId(itinerary.getGuideId());
         ib.setLocation(itinerary.getLocation());
         ib.setDate(itinerary.getDate());
@@ -120,7 +122,7 @@ public abstract class Controller {
 
             //Setting of delete image
             if (from.equals("profile")) {
-                this.setIvDelete(titledPane, itineraryBean, accordion, contentPane, output);
+                this.setIvDelete(titledPane, itineraryBean, accordion, contentPane, output, type);
             }
 
             //Setting of save image
@@ -150,7 +152,7 @@ public abstract class Controller {
         ivSave.setOnMouseClicked(mouseEvent -> {
             titledPane.setExpanded(false);
             try {
-                this.saveItinerary(itineraryBean, "save");
+                this.saveItinerary(itineraryBean);
 
                 output.setText("Saved");
 
@@ -169,7 +171,7 @@ public abstract class Controller {
         hBox.getChildren().addAll(region2, ivSave);
     }
 
-    private void setIvDelete(TitledPane titledPane, ItineraryBean itineraryBean, Accordion accordion, HBox hBox, Label output) {
+    private void setIvDelete(TitledPane titledPane, ItineraryBean itineraryBean, Accordion accordion, HBox hBox, Label output, String type) {
 
         HBox region2 = new HBox();
         region2.setMinWidth(15);
@@ -182,7 +184,9 @@ public abstract class Controller {
 
             titledPane.setExpanded(false);
             try {
-                this.saveItinerary(itineraryBean, "remove");
+
+                this.deleteItinerary(itineraryBean, type);
+
                 accordion.getPanes().remove(titledPane);
                 output.setText("Deleted");
             } catch (Exception e) {
@@ -261,13 +265,22 @@ public abstract class Controller {
         }
     }
 
-    private void saveItinerary(ItineraryBean itineraryBean, String type) throws GenericException {
-        SaveTour st = new SaveTour("gui");
+    private void saveItinerary(ItineraryBean itineraryBean) throws GenericException {
 
-        if (type.equals("save")) {
-            st.saveTour(SessionUser.getInstance().getSession(), itineraryBean);
+        SaveItinerary st = new SaveItinerary("gui");
+        st.saveItinerary(SessionUser.getInstance().getSession(), itineraryBean);
+
+    }
+
+    private void deleteItinerary(ItineraryBean itineraryBean, String type) throws GenericException {
+
+        if (type.equals("suggested")) {
+            BookTourController btc = new BookTourController("gui");
+            btc.removeParticipation(SessionUser.getInstance().getSession(), itineraryBean);
         } else {
-            st.removeTour(SessionUser.getInstance().getSession(), itineraryBean);
+            SaveItinerary st = new SaveItinerary("gui");
+            st.removeItinerary(SessionUser.getInstance().getSession(), itineraryBean);
+
         }
     }
 
