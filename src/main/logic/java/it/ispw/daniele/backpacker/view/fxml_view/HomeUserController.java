@@ -57,7 +57,7 @@ public class HomeUserController {
         searchBean.setCity(this.textFieldCity.getText());
         searchBean.setAddress(this.textFieldAddress.getText());
         searchBean.setRestaurant(this.radioButtonRestaurant.getText());
-        searchBean.setRange(this.labelRange.getText());
+        searchBean.setRange(String.valueOf(BigDecimal.valueOf(sliderRange.getValue()).setScale(1, RoundingMode.HALF_UP)));
 
         try {
             if (textFieldCountry.getText().equals("") || textFieldCity.getText().equals("") || textFieldAddress.getText().equals("")) {

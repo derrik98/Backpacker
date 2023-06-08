@@ -65,7 +65,6 @@ public class SearchController extends Controller {
             Itinerary itinerary;
 
             itinerary = new Itinerary("","", "", "", 0, 0, vector.toString());
-            itinerary.setId(Integer.parseInt(""));
 
             it.add(itinerary);
         }

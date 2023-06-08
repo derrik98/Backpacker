@@ -6,15 +6,18 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MonumentFromAddress extends JSONFactory{
+public class MonumentFromAddress extends JSONFactory {
     private final List<String> monuments = new ArrayList<>();
     private static MonumentFromAddress instance = null;
 
     public static synchronized MonumentFromAddress getInstance() {
-        if(instance==null) {
+        if (instance == null) {
             instance = new MonumentFromAddress();
         }
         return instance;
@@ -30,26 +33,31 @@ public class MonumentFromAddress extends JSONFactory{
 
         try {
             JSONObject json;
-            String url = ("https://maps.googleapis.com/maps/api/place/textsearch/json?query=monuments+in+"+convertString(searchBean.getAddress()) +
-                    "&radius=1000&type=tourist_attraction&language=it&key=" + System.getProperty("google_api"));
+            String url = ("https://maps.googleapis.com/maps/api/place/textsearch/json?query=monuments+in+" + convertString(searchBean.getAddress()) +
+                    "&radius=" + convertValueToInt(searchBean.getRange()) + "&type=tourist_attraction&language=it&key=" + System.getProperty("google_api"));
             json = readJsonFromUrl(url);
             JSONArray a = (JSONArray) json.get("results");
             int i = 0;
             JSONObject o;
-            while (i < a.length()){ //finche ci sono record
+            while (i < a.length()) { //finche ci sono record
                 o = a.getJSONObject(i);
-                if(!monuments.contains((String) o.get("name"))){
+                if (!monuments.contains((String) o.get("name"))) {
                     monuments.add((String) o.get("name"));
                 }
                 i++;
             }
-            if(!json.get("status").equals("OK")) {
+            if (!json.get("status").equals("OK")) {
                 throw new MonumentNotFoundException("No result");
             }
         } catch (IOException e) {
             throw new MonumentNotFoundException("Monuments not found");
         }
         return true;
+    }
+
+    private int convertValueToInt(String range) {
+        BigDecimal value = new BigDecimal(range).multiply(BigDecimal.valueOf(1000));//BigDecimal.valueOf(Long.parseLong(range)).multiply(BigDecimal.valueOf(1000));
+        return value.intValue();
     }
 
 }
