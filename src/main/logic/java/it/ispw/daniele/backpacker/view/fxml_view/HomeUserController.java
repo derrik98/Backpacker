@@ -1,6 +1,6 @@
 package it.ispw.daniele.backpacker.view.fxml_view;
 
-import it.ispw.daniele.backpacker.bean.HomeBean;
+import it.ispw.daniele.backpacker.bean.SearchBean;
 import it.ispw.daniele.backpacker.controller.search.SearchController;
 import it.ispw.daniele.backpacker.exceptions.AddressNotFoundException;
 import it.ispw.daniele.backpacker.exceptions.CityNotFoundException;
@@ -52,22 +52,22 @@ public class HomeUserController {
 
     public void searchItinerary() throws IOException {
 
-        HomeBean homeBean = new HomeBean();
-        homeBean.setCountry(this.textFieldCountry.getText());
-        homeBean.setCity(this.textFieldCity.getText());
-        homeBean.setAddress(this.textFieldAddress.getText());
-        homeBean.setRestaurant(this.radioButtonRestaurant.getText());
-        homeBean.setRange(this.labelRange.getText());
+        SearchBean searchBean = new SearchBean();
+        searchBean.setCountry(this.textFieldCountry.getText());
+        searchBean.setCity(this.textFieldCity.getText());
+        searchBean.setAddress(this.textFieldAddress.getText());
+        searchBean.setRestaurant(this.radioButtonRestaurant.getText());
+        searchBean.setRange(this.labelRange.getText());
 
         try {
             if (textFieldCountry.getText().equals("") || textFieldCity.getText().equals("") || textFieldAddress.getText().equals("")) {
                 throw new EmptyFieldException("Missing inputs");
             }
 
-            SessionUser.getInstance().setSearchSession(homeBean);
+            SessionUser.getInstance().setSearchSession(searchBean);
 
             SearchController sc = new SearchController();
-            sc.checkInput(homeBean);
+            sc.checkInput(searchBean);
             UserGraphicChange.getInstance().switchToResult(this.textFieldCountry.getScene());
 
         } catch (CityNotFoundException | EmptyFieldException | AddressNotFoundException | MonumentNotFoundException exception) {

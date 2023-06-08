@@ -1,6 +1,6 @@
 package it.ispw.daniele.backpacker.controller.search;
 
-import it.ispw.daniele.backpacker.bean.HomeBean;
+import it.ispw.daniele.backpacker.bean.SearchBean;
 import it.ispw.daniele.backpacker.exceptions.AddressNotFoundException;
 import it.ispw.daniele.backpacker.exceptions.CityNotFoundException;
 import it.ispw.daniele.backpacker.exceptions.MonumentNotFoundException;
@@ -57,7 +57,7 @@ public abstract class JSONFactory {
         return newString;
     }
 
-    protected abstract boolean getJSON(HomeBean homeBean) throws CityNotFoundException, AddressNotFoundException, MonumentNotFoundException, IOException;
+    protected abstract boolean getJSON(SearchBean searchBean) throws CityNotFoundException, AddressNotFoundException, MonumentNotFoundException, IOException;
 
 
 }

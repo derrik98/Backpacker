@@ -1,6 +1,6 @@
 package it.ispw.daniele.backpacker.view.fxml_view;
 
-import it.ispw.daniele.backpacker.bean.HomeBean;
+import it.ispw.daniele.backpacker.bean.SearchBean;
 import it.ispw.daniele.backpacker.bean.ItineraryBean;
 import it.ispw.daniele.backpacker.booktour.BookTourController;
 import it.ispw.daniele.backpacker.controller.search.SearchController;
@@ -68,14 +68,14 @@ public class ResultController  extends Controller {
             ugc.menuBar(this.menuBar, RESULT);
         }
 
-        HomeBean homeBean = SessionUser.getInstance().getSearchSession();
+        SearchBean searchBean = SessionUser.getInstance().getSearchSession();
 
-        if (homeBean != null) {
-            this.countrySearch.setText(homeBean.getCountry());
-            this.citySearch.setText(homeBean.getCity());
-            this.addressSearch.setText(homeBean.getAddress());
-            this.isRestaurant.setText(homeBean.isRestaurant());
-            this.radiusSearch.setText(homeBean.getRange());
+        if (searchBean != null) {
+            this.countrySearch.setText(searchBean.getCountry());
+            this.citySearch.setText(searchBean.getCity());
+            this.addressSearch.setText(searchBean.getAddress());
+            this.isRestaurant.setText(searchBean.isRestaurant());
+            this.radiusSearch.setText(searchBean.getRange());
         }
         else {
             this.countrySearch.setText("");
@@ -125,7 +125,7 @@ public class ResultController  extends Controller {
         SearchController sc = new SearchController();
         List<ItineraryBean> iti;
         try {
-            iti = sc.createItinerary(homeBean);
+            iti = sc.createItinerary(searchBean);
         } catch (GenericException | MonumentNotFoundException e) {
             throw new GenericException("ERROR");
         }

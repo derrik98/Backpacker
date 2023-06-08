@@ -3,7 +3,7 @@ package it.ispw.daniele.backpacker.bean;
 import java.io.Serial;
 import java.io.Serializable;
 
-public class HomeBean implements Serializable {
+public class SearchBean implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;

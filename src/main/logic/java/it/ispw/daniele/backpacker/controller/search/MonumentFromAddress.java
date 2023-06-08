@@ -1,6 +1,6 @@
 package it.ispw.daniele.backpacker.controller.search;
 
-import it.ispw.daniele.backpacker.bean.HomeBean;
+import it.ispw.daniele.backpacker.bean.SearchBean;
 import it.ispw.daniele.backpacker.exceptions.MonumentNotFoundException;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -20,17 +20,17 @@ public class MonumentFromAddress extends JSONFactory{
         return instance;
     }
 
-    public List<String> getMonuments(HomeBean homeBean) throws MonumentNotFoundException {
-        this.getJSON(homeBean);
+    public List<String> getMonuments(SearchBean searchBean) throws MonumentNotFoundException {
+        this.getJSON(searchBean);
         return this.monuments;
     }
 
     @Override
-    public boolean getJSON(HomeBean homeBean) throws MonumentNotFoundException {
+    public boolean getJSON(SearchBean searchBean) throws MonumentNotFoundException {
 
         try {
             JSONObject json;
-            String url = ("https://maps.googleapis.com/maps/api/place/textsearch/json?query=monuments+in+"+convertString(homeBean.getAddress()) +
+            String url = ("https://maps.googleapis.com/maps/api/place/textsearch/json?query=monuments+in+"+convertString(searchBean.getAddress()) +
                     "&radius=1000&type=tourist_attraction&language=it&key=" + System.getProperty("google_api"));
             json = readJsonFromUrl(url);
             JSONArray a = (JSONArray) json.get("results");

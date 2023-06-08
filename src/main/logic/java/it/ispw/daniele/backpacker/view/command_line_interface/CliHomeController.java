@@ -1,6 +1,6 @@
 package it.ispw.daniele.backpacker.view.command_line_interface;
 
-import it.ispw.daniele.backpacker.bean.HomeBean;
+import it.ispw.daniele.backpacker.bean.SearchBean;
 import it.ispw.daniele.backpacker.controller.search.SearchController;
 import it.ispw.daniele.backpacker.exceptions.AddressNotFoundException;
 import it.ispw.daniele.backpacker.exceptions.CityNotFoundException;
@@ -36,17 +36,17 @@ public class CliHomeController extends InterfaceController {
         System.out.println("Range:");
         String range = scanner.nextLine();
 
-        HomeBean homeBean = this.setHomeBean(country, city, address, restaurant, range);
+        SearchBean searchBean = this.setHomeBean(country, city, address, restaurant, range);
 
         try {
             if (country.equals("") || city.equals("") || address.equals("")) {
                 throw new GenericException("Data missing");
             }
 
-            SessionUser.getInstance().setSearchSession(homeBean);
+            SessionUser.getInstance().setSearchSession(searchBean);
 
             SearchController sc = new SearchController();
-            sc.checkInput(homeBean);
+            sc.checkInput(searchBean);
 
             CliUserGraphicChange ugc = CliUserGraphicChange.getInstance();
             ugc.switchToResult(scanner);

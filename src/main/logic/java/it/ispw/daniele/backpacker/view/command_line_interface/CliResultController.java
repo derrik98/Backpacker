@@ -1,6 +1,6 @@
 package it.ispw.daniele.backpacker.view.command_line_interface;
 
-import it.ispw.daniele.backpacker.bean.HomeBean;
+import it.ispw.daniele.backpacker.bean.SearchBean;
 import it.ispw.daniele.backpacker.bean.ItineraryBean;
 import it.ispw.daniele.backpacker.booktour.BookTourController;
 import it.ispw.daniele.backpacker.booktour.SaveTour;
@@ -28,14 +28,14 @@ public class CliResultController {
     public void init(Scanner scanner) throws MonumentNotFoundException, GenericException {
         System.out.print("\033[H\033[2J");
 
-        HomeBean homeBean = SessionUser.getInstance().getSearchSession();
+        SearchBean searchBean = SessionUser.getInstance().getSearchSession();
 
         System.out.println(BOLD + "RESULT PAGE\n" + RESET);
-        System.out.println("Country: " + homeBean.getCountry() + ", City: " + homeBean.getCity() + ", Address: " + homeBean.getAddress() + ", Restaurant: " + homeBean.isRestaurant() + ", Range: " + homeBean.getRange() + "\n");
+        System.out.println("Country: " + searchBean.getCountry() + ", City: " + searchBean.getCity() + ", Address: " + searchBean.getAddress() + ", Restaurant: " + searchBean.isRestaurant() + ", Range: " + searchBean.getRange() + "\n");
 
         BookTourController btc = new BookTourController("cli");
 
-        it = btc.getItinerary(homeBean.getCity(), "city");
+        it = btc.getItinerary(searchBean.getCity(), "city");
         int bookedSize = 0;
 
         if (it == null || it.isEmpty()) {
@@ -49,7 +49,7 @@ public class CliResultController {
         SearchController sc = new SearchController();
         List<ItineraryBean> iti;
 
-        iti = sc.createItinerary(homeBean);
+        iti = sc.createItinerary(searchBean);
 
         if (iti == null) {
             System.out.println("Self Itinerary: " + RED + "EMPTY_DATABASE " + RESET + "\n");
@@ -160,8 +160,8 @@ public class CliResultController {
         System.out.println(ITINERARY_ID);
         int input = Integer.parseInt(scanner.nextLine());
         if (input <= bSize && input >= bSize) {
-            CliItineraryDetailsController cidc = new CliItineraryDetailsController();
-            cidc.init(itineraryBeanList.get(input));
+            CliItineraryDetailsController idc = new CliItineraryDetailsController();
+            idc.init(itineraryBeanList.get(input));
         } else {
             System.out.println(RED + "Incorrect id" + RESET);
         }

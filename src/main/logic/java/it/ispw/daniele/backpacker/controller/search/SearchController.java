@@ -1,6 +1,6 @@
 package it.ispw.daniele.backpacker.controller.search;
 
-import it.ispw.daniele.backpacker.bean.HomeBean;
+import it.ispw.daniele.backpacker.bean.SearchBean;
 import it.ispw.daniele.backpacker.bean.ItineraryBean;
 import it.ispw.daniele.backpacker.entity.Itinerary;
 import it.ispw.daniele.backpacker.exceptions.AddressNotFoundException;
@@ -18,7 +18,7 @@ import java.util.Random;
 
 public class SearchController extends Controller {
 
-    public void checkInput(HomeBean bean) throws CityNotFoundException, AddressNotFoundException, MonumentNotFoundException, IOException {
+    public void checkInput(SearchBean bean) throws CityNotFoundException, AddressNotFoundException, MonumentNotFoundException, IOException {
 
         JSONFactory checkCityCountry = new CityFromCountry();
 
@@ -31,12 +31,12 @@ public class SearchController extends Controller {
         }
     }
 
-    public List<ItineraryBean> createItinerary(HomeBean homeBean) throws GenericException, MonumentNotFoundException {
+    public List<ItineraryBean> createItinerary(SearchBean searchBean) throws GenericException, MonumentNotFoundException {
 
         MonumentFromAddress monuments = new MonumentFromAddress();
-        List<String> result = monuments.getMonuments(homeBean);
+        List<String> result = monuments.getMonuments(searchBean);
 
-        monuments.getJSON(homeBean);
+        monuments.getJSON(searchBean);
 
         ArrayList<Itinerary> it = new ArrayList<>();
 

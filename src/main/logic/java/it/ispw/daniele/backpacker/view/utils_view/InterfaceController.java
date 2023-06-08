@@ -1,6 +1,6 @@
 package it.ispw.daniele.backpacker.view.utils_view;
 
-import it.ispw.daniele.backpacker.bean.HomeBean;
+import it.ispw.daniele.backpacker.bean.SearchBean;
 import it.ispw.daniele.backpacker.bean.ItineraryBean;
 import it.ispw.daniele.backpacker.bean.TouristGuideBean;
 import it.ispw.daniele.backpacker.bean.UserBean;
@@ -48,8 +48,8 @@ public abstract class InterfaceController {
         return ib;
     }
 
-    protected HomeBean setHomeBean(String country, String city, String address, String restaurant, String range){
-        HomeBean hb = new HomeBean();
+    protected SearchBean setHomeBean(String country, String city, String address, String restaurant, String range){
+        SearchBean hb = new SearchBean();
         hb.setCountry(country);
         hb.setCity(city);
         hb.setAddress(address);

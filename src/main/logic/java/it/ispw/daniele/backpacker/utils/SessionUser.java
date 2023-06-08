@@ -1,12 +1,12 @@
 package it.ispw.daniele.backpacker.utils;
 
 import it.ispw.daniele.backpacker.bean.GeneralUserBean;
-import it.ispw.daniele.backpacker.bean.HomeBean;
+import it.ispw.daniele.backpacker.bean.SearchBean;
 
 public class SessionUser {
 
     private GeneralUserBean userSession = null;
-    private HomeBean searchSession = null;
+    private SearchBean searchSession = null;
     private static SessionUser instance = null;
 
     private SessionUser(){}
@@ -28,11 +28,11 @@ public class SessionUser {
         return this.userSession;
     }
 
-    public void setSearchSession(HomeBean homeBean){
-        this.searchSession = homeBean;
+    public void setSearchSession(SearchBean searchBean){
+        this.searchSession = searchBean;
     }
 
-    public HomeBean getSearchSession(){
+    public SearchBean getSearchSession(){
         return this.searchSession;
     }
 
