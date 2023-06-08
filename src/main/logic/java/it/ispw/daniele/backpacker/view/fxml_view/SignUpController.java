@@ -21,11 +21,11 @@ import java.io.File;
 public class SignUpController extends InterfaceController {
 
     @FXML
-    private Label TOURIST_GUIDE;
+    private static Label TOURIST_GUIDE;
     @FXML
     private TextField textFieldImage;
     @FXML
-    private Label USER;
+    private static Label USER;
     @FXML
     private TextField textFieldEmailSignUp;
     @FXML
@@ -41,6 +41,9 @@ public class SignUpController extends InterfaceController {
     @FXML
     public Text errorText;
     private File imageFile = null;
+
+    public SignUpController() {
+    }
 
     @FXML
     public void signUp() {
@@ -58,7 +61,7 @@ public class SignUpController extends InterfaceController {
         email = textFieldEmailSignUp.getText();
         username = textFieldNameSignUp.getText();
         password = textFieldPassSignUp.getText();
-        if (this.USER.isUnderline()) {
+        if (USER.isUnderline()) {
             userType = USER.getId();
         } else {
             userType = TOURIST_GUIDE.getId();
@@ -134,15 +137,15 @@ public class SignUpController extends InterfaceController {
     @FXML
     public void switchToUserSignUpPage() {
         this.textFieldVATNumber.setDisable(true);
-        this.USER.setUnderline(true);
-        this.TOURIST_GUIDE.setUnderline(false);
+        USER.setUnderline(true);
+        TOURIST_GUIDE.setUnderline(false);
     }
 
     @FXML
     public void switchToTGuideSignUpPage() {
         this.textFieldVATNumber.setDisable(false);
-        this.USER.setUnderline(false);
-        this.TOURIST_GUIDE.setUnderline(true);
+        USER.setUnderline(false);
+        TOURIST_GUIDE.setUnderline(true);
     }
 
     @FXML
