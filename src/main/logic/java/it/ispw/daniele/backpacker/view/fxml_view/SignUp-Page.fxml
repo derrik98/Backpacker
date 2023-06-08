@@ -28,7 +28,7 @@
                          <Insets />
                      </HBox.margin>
                  </Text>
-                 <Label fx:id="User" onMouseClicked="#switchToUserSignUpPage" text="Generic User" underline="true">
+                 <Label fx:id="user" onMouseClicked="#switchToUserSignUpPage" text="Generic User" underline="true">
                      <font>
                          <Font size="27.0" />
                      </font>
@@ -39,7 +39,7 @@
                          <Cursor fx:constant="HAND" />
                      </cursor>
                  </Label>
-                 <Label fx:id="TouristGuide" onMouseClicked="#switchToTGuideSignUpPage" text="Tourist Guide">
+                 <Label fx:id="touristGuide" onMouseClicked="#switchToTGuideSignUpPage" text="Tourist Guide">
                      <font>
                          <Font size="27.0" />
                      </font>

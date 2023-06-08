@@ -14,7 +14,7 @@ public class UserGraphicChange extends GuiChangeTemplate {
     private static UserGraphicChange instance = null;
 
     private UserGraphicChange() {
-        whoAmI = Roles.User;
+        whoAmI = Roles.USER;
     }
 
     public static UserGraphicChange getInstance() {
