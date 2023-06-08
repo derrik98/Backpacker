@@ -70,9 +70,8 @@ public class AddItineraryViewController extends InterfaceController {
                 this.controller.addItinerary(itineraryBean);
                 itineraryBean.setItineraryId(controller.getItineraryId(itineraryBean));
                 this.errorText.setText("Itinerary added successfully");
-            } catch (DateException | GenericException | SQLException | FileNotFoundException | ClassNotFoundException |
-                     NumberFormatException e) {
-                this.errorText.setText("Unable to add itinerary");
+            } catch (DateException | GenericException | SQLException | FileNotFoundException | ClassNotFoundException | NumberFormatException e) {
+                this.errorText.setText(e.getMessage());
             }
 
         }

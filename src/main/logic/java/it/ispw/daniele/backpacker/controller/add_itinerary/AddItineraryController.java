@@ -29,7 +29,6 @@ public class AddItineraryController {
     }
 
     public int getItineraryId(ItineraryBean itineraryBean) throws SQLException, FileNotFoundException, GenericException, ClassNotFoundException {
-        ///MODIFICARE CODICE SQL
         return this.itineraryDao.getItineraryId(itineraryBean);
     }
 
@@ -37,18 +36,21 @@ public class AddItineraryController {
         Date date;
         Date currentDate = new Date();
 
+
         if(itineraryBean.getGuideId().equals("") || itineraryBean.getLocation().equals("")) {
-            return false;
+            throw new GenericException("Data missing");
         }
 
         if (itineraryBean.getDate() != null) {
             try {
                 date = new SimpleDateFormat("yyyy-MM-dd").parse(itineraryBean.getDate());
+                System.out.println(date);
+                System.out.println(itineraryBean.getDate());
             } catch (ParseException e) {
-                return false;
+                throw new GenericException("Data missing");
             }
         } else {
-            return false;
+            throw new GenericException("Data missing");
         }
 
         if(date.before(currentDate)){
