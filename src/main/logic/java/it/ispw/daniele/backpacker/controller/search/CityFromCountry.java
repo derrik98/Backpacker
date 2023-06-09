@@ -11,7 +11,7 @@ public class CityFromCountry extends JSONFactory{
 
     private static CityFromCountry instance = null;
 
-    public static synchronized CityFromCountry getInstance() {
+    public static CityFromCountry getInstance() {
         if(instance==null) {
             instance = new CityFromCountry();
         }

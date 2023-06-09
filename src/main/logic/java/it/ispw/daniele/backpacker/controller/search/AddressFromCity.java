@@ -12,7 +12,7 @@ public class AddressFromCity extends JSONFactory{
 
     private static AddressFromCity instance = null;
 
-    public static synchronized AddressFromCity getInstance() {
+    public static AddressFromCity getInstance() {
         if(instance==null) {
             instance = new AddressFromCity();
         }

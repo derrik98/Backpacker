@@ -25,7 +25,7 @@ public class CliResultController {
 
     private static final String ITINERARY_ID = "Itinerary id";
 
-    public void init(Scanner scanner) throws MonumentNotFoundException, GenericException {
+    public void init(Scanner scanner) throws MonumentNotFoundException, GenericException, IOException {
         System.out.print("\033[H\033[2J");
 
         SearchBean searchBean = SessionUser.getInstance().getSearchSession();

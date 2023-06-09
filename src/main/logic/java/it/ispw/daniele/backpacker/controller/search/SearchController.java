@@ -21,22 +21,30 @@ public class SearchController extends Controller {
     public void checkInput(SearchBean bean) throws CityNotFoundException, AddressNotFoundException, MonumentNotFoundException, IOException {
 
         JSONFactory checkCityCountry = new CityFromCountry();
+        checkCityCountry.getJSON(bean);
 
-        if (checkCityCountry.getJSON(bean)) {
-            JSONFactory checkAddressCity = new AddressFromCity();
-            if (checkAddressCity.getJSON(bean)) {
-                MonumentFromAddress monuments = new MonumentFromAddress();
-                monuments.getJSON(bean);
-            }
-        }
+        JSONFactory checkAddressCity = new AddressFromCity();
+        checkAddressCity.getJSON(bean);
+
+        MonumentFromAddress monuments = new MonumentFromAddress();
+        monuments.getJSON(bean);
+
+
+//        if (checkCityCountry.getJSON(bean)) {
+//            JSONFactory checkAddressCity = new AddressFromCity();
+//            if (checkAddressCity.getJSON(bean)) {
+//                MonumentFromAddress monuments = new MonumentFromAddress();
+//                monuments.getJSON(bean);
+//            }
+//        }
     }
 
-    public List<ItineraryBean> createItinerary(SearchBean searchBean) throws GenericException, MonumentNotFoundException {
+    public List<ItineraryBean> createItinerary(SearchBean searchBean) throws GenericException, MonumentNotFoundException, IOException {
 
         MonumentFromAddress monuments = new MonumentFromAddress();
         List<String> result = monuments.getMonuments(searchBean);
 
-        monuments.getJSON(searchBean);
+        //monuments.getJSON(searchBean);
 
         ArrayList<Itinerary> it = new ArrayList<>();
 
@@ -64,7 +72,7 @@ public class SearchController extends Controller {
 
             Itinerary itinerary;
 
-            itinerary = new Itinerary("","", "", "", 0, 0, vector.toString());
+            itinerary = new Itinerary("", "", "", "", 0, 0, vector.toString());
             itinerary.setId(i);
 
             it.add(itinerary);

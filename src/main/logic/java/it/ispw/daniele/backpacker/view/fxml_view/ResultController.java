@@ -20,6 +20,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+import java.io.IOException;
 import java.util.List;
 
 public class ResultController  extends Controller {
@@ -127,7 +128,7 @@ public class ResultController  extends Controller {
         List<ItineraryBean> iti;
         try {
             iti = sc.createItinerary(searchBean);
-        } catch (GenericException | MonumentNotFoundException e) {
+        } catch (GenericException | MonumentNotFoundException | IOException e) {
             throw new GenericException("ERROR");
         }
 
