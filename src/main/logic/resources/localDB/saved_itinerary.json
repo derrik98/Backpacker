@@ -1,1 +1,19 @@
-{"saved_itinerary":[{"id":"1","steps":"Colonna di Marco Aurelio\/Monumento a Goethe\/Pantheon\/Monumento a José Gervasio Artigas\/Statue dei Dioscuri\/Monumento a Quintino Sella","username":"aq"},{"id":"2","steps":"Cordonata Capitolina\/Piazza di San Silvestro\/Fontana della Dea Roma\/Scalinata di Trinità dei MontiFontana della Dea Roma\/Sacrario delle Bandiere delle Forze Armate","username":"aq"},{"id":"3","steps":"addd-","username":"sw"},{"id":"4","steps":"colo-","username":"sw"},{"id":"5","steps":"colosseo-","username":"sw"},{"id":"6","steps":"colosseo-","username":"sw"},{"id":"7","steps":"colosseo-","username":"sw"},{"id":"1","steps":"coslo-","username":"sw"},{"id":"1","steps":"coslo-","username":"sw"},{"id":"1","steps":"coslo-","username":"sw"},{"id":"1","steps":"colosseo-","username":"sw"},{"id":"1","steps":"colosseo-","username":"sw"},{"id":"1","steps":"colosseo-","username":"aq"},{"id":"1","steps":"colosseo-","username":"aq"},{"id":"1","steps":"colosseo-","username":"aq"},{"id":"0","steps":"Cordonata Capitolina\/Statue dei Dioscuri\/Colonna di Marco Aurelio\/Piazza di San Silvestro\/Fontana della Dea Roma\/Sacrario delle Bandiere delle Forze Armate","username":"aq"},{"id":"0","steps":"Fontana della Dea Roma\/Statua Equestre di Vittorio Emanuele II\/Terrazza delle Quadrighe\/Scalinata di Trinità dei Monti\/Monumento al BersagliereTerrazza delle Quadrighe","username":"aq"}]}
+{
+  "saved_itinerary": [
+    {
+      "id": "0",
+      "steps": "Monumento a Quintino Sella\/Cordonata Capitolina\/Monumento al Bersagliere\/Piazza di San Silvestro\/Altare della PatriaPiazza di San Silvestro",
+      "username": "aq"
+    },
+    {
+      "id": "1",
+      "steps": "Obelisco della Minerva\/Portico d'Ottavia\/Galleria Doria Pamphilj\/Terrazza delle Quadrighe\/Scalinata di Trinità dei Monti\/Obelisco Flaminio",
+      "username": "aq"
+    },
+    {
+      "id": "2",
+      "steps": "Portico d'Ottavia\/Fontana della Dea Roma\/Monumento celebrativo del \"Bicentenario dei Carabinieri\"\/Statue dei Dioscuri\/Monumento al Bersagliere\/Monumento a Goethe",
+      "username": "aq"
+    }
+  ]
+}

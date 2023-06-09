@@ -14,10 +14,7 @@ import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public abstract class ItineraryDaoFactory extends DaoTemplate {
 
@@ -136,7 +133,7 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
             arr = (JSONArray) o.get("itinerary");
 
             jsonMap = new HashMap<>();
-            jsonMap.put(ID, String.valueOf(arr.size() + 1));  //controllare bene indice
+            jsonMap.put(ID, String.valueOf(arr.size() + 1));
             jsonMap.put(GUIDE_ID, itineraryBean.getGuideId());
             jsonMap.put(LOCATION, itineraryBean.getLocation());
             jsonMap.put(DATE, String.valueOf(date));
@@ -192,7 +189,6 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
 
             arr.add(newItinerary);
 
-
             this.writeOnFile(PATH_SAVED_ITINERARY, o);
 
             return true;
@@ -223,7 +219,7 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
 
                 JSONObject object = (JSONObject) arr.get(index);
 
-                if (object.get(ID).equals(id) && object.get(USERNAME).equals(username) && object.get(STEPS).equals(steps)) {
+                if (object.get(ID).equals(String.valueOf(id)) && object.get(USERNAME).equals(username) && object.get(STEPS.replace("\\/", "/")).equals(steps)) {
 
                     arr.remove(object);
 
