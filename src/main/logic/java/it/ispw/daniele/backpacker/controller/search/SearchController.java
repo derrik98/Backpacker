@@ -31,7 +31,7 @@ public class SearchController extends Controller {
 
     }
 
-    public List<ItineraryBean> createItinerary(SearchBean searchBean) throws GenericException, MonumentNotFoundException, IOException {
+    public List<ItineraryBean> createItinerary(SearchBean searchBean) throws GenericException, MonumentNotFoundException {
 
         MonumentFromAddress monuments = new MonumentFromAddress();
         List<String> result = monuments.getMonuments(searchBean);

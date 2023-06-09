@@ -26,7 +26,6 @@ public class SaveItinerary extends Controller {
     }
 
     public void saveItinerary(GeneralUserBean user, ItineraryBean itinerary) throws GenericException {
-        System.out.println(itinerary.getItineraryId());
         this.id.saveItinerary(itinerary.getItineraryId(), user.getUsername(), itinerary.getSteps());
     }
 
