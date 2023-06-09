@@ -29,22 +29,12 @@ public class SearchController extends Controller {
         MonumentFromAddress monuments = new MonumentFromAddress();
         monuments.getJSON(bean);
 
-
-//        if (checkCityCountry.getJSON(bean)) {
-//            JSONFactory checkAddressCity = new AddressFromCity();
-//            if (checkAddressCity.getJSON(bean)) {
-//                MonumentFromAddress monuments = new MonumentFromAddress();
-//                monuments.getJSON(bean);
-//            }
-//        }
     }
 
     public List<ItineraryBean> createItinerary(SearchBean searchBean) throws GenericException, MonumentNotFoundException, IOException {
 
         MonumentFromAddress monuments = new MonumentFromAddress();
         List<String> result = monuments.getMonuments(searchBean);
-
-        //monuments.getJSON(searchBean);
 
         ArrayList<Itinerary> it = new ArrayList<>();
 
