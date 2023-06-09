@@ -72,11 +72,8 @@ public class CliAddItineraryController extends Controller {
 
         try {
             result = controller.addItinerary(itineraryBean);
-            System.out.println(result + " A ");
             itineraryBean.setItineraryId(controller.getItineraryId(itineraryBean));
-            System.out.println(result);
-            System.out.println(String.valueOf(controller.getItineraryId(itineraryBean)));
-            System.out.println(itineraryBean.getItineraryId());
+
             if (result) {
                 System.out.println("Itinerary added successfully\n");
             } else {

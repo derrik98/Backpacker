@@ -12,8 +12,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
-import static it.ispw.daniele.backpacker.view.command_line_interface.CLI.BOLD;
-import static it.ispw.daniele.backpacker.view.command_line_interface.CLI.RESET;
+import static it.ispw.daniele.backpacker.view.command_line_interface.CLI.*;
 
 public class CliUserDetailsController extends CliController {
 
@@ -43,14 +42,11 @@ public class CliUserDetailsController extends CliController {
             System.out.println("Surname: " + users.getSurname());
             System.out.println("\n");
 
-            this.createCliTable(users.getUsername());
-
-            System.out.println("\nGo Back [b]: ");
-
-            if (scanner.nextLine().equals("b")) {
+            try {
+                this.createCliTable(scanner, users.getUsername());
                 return;
-            } else {
-                System.out.println("Command not found");
+            } catch (GenericException e) {
+                System.out.println(RED + "Command not found\n" + RESET);
             }
 
         } while (true);

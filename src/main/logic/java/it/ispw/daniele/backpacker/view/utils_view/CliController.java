@@ -4,32 +4,68 @@ import it.ispw.daniele.backpacker.bean.ItineraryBean;
 import it.ispw.daniele.backpacker.booktour.BookTourController;
 import it.ispw.daniele.backpacker.booktour.SaveItinerary;
 import it.ispw.daniele.backpacker.exceptions.GenericException;
+import it.ispw.daniele.backpacker.utils.SessionUser;
 
 import java.util.List;
+import java.util.Scanner;
+
+import static it.ispw.daniele.backpacker.view.command_line_interface.CLI.RED;
+import static it.ispw.daniele.backpacker.view.command_line_interface.CLI.RESET;
 
 public class CliController extends Controller {
 
-    protected void createCliTable(String user) {
+    protected void createCliTable(Scanner scanner, String user) throws GenericException {
 
-        List<ItineraryBean> booked = this.getBookedIt(user);
+        do {
 
-        List<ItineraryBean> saved = this.getIt(user);
+            List<ItineraryBean> booked = this.getBookedIt(user);
 
-        if (booked == null || booked.isEmpty()) {
-            System.out.println("Booked itineraries: ");
-            System.out.println("EMPTY_DATABASE\n");
-        } else {
-            this.cliDisplayBIt(booked);
-        }
+            List<ItineraryBean> saved = this.getIt(user);
 
-        if (saved == null || saved.isEmpty()) {
-            System.out.println("Saved itineraries: ");
-            System.out.println("EMPTY_DATABASE\n");
-        } else {
-            this.cliDisplayIt(saved);
-        }
+            if (booked == null || booked.isEmpty()) {
+                System.out.println("Booked itineraries: ");
+                System.out.println("EMPTY_DATABASE\n");
+            } else {
+                this.cliDisplayBIt(booked);
+            }
 
+            if (saved == null || saved.isEmpty()) {
+                System.out.println("Saved itineraries: ");
+                System.out.println("EMPTY_DATABASE\n");
+            } else {
+                this.cliDisplayIt(saved);
+            }
 
+            System.out.println("Commands : REMOVE BOOKED[0] - REMOVE SAVED[1] - GO BACK[2]");
+
+            int input = Integer.parseInt(scanner.nextLine());
+            switch (input) {
+                case 0 -> {
+                    assert booked != null;
+                    this.removeB(input, booked);
+                }
+                case 1 -> {
+                    assert saved != null;
+                    this.removeS(input, saved);
+                }
+                case 2 -> {
+                    return;
+                }
+                default -> System.out.println(RED + "Command not found\n" + RESET);
+            }
+
+        }while (true);
+    }
+
+    private void removeS(int input, List<ItineraryBean> saved) throws GenericException {
+        SaveItinerary st = new SaveItinerary("gui");
+        st.removeItinerary(SessionUser.getInstance().getSession(), saved.get(input));
+    }
+
+    private void removeB(int input, List<ItineraryBean> booked) throws GenericException {
+
+        BookTourController btc = new BookTourController("cli");
+        btc.removeParticipation(SessionUser.getInstance().getSession(), booked.get(input));
     }
 
     private List<ItineraryBean> getBookedIt(String user) {

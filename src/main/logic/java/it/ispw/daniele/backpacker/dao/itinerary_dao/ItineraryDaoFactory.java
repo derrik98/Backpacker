@@ -107,9 +107,6 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
             Connection conn = DatabaseTouristGuideConnection.getTouristGuideConnection();
             String sql = "call backpacker.add_itinerary(?, ?, ?, ?, ?, ?, ?);\r\n";
             java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-            System.out.println(sqlDate);
-            System.out.println(date);
-            System.out.println(date.getTime());
 
             try (PreparedStatement stm = conn.prepareStatement(sql)) {
 

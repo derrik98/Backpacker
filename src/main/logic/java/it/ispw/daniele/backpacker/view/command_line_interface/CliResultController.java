@@ -26,7 +26,7 @@ public class CliResultController extends Controller {
 
     private static final String ITINERARY_ID = "Itinerary id";
 
-    public void init(Scanner scanner) throws MonumentNotFoundException, GenericException, IOException {
+    public void init(Scanner scanner) throws MonumentNotFoundException, GenericException{
         System.out.print("\033[H\033[2J");
 
         SearchBean searchBean = SessionUser.getInstance().getSearchSession();
@@ -49,7 +49,6 @@ public class CliResultController extends Controller {
         } else {
             System.out.println("Suggested Itinerary: \n");
             bookedSize = it.size();
-            System.out.println("SIZE " + bookedSize);
             createTable(it, 0);
         }
 
@@ -101,7 +100,6 @@ public class CliResultController extends Controller {
 
             StringBuilder line = new StringBuilder();
             line.append("ID [").append(tableSize).append("] ");
-            System.out.println(tableSize);
             tableSize++;
             for (int indexMonument = 0; indexMonument < als.size(); indexMonument++) {
                 line.append(als.get(indexMonument));

@@ -16,12 +16,13 @@ public class CliItineraryDetailsController {
     private final BookTourController controller = new BookTourController("cli");
     private ItineraryBean ib = new ItineraryBean();
     private final GeneralUserBean sessionUser = SessionUser.getInstance().getSession();
+
     public void subscribe() {
 
         boolean isPart;
         try {
             isPart = controller.isParticipating(this.sessionUser, ib);
-            if(isPart){
+            if (isPart) {
                 controller.removeParticipation(this.sessionUser, ib);
                 System.out.print("Itinerary removed!");
                 this.command = "SUBSCRIBE";
@@ -59,26 +60,20 @@ public class CliItineraryDetailsController {
 
         ib = itineraryBean;
 
-        do{
+        do {
 
-        System.out.println("\nCOMMANDS [0] " + command + " - [1] UNDO\n");
+            System.out.println("\nCOMMANDS [0] " + command + " - [1] UNDO\n");
 
-        System.out.println("Digit command: ");
+            System.out.println("Digit command: ");
 
 
-            switch (scanner.nextLine()) {
-                case "0" -> {
-                    this.subscribe();}
-                case "1" -> {
-
-                    System.out.println("undo");
-                    return;
-                }
-                default -> {
-                    return;
-                }
+            if (scanner.nextLine().equals("0")) {
+                this.subscribe();
+            } else {
+                return;
             }
-        }while(true);
+
+        } while (true);
 
 
     }
