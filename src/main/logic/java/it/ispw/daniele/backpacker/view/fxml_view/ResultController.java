@@ -1,14 +1,14 @@
 package it.ispw.daniele.backpacker.view.fxml_view;
 
-import it.ispw.daniele.backpacker.bean.SearchBean;
 import it.ispw.daniele.backpacker.bean.ItineraryBean;
+import it.ispw.daniele.backpacker.bean.SearchBean;
 import it.ispw.daniele.backpacker.booktour.BookTourController;
 import it.ispw.daniele.backpacker.controller.search.SearchController;
 import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.exceptions.MonumentNotFoundException;
-import it.ispw.daniele.backpacker.utils.Controller;
 import it.ispw.daniele.backpacker.utils.Roles;
 import it.ispw.daniele.backpacker.utils.SessionUser;
+import it.ispw.daniele.backpacker.view.utils_view.GuiController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Hyperlink;
@@ -20,10 +20,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-import java.io.IOException;
 import java.util.List;
 
-public class ResultController  extends Controller {
+public class ResultController  extends GuiController {
     @FXML
     public Text suggestedItinerary = new Text();
     @FXML
@@ -109,7 +108,7 @@ public class ResultController  extends Controller {
 
         BookTourController btc = new BookTourController("gui");
         List<ItineraryBean> sItinerary;
-        sItinerary = btc.getItinerary(citySearch.getText(), "city");
+        sItinerary = this.convert(btc.getItinerary(citySearch.getText(), "city"));
 
         if(sItinerary == null){
             suggestedItinerary.setText("Suggested Itinerary: EMPTY");
@@ -120,15 +119,15 @@ public class ResultController  extends Controller {
             guideImage.setFitHeight(50);
             guideImage.setFitHeight(50);
 
-            Accordion accordionSuggested = this.createTable(sItinerary, "suggested", RESULT, this.stackPaneResult);
+            Accordion accordionSuggested = this.createGuiTable(sItinerary, "suggested", RESULT, this.stackPaneResult);
             vBoxResultGuide.getChildren().add(accordionSuggested);
         }
 
         SearchController sc = new SearchController();
         List<ItineraryBean> iti;
         try {
-            iti = sc.createItinerary(searchBean);
-        } catch (GenericException | MonumentNotFoundException | IOException e) {
+            iti = this.convert(sc.createItinerary(searchBean));
+        } catch (GenericException | MonumentNotFoundException e) {
             throw new GenericException("ERROR");
         }
 
@@ -138,7 +137,7 @@ public class ResultController  extends Controller {
         else {
             selfItinerary.setText("Self Itinerary");
 
-            Accordion accordionSelf = this.createTable(iti, "self", RESULT, null);
+            Accordion accordionSelf = this.createGuiTable(iti, "self", RESULT, null);
             vBoxResult.getChildren().add(accordionSelf);
         }
     }

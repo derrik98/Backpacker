@@ -21,7 +21,6 @@ public class CliItineraryDetailsController {
         boolean isPart;
         try {
             isPart = controller.isParticipating(this.sessionUser, ib);
-
             if(isPart){
                 controller.removeParticipation(this.sessionUser, ib);
                 System.out.print("Itinerary removed!");
@@ -37,7 +36,7 @@ public class CliItineraryDetailsController {
 
     }
 
-    public void init(ItineraryBean itineraryBean) {
+    public void init(Scanner scanner, ItineraryBean itineraryBean) {
 
         System.out.print("\033[H\033[2J");
         System.out.println(BOLD + "ITINERARY DETAILS PAGE\n" + RESET);
@@ -60,8 +59,6 @@ public class CliItineraryDetailsController {
 
         ib = itineraryBean;
 
-        Scanner scanner = new Scanner(System.in);
-
         do{
 
         System.out.println("\nCOMMANDS [0] " + command + " - [1] UNDO\n");
@@ -69,9 +66,10 @@ public class CliItineraryDetailsController {
         System.out.println("Digit command: ");
 
 
-            switch (scanner.nextInt()) {
-                case 0 -> this.subscribe();
-                case 1 -> {
+            switch (scanner.nextLine()) {
+                case "0" -> {
+                    this.subscribe();}
+                case "1" -> {
 
                     System.out.println("undo");
                     return;

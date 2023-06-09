@@ -42,6 +42,7 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
 
                     if (String.valueOf(object.get(LOCATION)).equals(city)) {
 
+                        String id = (String) object.get(ID);
                         String guideId = String.valueOf(object.get(GUIDE_ID));
                         String location = String.valueOf(object.get(LOCATION));
                         String date = String.valueOf(object.get(DATE));
@@ -50,13 +51,11 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
                         String price = String.valueOf(object.get(PRICE));
                         String steps = String.valueOf(object.get(STEPS));
 
-
                         Itinerary itinerary = new Itinerary(guideId, location, date, time, Integer.parseInt(participants),
                                 Integer.parseInt(price), steps);
+                        itinerary.setId(Integer.parseInt(id));
 
                         itineraryList.add(itinerary);
-
-
                     }
                 }
                 return itineraryList;
@@ -69,7 +68,7 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
 
     @Override
     public Boolean isParticipating(String username, int itineraryId) throws GenericException {
-        Boolean ret = (Boolean) this.execute(() -> {
+        Boolean ret = this.execute(() -> {
 
             JSONParser parser = new JSONParser();
 
@@ -78,15 +77,11 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
                 JSONObject o = (JSONObject) parser.parse(fileReader);
                 JSONArray arr = (JSONArray) o.get("goes_to");
 
-                if (arr.isEmpty()) {
-                    return Collections.emptyList();
-                }
-
                 for (int index = 0; index < arr.size(); index++) {
 
                     JSONObject object = (JSONObject) arr.get(index);
 
-                    if (object.get(USERNAME).equals(username) && object.get(ITINERARY_ID).equals(itineraryId)) {
+                    if (object.get(USERNAME).equals(username) && object.get(ITINERARY_ID).equals(String.valueOf(itineraryId))) {
 
                         return true;
                     }
@@ -98,6 +93,7 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
 
             return false;
         });
+
         return Objects.requireNonNullElse(ret, false);
     }
 
@@ -124,7 +120,7 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
                         && object.get(PRICE).equals(String.valueOf(itineraryBean.getPrice()))
                         && object.get(STEPS).equals(itineraryBean.getSteps())) {
 
-                    return (int) object.get(ID);
+                    return Integer.parseInt((String) object.get(ID));
                 }
 
             }
@@ -165,15 +161,17 @@ public class ItineraryDaoL extends ItineraryDaoFactory {
 
                         if (objectG.get(ITINERARY_ID).equals(objectI.get(ID)) && objectG.get(USERNAME).equals(input)) {
 
+                            String id = (String) objectI.get(ID);
                             String guideId = (String) objectI.get(GUIDE_ID);
                             String location = (String) objectI.get(LOCATION);
                             String date = (String) objectI.get(DATE);
                             String time = (String) objectI.get(TIME);
-                            int participants = (int) objectI.get(PARTICIPANTS);
-                            int price = (int) objectI.get(PRICE);
+                            String participants = (String) objectI.get(PARTICIPANTS);
+                            String price = (String) objectI.get(PRICE);
                             String steps = (String) objectI.get(STEPS);
 
-                            Itinerary itinerary = new Itinerary(guideId, location, date, time, participants, price, steps);
+                            Itinerary itinerary = new Itinerary(guideId, location, date, time, Integer.parseInt(participants), Integer.parseInt(price), steps);
+                            itinerary.setId(Integer.parseInt(id));
 
                             itineraryList.add(itinerary);
 

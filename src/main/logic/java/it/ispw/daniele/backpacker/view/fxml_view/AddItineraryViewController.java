@@ -6,7 +6,7 @@ import it.ispw.daniele.backpacker.controller.add_itinerary.AddItineraryControlle
 import it.ispw.daniele.backpacker.exceptions.DateException;
 import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.utils.SessionUser;
-import it.ispw.daniele.backpacker.view.utils_view.InterfaceController;
+import it.ispw.daniele.backpacker.view.utils_view.Controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
@@ -17,7 +17,7 @@ import javafx.scene.text.Text;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 
-public class AddItineraryViewController extends InterfaceController {
+public class AddItineraryViewController extends Controller {
 
     @FXML
     public TextField textFieldLanguages;

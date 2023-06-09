@@ -6,7 +6,7 @@ import it.ispw.daniele.backpacker.controller.login.LoginController;
 import it.ispw.daniele.backpacker.exceptions.EmptyFieldException;
 import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.utils.Roles;
-import it.ispw.daniele.backpacker.view.utils_view.InterfaceController;
+import it.ispw.daniele.backpacker.view.utils_view.Controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 
-public class SignUpController extends InterfaceController {
+public class SignUpController extends Controller {
 
     @FXML
     private Label touristGuide;
@@ -81,6 +81,7 @@ public class SignUpController extends InterfaceController {
         if (userType.equals(Roles.USER.name())) {
             UserBean ub = this.setUserBean(username, name, surname, email, password, newFileName);
 
+
             try {
                 regResult = lc.createUser(ub, "gui");
             } catch (EmptyFieldException | GenericException exception) {
@@ -97,11 +98,13 @@ public class SignUpController extends InterfaceController {
             }
         }
 
+        this.errorText.setText("");
+
         if (Boolean.TRUE.equals(regResult)) {
 
             try {
                 this.setImage(this.imageFile, fileName, newFileName);
-
+                this.errorText.setText("User successfully registered");
             } catch (GenericException e) {
                 this.errorText.setText(e.getMessage());
             }
@@ -117,7 +120,7 @@ public class SignUpController extends InterfaceController {
         this.textFieldVATNumber.setText("");
         this.imageFile = null;
         this.textFieldImage.setText("No image selected");
-        this.errorText.setText("");
+
     }
 
     @FXML

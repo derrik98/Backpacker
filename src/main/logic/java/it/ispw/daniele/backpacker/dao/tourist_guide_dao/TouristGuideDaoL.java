@@ -12,20 +12,23 @@ import java.util.Objects;
 
 public class TouristGuideDaoL extends TouristGuideDaoFactory {
 
+    protected static final String TOURIST_GUIDE = "tourist_guide";
+    protected static final String GENERAL_USER = "general_user";
+
     protected List<TouristGuide> queryDatabase(String caller) throws GenericException {
         List<TouristGuide> ret = this.execute(() -> {
 
-            JSONObject objectT = this.openFile(PATH_TOURIST_GUIDE);
-            JSONArray arrayT = (JSONArray) objectT.get("tourist_guide");
+            JSONObject objectGuide = this.openFile(PATH_TOURIST_GUIDE);
+            JSONArray arrayGuide = (JSONArray) objectGuide.get(TOURIST_GUIDE);
 
             JSONObject objectGeneralUser = this.openFile(PATH_GENERAL_USER);
-            JSONArray arrayGeneralUser = (JSONArray) objectGeneralUser.get("general_user");
+            JSONArray arrayGeneralUser = (JSONArray) objectGeneralUser.get(GENERAL_USER);
 
-            if (arrayT.isEmpty() || arrayGeneralUser.isEmpty()) {
+            if (arrayGuide.isEmpty() || arrayGeneralUser.isEmpty()) {
                 return Collections.emptyList();
             }
 
-            return this.getTGuide(objectT, arrayGeneralUser, caller);
+            return this.getTGuide(objectGuide, arrayGeneralUser, caller);
 
         });
 
@@ -36,11 +39,11 @@ public class TouristGuideDaoL extends TouristGuideDaoFactory {
 
         List<TouristGuide> l = new ArrayList<>();
 
-        JSONArray arrayT = (JSONArray) objectT.get("tourist_guide");
+        JSONArray arrayGuide = (JSONArray) objectT.get(TOURIST_GUIDE);
 
-        for (int indexT = 0; indexT < arrayT.size(); indexT++) {
+        for (int indexT = 0; indexT < arrayGuide.size(); indexT++) {
 
-            JSONObject objectU = (JSONObject) arrayT.get(indexT);
+            JSONObject objectU = (JSONObject) arrayGuide.get(indexT);
 
             for (int indexGU = 0; indexGU < arrayGeneralUser.size(); indexGU++) {
 
@@ -48,25 +51,23 @@ public class TouristGuideDaoL extends TouristGuideDaoFactory {
 
                 if (objectU.get(USERNAME).equals(caller) && objectGU.get(USERNAME).equals(caller)) {
 
-                    String username = (String) objectT.get(USERNAME);
-                    String name = (String) objectT.get(NAME);
-                    String surname = (String) objectT.get(SURNAME);
-                    String profilePicture = (String) objectT.get(PROFILE_PICTURE_PATH);
+                    String username = (String) objectU.get(USERNAME);
+                    String name = (String) objectU.get(NAME);
+                    String surname = (String) objectU.get(SURNAME);
+                    String profilePicture = (String) objectU.get(PROFILE_PICTURE_PATH);
                     String email = (String) objectGU.get(EMAIL);
-                    String vatNum = (String) objectT.get(IDENTIFICATION_CODE);
+                    String vatNum = (String) objectU.get(IDENTIFICATION_CODE);
 
                     if (objectU.get(PROFILE_PICTURE_PATH) == null || objectU.get(PROFILE_PICTURE_PATH).equals("")) {
-                        profilePicture = "user.png";
+                        profilePicture = "tourist_guide.png";
                     }
 
                     l.add(new TouristGuide(username, name, surname, profilePicture, email, vatNum));
 
                     return l;
-
                 }
             }
         }
-
         return Collections.emptyList();
     }
 }

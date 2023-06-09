@@ -6,7 +6,7 @@ import it.ispw.daniele.backpacker.controller.login.LoginController;
 import it.ispw.daniele.backpacker.exceptions.EmptyFieldException;
 import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.utils.Roles;
-import it.ispw.daniele.backpacker.view.utils_view.InterfaceController;
+import it.ispw.daniele.backpacker.view.utils_view.Controller;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -16,7 +16,7 @@ import java.util.Scanner;
 import static it.ispw.daniele.backpacker.view.command_line_interface.CLI.*;
 
 
-public class CliSignUpController extends InterfaceController {
+public class CliSignUpController extends Controller {
 
     private File imageFile = null;
 

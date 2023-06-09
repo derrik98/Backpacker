@@ -1,1 +1,5 @@
-{"general_user":[{"password":"aq","role":"user","email":"aq","username":"aq"},{"password":"sw","role":"tourist_guide","email":"sw","username":"sw"},{"password":"sw","role":"user","email":"sw","username":"sw"},{"password":"aq","role":"tourist_guide","email":"aq","username":"aq"},{"password":"sw","role":"tourist_guide","email":"sw","username":"sw"},{"password":"sw","role":"tourist_guide","email":"sw","username":"sw"},{"password":"sw","role":"tourist_guide","email":"sw","username":"sw"},{"password":"sw","role":"tourist_guide","email":"sw","username":"sw"},{"password":"sw","role":"tourist_guide","email":"sw","username":"sw"},{"password":"sw","role":"tourist_guide","email":"sw","username":"sw"},{"password":"sw","role":"tourist_guide","email":"sw","username":"sw"},{"password":"aq","role":"user","email":"aq","username":"aq"}]}
+{
+  "general_user": [
+
+  ]
+}

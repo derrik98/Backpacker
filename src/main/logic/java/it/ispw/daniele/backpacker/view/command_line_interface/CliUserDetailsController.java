@@ -1,15 +1,12 @@
 package it.ispw.daniele.backpacker.view.command_line_interface;
 
-import it.ispw.daniele.backpacker.bean.ItineraryBean;
 import it.ispw.daniele.backpacker.bean.UserBean;
-import it.ispw.daniele.backpacker.booktour.BookTourController;
-import it.ispw.daniele.backpacker.booktour.SaveItinerary;
 import it.ispw.daniele.backpacker.dao.user_dao.UserDaoFactory;
 import it.ispw.daniele.backpacker.dao.user_dao.UserDaoL;
 import it.ispw.daniele.backpacker.entity.User;
 import it.ispw.daniele.backpacker.exceptions.GenericException;
-import it.ispw.daniele.backpacker.utils.Controller;
 import it.ispw.daniele.backpacker.utils.SessionUser;
+import it.ispw.daniele.backpacker.view.utils_view.CliController;
 
 import java.util.List;
 import java.util.Objects;
@@ -18,7 +15,7 @@ import java.util.Scanner;
 import static it.ispw.daniele.backpacker.view.command_line_interface.CLI.BOLD;
 import static it.ispw.daniele.backpacker.view.command_line_interface.CLI.RESET;
 
-public class CliUserDetailsController extends Controller {
+public class CliUserDetailsController extends CliController {
 
     private UserBean getSearchUser(String caller) {
 
@@ -32,9 +29,8 @@ public class CliUserDetailsController extends Controller {
         return this.convert(Objects.requireNonNull(l).get(0));
     }
 
-    public void init() {
+    public void init(Scanner scanner) {
 
-        Scanner scanner = new Scanner(System.in);
         UserBean users = this.getSearchUser(SessionUser.getInstance().getSession().getUsername());
 
         do {
@@ -47,23 +43,7 @@ public class CliUserDetailsController extends Controller {
             System.out.println("Surname: " + users.getSurname());
             System.out.println("\n");
 
-            List<ItineraryBean> booked = this.getBookedIt(users);
-
-            List<ItineraryBean> saved = this.getIt(users);
-
-            if(booked == null){
-                System.out.println("Booked itineraries: ");
-                System.out.println("EMPTY_DATABASE\n");
-            } else {
-                this.cliDisplayBIt(booked);
-            }
-
-            if(saved == null){
-                System.out.println("Saved itineraries: ");
-                System.out.println("EMPTY_DATABASE\n");
-            } else {
-                this.cliDisplayIt(saved);
-            }
+            this.createCliTable(users.getUsername());
 
             System.out.println("\nGo Back [b]: ");
 
@@ -73,30 +53,6 @@ public class CliUserDetailsController extends Controller {
                 System.out.println("Command not found");
             }
 
-        } while (scanner.hasNext());
-    }
-
-    private List<ItineraryBean> getBookedIt(UserBean users) {
-
-        BookTourController btc = new BookTourController("cli");
-        List<ItineraryBean> booked = null;
-        try {
-            booked = btc.getItinerary(users.getUsername(), "user");
-        } catch (GenericException e) {
-            System.out.println(e.getMessage());
-        }
-        return booked;
-    }
-
-    private List<ItineraryBean> getIt(UserBean users) {
-
-        SaveItinerary st = new SaveItinerary("cli");
-        List<ItineraryBean> saved = null;
-        try {
-            saved = st.getItinerary(users.getUsername());
-        } catch (GenericException e) {
-            System.out.println(e.getMessage());
-        }
-        return saved;
+        } while (true);
     }
 }

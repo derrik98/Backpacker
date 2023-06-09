@@ -1,13 +1,11 @@
 package it.ispw.daniele.backpacker.controller.search;
 
 import it.ispw.daniele.backpacker.bean.SearchBean;
-import it.ispw.daniele.backpacker.bean.ItineraryBean;
 import it.ispw.daniele.backpacker.entity.Itinerary;
 import it.ispw.daniele.backpacker.exceptions.AddressNotFoundException;
 import it.ispw.daniele.backpacker.exceptions.CityNotFoundException;
 import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.exceptions.MonumentNotFoundException;
-import it.ispw.daniele.backpacker.utils.Controller;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -16,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class SearchController extends Controller {
+public class SearchController {
 
     public void checkInput(SearchBean bean) throws CityNotFoundException, AddressNotFoundException, MonumentNotFoundException, IOException {
 
@@ -31,7 +29,7 @@ public class SearchController extends Controller {
 
     }
 
-    public List<ItineraryBean> createItinerary(SearchBean searchBean) throws GenericException, MonumentNotFoundException {
+    public List<Itinerary> createItinerary(SearchBean searchBean) throws GenericException, MonumentNotFoundException {
 
         MonumentFromAddress monuments = new MonumentFromAddress();
         List<String> result = monuments.getMonuments(searchBean);
@@ -67,7 +65,7 @@ public class SearchController extends Controller {
 
             it.add(itinerary);
         }
-        return this.convert(it);
+        return it;
     }
 
 }

@@ -65,7 +65,6 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
 
             DatabaseUserConnection.closeUserConnection(conn);
 
-
             //Save on File System
             JSONObject o = this.openFile(PATH_GOES_TO);
             JSONArray arr = (JSONArray) o.get("goes_to");
@@ -87,6 +86,7 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
 
                     JSONObject object = (JSONObject) arr.get(index);
 
+
                     if (object.get(USERNAME).equals(username) && object.get(ITINERARY_ID).equals(id)) {
 
                         arr.remove(object);
@@ -106,10 +106,13 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
             //Save on Database
             Connection conn = DatabaseTouristGuideConnection.getTouristGuideConnection();
             String sql = "call backpacker.add_itinerary(?, ?, ?, ?, ?, ?, ?);\r\n";
+            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+            System.out.println(sqlDate);
+            System.out.println(date);
+            System.out.println(date.getTime());
 
             try (PreparedStatement stm = conn.prepareStatement(sql)) {
 
-                java.sql.Date sqlDate = new java.sql.Date(date.getTime());
                 stm.setString(1, itineraryBean.getGuideId());
                 stm.setString(2, itineraryBean.getLocation());
                 stm.setDate(3, sqlDate);
@@ -136,7 +139,7 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
             jsonMap.put(ID, String.valueOf(arr.size() + 1));
             jsonMap.put(GUIDE_ID, itineraryBean.getGuideId());
             jsonMap.put(LOCATION, itineraryBean.getLocation());
-            jsonMap.put(DATE, String.valueOf(date));
+            jsonMap.put(DATE, String.valueOf(sqlDate));
             jsonMap.put(TIME, itineraryBean.getTime());
             jsonMap.put(PARTICIPANTS, String.valueOf(itineraryBean.getParticipants()));
             jsonMap.put(PRICE, String.valueOf(itineraryBean.getPrice()));
@@ -147,7 +150,6 @@ public abstract class ItineraryDaoFactory extends DaoTemplate {
             arr.add(newUser);
 
             this.writeOnFile(PATH_ITINERARY, o);
-
 
             return true;
 

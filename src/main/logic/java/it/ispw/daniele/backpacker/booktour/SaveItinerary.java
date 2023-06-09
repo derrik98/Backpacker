@@ -7,12 +7,11 @@ import it.ispw.daniele.backpacker.dao.itinerary_dao.ItineraryDaoFactory;
 import it.ispw.daniele.backpacker.dao.itinerary_dao.ItineraryDaoL;
 import it.ispw.daniele.backpacker.entity.Itinerary;
 import it.ispw.daniele.backpacker.exceptions.GenericException;
-import it.ispw.daniele.backpacker.utils.Controller;
 
 import java.util.Collections;
 import java.util.List;
 
-public class SaveItinerary extends Controller {
+public class SaveItinerary {
 
     private ItineraryDaoFactory id = null;
 
@@ -33,14 +32,14 @@ public class SaveItinerary extends Controller {
         this.id.removeItinerary(itinerary.getItineraryId(), user.getUsername(), itinerary.getSteps());
     }
 
-    public List<ItineraryBean> getItinerary(String input) throws GenericException {
+    public List<Itinerary> getItinerary(String input) throws GenericException {
 
         List<Itinerary> itinerary;
 
         itinerary = this.id.getSavedItinerary(input);
 
         if(itinerary != null){
-            return this.convert(itinerary);
+            return itinerary;
         }
         else{
             return Collections.emptyList();

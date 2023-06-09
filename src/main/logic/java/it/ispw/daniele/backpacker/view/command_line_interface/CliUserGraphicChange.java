@@ -21,17 +21,17 @@ public class CliUserGraphicChange extends CliChangeTemplate {
 
     public  void switchToHome(Scanner scanner){
         this.catcher(() -> {
-            stackScene.add("home");
-            CliHomeController homeController = new CliHomeController();
-            homeController.init(scanner);
+            stackScene.add("search");
+            CliSearchController searchController = new CliSearchController();
+            searchController.init(scanner);
         });
     }
 
-    public  void switchToUserDetails(){
+    public  void switchToUserDetails(Scanner scanner){
         this.catcher(() -> {
             stackScene.add("profile");
             CliUserDetailsController cliUserDetailsController = new CliUserDetailsController();
-            cliUserDetailsController.init();
+            cliUserDetailsController.init(scanner);
         });
     }
 }

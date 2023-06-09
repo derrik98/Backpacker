@@ -14,7 +14,7 @@ public class CliMenuUserController {
 
     private CliUserGraphicChange ugc;
 
-    private static final String HOME = "home";
+    private static final String SEARCH = "search";
     private static final String RESULT = "result";
     private static final String PROFILE = "profile";
 
@@ -23,7 +23,7 @@ public class CliMenuUserController {
         this.ugc = CliUserGraphicChange.getInstance();
 
         if (stackScene.isEmpty()) {
-            stackScene.add(HOME);
+            stackScene.add(SEARCH);
         }
 
         do {
@@ -42,26 +42,22 @@ public class CliMenuUserController {
             switch (scanner.nextLine()) {
                 case "0" -> {
                     ugc.switchToHome(scanner);
-                    stackScene.add(HOME);
-                }case "1" -> {
+                    stackScene.add(SEARCH);
+                }
+                case "1" -> {
                     ugc.switchToResult(scanner);
                     stackScene.add(RESULT);
                 }
                 case "2" -> {
-                    ugc.switchToUserDetails();
+                    ugc.switchToUserDetails(scanner);
                     stackScene.add(PROFILE);
                 }
                 case "3" -> {
                     System.out.println(RED + "LOGOUT" + RESET);
                     SessionUser.getInstance().closeSession();
-                    ugc.switchToLogin();
                     return;
                 }
-                case "u" -> {
-                    this.undo(scanner);
-                    //System.out.println("undo");
-                    return;
-                }
+                case "u" -> this.undo(scanner);
                 default -> System.out.println(RED + "COMMAND NOT FOUND\n" + RESET);
             }
 
@@ -71,22 +67,14 @@ public class CliMenuUserController {
     private void undo(Scanner scanner) {
 
         if (stackScene.size() > 1) {
-            String from = stackScene.get(stackScene.size() - 2);
+            String from = stackScene.get(stackScene.size() - 1);
             switch (from) {
-                case HOME -> this.ugc.switchToHome(scanner);
+                case SEARCH -> this.ugc.switchToHome(scanner);
                 case RESULT -> this.ugc.switchToResult(scanner);
-                case PROFILE -> this.ugc.switchToUserDetails();
-                default -> {
-                    System.out.println(RED + "Error" + RESET);
-                    SessionUser.getInstance().closeSession();
-                    return;
-                }
+                case PROFILE -> this.ugc.switchToUserDetails(scanner);
+                default -> System.out.println(RED + "Unable to undo" + RESET);
             }
             stackScene.remove(stackScene.size() - 1);
-
-        } else {
-            //SessionUser.getInstance().closeSession();
-            //this.ugc.switchToLogin();
         }
     }
 }

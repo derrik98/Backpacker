@@ -7,8 +7,8 @@ import it.ispw.daniele.backpacker.booktour.SaveItinerary;
 import it.ispw.daniele.backpacker.dao.tourist_guide_dao.TouristGuideDao;
 import it.ispw.daniele.backpacker.entity.TouristGuide;
 import it.ispw.daniele.backpacker.exceptions.GenericException;
-import it.ispw.daniele.backpacker.utils.Controller;
 import it.ispw.daniele.backpacker.utils.SessionUser;
+import it.ispw.daniele.backpacker.view.utils_view.GuiController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
-public class TGuideDetailsController extends Controller {
+public class TGuideDetailsController extends GuiController {
     @FXML
     public HBox menuBar;
     @FXML
@@ -102,30 +102,30 @@ public class TGuideDetailsController extends Controller {
 
         List<ItineraryBean> booked = null;
         try {
-            booked = new BookTourController("gui").getItinerary(tUsers.getUsername(), "user");
+            booked = this.convert(new BookTourController("gui").getItinerary(tUsers.getUsername(), "user"));
         } catch (GenericException e) {
             this.errorText.setText(e.getMessage());
         }
 
         List<ItineraryBean> saved = null;
         try {
-            saved = new SaveItinerary("gui").getItinerary(tUsers.getUsername());
+            saved = this.convert(new SaveItinerary("gui").getItinerary(tUsers.getUsername()));
         } catch (GenericException e) {
             this.errorText.setText(e.getMessage());
         }
 
-        if(booked == null){
+        if(booked == null || booked.isEmpty()){
             textBookedItineraries.setText(textBookedItineraries.getText() + ": EMPTY");
         }
         else {
-            Accordion accordionSuggested = this.createTable(booked, "suggested", PROFILE, null);
+            Accordion accordionSuggested = this.createGuiTable(booked, "suggested", PROFILE, null);
             vBoxBooked.getChildren().addAll(accordionSuggested);
         }
-        if(saved == null){
+        if(saved == null || saved.isEmpty()){
             textSavedItineraries.setText(textSavedItineraries.getText() + ": EMPTY");
         }
         else {
-            Accordion accordionSelf = this.createTable(saved, "self", PROFILE, null);
+            Accordion accordionSelf = this.createGuiTable(saved, "self", PROFILE, null);
             vBoxSaved.getChildren().addAll(accordionSelf);
         }
 

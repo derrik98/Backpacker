@@ -26,9 +26,9 @@ public class TouristGuideGraphicChange extends GuiChangeTemplate {
     public void switchToHomePage(Scene scene) {
         this.catcher(() -> {
             FXMLLoader loader = new FXMLLoader();
-            FileInputStream fileInputStream = new FileInputStream("src/main/logic/java/it/ispw/daniele/backpacker/view/fxml_view/Home-Page.fxml");
+            FileInputStream fileInputStream = new FileInputStream("src/main/logic/java/it/ispw/daniele/backpacker/view/fxml_view/Search-Page.fxml");
             Parent fxmlLoader = loader.load(fileInputStream);
-            HomeUserController huc = loader.getController();
+            SearchController huc = loader.getController();
             scene.setRoot(fxmlLoader);
             huc.init();
         });

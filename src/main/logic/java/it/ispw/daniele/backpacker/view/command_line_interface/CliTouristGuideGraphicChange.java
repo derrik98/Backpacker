@@ -22,24 +22,24 @@ public class CliTouristGuideGraphicChange extends CliChangeTemplate {
     protected void switchToHome(Scanner scanner) {
         this.catcher(() -> {
             stackScene.add("home");
-            CliHomeController homeController = new CliHomeController();
+            CliSearchController homeController = new CliSearchController();
             homeController.init(scanner);
         });
     }
 
-    public void switchToGuideDetails() {
+    public void switchToGuideDetails(Scanner scanner) {
         this.catcher(() -> {
             stackScene.add("home");
             CliGuideDetailsController cliGuideDetailsController = new CliGuideDetailsController();
-            cliGuideDetailsController.init();
+            cliGuideDetailsController.init(scanner);
         });
     }
 
-    public void switchToAddItinerary() {
+    public void switchToAddItinerary(Scanner scanner) {
         this.catcher(() -> {
             stackScene.add("addIt");
             CliAddItineraryController cliAddItineraryController = new CliAddItineraryController();
-            cliAddItineraryController.init();
+            cliAddItineraryController.init(scanner);
         });
     }
 

@@ -8,6 +8,7 @@ import it.ispw.daniele.backpacker.controller.search.SearchController;
 import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.exceptions.MonumentNotFoundException;
 import it.ispw.daniele.backpacker.utils.SessionUser;
+import it.ispw.daniele.backpacker.view.utils_view.Controller;
 
 import java.awt.*;
 import java.io.IOException;
@@ -19,7 +20,7 @@ import java.util.Scanner;
 
 import static it.ispw.daniele.backpacker.view.command_line_interface.CLI.*;
 
-public class CliResultController {
+public class CliResultController extends Controller {
 
     List<ItineraryBean> it;
 
@@ -30,12 +31,17 @@ public class CliResultController {
 
         SearchBean searchBean = SessionUser.getInstance().getSearchSession();
 
+        if(searchBean == null){
+            System.out.println(RED + "Please go to search page" + RESET + "\n");
+            return;
+        }
+
         System.out.println(BOLD + "RESULT PAGE\n" + RESET);
         System.out.println("Country: " + searchBean.getCountry() + ", City: " + searchBean.getCity() + ", Address: " + searchBean.getAddress() + ", Restaurant: " + searchBean.isRestaurant() + ", Range: " + searchBean.getRange() + "\n");
 
         BookTourController btc = new BookTourController("cli");
 
-        it = btc.getItinerary(searchBean.getCity(), "city");
+        it = this.convert(btc.getItinerary(searchBean.getCity(), "city"));
         int bookedSize = 0;
 
         if (it == null || it.isEmpty()) {
@@ -43,13 +49,14 @@ public class CliResultController {
         } else {
             System.out.println("Suggested Itinerary: \n");
             bookedSize = it.size();
+            System.out.println("SIZE " + bookedSize);
             createTable(it, 0);
         }
 
         SearchController sc = new SearchController();
         List<ItineraryBean> iti;
 
-        iti = sc.createItinerary(searchBean);
+        iti = this.convert(sc.createItinerary(searchBean));
 
         if (iti == null) {
             System.out.println("Self Itinerary: " + RED + "EMPTY_DATABASE " + RESET + "\n");
@@ -94,6 +101,7 @@ public class CliResultController {
 
             StringBuilder line = new StringBuilder();
             line.append("ID [").append(tableSize).append("] ");
+            System.out.println(tableSize);
             tableSize++;
             for (int indexMonument = 0; indexMonument < als.size(); indexMonument++) {
                 line.append(als.get(indexMonument));
@@ -106,6 +114,7 @@ public class CliResultController {
     }
 
     private void viewOnMap(Scanner scanner, List<ItineraryBean> itineraryBeanList) {
+
         System.out.println(ITINERARY_ID);
         int input = Integer.parseInt(scanner.nextLine());
 
@@ -159,9 +168,10 @@ public class CliResultController {
     private void buy(Scanner scanner, List<ItineraryBean> itineraryBeanList, int bSize){
         System.out.println(ITINERARY_ID);
         int input = Integer.parseInt(scanner.nextLine());
-        if (input <= bSize && input >= bSize) {
+        if (input <= bSize && input >= 0) {
             CliItineraryDetailsController idc = new CliItineraryDetailsController();
-            idc.init(itineraryBeanList.get(input));
+            idc.init(scanner, itineraryBeanList.get(input));
+
         } else {
             System.out.println(RED + "Incorrect id" + RESET);
         }

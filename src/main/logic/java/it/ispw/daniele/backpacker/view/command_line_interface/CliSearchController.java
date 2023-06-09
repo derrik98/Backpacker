@@ -7,14 +7,14 @@ import it.ispw.daniele.backpacker.exceptions.CityNotFoundException;
 import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.exceptions.MonumentNotFoundException;
 import it.ispw.daniele.backpacker.utils.SessionUser;
-import it.ispw.daniele.backpacker.view.utils_view.InterfaceController;
+import it.ispw.daniele.backpacker.view.utils_view.Controller;
 
 import java.io.IOException;
 import java.util.Scanner;
 
 import static it.ispw.daniele.backpacker.view.command_line_interface.CLI.*;
 
-public class CliHomeController extends InterfaceController {
+public class CliSearchController extends Controller {
 
     public void init(Scanner scanner) throws IOException, AddressNotFoundException, CityNotFoundException, MonumentNotFoundException, GenericException {
 

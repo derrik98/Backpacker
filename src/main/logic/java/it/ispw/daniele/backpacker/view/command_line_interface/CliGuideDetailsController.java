@@ -1,15 +1,12 @@
 package it.ispw.daniele.backpacker.view.command_line_interface;
 
-import it.ispw.daniele.backpacker.bean.GeneralUserBean;
-import it.ispw.daniele.backpacker.bean.ItineraryBean;
 import it.ispw.daniele.backpacker.bean.TouristGuideBean;
-import it.ispw.daniele.backpacker.booktour.BookTourController;
-import it.ispw.daniele.backpacker.booktour.SaveItinerary;
-import it.ispw.daniele.backpacker.dao.tourist_guide_dao.TouristGuideDao;
+import it.ispw.daniele.backpacker.dao.tourist_guide_dao.TouristGuideDaoFactory;
+import it.ispw.daniele.backpacker.dao.tourist_guide_dao.TouristGuideDaoL;
 import it.ispw.daniele.backpacker.entity.TouristGuide;
 import it.ispw.daniele.backpacker.exceptions.GenericException;
-import it.ispw.daniele.backpacker.utils.Controller;
 import it.ispw.daniele.backpacker.utils.SessionUser;
+import it.ispw.daniele.backpacker.view.utils_view.CliController;
 
 import java.util.List;
 import java.util.Objects;
@@ -18,24 +15,22 @@ import java.util.Scanner;
 import static it.ispw.daniele.backpacker.view.command_line_interface.CLI.BOLD;
 import static it.ispw.daniele.backpacker.view.command_line_interface.CLI.RESET;
 
-public class CliGuideDetailsController extends Controller {
+public class CliGuideDetailsController extends CliController {
 
     private TouristGuideBean getSearchUser(String caller) {
-        TouristGuideDao ud = new TouristGuideDao();
+        TouristGuideDaoFactory gdf = new TouristGuideDaoL();
         List<TouristGuide> l = null;
         try {
-            l = ud.getSearchUser(caller);
+            l = gdf.getSearchUser(caller);
         } catch (GenericException e) {
             System.out.println(e.getMessage());
         }
         return this.convert(Objects.requireNonNull(l).get(0));
     }
 
-    public void init() {
+    public void init(Scanner scanner) {
 
-        GeneralUserBean gub = SessionUser.getInstance().getSession();
-        TouristGuideBean guide = this.getSearchUser(gub.getUsername());
-        Scanner scanner = new Scanner(System.in);
+        TouristGuideBean guide = this.getSearchUser(SessionUser.getInstance().getSession().getUsername());
 
         do {
             System.out.print("\033[H\033[2J");
@@ -47,23 +42,7 @@ public class CliGuideDetailsController extends Controller {
             System.out.println("Vat number: " + guide.getIdentificationCode());
             System.out.println("\n");
 
-            List<ItineraryBean> booked = this.getBookedIt(guide);
-
-            List<ItineraryBean> saved = this.getIt(guide);
-
-            if(booked == null){
-                System.out.println("Booked itineraries: ");
-                System.out.println("EMPTY_DATABASE\n");
-            } else {
-                this.cliDisplayBIt(booked);
-            }
-
-            if(saved == null){
-                System.out.println("Saved itineraries: ");
-                System.out.println("EMPTY_DATABASE\n");
-            } else {
-                this.cliDisplayIt(saved);
-            }
+            this.createCliTable(guide.getUsername());
 
             System.out.println("Go Back [press 'b']: ");
 
@@ -73,30 +52,6 @@ public class CliGuideDetailsController extends Controller {
             else {
                 System.out.println("Command not found");
             }
-        }while (scanner.hasNext());
-    }
-
-    private List<ItineraryBean> getBookedIt(TouristGuideBean guide) {
-
-        BookTourController btc = new BookTourController("cli");
-        List<ItineraryBean> booked = null;
-        try {
-            booked = btc.getItinerary(guide.getUsername(), "user");
-        } catch (GenericException e) {
-            System.out.println(e.getMessage());
-        }
-        return booked;
-    }
-
-    private List<ItineraryBean> getIt(TouristGuideBean guide) {
-
-        SaveItinerary st = new SaveItinerary("cli");
-        List<ItineraryBean> saved = null;
-        try {
-            saved = st.getItinerary(guide.getUsername());
-        } catch (GenericException e) {
-            System.out.println(e.getMessage());
-        }
-        return saved;
+        }while (true);
     }
 }

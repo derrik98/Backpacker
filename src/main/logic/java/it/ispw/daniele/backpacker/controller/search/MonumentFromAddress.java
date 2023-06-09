@@ -63,7 +63,7 @@ public class MonumentFromAddress extends JSONFactory {
     }
 
     private int convertValueToInt(String range) {
-        BigDecimal value = new BigDecimal(range).multiply(BigDecimal.valueOf(1000));//BigDecimal.valueOf(Long.parseLong(range)).multiply(BigDecimal.valueOf(1000));
+        BigDecimal value = new BigDecimal(range).multiply(BigDecimal.valueOf(1000));
         return value.intValue();
     }
 

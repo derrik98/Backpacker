@@ -14,7 +14,7 @@ public class CliMenuGuideController {
 
     private CliTouristGuideGraphicChange ggc;
 
-    private static final String HOME = "home";
+    private static final String SEARCH = "search";
     private static final String RESULT = "result";
     private static final String ADD_ITINERARY = "addItinerary";
     private static final String PROFILE = "profile";
@@ -24,7 +24,7 @@ public class CliMenuGuideController {
         ggc = CliTouristGuideGraphicChange.getInstance();
 
         if (stackScene.isEmpty()) {
-            stackScene.add(HOME);
+            stackScene.add(SEARCH);
         }
 
         do {
@@ -44,18 +44,18 @@ public class CliMenuGuideController {
             switch (scanner.nextLine()) {
                 case "0" -> {
                     ggc.switchToHome(scanner);
-                    stackScene.add(HOME);
+                    stackScene.add(SEARCH);
                 }
                 case "1" -> {
                     ggc.switchToResult(scanner);
                     stackScene.add(RESULT);
                 }
                 case "2" -> {
-                    ggc.switchToAddItinerary();
+                    ggc.switchToAddItinerary(scanner);
                     stackScene.add(ADD_ITINERARY);
                 }
                 case "3" -> {
-                    ggc.switchToGuideDetails();
+                    ggc.switchToGuideDetails(scanner);
                     stackScene.add(PROFILE);
                 }
                 case "4" -> {
@@ -63,10 +63,7 @@ public class CliMenuGuideController {
                     SessionUser.getInstance().closeSession();
                     return;
                 }
-                case "u" -> {
-                    this.undo(scanner);
-                    //return;
-                }
+                case "u" -> this.undo(scanner);
                 default -> System.out.println(RED + "Command not found\n" + RESET);
             }
 
@@ -78,20 +75,14 @@ public class CliMenuGuideController {
         if (stackScene.size() > 1) {
             String from = stackScene.get(stackScene.size() - 2);
             switch (from) {
-                case HOME -> this.ggc.switchToHome(scanner);
+                case SEARCH -> this.ggc.switchToHome(scanner);
                 case RESULT -> this.ggc.switchToResult(scanner);
-                case ADD_ITINERARY -> this.ggc.switchToAddItinerary();
-                case PROFILE -> this.ggc.switchToGuideDetails();
-                default -> {
-                    System.out.println(RED + "Error" + RESET);
-                    SessionUser.getInstance().closeSession();
-                    return;
-                }
+                case ADD_ITINERARY -> this.ggc.switchToAddItinerary(scanner);
+                case PROFILE -> this.ggc.switchToGuideDetails(scanner);
+                default -> System.out.println(RED + "Unable to undo" + RESET);
             }
             stackScene.remove(stackScene.size() - 1);
 
-        } else {
-            this.ggc.switchToHome(scanner);
         }
     }
 }

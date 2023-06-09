@@ -4,7 +4,7 @@ import it.ispw.daniele.backpacker.bean.GeneralUserBean;
 import it.ispw.daniele.backpacker.bean.ItineraryBean;
 import it.ispw.daniele.backpacker.controller.add_itinerary.AddItineraryController;
 import it.ispw.daniele.backpacker.utils.SessionUser;
-import it.ispw.daniele.backpacker.view.utils_view.InterfaceController;
+import it.ispw.daniele.backpacker.view.utils_view.Controller;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -12,15 +12,14 @@ import java.util.Scanner;
 import static it.ispw.daniele.backpacker.view.command_line_interface.CLI.RED;
 import static it.ispw.daniele.backpacker.view.command_line_interface.CLI.RESET;
 
-public class CliAddItineraryController extends InterfaceController {
+public class CliAddItineraryController extends Controller {
 
     private String steps = "";
     private GeneralUserBean guideBean = SessionUser.getInstance().getSession();
     private final ArrayList<String> listView = new ArrayList<>();
     private AddItineraryController controller;
-    Scanner scanner = new Scanner(System.in);
 
-    public void init() {
+    public void init(Scanner scanner) {
 
         this.controller = new AddItineraryController("cli");
 
@@ -33,7 +32,7 @@ public class CliAddItineraryController extends InterfaceController {
             String input = scanner.nextLine();
 
             if (input.equals("share")) {
-                this.share();
+                this.share(scanner);
                 return;
             } else {
                 listView.add(input);
@@ -42,7 +41,7 @@ public class CliAddItineraryController extends InterfaceController {
         this.guideBean = SessionUser.getInstance().getSession();
     }
 
-    private void share() {
+    private void share(Scanner scanner) {
 
         for (int i = 0; i < this.listView.size(); i++) {
             if (!this.listView.get(i).equals("")) {
@@ -55,7 +54,7 @@ public class CliAddItineraryController extends InterfaceController {
         System.out.println("Location:");
         String location = scanner.nextLine();
 
-        System.out.println("Date: format[YYYY/MM/DD]");
+        System.out.println("Date: format[YYYY-MM-DD]");
         String date = scanner.nextLine().replace("/", "-");
 
         System.out.println("Time:");
@@ -73,6 +72,11 @@ public class CliAddItineraryController extends InterfaceController {
 
         try {
             result = controller.addItinerary(itineraryBean);
+            System.out.println(result + " A ");
+            itineraryBean.setItineraryId(controller.getItineraryId(itineraryBean));
+            System.out.println(result);
+            System.out.println(String.valueOf(controller.getItineraryId(itineraryBean)));
+            System.out.println(itineraryBean.getItineraryId());
             if (result) {
                 System.out.println("Itinerary added successfully\n");
             } else {

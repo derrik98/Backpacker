@@ -12,8 +12,7 @@ public class Itinerary {
     protected String steps;
 
     public Itinerary(String guideId, String location, String date, String time, int participants, int price, String steps) {
-
-        //this.id = id;
+        
         this.guideId = guideId;
         this.location = location;
         this.date = date;
@@ -22,17 +21,6 @@ public class Itinerary {
         this.price = price;
         this.steps = steps;
     }
-
-//    public Itinerary(String guideId, String location, String date, String time, int participants, int price, String steps) {
-//
-//        this.guideId = guideId;
-//        this.location = location;
-//        this.date = date;
-//        this.time = time;
-//        this.participants = participants;
-//        this.price = price;
-//        this.steps = steps;
-//    }
 
     public String getSteps() {
         return this.steps;

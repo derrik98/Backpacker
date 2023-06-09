@@ -1,1 +1,5 @@
-{"goes_to":[{"with_guide":"true","itinerary_id":"0","username":"sw"},{"with_guide":"true","itinerary_id":"0","username":"aq"},{"with_guide":"true","itinerary_id":"0","username":"aq"},{"with_guide":"true","itinerary_id":"0","username":"sw"},{"with_guide":"true","itinerary_id":"0","username":"sw"},{"with_guide":"true","itinerary_id":"0","username":"sw"},{"with_guide":"true","itinerary_id":"1","username":"sw"},{"with_guide":"true","itinerary_id":"1","username":"sw"},{"with_guide":"true","itinerary_id":"1","username":"sw"},{"with_guide":"true","itinerary_id":"1","username":"aq"},{"with_guide":"true","itinerary_id":"1","username":"aq"},{"with_guide":"true","itinerary_id":"1","username":"aq"},{"with_guide":"true","itinerary_id":"1","username":"aq"},{"with_guide":"true","itinerary_id":"1","username":"aq"}]}
+{
+  "goes_to": [
+
+  ]
+}

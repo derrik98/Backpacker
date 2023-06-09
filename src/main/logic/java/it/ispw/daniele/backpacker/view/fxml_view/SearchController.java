@@ -1,7 +1,6 @@
 package it.ispw.daniele.backpacker.view.fxml_view;
 
 import it.ispw.daniele.backpacker.bean.SearchBean;
-import it.ispw.daniele.backpacker.controller.search.SearchController;
 import it.ispw.daniele.backpacker.exceptions.AddressNotFoundException;
 import it.ispw.daniele.backpacker.exceptions.CityNotFoundException;
 import it.ispw.daniele.backpacker.exceptions.EmptyFieldException;
@@ -19,7 +18,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class HomeUserController {
+public class SearchController {
 
     @FXML
     private Text errorText;
@@ -66,7 +65,7 @@ public class HomeUserController {
 
             SessionUser.getInstance().setSearchSession(searchBean);
 
-            SearchController sc = new SearchController();
+            it.ispw.daniele.backpacker.controller.search.SearchController sc = new it.ispw.daniele.backpacker.controller.search.SearchController();
             sc.checkInput(searchBean);
             UserGraphicChange.getInstance().switchToResult(this.textFieldCountry.getScene());
 
