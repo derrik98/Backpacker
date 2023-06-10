@@ -31,14 +31,6 @@ public abstract class CliChangeTemplate {
         }
     }
 
-    public void switchToLogin() {
-        this.catcher(() -> {
-            stackScene.add("login");
-            CliLoginController clc = new CliLoginController();
-            clc.init();
-        });
-    }
-
     public void switchToResult(Scanner scanner) {
         this.catcher(() -> {
             stackScene.add("result");

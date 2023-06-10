@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class SearchController {
+public class SearchViewController {
 
     @FXML
     private Text errorText;

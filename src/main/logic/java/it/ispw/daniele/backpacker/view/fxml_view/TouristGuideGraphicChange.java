@@ -28,7 +28,7 @@ public class TouristGuideGraphicChange extends GuiChangeTemplate {
             FXMLLoader loader = new FXMLLoader();
             FileInputStream fileInputStream = new FileInputStream("src/main/logic/java/it/ispw/daniele/backpacker/view/fxml_view/Search-Page.fxml");
             Parent fxmlLoader = loader.load(fileInputStream);
-            SearchController huc = loader.getController();
+            SearchViewController huc = loader.getController();
             scene.setRoot(fxmlLoader);
             huc.init();
         });

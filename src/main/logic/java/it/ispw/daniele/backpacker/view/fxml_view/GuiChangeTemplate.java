@@ -45,7 +45,7 @@ public abstract class GuiChangeTemplate {
             FXMLLoader loader = new FXMLLoader();
             FileInputStream fileInputStream = new FileInputStream("src/main/logic/java/it/ispw/daniele/backpacker/view/fxml_view/Result-Page.fxml");
             Parent fxmlLoader = loader.load(fileInputStream);
-            ResultController rc = loader.getController();
+            ResultViewController rc = loader.getController();
             scene.setRoot(fxmlLoader);
             rc.init();
         });

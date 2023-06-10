@@ -25,7 +25,6 @@ public class AddItineraryController {
         } else if (view.equals("cli")) {
             this.itineraryDao = new ItineraryDaoL();
         }
-
     }
 
     public int getItineraryId(ItineraryBean itineraryBean) throws SQLException, FileNotFoundException, GenericException, ClassNotFoundException {

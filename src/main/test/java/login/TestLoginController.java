@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TestLoginController {
 
     @Test
-    public void testUsernameEmptyLogin() {
+    public void testUsernameEmptyLogin() { //test for LoginController class
 
         LoginController lc;
         String output;
