@@ -121,7 +121,7 @@
                            <VBox.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </VBox.margin>
-                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Max Partecipants:">
+                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Max Participants:">
                               <font>
                                  <Font size="27.0" />
                               </font>
@@ -157,7 +157,7 @@
                            </TextField>
                         </HBox>
                         <HBox alignment="CENTER_RIGHT">
-                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Price:">
+                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Price($):">
                               <font>
                                  <Font size="27.0" />
                               </font>
