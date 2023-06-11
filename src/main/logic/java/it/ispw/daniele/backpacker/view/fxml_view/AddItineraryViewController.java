@@ -45,10 +45,17 @@ public class AddItineraryViewController extends Controller {
     @FXML
     public void share() {
 
-        for (int i = 0; i < listView.getItems().size() - 1; i++) {
+        for (int i = 0; i < listView.getItems().size(); i++) {
+
             TextField t = (TextField) listView.getItems().get(i);
+            this.steps = this.steps.concat(t.getText());
+
             if (!t.getText().equals("") && t.getText() != null) {
-                this.steps = this.steps.concat(t.getText() + "-");
+                t = (TextField) listView.getItems().get(i + 1);
+
+                if(!t.getText().equals("") && t.getText() != null) {
+                    this.steps = this.steps.concat(" - ");
+                }
             }
         }
 

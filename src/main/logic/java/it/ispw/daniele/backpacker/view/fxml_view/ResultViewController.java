@@ -2,7 +2,7 @@ package it.ispw.daniele.backpacker.view.fxml_view;
 
 import it.ispw.daniele.backpacker.bean.ItineraryBean;
 import it.ispw.daniele.backpacker.bean.SearchBean;
-import it.ispw.daniele.backpacker.booktour.BookTourController;
+import it.ispw.daniele.backpacker.controller.book_tour.BookTourController;
 import it.ispw.daniele.backpacker.controller.search.SearchController;
 import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.exceptions.MonumentNotFoundException;

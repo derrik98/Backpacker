@@ -1,8 +1,8 @@
 package it.ispw.daniele.backpacker.view.utils_view;
 
 import it.ispw.daniele.backpacker.bean.ItineraryBean;
-import it.ispw.daniele.backpacker.booktour.BookTourController;
-import it.ispw.daniele.backpacker.booktour.SaveItinerary;
+import it.ispw.daniele.backpacker.controller.book_tour.BookTourController;
+import it.ispw.daniele.backpacker.controller.book_tour.SaveItinerary;
 import it.ispw.daniele.backpacker.exceptions.GenericException;
 import it.ispw.daniele.backpacker.utils.FileManager;
 import it.ispw.daniele.backpacker.utils.SessionUser;
@@ -79,11 +79,9 @@ public class GuiController extends Controller {
                 this.setIvSave(titledPane, itineraryBean, contentPane, output);
             }
 
-            titledPane.setGraphic(contentPane);
             this.goToMap(als, titledPane);
 
-            titledPane.setExpanded(true);
-            titledPane.setCollapsible(true);
+            titledPane.setGraphic(contentPane);
             accordion.getPanes().add(titledPane);
         }
         return accordion;
@@ -218,7 +216,8 @@ public class GuiController extends Controller {
         WebView webView = new WebView();
         webView.setMinHeight(550);
 
-        StringBuilder url = new StringBuilder("https://google.it/maps/dir/" + als.get(0));
+        String s = als.get(0).replace(" - ", "/");
+        StringBuilder url = new StringBuilder("https://google.it/maps/dir/" + s);
 
         for (String element : als) {
 

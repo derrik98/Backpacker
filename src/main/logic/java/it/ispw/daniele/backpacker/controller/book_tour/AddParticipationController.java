@@ -1,4 +1,4 @@
-package it.ispw.daniele.backpacker.booktour;
+package it.ispw.daniele.backpacker.controller.book_tour;
 
 import it.ispw.daniele.backpacker.bean.GeneralUserBean;
 import it.ispw.daniele.backpacker.bean.ItineraryBean;

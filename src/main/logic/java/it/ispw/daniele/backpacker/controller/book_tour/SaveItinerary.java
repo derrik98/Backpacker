@@ -1,4 +1,4 @@
-package it.ispw.daniele.backpacker.booktour;
+package it.ispw.daniele.backpacker.controller.book_tour;
 
 import it.ispw.daniele.backpacker.bean.GeneralUserBean;
 import it.ispw.daniele.backpacker.bean.ItineraryBean;
@@ -10,6 +10,7 @@ import it.ispw.daniele.backpacker.exceptions.GenericException;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class SaveItinerary {
 
@@ -38,12 +39,7 @@ public class SaveItinerary {
 
         itinerary = this.id.getSavedItinerary(input);
 
-        if(itinerary != null){
-            return itinerary;
-        }
-        else{
-            return Collections.emptyList();
-        }
+        return Objects.requireNonNullElse(itinerary, Collections.emptyList());
     }
 
 }

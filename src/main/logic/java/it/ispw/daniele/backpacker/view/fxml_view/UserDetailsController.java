@@ -2,8 +2,8 @@ package it.ispw.daniele.backpacker.view.fxml_view;
 
 import it.ispw.daniele.backpacker.bean.ItineraryBean;
 import it.ispw.daniele.backpacker.bean.UserBean;
-import it.ispw.daniele.backpacker.booktour.BookTourController;
-import it.ispw.daniele.backpacker.booktour.SaveItinerary;
+import it.ispw.daniele.backpacker.controller.book_tour.BookTourController;
+import it.ispw.daniele.backpacker.controller.book_tour.SaveItinerary;
 import it.ispw.daniele.backpacker.dao.user_dao.UserDao;
 import it.ispw.daniele.backpacker.entity.User;
 import it.ispw.daniele.backpacker.exceptions.GenericException;
