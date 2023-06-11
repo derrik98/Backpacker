@@ -1,5 +1,1 @@
-{
-  "general_user": [
-
-  ]
-}
+{"general_user":[{"password":"guide","role":"tourist_guide","email":"guide","username":"guide"},{"password":"user","role":"user","email":"user","username":"user"},{"password":"guide","role":"tourist_guide","email":"guide","username":"guide"},{"password":"user","role":"user","email":"user","username":"user"},{"password":"guide","role":"tourist_guide","email":"guide","username":"guide"},{"password":"user","role":"user","email":"user","username":"user"},{"password":"guide","role":"tourist_guide","email":"guide","username":"guide"},{"password":"user","role":"user","email":"user","username":"usr"},{"password":"user","role":"user","email":"user","username":"user"},{"password":"guide","role":"tourist_guide","email":"guide","username":"guide"},{"password":"guide","role":"tourist_guide","email":"guide","username":"guide"},{"password":"user","role":"user","email":"user","username":"user"},{"password":"guide","role":"tourist_guide","email":"guide","username":"guide"},{"password":"user","role":"user","email":"user","username":"user"},{"password":"guide","role":"tourist_guide","email":"guide","username":"guide"},{"password":"user","role":"user","email":"user","username":"user"}]}
