@@ -79,7 +79,12 @@ public class GuiController extends Controller {
                 this.setIvSave(titledPane, itineraryBean, contentPane, output);
             }
 
-            this.goToMap(als, titledPane);
+            titledPane.setOnMouseClicked(mouseEvent -> {
+
+                if (!titledPane.isExpanded()) {
+                    this.goToMap(als, titledPane);
+                }
+            });
 
             titledPane.setGraphic(contentPane);
             accordion.getPanes().add(titledPane);
