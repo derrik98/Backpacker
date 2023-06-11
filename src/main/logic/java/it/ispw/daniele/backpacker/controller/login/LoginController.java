@@ -19,7 +19,7 @@ import it.ispw.daniele.backpacker.exceptions.LoginFailException;
 
 public class LoginController {
 
-    public GeneralUserBean login(GeneralUserBean userBean, String view) throws EmptyFieldException, GenericException {
+    public GeneralUserBean login(GeneralUserBean userBean, String view) throws EmptyFieldException, GenericException, LoginFailException {
 
         GeneralUserDaoFactory gudf = null;
 
